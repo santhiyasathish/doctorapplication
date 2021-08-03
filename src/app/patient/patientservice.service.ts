@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PatientserviceService {
+  api : string = environment.apiUrl;
   doclist=[{
     id:1,
     head:'Dr. Raja',
