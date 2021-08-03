@@ -11,6 +11,7 @@ import { CategorylistComponent } from './categorylist/categorylist.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TopdoctorlistComponent } from './topdoctorlist/topdoctorlist.component';
+import { DoctorprofileviewComponent } from './doctorprofileview/doctorprofileview.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { TopdoctorlistComponent } from './topdoctorlist/topdoctorlist.component'
     CategorylistComponent,
     HomeComponent,
     ProfileComponent,
-    TopdoctorlistComponent
+    TopdoctorlistComponent,
+    DoctorprofileviewComponent
   ]
 })
 export class PatientModule {}
