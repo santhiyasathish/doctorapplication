@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
+import { PatientserviceService } from '../patientservice.service';
 
 @Component({
   selector: 'app-topdoctorlist',
@@ -7,8 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopdoctorlistComponent implements OnInit {
 
-  constructor() { }
+  category: string = "all";
+  isAndroid: boolean = false;
+  doclist : any[];
+  id=1;
 
-  ngOnInit() {}
+  constructor(platform: Platform,private service:PatientserviceService) {
+    this.isAndroid = platform.is('android');
+   }
+   ngOnInit(){
+     this.doclist =this.service.doclist;
+   }
 
+   slidesOptions = {
+    slidesPerView: 3.5
+  }
 }
