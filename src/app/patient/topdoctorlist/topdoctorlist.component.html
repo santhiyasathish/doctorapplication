@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border" >
   <ion-toolbar >
     <ion-buttons>
-      <ion-back-button defaultHref="/folder/index"></ion-back-button>
+      <ion-back-button defaultHref="/patient/home"></ion-back-button>
     </ion-buttons>
     <ion-title>
       
@@ -63,7 +63,7 @@
   <div [ngSwitch]="category">
     <ion-item-group *ngSwitchCase="'all'">
       <ion-item *ngFor="let data of doclist" lines="none">
-        <ion-grid routerLink="/docprofile/{{data.id}}">
+        <ion-grid routerLink="/patient/docprofile/{{data.id}}">
           <ion-row class="ion-align-items-center">
             <ion-col size="3">
               <ion-avatar >
@@ -88,7 +88,7 @@
     </ion-item-group>
 
     <ion-item-group *ngSwitchCase="'surgeon'">
-      <ion-item *ngFor="let data of doclist" lines="none" routerLink="/docprofile/{{data.id}}">
+      <ion-item *ngFor="let data of doclist" lines="none" routerLink="patient/docprofile/{{data.id}}">
         <ion-grid >
           <ion-row class="ion-align-items-center">
             <ion-col size="3">

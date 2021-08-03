@@ -10,7 +10,7 @@ import { DoctorprofileviewComponent } from './doctorprofileview/doctorprofilevie
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent
   },
   {
