@@ -7,17 +7,19 @@ import { PatientserviceService } from '../patientservice.service';
   styleUrls: ['./doctorprofileview.component.scss'],
 })
 export class DoctorprofileviewComponent implements OnInit {
-  editData : any;
-  constructor(public service:PatientserviceService) { }
+  editData: any;
+  constructor(public service: PatientserviceService) {}
 
   ngOnInit() {
-    this.service.doclist.forEach(data=>{
-      console.log(data)
-        if(JSON.parse(JSON.stringify(data)).id == window.location.href.split('/')[5]){
-          this.editData = [data];
-        }
-      });
-      console.log(this.editData);
+    this.service.doclist.forEach((data) => {
+      console.log(data);
+      if (
+        JSON.parse(JSON.stringify(data)).id ==
+        window.location.href.split('/')[5]
+      ) {
+        this.editData = [data];
+      }
+    });
+    console.log(this.editData);
   }
-
 }

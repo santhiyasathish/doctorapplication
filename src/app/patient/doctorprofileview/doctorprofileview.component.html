@@ -2,7 +2,7 @@
   <ion-toolbar class="secondary">
     
     <ion-buttons slot="start" >
-      <ion-back-button  defaultHref="/folder/index"></ion-back-button>
+      <ion-back-button  defaultHref="/patient/home"></ion-back-button>
       
       <ion-title class="ion-justify-content-center">My Profile</ion-title>
     </ion-buttons>
@@ -89,8 +89,8 @@
           <ion-icon name="mail-unread-outline"></ion-icon>
         </ion-button>
         </ion-col>
-        <ion-col>
-          <ion-button routerLink="/appointment">
+        <ion-col *ngFor="let data of editData">
+          <ion-button routerLink="/patient/book">
             <ion-icon name="calendar-outline"></ion-icon>appointment
           </ion-button>
         </ion-col>

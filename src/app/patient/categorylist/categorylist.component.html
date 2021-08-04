@@ -1,3 +1,129 @@
-<p>
-  categorylist works!      
-</p>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button routerLink="/patient/home"></ion-back-button>
+      <ion-title>Category List</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-card *ngFor="let data of slider" [class]="data.class">
+      <ion-card-header> </ion-card-header>
+      <ion-card-content class="ion-text-left">
+        <ion-card-title id="txtsty">{{ data.title }}</ion-card-title>
+        <ion-text id="txtstys">{{ data.text }}</ion-text>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- <ion-card class="cardtwo">
+        <ion-card-header>
+        </ion-card-header>
+        <ion-card-content class="ion-text-left">
+          <ion-card-title id="txtsty">Covid - 19 specialist</ion-card-title>
+          <ion-text id="txtstys">500+ Doctor</ion-text>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="cardthree">
+        <ion-card-header>
+          
+        </ion-card-header>
+        <ion-card-content class="ion-text-left">
+          <ion-card-title id="txtsty">Heart specialist</ion-card-title>
+          <ion-text id="txtstys">350+ stories</ion-text>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="cardone"   >
+        <ion-card-header>
+
+        </ion-card-header>
+        <ion-card-content  class="ion-text-left">
+          
+          <ion-card-title id="txtsty">Chemist & Drugist</ion-card-title>
+          <ion-text id="txtstys">899+ Doctor</ion-text>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="cardtwo">
+        <ion-card-header>
+        </ion-card-header>
+        <ion-card-content class="ion-text-left">
+          <ion-card-title id="txtsty">Covid - 19 specialist</ion-card-title>
+          <ion-text id="txtstys">500+ Doctor</ion-text>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="cardthree">
+        <ion-card-header>
+          
+        </ion-card-header>
+        <ion-card-content class="ion-text-left">
+          <ion-card-title id="txtsty">Heart specialist</ion-card-title>
+          <ion-text id="txtstys">350+ stories</ion-text>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="cardone"   >
+        <ion-card-header>
+    
+        </ion-card-header>
+        <ion-card-content  class="ion-text-left">
+          
+          <ion-card-title id="txtsty">Chemist & Drugist</ion-card-title>
+          <ion-text id="txtstys">899+ Doctor</ion-text>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="cardtwo">
+        <ion-card-header>
+        </ion-card-header>
+        <ion-card-content class="ion-text-left">
+          <ion-card-title id="txtsty">Covid - 19 specialist</ion-card-title>
+          <ion-text id="txtstys">500+ Doctor</ion-text>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="cardthree">
+        <ion-card-header>
+          
+        </ion-card-header>
+        <ion-card-content class="ion-text-left">
+          <ion-card-title id="txtsty">Heart specialist</ion-card-title>
+          <ion-text id="txtstys">350+ stories</ion-text>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="cardone"   >
+        <ion-card-header>
+    
+        </ion-card-header>
+        <ion-card-content  class="ion-text-left">
+          
+          <ion-card-title id="txtsty">Chemist & Drugist</ion-card-title>
+          <ion-text id="txtstys">899+ Doctor</ion-text>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="cardtwo">
+        <ion-card-header>
+        </ion-card-header>
+        <ion-card-content class="ion-text-left">
+          <ion-card-title id="txtsty">Covid - 19 specialist</ion-card-title>
+          <ion-text id="txtstys">500+ Doctor</ion-text>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="cardthree">
+        <ion-card-header>
+          
+        </ion-card-header>
+        <ion-card-content class="ion-text-left">
+          <ion-card-title id="txtsty">Heart specialist</ion-card-title>
+          <ion-text id="txtstys">350+ stories</ion-text>
+        </ion-card-content>
+      </ion-card> -->
+  </ion-row>
+</ion-content>

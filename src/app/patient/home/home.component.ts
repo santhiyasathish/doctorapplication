@@ -10,26 +10,27 @@ import { PatientserviceService } from '../patientservice.service';
 })
 export class HomeComponent implements OnInit {
   public folder: string;
-  doclist:any[];
+  doclist: any[];
   id = 1;
   slider: any = [];
-  roundList:any=[];
-  constructor(private activatedRoute: ActivatedRoute, private service:PatientserviceService,
-    private menu: MenuController) {
-      this.menu.enable(false, 'custom');
-   }
+  roundList: any = [];
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private service: PatientserviceService,
+    private menu: MenuController
+  ) {
+    this.menu.enable(true);
+  }
 
   ngOnInit() {
     this.doclist = this.service.doclist;
-    this.slider=this.service.slider;
-    this.roundList=this.service.roundList;
-    
+    this.slider = this.service.slider;
+    this.roundList = this.service.roundList;
   }
   slidesOptions = {
-    slidesPerView: 2.5
-  }
-  slidesContents ={
-    slidesPerView:4.5
-  }
-
+    slidesPerView: 2.5,
+  };
+  slidesContents = {
+    slidesPerView: 4.5,
+  };
 }

@@ -11,7 +11,7 @@
       </ion-buttons>
     </ion-toolbar>
 
-    <ion-item lines="none">
+    <ion-item routerLink="/patient/profile/" lines="none">
       <ion-avatar slot="start">
         <img
           src="https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
@@ -30,7 +30,7 @@
   <ion-slides class="roundlist" [options]="slidesContents">
     <ion-slide *ngFor="let data of roundList">
       <ion-card-header>
-        <img src="{{data.icon}}" />
+        <img src="{{ data.icon }}" />
       </ion-card-header>
     </ion-slide>
   </ion-slides>
@@ -60,11 +60,11 @@
     <ion-slide *ngFor="let data of slider">
       <ion-card [class]="data.class">
         <ion-card-header>
-          <div [class]="data.subclass">{{data.header}}</div>
+          <div [class]="data.subclass">{{ data.header }}</div>
         </ion-card-header>
         <ion-card-content class="ion-text-left">
-          <ion-card-title id="txtsty">{{data.title}}</ion-card-title>
-          <ion-text id="txtstys">{{data.text}}</ion-text>
+          <ion-card-title id="txtsty">{{ data.title }}</ion-card-title>
+          <ion-text id="txtstys">{{ data.text }}</ion-text>
         </ion-card-content>
       </ion-card>
     </ion-slide>
@@ -118,17 +118,17 @@
 
   <div class="container">
     <ion-item lines="none" *ngFor="let data of doclist">
-      <ion-grid routerLink="/patient/docprofile/{{data.id}}">
+      <ion-grid routerLink="/patient/docprofile/{{ data.id }}">
         <ion-row class="ion-align-items-center">
           <ion-col size="3">
             <ion-avatar>
-              <img src="{{data.img}}" />
+              <img src="{{ data.img }}" />
             </ion-avatar>
           </ion-col>
           <ion-col size="7">
             <ion-label>
-              <h4>{{data.head}}</h4>
-              <h6>{{data.desc}}</h6>
+              <h4>{{ data.head }}</h4>
+              <h6>{{ data.desc }}</h6>
             </ion-label>
           </ion-col>
           <ion-col size="2">
