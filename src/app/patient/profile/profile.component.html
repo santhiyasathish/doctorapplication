@@ -8,9 +8,40 @@
 </ion-header>
 <ion-content>
   <form>
+    <ion-item class="txtcolor">
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item class="txtcolor">
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item class="txtcolor">
+      <ion-label position="floating">Conact Number</ion-label>
+      <ion-input type="Number"></ion-input>
+    </ion-item>
+    <ion-item class="txtcolor">
+      <ion-label position="floating">Email id</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+    <ion-item class="txtcolor">
+      <ion-label position="floating">Gender</ion-label>
+      <ion-select value="male">
+        <ion-select-option value="male">Male</ion-select-option>
+        <ion-select-option value="female">Female</ion-select-option>
+        <ion-select-option value="transgender">Transgender</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="txtcolor">
+      <ion-label>Date of Birth</ion-label>
+      <ion-datetime value="1990-05-24" placeholder="selectdate"></ion-datetime>
+    </ion-item>
     <ion-item>
-      
+      <ion-label>Blood Group</ion-label>
+      <ion-select>
+        <ion-select-option value="O+">O+</ion-select-option>
+        <ion-select-option value="O-">O-</ion-select-option>
+      </ion-select>
     </ion-item>
   </form>
-
 </ion-content>
