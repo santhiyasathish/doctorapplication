@@ -1,3 +1,214 @@
-<p>
-  home works!
-</p>
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button class="bordered" fill="solid" color="light">
+          <ion-icon color="primary" name="notifications"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <ion-item lines="none">
+      <ion-avatar slot="start">
+        <img
+          src="https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+        />
+      </ion-avatar>
+      <ion-label>
+        <p>Hello,</p>
+        <h3>Janagan J</h3>
+      </ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-searchbar></ion-searchbar>
+  <ion-slides class="roundlist" [options]="slidesContents">
+    <ion-slide *ngFor="let data of roundList">
+      <ion-card-header>
+        <img src="{{data.icon}}" />
+      </ion-card-header>
+    </ion-slide>
+  </ion-slides>
+  <ion-grid class="broken">
+    <ion-row>
+      <ion-col size="3.5" size-lg offset="0">
+        <div style="margin-top: 10px; color: black">
+          <strong>Categor</strong>
+        </div>
+      </ion-col>
+      <ion-col size="3" size-lg offset="3">
+        <div>
+          <ion-chip
+            routerLink="/patient/category/all"
+            class="iconstyles"
+            outline
+            color="primary"
+          >
+            <ion-label>SeeAll</ion-label>
+          </ion-chip>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-slides [options]="slidesOptions">
+    <ion-slide *ngFor="let data of slider">
+      <ion-card [class]="data.class">
+        <ion-card-header>
+          <div [class]="data.subclass">{{data.header}}</div>
+        </ion-card-header>
+        <ion-card-content class="ion-text-left">
+          <ion-card-title id="txtsty">{{data.title}}</ion-card-title>
+          <ion-text id="txtstys">{{data.text}}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <!-- <ion-slide>
+        <ion-card class="cardtwo">
+          <ion-card-header>
+            <div class="cardtwosub">
+              
+            </div>
+          </ion-card-header>
+          <ion-card-content class="ion-text-left">
+            <ion-card-title id="txtsty">Covid - 19 specialist</ion-card-title>
+            <ion-text id="txtstys">500+ Doctor</ion-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-card class="cardthree">
+          <ion-card-header>
+            <div class="cardthreesub">
+             
+            </div>
+          </ion-card-header>
+          <ion-card-content class="ion-text-left">
+            <ion-card-title id="txtsty">Heart specialist</ion-card-title>
+            <ion-text id="txtstys">350+ stories</ion-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide> -->
+  </ion-slides>
+  <ion-grid class="broken">
+    <ion-row>
+      <ion-col size="3.5" size-lg offset="0">
+        <div style="margin-top: 10px; color: black">
+          <strong>TopDoctors</strong>
+        </div>
+      </ion-col>
+      <ion-col size="3" size-lg offset="3">
+        <div>
+          <ion-icon
+            routerLink="/patient/toplist"
+            class="iconstyle"
+            name="filter"
+          ></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="container">
+    <ion-item lines="none" *ngFor="let data of doclist">
+      <ion-grid routerLink="/patient/docprofile/{{data.id}}">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3">
+            <ion-avatar>
+              <img src="{{data.img}}" />
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="7">
+            <ion-label>
+              <h4>{{data.head}}</h4>
+              <h6>{{data.desc}}</h6>
+            </ion-label>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button color="light" fill="clear">
+              <ion-icon
+                class="yarrowstyle"
+                slot="icon-only"
+                name="chevron-forward-outline"
+              ></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <!-- <ion-item lines="none" routerLink="/docprofile">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3">
+            <ion-avatar >
+              <img src="https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg">
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="7">
+            <ion-label>
+							<h4>Dr. Rajasekar</h4>
+							<h6>Neurology</h6>
+						</ion-label>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button color="light" fill="clear">
+              <ion-icon class="yarrowstyle" slot="icon-only" name="chevron-forward-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item lines="none" routerLink="/docprofile">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3">
+            <ion-avatar >
+              <img src="https://st4.depositphotos.com/12982378/23084/i/600/depositphotos_230843210-stock-photo-handsome-doctor-stethoscope-writing-something.jpg">
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="7">
+            <ion-label>
+							<h4>Dr. Sekar</h4>
+							<h6>cardio Surgeon</h6>
+						</ion-label>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button color="light" fill="clear">
+              <ion-icon class="yarrowstyle" slot="icon-only" name="chevron-forward-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item lines="none" routerLink="/docprofile">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3">
+            <ion-avatar >
+              <img src="https://st4.depositphotos.com/12982378/23084/i/600/depositphotos_230843520-stock-photo-handsome-doctor-stethoscope-holding-glasses.jpg">
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="7">
+            <ion-label>
+							<h4>Dr. Raju</h4>
+							<h6>Heart Surgeon</h6>
+						</ion-label>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button color="light" fill="clear">
+              <ion-icon class="yarrowstyle" slot="icon-only" name="chevron-forward-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item> -->
+  </div>
+</ion-content>
