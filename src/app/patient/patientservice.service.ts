@@ -154,5 +154,17 @@ icon: 'https://img.icons8.com/bubbles/50/fa314a/dental-crown.png'
   post (serviceName: string, data:any){
 
   }
+  doctorType(){
+    return this.http.get(this.api+'doctortype');
+  }
+
+  topDoctorList(data:any){
+    return this.http.post(this.api+'topDoctorList', data);
+  }
+
+  viewDoctorProfile(data:any){
+    return this.http.post(this.api+'getdoctorprofile', data);
+  }
+  
 }
 

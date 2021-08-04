@@ -14,13 +14,15 @@ export class HomeComponent implements OnInit {
   id = 1;
   slider: any = [];
   roundList:any=[];
+  catList: any[];
   constructor(private activatedRoute: ActivatedRoute, private service:PatientserviceService,
     private menu: MenuController) {
       this.menu.enable(false, 'custom');
    }
 
   ngOnInit() {
-    this.doclist = this.service.doclist;
+   this.selectCatagory('all');
+   this.doctorCatList();
     this.slider=this.service.slider;
     this.roundList=this.service.roundList;
     
@@ -30,6 +32,23 @@ export class HomeComponent implements OnInit {
   }
   slidesContents ={
     slidesPerView:4.5
+  }
+
+  selectCatagory(type:string){
+    let cat = {
+      cat_type: type
+    }
+   this.service.topDoctorList(cat).subscribe(data =>{
+     console.log(data);
+     this.doclist = JSON.parse(JSON.stringify(data)).list;
+   });
+  }
+
+  doctorCatList(){
+    this.service.doctorType().subscribe(data=>{
+      this.catList = JSON.parse(JSON.stringify(data)).category;
+      console.log(data);
+    });
   }
 
 }

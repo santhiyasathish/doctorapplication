@@ -2,7 +2,7 @@
   <ion-toolbar class="secondary">
     
     <ion-buttons slot="start" >
-      <ion-back-button  defaultHref="/folder/index"></ion-back-button>
+      <ion-back-button defaultHref="/patient/toplist"></ion-back-button>
       
       <ion-title class="ion-justify-content-center">My Profile</ion-title>
     </ion-buttons>
@@ -10,70 +10,58 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngFor="let data of editData">
   <ion-card class="content" color="secondary">
-    <div class="img-wrapper" *ngFor="let data of editData">
-      <img src="{{data.img}}"/>
+    <div class="img-wrapper">
+      <img src="{{data.image}}"/>
       <ion-button color="light">
         <ion-icon slot="icon-only" name="camera-outline" color="medium">
         </ion-icon>
       </ion-button>
     </div>
-    <ion-card-content  class="ion-text-center" *ngFor="let data of editData">
+    <ion-card-content  class="ion-text-center">
       <ion-text >
-      <h2>{{data.head}}</h2>
+      <h2>{{data.name}}</h2>
       </ion-text>
       <ion-text color="dark">
          <div class="ion-justify-content-center">
-           <p>{{data.desc}}</p>
+           <p>{{data.professional}}</p>
          </div> 
       </ion-text>
       <ion-text color="medium">
         <div style="display:flex;" class="ion-justify-content-center">
         <ion-icon name="location-outline" color="medium">
         </ion-icon>
-        <p>{{data.place}}</p>
+        <p>{{data.location}}</p>
         </div>
       </ion-text>
     </ion-card-content>
   </ion-card>
-  <!-- <ion-card class="edit-content">
-    <ion-card-content>
-      <ion-row>
-        <ion-col  style="margin-top: 10px; color: black; font-size: large;" size="9" size-lg offset="0">
-          <h2> Edit Profile</h2>
-        </ion-col>
-        <ion-col size="3" size-lg>
-          <ion-button>Edit<ion-icon name="create-outline"></ion-icon></ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card> -->
 
-  <ion-card *ngFor="let data of editData">
+  <ion-card>
     <ion-card-header>
       <ion-list>
         <ion-list-header>
           <ion-label>Good Review</ion-label>
         </ion-list-header>
-        <ion-progress-bar value="{{data.reviewv}}" buffer="{{data.reviewb}}"></ion-progress-bar>
+        <ion-progress-bar value="{{data.review}}"></ion-progress-bar>
     </ion-list>
      <ion-list>
        <ion-list-header>
          <ion-label>Total Score</ion-label>
        </ion-list-header>
-       <ion-progress-bar value="{{data.scorev}}" buffer="{{data.scoreb}}"></ion-progress-bar>
+       <ion-progress-bar value="{{data.score}}"></ion-progress-bar>
      </ion-list>
      <ion-list>
        <ion-list-header>
          <ion-label>Satisfaction</ion-label>
        </ion-list-header>
-       <ion-progress-bar value="{{data.satisv}}" buffer="{{data.satisb}}"></ion-progress-bar>
+       <ion-progress-bar value="{{data.satisfication}}"></ion-progress-bar>
      </ion-list>
       <ion-col>
            <div class="ion-text-justify">
-             <h5>About {{data.head}}</h5>
-            <p>{{data.about}}</p>
+             <h5>About</h5>
+            <p> {{data.about}}</p>
            </div>
          </ion-col>
     </ion-card-header>
