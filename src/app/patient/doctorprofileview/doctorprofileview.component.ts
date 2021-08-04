@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientserviceService } from '../patientservice.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-doctorprofileview',
@@ -7,19 +8,23 @@ import { PatientserviceService } from '../patientservice.service';
   styleUrls: ['./doctorprofileview.component.scss'],
 })
 export class DoctorprofileviewComponent implements OnInit {
-  editData: any;
-  constructor(public service: PatientserviceService) {}
+  editData : any;
+  profileId: string;
+  constructor(public service:PatientserviceService,
+    private route: ActivatedRoute
+    ) { }
 
   ngOnInit() {
-    this.service.doclist.forEach((data) => {
-      console.log(data);
-      if (
-        JSON.parse(JSON.stringify(data)).id ==
-        window.location.href.split('/')[5]
-      ) {
-        this.editData = [data];
-      }
-    });
-    console.log(this.editData);
+    this.profileId = this.route.snapshot.paramMap.get('id');
+    this.viewDoctorProfile(this.profileId);
+  }
+
+  viewDoctorProfile(val){
+    let id = {
+      user_id: val
+    }
+    this.service.viewDoctorProfile(id).subscribe(data=>{
+      this.editData = [JSON.parse(JSON.stringify(data)).data];
+    })
   }
 }

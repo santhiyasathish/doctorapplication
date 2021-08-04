@@ -7,7 +7,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class PatientserviceService {
   api: string = environment.apiUrl;
- 
   morningtime = [
     {
       id: 1,
@@ -286,6 +285,21 @@ export class PatientserviceService {
       icon: 'https://img.icons8.com/bubbles/50/fa314a/embryo.png',
     },
   ];
-  constructor(private http: HttpClient) {}
-  post(serviceName: string, data: any) {}
+    constructor(private http:HttpClient) { }
+  post (serviceName: string, data:any){
+
+  }
+  doctorType(){
+    return this.http.get(this.api+'doctortype');
+  }
+
+  topDoctorList(data:any){
+    return this.http.post(this.api+'topDoctorList', data);
+  }
+
+  viewDoctorProfile(data:any){
+    return this.http.post(this.api+'getdoctorprofile', data);
+  }
+
+  
 }
