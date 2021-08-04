@@ -10,7 +10,7 @@ export class ServiceService {
   constructor(private http: HttpClient) { }
 
   register(data){
-    return this.http.post(this.api+'register', data);
+    return this.http.post(this.api+'signup', data);
   }
 
 }
