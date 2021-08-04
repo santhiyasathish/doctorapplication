@@ -77,8 +77,8 @@
           <ion-icon name="mail-unread-outline"></ion-icon>
         </ion-button>
         </ion-col>
-        <ion-col>
-          <ion-button routerLink="/appointment">
+        <ion-col *ngFor="let data of editData">
+          <ion-button routerLink="/patient/book">
             <ion-icon name="calendar-outline"></ion-icon>appointment
           </ion-button>
         </ion-col>

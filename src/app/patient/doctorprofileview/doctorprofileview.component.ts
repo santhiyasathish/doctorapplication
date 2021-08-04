@@ -27,5 +27,4 @@ export class DoctorprofileviewComponent implements OnInit {
       this.editData = [JSON.parse(JSON.stringify(data)).data];
     })
   }
-
 }

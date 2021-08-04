@@ -1,0 +1,160 @@
+ion-content {
+  --background: linear-gradient(
+    90deg,
+    rgb(255, 255, 255) 0%,
+    rgb(255, 255, 255) 35%,
+    rgb(250, 252, 255) 100%
+  );
+
+  .item {
+    background: #ffffff;
+    padding: 4px 0px 20px 0px;
+    border-radius: 0 0 28px 28px;
+  }
+  .cardone {
+    width: 100%;
+    box-shadow: 0px 5px 10px 0px #cccccc;
+    border-radius: 30px;
+    padding: 14px;
+    display: inline;
+
+    // background: rgba(25, 201, 255, 0.8);
+    background: rgb(0, 255, 192);
+    background: linear-gradient(
+      90deg,
+      rgba(87, 209, 179, 0.877) 14%,
+      rgba(47, 182, 182, 0.719) 90%
+    );
+  }
+
+  .cardtwo {
+    width: 100%;
+    box-shadow: 0px 5px 10px 0px #cccccc;
+    border-radius: 30px;
+    padding: 14px;
+    display: inline;
+
+    // background: rgba(25, 201, 255, 0.8);
+    background: rgb(0, 255, 192);
+    background: linear-gradient(
+      90deg,
+      rgba(121, 179, 255, 0.877) 14%,
+      rgba(57, 136, 255, 0.692) 90%
+    );
+  }
+  .cardthree {
+    width: 100%;
+    box-shadow: 0px 5px 10px 0px #cccccc;
+    border-radius: 30px;
+    padding: 14px;
+    display: inline;
+
+    // background: rgba(25, 201, 255, 0.8);
+    background: rgb(0, 255, 192);
+    background: linear-gradient(
+      90deg,
+      rgba(255, 155, 155, 0.877) 14%,
+      rgba(255, 88, 37, 0.521) 90%
+    );
+  }
+  .cardonesub {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    background: rgb(0, 255, 192);
+    background: linear-gradient(
+      90deg,
+      rgba(87, 209, 179, 0.877) 14%,
+      rgba(4, 191, 228, 0.521) 90%
+    );
+    // background: #ffffff;
+    box-shadow: 7px 7px 20px #458bc0, -7px -7px 20px #89beb144;
+
+    align-items: left;
+    left: left;
+    display: flex;
+    justify-content: left;
+  }
+  .cardtwosub {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    background: rgb(0, 255, 192);
+    background: linear-gradient(
+      90deg,
+      rgba(121, 179, 255, 0.877) 14%,
+      rgba(57, 136, 255, 0.692) 90%
+    );
+    // background: #ffffff;
+    box-shadow: 7px 7px 20px #458bc0, -7px -7px 20px #89beb144;
+
+    align-items: left;
+    left: left;
+    display: flex;
+    justify-content: left;
+  }
+  .cardthreesub {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    background: rgb(0, 255, 192);
+    background: linear-gradient(
+      90deg,
+      rgba(255, 155, 155, 0.877) 14%,
+      rgba(255, 88, 37, 0.521) 90%
+    );
+    // background: #ffffff;
+    box-shadow: 7px 7px 20px #d35151, -7px -7px 20px #962e2644;
+
+    align-items: left;
+    left: left;
+    display: flex;
+    justify-content: left;
+  }
+
+  ion-card {
+    // width: 100%;
+    // box-shadow: none;
+    // border-radius: 30px;
+    // padding: 14px;
+    // display: inline;
+
+    // // background: rgba(25, 201, 255, 0.8);
+    // background: rgb(0,255,192);
+    // background: linear-gradient(90deg, rgba(87, 209, 179, 0.877) 14%, rgba(4, 191, 228, 0.521) 90%);
+    .main {
+      width: 60px;
+      height: 60px;
+      border-radius: 50px;
+      background: rgb(0, 255, 192);
+      background: linear-gradient(
+        90deg,
+        rgba(87, 209, 179, 0.877) 14%,
+        rgba(4, 191, 228, 0.521) 90%
+      );
+      // background: #ffffff;
+      box-shadow: 7px 7px 20px #458bc0, -7px -7px 20px #89beb144;
+
+      align-items: left;
+      left: left;
+      display: flex;
+      justify-content: left;
+
+      img {
+        width: 30px;
+      }
+    }
+
+    .files {
+      padding-top: 14px;
+    }
+  }
+  #txtsty {
+    color: #000000;
+    font-size: small;
+  }
+  #txtstys {
+    color: #555555;
+    font-size: smaller;
+  }
+}

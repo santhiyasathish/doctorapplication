@@ -3,90 +3,42 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PatientserviceService {
-  api : string = environment.apiUrl;
-  doclist=[{
-    id:1,
-    head:'Dr. Raja',
-    img:'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
-    desc:'Heart Sergeon',
-    place:'pondicherry -605107',
-    about:'Dr K R Raja, Chairman - Institute of Cardiac Sciences |  Director - Institute of Heart and Lung Transplant & Mechanical Circulatory Support, MGM Healthcare, is one of India s leading cardiothoracic surgeons and heart-lung transplant specialists with over 30 years of experience in his expert hands.',
-    reviewv:'0.25',reviewb:'0.5',
-    scorev:'0.25',scoreb:'0.5',
-    satisv:'0.25',satisb:'0.5'
-  },
+  api: string = environment.apiUrl;
+ 
+  morningtime = [
     {
-      id:2,
-      head:'Dr.Raja Seker',
-      img:'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
-      desc:'Heart Sergeon',
-      place:'pondicherry -605001',
-      about:'Dr K R Janagan, Chairman - Institute of Cardiac Sciences |  Director - Institute of Heart and Lung Transplant & Mechanical Circulatory Support, MGM Healthcare, is one of India s leading cardiothoracic surgeons and heart-lung transplant specialists with over 30 years of experience in his expert hands.',
-      reviewv:'0.25',reviewb:'0.5',
-      scorev:'0.25',scoreb:'0.5',
-      satisv:'0.25',satisb:'0.5'
-      
-      },
-      {
-        id:3,
-        head:'Dr. Raj',
-        img:'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
-        desc:'Heart Sergeon',
-        place:'pondicherry -605001',
-        about:'Dr K R Janagan, Chairman - Institute of Cardiac Sciences |  Director - Institute of Heart and Lung Transplant & Mechanical Circulatory Support, MGM Healthcare, is one of India s leading cardiothoracic surgeons and heart-lung transplant specialists with over 30 years of experience in his expert hands.',
-        reviewv:'0.25',reviewb:'0.5',
-        scorev:'0.25',scoreb:'0.5',
-        satisv:'0.25',satisb:'0.5'
-
-        },
-        {
-          id:4,
-          head:'Dr.David Kemp',
-          img:'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
-          desc:'Heart Sergeon',
-          place:'pondicherry -605001',
-          about:'Dr K R Janagan, Chairman - Institute of Cardiac Sciences |  Director - Institute of Heart and Lung Transplant & Mechanical Circulatory Support, MGM Healthcare, is one of India s leading cardiothoracic surgeons and heart-lung transplant specialists with over 30 years of experience in his expert hands.',
-          reviewv:'0.25',reviewb:'0.5',
-          scorev:'0.25',scoreb:'0.5',
-          satisv:'0.25',satisb:'0.5'
-
-          },
-          {
-            id:5,
-            head:'Dr.David Kemp',
-            img:'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
-            desc:'Heart Sergeon',
-            place:'pondicherry -605001',
-            about:'Dr K R Janagan, Chairman - Institute of Cardiac Sciences |  Director - Institute of Heart and Lung Transplant & Mechanical Circulatory Support, MGM Healthcare, is one of India s leading cardiothoracic surgeons and heart-lung transplant specialists with over 30 years of experience in his expert hands.',
-            reviewv:'0.25',reviewb:'0.5',
-            scorev:'0.25',scoreb:'0.5',
-            satisv:'0.25',satisb:'0.5'
-            },
-            {
-              id:6,
-              head:'Dr.David Kemp',
-              img:'https://st4.depositphotos.com/12982378/23084/i/600/depositphotos_230843520-stock-photo-handsome-doctor-stethoscope-holding-glasses.jpg',
-              desc:'Heart Sergeon',
-              place:'pondicherry -605001',
-              about:'Dr K R Janagan, Chairman - Institute of Cardiac Sciences |  Director - Institute of Heart and Lung Transplant & Mechanical Circulatory Support, MGM Healthcare, is one of India s leading cardiothoracic surgeons and heart-lung transplant specialists with over 30 years of experience in his expert hands.',
-              reviewv:'0.25',reviewb:'0.5',
-              scorev:'0.25',scoreb:'0.5',
-              satisv:'0.25',satisb:'0.5'
-              },
-              {
-                id:7,
-                head:'Dr.David Kemp',
-                img:'https://st4.depositphotos.com/12982378/23084/i/600/depositphotos_230843520-stock-photo-handsome-doctor-stethoscope-holding-glasses.jpg',
-                desc:'Heart Sergeon',
-                place:'pondicherry -605001',
-                about:'Dr K R Janagan, Chairman - Institute of Cardiac Sciences |  Director - Institute of Heart and Lung Transplant & Mechanical Circulatory Support, MGM Healthcare, is one of India s leading cardiothoracic surgeons and heart-lung transplant specialists with over 30 years of experience in his expert hands.',
-                reviewv:'0.25',reviewb:'0.5',
-                scorev:'0.25',scoreb:'0.5',
-                satisv:'0.25',satisb:'0.5'
-                },
+      id: 1,
+      slot: '10:30 AM',
+      disable:'true'
+    },
+    {
+      id: 2,
+      slot: '10:45 AM',
+      disable:'false'
+    },
+    {
+      id: 3,
+      slot: '11:00 AM',
+      disable:'false'
+    },
+    {
+      id: 4,
+      slot: '11:15 AM',
+      disable:'false'
+    },
+    {
+      id: 5,
+      slot: '11:30 AM',
+      disable:'false'
+    },
+    {
+      id: 6,
+      slot: '11:45 AM',
+      disable:'true'
+    },
   ];
   slider = [{
     id:1,
@@ -167,4 +119,3 @@ icon: 'https://img.icons8.com/bubbles/50/fa314a/dental-crown.png'
   }
   
 }
-

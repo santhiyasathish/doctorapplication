@@ -11,7 +11,7 @@
       </ion-buttons>
     </ion-toolbar>
 
-    <ion-item lines="none">
+    <ion-item routerLink="/patient/profile/" lines="none">
       <ion-avatar slot="start">
         <img
           src="https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
@@ -30,7 +30,7 @@
   <ion-slides class="roundlist" [options]="slidesContents">
     <ion-slide *ngFor="let data of roundList">
       <ion-card-header>
-        <img src="{{data.icon}}" />
+        <img src="{{ data.icon }}" />
       </ion-card-header>
     </ion-slide>
   </ion-slides>

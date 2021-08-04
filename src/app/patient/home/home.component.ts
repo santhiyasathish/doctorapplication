@@ -10,7 +10,7 @@ import { PatientserviceService } from '../patientservice.service';
 })
 export class HomeComponent implements OnInit {
   public folder: string;
-  doclist:any[];
+  doclist: any[];
   id = 1;
   slider: any = [];
   roundList:any=[];
