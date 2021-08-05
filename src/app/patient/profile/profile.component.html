@@ -1,47 +1,47 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <!-- <ion-toolbar class="secondary">
     <ion-buttons slot="start">
-      <ion-back-button routerLink="/patient/home"></ion-back-button>
-      <ion-title>Profile</ion-title>
+      <ion-back-button defaultHref="/patient/toplist"></ion-back-button>
+
+      <ion-title class="ion-justify-content-center">My Profile</ion-title>
     </ion-buttons>
-  </ion-toolbar>
+    
+  </ion-toolbar> -->
+
+  <div class="main"></div>
+  <div class="backbutton">
+    <ion-chip outline color="light" routerLink="/patient/home/"
+      ><ion-icon name="arrow-back-outline"></ion-icon
+    ></ion-chip>
+  </div>
+  <div class="avatar">
+    <ion-avatar class="profileavatar">
+      <img
+        src="https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+      />
+    </ion-avatar>
+    <ion-button color="secondary">
+      <ion-icon name="camera-reverse" color="light"></ion-icon>
+      
+    </ion-button>
+  </div>
+  <div class="editavatar">
+    <ion-avatar class="edit">
+      <img
+        src="https://img.icons8.com/plasticine/100/000000/pencil.png"
+      />
+    </ion-avatar>
+  </div>
 </ion-header>
-<ion-content>
-  <form>
-    <ion-item class="txtcolor">
-      <ion-label position="floating">First Name</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item class="txtcolor">
-      <ion-label position="floating">Last Name</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item class="txtcolor">
-      <ion-label position="floating">Conact Number</ion-label>
-      <ion-input type="Number"></ion-input>
-    </ion-item>
-    <ion-item class="txtcolor">
-      <ion-label position="floating">Email id</ion-label>
-      <ion-input type="email"></ion-input>
-    </ion-item>
-    <ion-item class="txtcolor">
-      <ion-label position="floating">Gender</ion-label>
-      <ion-select value="male">
-        <ion-select-option value="male">Male</ion-select-option>
-        <ion-select-option value="female">Female</ion-select-option>
-        <ion-select-option value="transgender">Transgender</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item class="txtcolor">
-      <ion-label>Date of Birth</ion-label>
-      <ion-datetime value="1990-05-24" placeholder="selectdate"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>Blood Group</ion-label>
-      <ion-select>
-        <ion-select-option value="O+">O+</ion-select-option>
-        <ion-select-option value="O-">O-</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </form>
+<ion-content >
+ 
+<ion-card style="margin-top: 20%;">
+  <ion-card-header>
+
+  </ion-card-header>
+  <ion-card-content>
+
+  </ion-card-content>
+</ion-card>
+
 </ion-content>
