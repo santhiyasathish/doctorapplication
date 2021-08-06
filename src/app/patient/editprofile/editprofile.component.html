@@ -1,0 +1,109 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button routerLink="/patient/home"></ion-back-button>
+      <ion-title>Profile</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <form>
+      <ion-item class="txtcolor">
+        <ion-label position="floating">First Name
+          <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item class="txtcolor">
+        <ion-label position="floating">Last Name
+          <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item class="txtcolor">
+        <ion-label position="floating">Conact Number</ion-label>
+        <ion-input type="Number" clearInput></ion-input>
+      </ion-item>
+      <ion-item class="txtcolor">
+        <ion-col>
+          <ion-label>Email id</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-input type="email" clearInput></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-label>@gmail.com</ion-label>
+        </ion-col>
+      </ion-item>
+      <ion-item class="txtcolor">
+        <ion-label>Gender</ion-label>
+        <ion-select value="male">
+          <ion-select-option value="male">Male</ion-select-option>
+          <ion-select-option value="female">Female</ion-select-option>
+          <ion-select-option value="transgender">Transgender</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="txtcolor">
+        <ion-label>Date of Birth</ion-label>
+        <ion-datetime value="1990-05-24" placeholder="selectdate"></ion-datetime>
+      </ion-item>
+      <ion-item class="txtcolor">
+        <ion-label>Blood Group</ion-label>
+        <ion-select>
+          <ion-select-option value="a+">A+</ion-select-option>
+          <ion-select-option value="a-">A-</ion-select-option>
+          <ion-select-option value="b+">B+</ion-select-option>
+          <ion-select-option value="b-">B-</ion-select-option>
+          <ion-select-option value="o+">O+</ion-select-option>
+          <ion-select-option value="o-">O-</ion-select-option>
+          <ion-select-option value="ab+">AB+</ion-select-option>
+          <ion-select-option value="ab-">AB-</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="txtcolor">
+        <ion-label>Marital Status</ion-label>
+        <ion-select>
+          <ion-select-option value="single">Single</ion-select-option>
+          <ion-select-option value="married">Married</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="txtcolor">
+        <ion-col size="7.5">
+          <ion-label>Height</ion-label>
+        </ion-col>
+        <ion-col size="3">
+          <ion-input type="number" clearInput></ion-input>
+        </ion-col>
+        <ion-col floating="right">
+          <ion-label>Cm</ion-label>
+        </ion-col>
+      </ion-item>
+      <ion-item class="txtcolor">
+        <ion-col size="7.5">
+          <ion-label>Weight</ion-label>
+        </ion-col>
+        <ion-col size="3">
+          <ion-input type="number" clearInput></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-label>Kg</ion-label>
+        </ion-col>
+      </ion-item>
+      <ion-item class="txtcolor">
+        <ion-label position="floating">Emergency Contact</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item class="txtcolor">
+        <ion-label position="floating">Location</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-card-content class="button-align">
+        <ion-button>
+          <ion-icon name="checkmark-outline"></ion-icon>
+          Completed
+        </ion-button>
+      </ion-card-content>
+    </form>
+  </ion-card>
+</ion-content>
