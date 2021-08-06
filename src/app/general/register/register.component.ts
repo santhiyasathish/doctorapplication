@@ -1,18 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  username: string ="";
-  email: string="";
-  password: string="";
-  mobile: string="";
-  constructor(private service: ServiceService) { }
+  loginForm: FormGroup;
+  constructor(private service: ServiceService, private formBuilder: FormBuilder) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      username: new FormControl('username'),
+      email: new FormControl('password'),
+      usertype: new FormControl('d'),
+      password: new FormControl('password'),
+      cpassword: new FormControl('password'),
+      gender: new FormControl('f'),
+      dob: new FormControl('1996-02-22'),
+    });
+  }
   
   onSubmit(){
     let data;
@@ -28,7 +36,22 @@ export class RegisterComponent implements OnInit {
     this.service.register(data).subscribe(data =>{
       console.log(data);
     });
-    alert(this.username+","+this.email+","+this.password+","+this.mobile)
+  }
 
+  onClickLogIn(form){
+    console.log(form)
+    let data;
+    data = {
+      email: form.email,
+      username: form.username,
+      usertype: form.usertype,
+      password: form.password,
+      gender : form.gender,
+      dob: form.dob,
+      }
+      
+    this.service.register(data).subscribe(data =>{
+      console.log(data);
+    });
   }
 }

@@ -1,39 +1,47 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Create new account</ion-title>
+  <ion-toolbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
-  <ion-list>
-  <ion-item no-lines >
-    <ion-label position="floating">UserName</ion-label>
-    <ion-input  [(ngModel)]="username" type="text" required></ion-input>
-  </ion-item>
-
-  <ion-item >
-    <ion-label position="floating">Email</ion-label>
-    <ion-input [(ngModel)]="email" type="text" required></ion-input>
-  </ion-item>
-
-  <ion-item >
-    <ion-label position="floating">Mobile</ion-label>
-    <ion-input [(ngModel)]="mobile" type="text" required></ion-input>
-  </ion-item>
-
-  <ion-item >
-    <ion-label position="floating">Password</ion-label>
-    <ion-input [(ngModel)]="password" type="text" required></ion-input>
-  </ion-item>
-
-  <ion-button class="ion-margin-top" type="submit" expand="block" color="primary" (click)="onSubmit()">
-    Create Account
-  </ion-button>
-
-  <ion-item  class="ion-text-center">
-    <ion-label>Or</ion-label>
-  </ion-item>
-
-  <ion-button color="primary" expand="block" fill="outline" [routerLink]="['/login']">Login</ion-button>
-</ion-list>
+<ion-content padding>
+  <form [formGroup]="loginForm" (ngSubmit)="onClickLogIn(loginForm.value)">
+    <ion-item>
+      <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="email" name="email" placeholder="Enter Email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating">Mobile</ion-label>
+      <ion-input fromControlName="mobile" inputmode="tel" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="password" name="password" placeholder="Enter password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="password" name="cpassword" placeholder="Enter password" formControlName="cpassword"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">User Type</ion-label>
+      <ion-select placeholder="Select One" formControlName="usertype">
+        <ion-select-option value="doctor">Doctor</ion-select-option>
+        <ion-select-option value="patient">patient</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Gender</ion-label>
+      <ion-select placeholder="Select One" formControlName="gender">
+        <ion-select-option value="female">Female</ion-select-option>
+        <ion-select-option value="male">Male</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">DOB</ion-label>
+      <ion-datetime displayFormat="MM DD YY" placeholder="Select Date" formControlName="dob"></ion-datetime>
+    </ion-item>
+    <ion-button type="submit">Sign In</ion-button>
+  </form>
 </ion-content>

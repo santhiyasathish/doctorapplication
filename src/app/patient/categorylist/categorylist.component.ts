@@ -8,13 +8,22 @@ import { PatientserviceService } from '../patientservice.service';
 })
 export class CategorylistComponent implements OnInit {
   slider: any[];
+  catList: any[];
   constructor(private service: PatientserviceService) {}
 
   ngOnInit() {
     this.slider = this.service.slider;
+    this.doctorCatList();
   }
 
   slidesOptions = {
     slidesPerView: 2.5,
   };
+
+  doctorCatList(){
+    this.service.doctorType().subscribe(data=>{
+      this.catList = JSON.parse(JSON.stringify(data)).category;
+      console.log(data);
+    });
+  }
 }

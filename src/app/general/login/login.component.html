@@ -1,27 +1,19 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Login </ion-title>
+  <ion-toolbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
-  <ion-item color="light">
-    <ion-label position="floating">Username</ion-label>
-    <ion-input [(ngModel)]="username" type="text" required></ion-input>
-  </ion-item>
-
-  <ion-item color="light">
-    <ion-label position="floating">Password</ion-label>
-    <ion-input [(ngModel)]="password" type="text" required></ion-input>
-  </ion-item>
-
-  <ion-button class="ion-margin-top" type="submit" expand="block" color="primary" (click)="onSubmit()">
-    Signin
-  </ion-button>
-
-  <ion-item color="light" class="ion-text-center">
-    <ion-label>Or</ion-label>
-  </ion-item>
-
-  <ion-button color="primary" expand="block" fill="outline" [routerLink]="['/register']">Create Account</ion-button>
+<ion-content padding>
+  <form [formGroup]="loginForm" (ngSubmit)="onClickLogIn(loginForm.value)">
+    <ion-item>
+      <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="password" name="password" placeholder="Enter password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-button type="submit">Sign In</ion-button>
+  </form>
 </ion-content>
