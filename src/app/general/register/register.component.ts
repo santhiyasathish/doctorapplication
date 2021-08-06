@@ -12,12 +12,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: new FormControl('username'),
-      email: new FormControl('password'),
-      usertype: new FormControl('d'),
-      password: new FormControl('password'),
-      cpassword: new FormControl('password'),
-      gender: new FormControl('f'),
+      username: new FormControl('santhiya'),
+      email: new FormControl('santhiya.duskcoder@gmail.com'),
+      usertype: new FormControl('doctor'),
+      password: new FormControl('12345678'),
+      cpassword: new FormControl('12345678'),
+      gender: new FormControl('female'),
       dob: new FormControl('1996-02-22'),
     });
   }
