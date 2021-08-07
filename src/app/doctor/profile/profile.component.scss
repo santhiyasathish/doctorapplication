@@ -1,0 +1,37 @@
+ion-header{
+    img{
+        border-radius: 0px 70px 0px 0px;
+    border-bottom-left-radius: 250px 250px;
+    position: relative;
+    }
+    ion-chip{
+        position: absolute;
+            top: 3px;
+    left: -4px;
+    }
+
+}
+
+ion-content{
+    .avatar{
+        position: absolute;
+        border-radius:50%;
+        top: 200px;
+        left: -10px;
+        ion-avatar{
+            width: 100px;
+            height: 100px;
+            overflow: hidden !important;
+            border: 4px solid rgba(255, 221, 221, 0.842) !important;
+           
+        }
+        img{
+            box-shadow: -5px 14px 50px #5a5a5a, 9px -4px 44px #ffffff;
+        }
+       
+    }
+}
+
+
+
+    
