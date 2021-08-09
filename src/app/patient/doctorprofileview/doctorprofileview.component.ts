@@ -10,12 +10,14 @@ import { ActivatedRoute } from '@angular/router';
 export class DoctorprofileviewComponent implements OnInit {
   editData : any;
   profileId: string;
+  docId: string;
   constructor(public service:PatientserviceService,
     private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
     this.profileId = this.route.snapshot.paramMap.get('id');
+    this.docId = this.route.snapshot.paramMap.get('id');
     this.viewDoctorProfile(this.profileId);
   }
 
@@ -27,4 +29,6 @@ export class DoctorprofileviewComponent implements OnInit {
       this.editData = [JSON.parse(JSON.stringify(data)).data];
     })
   }
+
+ 
 }

@@ -48,7 +48,14 @@ export class HomeComponent implements OnInit {
     this.service.doctorType().subscribe(data=>{
       this.catList = JSON.parse(JSON.stringify(data)).category;
       console.log(data);
-    });
+ 
+    },   (error) => {                              //Error callback
+          alert('error caught in component');
+    
+          //throw error;   //You can also throw the error to a global error handler
+        });
+        
+        
   }
 
 }
