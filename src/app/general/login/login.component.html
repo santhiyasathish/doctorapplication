@@ -7,13 +7,29 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="loginForm" (ngSubmit)="onClickLogIn(loginForm.value)">
-    <ion-item>
-      <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="password" name="password" placeholder="Enter password" formControlName="password"></ion-input>
-    </ion-item>
-    <ion-button type="submit">Sign In</ion-button>
-  </form>
+  <div class="register-form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"></ion-input>
+      </ion-item>
+      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+        <div *ngIf="f.username.errors.required">Fullname is required</div>
+      </div>
+      <ion-item>
+        <ion-input type="password" name="password" placeholder="Enter password" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.minlength">
+          Password must be at least 6 characters
+        </div>
+        <div *ngIf="f.password.errors.maxlength">
+          Username must not exceed 40 characters
+        </div>
+      </div>
+      <ion-button type="submit">Sign In</ion-button>
+    </form>
+  </div>
+ 
 </ion-content>
+
