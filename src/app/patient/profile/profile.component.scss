@@ -20,9 +20,14 @@ ion-header {
 }
 ion-content{
     position: absolute;
-  top:27%;
+  // top:27%;
 
   
+}
+.colors{
+  background-color: rgb(152, 205, 252);
+  border-radius: 35px 35px 35px 35px;
+  color: #6e6e6e;
 }
 .editavatar{
     position: absolute;
