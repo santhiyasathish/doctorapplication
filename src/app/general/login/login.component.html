@@ -1,19 +1,39 @@
+
+
+
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Ionic Blank
+     Login Form
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="loginForm" (ngSubmit)="onClickLogIn(loginForm.value)">
-    <ion-item>
-      <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="password" name="password" placeholder="Enter password" formControlName="password"></ion-input>
-    </ion-item>
-    <ion-button type="submit">Sign In</ion-button>
-  </form>
+  <div class="login-form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <ion-item no-lines>
+        <ion-label position="floating">UserName</ion-label>
+        <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"></ion-input>
+      </ion-item>
+      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+        <div  class="error-message"  *ngIf="f.username.errors.required"> <ion-icon name="alert-circle-outline"></ion-icon> UserName is required</div>
+      </div>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" name="password" placeholder="Enter password" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div class="error-message" *ngIf="f.password.errors.required"> <ion-icon name="alert-circle-outline"></ion-icon> Password is required</div>
+        <div  class="error-message"  *ngIf="f.password.errors.minlength"> <ion-icon name="alert-circle-outline"></ion-icon>
+          Password must be at least 6 characters
+        </div>
+        <div   class="error-message" *ngIf="f.password.errors.maxlength"><ion-icon name="alert-circle-outline"></ion-icon>
+          Username must not exceed 40 characters
+        </div>
+      </div>
+      <ion-button type="submit" color="primary" expand="block">Sign In</ion-button>
+    </form>
+  </div>
+ 
 </ion-content>
