@@ -7,20 +7,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngFor = "let doc of docDetail">
   <ion-item-group>
     <ion-item>
       <ion-row>
         <ion-avatar>
           <img
-            src="https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg"
+            src="{{doc.doc_image}}"
           />
         </ion-avatar>
       </ion-row>
       <ion-item lines="none">
         <ion-list>
-          <ion-label> <h2>Dr.J Janagan</h2> </ion-label>
-          <ion-label color="medium"><h6>Heart Surgeon</h6></ion-label>
+          <ion-label> <h2>{{doc.doc_name}}</h2> </ion-label>
+          <ion-label color="medium"><h6>{{doc.professional}}</h6></ion-label>
         </ion-list>
       </ion-item>
     </ion-item>

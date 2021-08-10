@@ -301,5 +301,12 @@ export class PatientserviceService {
     return this.http.post(this.api+'getdoctorprofile', data);
   }
 
+  bookAppointment(data:any){
+    return this.http.post(this.api+'bookappointment', data);
+  }
+
+  appointmentDetail(data:any){
+    return this.http.post(this.api+'doctorviewappionment', data);
+  }
   
 }

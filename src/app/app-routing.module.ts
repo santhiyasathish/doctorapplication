@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './general/login/login.component';
 import { RegisterComponent } from './general/register/register.component';
+import { EditprofileComponent } from './patient/editprofile/editprofile.component';
 
 const routes: Routes = [
   {

@@ -10,38 +10,142 @@
 
   <div class="main"></div>
   <div class="backbutton">
-    <ion-chip outline color="light" routerLink="/patient/home/"
-      ><ion-icon name="arrow-back-outline"></ion-icon
-    ></ion-chip>
+    <ion-chip outline color="light" routerLink="/patient/home/">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-chip>
   </div>
   <div class="avatar">
     <ion-avatar class="profileavatar">
       <img
-        src="https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-      />
+        src="https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
     </ion-avatar>
     <ion-button color="secondary">
       <ion-icon name="camera-reverse" color="light"></ion-icon>
-      
     </ion-button>
   </div>
-  <div class="editavatar">
-    <ion-avatar class="edit">
-      <img
-        src="https://img.icons8.com/plasticine/100/000000/pencil.png"
-      />
+  <div  class="editavatar">
+    <ion-avatar routerLink="/patient/editprofile/" class="ion-activatable ripple-parent">
+      <ion-img   src="https://img.icons8.com/plasticine/100/000000/pencil.png" ></ion-img>
+        <ion-ripple-effect></ion-ripple-effect>
     </ion-avatar>
   </div>
 </ion-header>
-<ion-content >
- 
-<ion-card style="margin-top: 20%;">
-  <ion-card-header>
-
-  </ion-card-header>
-  <ion-card-content>
-
-  </ion-card-content>
-</ion-card>
-
+<ion-content>
+  <ion-card style="margin-top: 70%">
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-label>Patient Name </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>J Janagan</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Contact Number </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>+918098494194</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Email id </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>janapsp1997@gmail.com</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Gender </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>Male</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Date of Birth </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>24-07-1997</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Blood Group </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>O+</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Marital Status </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>-</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Height </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>-</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Weight </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>-</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Emergency Contact </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>-</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Location </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>Pondicherry</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-text>
+        <h2>Appointment</h2>
+      </ion-text>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item-group >
+        <ion-item class="colors">
+          <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label>Dr.janagan</ion-label>
+              <ion-label>MBMS Skin Specialist</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-chip style="margin-top: 10px;" outline color="success">10:30 PM</ion-chip>
+            </ion-col>
+            <ion-col size="1"><ion-icon color="danger" style="width: 30px; height: 30px; margin-top: 10px;" name="close-circle-outline"></ion-icon></ion-col>
+          </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-item-group>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

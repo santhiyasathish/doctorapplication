@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TopdoctorlistComponent } from './topdoctorlist/topdoctorlist.component';
 import { DoctorprofileviewComponent } from './doctorprofileview/doctorprofileview.component';
+import { EditprofileComponent } from './editprofile/editprofile.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'book',
+    path: 'book/:id',
     component: BookappointmentComponent
   },
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'docprofile/:id',
     component: DoctorprofileviewComponent
+  },
+  {
+    path: 'editprofile',
+    component: EditprofileComponent
   }
 ];
 
