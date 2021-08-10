@@ -49,11 +49,4 @@ export class LoginComponent implements OnInit {
     console.log(JSON.stringify(this.loginForm.value, null, 2));
   }
 
-  onReset(): void {
-    this.submitted = false;
-    this.loginForm.reset();
-  }
-  onClickLogIn(form){
-    console.log(form);
-  }
 }
