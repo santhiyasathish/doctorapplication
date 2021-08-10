@@ -1,7 +1,9 @@
+import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { PatientserviceService } from '../patientservice.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +17,13 @@ export class HomeComponent implements OnInit {
   slider: any = [];
   roundList:any=[];
   catList: any[];
-  constructor(private activatedRoute: ActivatedRoute, private service:PatientserviceService,
-    private menu: MenuController) {
+  isAndroid: boolean = false;
+  
+  constructor(private activatedRoute: ActivatedRoute,
+     private service:PatientserviceService,
+      private menu: MenuController,
+      private platform: Platform) {
+      this.isAndroid = platform.is('android');
       this.menu.enable(false, 'custom');
    }
 
@@ -49,11 +56,11 @@ export class HomeComponent implements OnInit {
       this.catList = JSON.parse(JSON.stringify(data)).category;
       console.log(data);
  
-    },   (error) => {                              //Error callback
-          alert('error caught in component');
-    
-          //throw error;   //You can also throw the error to a global error handler
-        });
+    },   error => {
+                  alert('hi santhiya');
+                    alert(JSON.stringify(error)); //gives an object at this point
+                    console.log(error); 
+                });
         
         
   }
