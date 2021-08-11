@@ -58,11 +58,4 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onReset(): void {
-    this.submitted = false;
-    this.loginForm.reset();
-  }
-  onClickLogIn(form){
-    console.log(form);
-  }
 }

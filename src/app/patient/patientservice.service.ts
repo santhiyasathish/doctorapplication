@@ -7,6 +7,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class PatientserviceService {
   api: string = environment.apiUrl;
+   headers = new HttpHeaders()
+.append('Strict-Transport-Security', 'max-age=63072000; includeSubDomains'); 
+
+httpOptions = {
+    headers: new HttpHeaders({
+        "Content-Type": "application/json; charset=utf-8" , 
+        "Access-Control-Allow-Origin": "*", 
+        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token, Accept, Authorization, X-Request-With",
+        "Access-Control-Allow-Credentials" : "true",
+        "Access-Control-Allow-Methods" : "GET, POST, DELETE, PUT, OPTIONS, TRACE, PATCH, CONNECT"  
+       }) 
+};  
   morningtime = [
     {
       id: 1,
@@ -285,21 +297,30 @@ export class PatientserviceService {
       icon: 'https://img.icons8.com/bubbles/50/fa314a/embryo.png',
     },
   ];
-    constructor(private http:HttpClient) { }
+    constructor(private http:HttpClient) {
+      alert(this.api);
+     }
   post (serviceName: string, data:any){
 
   }
   doctorType(){
-    return this.http.get(this.api+'doctortype');
+    return this.http.get(this.api+'doctortype', this.httpOptions);
   }
 
   topDoctorList(data:any){
-    return this.http.post(this.api+'topDoctorList', data);
+    return this.http.post(this.api+'topDoctorList', data, this.httpOptions);
   }
 
   viewDoctorProfile(data:any){
-    return this.http.post(this.api+'getdoctorprofile', data);
+    return this.http.post(this.api+'getdoctorprofile', data, this.httpOptions);
   }
 
+  bookAppointment(data:any){
+    return this.http.post(this.api+'bookappointment', data, this.httpOptions);
+  }
+
+  appointmentDetail(data:any){
+    return this.http.post(this.api+'doctorviewappionment', data, this.httpOptions);
+  }
   
 }
