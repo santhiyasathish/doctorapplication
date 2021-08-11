@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { ServiceService } from '../service.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
 
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private service: ServiceService) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -46,7 +47,15 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    console.log(JSON.stringify(this.loginForm.value, null, 2));
+    let logData = {
+      email : this.loginForm.value.username,
+      password : this.loginForm.value.password
+    };
+
+
+    this.service.login(logData).subscribe(data=>{
+      localStorage.setItem('log', JSON.stringify(JSON.parse(JSON.stringify(data)).logData));
+    });
   }
 
   onReset(): void {

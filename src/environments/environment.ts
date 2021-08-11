@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl : 'http://localhost/doctorapi/public/api/',
+  // apiUrl : 'http://duskcoder.com/doctor/public/api/',
 };
 
 /*
