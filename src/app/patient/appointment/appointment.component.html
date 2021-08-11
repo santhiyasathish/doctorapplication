@@ -1,8 +1,139 @@
-<ion-header>
-  <ion-title>
-    
-  </ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button href="/patient/docprofile"></ion-back-button>
+      <ion-title>Appointment</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
-<ion-content>
 
+<ion-content *ngFor="let doc of docDetail">
+  <ion-item-group>
+    <ion-item>
+      <ion-row>
+        <ion-avatar>
+          <img src="{{doc.doc_image}}" />
+        </ion-avatar>
+      </ion-row>
+      <ion-item lines="none">
+        <ion-list>
+          <ion-label>
+            <h2>{{doc.doc_name}}</h2>
+          </ion-label>
+          <ion-label color="medium">
+            <h6>{{doc.professional}}</h6>
+          </ion-label>
+        </ion-list>
+      </ion-item>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item color="light" class="dateslot">
+    <ion-slides [options]="slidesOptions">
+      <ion-slide>
+        <ion-card class="ion-activatable ripple-parent">
+          <ion-ripple-effect></ion-ripple-effect>
+          <ion-card-content>
+            <ion-row>
+              <div class="ion-text-justify">
+                <ion-label>Today, 03 Augest</ion-label>
+                <ion-label color="success">3 slot abailable</ion-label>
+              </div>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card>
+          <ion-card-content>
+            <ion-row>
+              <div class="ion-text-justify">
+                <ion-label>Today, 30 July</ion-label>
+                <ion-label color="success">3 slot abailable</ion-label>
+              </div>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card>
+          <ion-card-content>
+            <ion-row>
+              <div class="ion-text-justify">
+                <ion-label>Today, 30 July</ion-label>
+                <ion-label color="success">3 slot abailable</ion-label>
+              </div>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </ion-item>
+
+  <ion-item class="ion-text-center">
+    <ion-label><strong>Thu, 04 Aug</strong></ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-col size="1">
+      <ion-icon color="medium" name="partly-sunny-outline"></ion-icon>
+    </ion-col>
+    <ion-col size="2.2">
+      <ion-label color="medium">Morning</ion-label>
+    </ion-col>
+    <ion-col size="2">
+      <ion-label color="medium">3 slot</ion-label>
+    </ion-col>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-row>
+      <ion-col *ngFor="let data of morningtime" size="3">
+        <ion-chip disabled="{{ data.disable }}" outline color="success">
+          <ion-label>{{ data.slot }}</ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-col size="1">
+      <ion-icon color="medium" name="sunny-outline"></ion-icon>
+    </ion-col>
+    <ion-col size="2.6">
+      <ion-label color="medium">Afternoon</ion-label>
+    </ion-col>
+    <ion-col size="2">
+      <ion-label color="medium">7 slot</ion-label>
+    </ion-col>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-row>
+      <ion-col *ngFor="let data of afternoontime" size="3">
+        <ion-chip disabled="{{ data.disable }}" outline color="success">
+          <ion-label>{{ data.slot }}</ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-col size="1">
+      <ion-icon color="medium" name="moon-outline"></ion-icon>
+    </ion-col>
+    <ion-col size="2.2">
+      <ion-label color="medium">Evening</ion-label>
+    </ion-col>
+    <ion-col size="2">
+      <ion-label color="medium">9 Slot</ion-label>
+    </ion-col>
+  </ion-item>
+  <ion-item>
+    <ion-row>
+      <ion-col size="3" *ngFor="let data of eveningtime">
+        <ion-chip disabled="{{ data.disable }}" outline color="success">
+          <ion-label>{{ data.slot }}</ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <section>
+    <ion-button color="success" expand="block">Book Appointment</ion-button>
+  </section>
 </ion-content>

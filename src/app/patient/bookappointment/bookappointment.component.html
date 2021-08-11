@@ -7,20 +7,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngFor = "let doc of docDetail">
+<ion-content >
   <ion-item-group>
     <ion-item>
       <ion-row>
         <ion-avatar>
-          <img
+          <!-- <img
             src="{{doc.doc_image}}"
-          />
+          /> -->
         </ion-avatar>
       </ion-row>
       <ion-item lines="none">
         <ion-list>
-          <ion-label> <h2>{{doc.doc_name}}</h2> </ion-label>
-          <ion-label color="medium"><h6>{{doc.professional}}</h6></ion-label>
+          <!-- <ion-label> <h2>{{doc.doc_name}}</h2> </ion-label>
+          <ion-label color="medium"><h6>{{doc.professional}}</h6></ion-label> -->
         </ion-list>
       </ion-item>
     </ion-item>
@@ -85,7 +85,7 @@
   <ion-item lines="none">
     <ion-row>
       <ion-col *ngFor="let data of morningtime" size="3">
-        <ion-chip disabled="{{ data.disable }}" outline color="success">
+        <ion-chip (click)="conform()" disabled="{{ data.disable }}" outline color="success">
           <ion-label>{{ data.slot }}</ion-label>
         </ion-chip>
       </ion-col>
