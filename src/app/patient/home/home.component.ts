@@ -11,6 +11,7 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  userName: string;
   public folder: string;
   doclist: any[];
   id = 1;
@@ -28,6 +29,8 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.userName = JSON.parse(localStorage.getItem('log')).name;
+    console.log(this.userName);
    this.selectCatagory('all');
    this.doctorCatList();
     this.slider=this.service.slider;

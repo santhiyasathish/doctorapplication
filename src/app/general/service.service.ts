@@ -13,4 +13,8 @@ export class ServiceService {
     return this.http.post(this.api+'signup', data);
   }
 
+  login(data){
+    return this.http.post(this.api+'login', data);
+  }
+
 }

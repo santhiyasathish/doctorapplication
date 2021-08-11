@@ -5,14 +5,17 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  email : string;
   public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+    { title: 'home', url: 'patient/docprofile/4', icon: 'mail' },
+    { title: 'profile', url: 'patient/docprofile/4', icon: 'paper-plane' },
+    { title: 'book appointment', url: 'patient/book', icon: 'paper-plane' },
+    { title: 'Logout', url: '/folder/Favorites', icon: 'heart' }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  constructor() {
+
+    this.email = JSON.parse(localStorage.getItem('log')).email;
+
+  }
 }
