@@ -22,7 +22,7 @@ export class RegisterComponent  implements OnInit {
   registerForm:FormGroup;
   submitted = false;
   mydate;
- 
+  hide = true;
 
   constructor(private formBuilder: FormBuilder, private service: ServiceService, public alertCtrl: AlertController) {}
 

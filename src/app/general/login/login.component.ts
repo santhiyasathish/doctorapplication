@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   loginForm: FormGroup;
   submitted = false;
-
+  hide = true;
 
   constructor(private formBuilder: FormBuilder) {}
 
