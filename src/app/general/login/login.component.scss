@@ -1,21 +1,22 @@
 ion-header {
-    height: 79%;
+    height: 100%;
+    background-color: #a5d9e9;
     img {
         position: relative;
     }
     .firstcard {
         margin: 0px;
         height: 40%;
+        box-shadow: none;
     }
     .secondcard {
-        top: -30px;
-        margin: 0px;
+        top: -10%;
+        // margin: 0px;
         display: flex;
         flex-direction: column;
-        margin: 0 !important;
-        height: 100%;
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
+        // margin: 0 !important;
+        // height: 100%;
+        border-radius: 30px;
     }
 
     .header{
