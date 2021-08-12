@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://duskcoder.com/doctor/public/api/",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

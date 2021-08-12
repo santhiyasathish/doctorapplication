@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { TopdoctorlistComponent } from './topdoctorlist/topdoctorlist.component';
 import { DoctorprofileviewComponent } from './doctorprofileview/doctorprofileview.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
     ProfileComponent,
     TopdoctorlistComponent,
     DoctorprofileviewComponent,
-    EditprofileComponent
+    EditprofileComponent,
+    AppointmentComponent
   ]
 })
 export class PatientModule {}
