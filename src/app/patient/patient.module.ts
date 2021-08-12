@@ -14,6 +14,7 @@ import { TopdoctorlistComponent } from './topdoctorlist/topdoctorlist.component'
 import { DoctorprofileviewComponent } from './doctorprofileview/doctorprofileview.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { PatnotificationComponent } from './patnotification/patnotification.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { AppointmentComponent } from './appointment/appointment.component';
     TopdoctorlistComponent,
     DoctorprofileviewComponent,
     EditprofileComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    PatnotificationComponent
   ]
 })
 export class PatientModule {}

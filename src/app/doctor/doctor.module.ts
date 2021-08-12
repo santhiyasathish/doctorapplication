@@ -9,6 +9,7 @@ import { DoctorRoutingModule } from './doctor-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ViewappiontmentComponent } from './viewappiontment/viewappiontment.component';
+import { DocnotificationComponent } from './docnotification/docnotification.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ViewappiontmentComponent } from './viewappiontment/viewappiontment.comp
   declarations: [
     HomeComponent,
     ProfileComponent,
-    ViewappiontmentComponent
+    ViewappiontmentComponent,
+    DocnotificationComponent
   ]
 })
 export class DoctorModule {}
