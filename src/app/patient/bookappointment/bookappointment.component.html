@@ -7,8 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-<!-- <ion-content *ngFor = "let doc of docDetail.data"> -->
+<ion-content >
   <ion-item-group>
     <ion-item>
       <ion-row>
@@ -86,7 +85,7 @@
   <ion-item lines="none">
     <ion-row>
       <ion-col *ngFor="let data of morningtime" size="3">
-        <ion-chip disabled="{{ data.disable }}" outline color="success">
+        <ion-chip (click)="conform()" disabled="{{ data.disable }}" outline color="success">
           <ion-label>{{ data.slot }}</ion-label>
         </ion-chip>
       </ion-col>

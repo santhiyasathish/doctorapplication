@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { TopdoctorlistComponent } from './topdoctorlist/topdoctorlist.component';
 import { DoctorprofileviewComponent } from './doctorprofileview/doctorprofileview.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'editprofile',
     component: EditprofileComponent
+  },
+  {
+    path:'appointment',
+    component: AppointmentComponent
   }
 ];
 
