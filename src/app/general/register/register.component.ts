@@ -9,6 +9,7 @@ import {
 import { ServiceService } from '../service.service';
 import { AlertController } from '@ionic/angular';
 import Validation from './validation';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,9 +25,12 @@ export class RegisterComponent  implements OnInit {
   mydate;
  
 
-  constructor(private formBuilder: FormBuilder, private service: ServiceService, public alertCtrl: AlertController) {}
+  constructor(private formBuilder: FormBuilder, private service: ServiceService, public alertCtrl: AlertController,  private router: Router) {}
 
   ngOnInit() {
+    if (localStorage.getItem('log') != null) {
+      this.router.navigateByUrl('patient/docprofile/3');
+    }
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
       email:['', Validators.compose([
@@ -66,15 +70,30 @@ export class RegisterComponent  implements OnInit {
     data = {
       email: this.registerForm.value.email,
       username: this.registerForm.value.username,
-      usertype: this.registerForm.value.usertype,
+      // usertype: this.registerForm.value.usertype,
       password: this.registerForm.value.password,
       gender : this.registerForm.value.gender,
       dob: this.registerForm.value.dob.split('T')[0],
       }
-      
+      let alertMsg;
     this.service.register(data).subscribe(async data =>{
-      this.alertmessage = JSON.parse(JSON.stringify(data)).error_messages; 
-      console.log(JSON.parse(JSON.stringify(data)).error_messages);
+      let response = JSON.parse(JSON.stringify(data));
+      this.alertmessage = response.messages;
+      if(response.success == true) {
+        let logdata;
+        alertMsg = response.messages;
+        logdata = {
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password,
+        }
+          this.service.login(logdata).subscribe(data1=>{
+            localStorage.setItem('log', JSON.stringify(JSON.parse(JSON.stringify(data1)).logData));
+            this.router.navigateByUrl('patient/docprofile/3');
+          });
+      }
+      else{
+        alertMsg = response.error_messages;
+      }
       let prompt = this.alertCtrl.create({
       
         message: this.alertmessage,
@@ -93,9 +112,6 @@ export class RegisterComponent  implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    // console.log(JSON.stringify(this.registerForm.value, null, 2));
-    
-    // console.log(this.registerForm.value.dob.split('T')[0]);
   }
 
 }

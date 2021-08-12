@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./bookappointment.component.scss'],
 })
 export class BookappointmentComponent implements OnInit {
+
   morningtime:any[];
   afternoontime:any[];
   eveningtime:any[];
@@ -58,7 +59,7 @@ export class BookappointmentComponent implements OnInit {
       doc_id: id
     }
     this.service.appointmentDetail(passData).subscribe(data=>{
-      this.docDetail = JSON.parse(JSON.stringify(data)).data;
+      this.docDetail = JSON.parse(JSON.stringify(data));
       console.log(data);
     })
   }

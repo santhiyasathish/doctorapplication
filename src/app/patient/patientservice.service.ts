@@ -298,7 +298,6 @@ httpOptions = {
     },
   ];
     constructor(private http:HttpClient) {
-      alert(this.api);
      }
   post (serviceName: string, data:any){
 

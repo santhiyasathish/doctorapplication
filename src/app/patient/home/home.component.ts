@@ -59,13 +59,7 @@ export class HomeComponent implements OnInit {
       this.catList = JSON.parse(JSON.stringify(data)).category;
       console.log(data);
  
-    },   error => {
-                  alert('hi santhiya');
-                    alert(JSON.stringify(error)); //gives an object at this point
-                    console.log(error); 
-                });
-        
-        
+    });
   }
 
 }
