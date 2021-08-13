@@ -1,0 +1,38 @@
+.container {
+    font-size: 16px;
+    line-height: 16px;
+    height: 32px;
+    overflow: hidden;
+}
+.show {
+    overflow: visible;
+    height: auto;
+}
+ion-content {
+    ion-card {
+        border-radius: 20px;
+        ion-card-header {
+            
+            ion-row {
+                ion-col {
+                    ion-text {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+        ion-card-content{
+            ion-text{
+                    text-align-last: justify;
+            }
+        }
+        .ion-col {
+            margin-top: 10px;
+        }
+        ion-button {
+            height: 30px;
+            width: auto;
+            font-size: 10px;
+        }
+    }
+}

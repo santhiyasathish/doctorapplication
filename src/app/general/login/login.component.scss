@@ -1,38 +1,55 @@
-ion-header {
-    height: 100%;
-    background-color: #a5d9e9;
-    img {
-        position: relative;
-    }
-    .firstcard {
-        margin: 0px;
-        height: 40%;
-        box-shadow: none;
-    }
+// ion-content {
+
+//     background-color: #a5d9e9;
+   
+  
+//     .secondcard {
+//         top: -10%;
+//         // margin: 0px;
+//         display: flex;
+//         flex-direction: column;
+//         // margin: 0 !important;
+//         // height: 100%;
+//         border-radius: 30px;
+//     }
+
+//     // .header{
+//     //     display: flex!important;
+//     //     align-content: center!important;
+//     //     align-items: center!important;
+//     //     width: 100%;
+//     //    padding-top: 60px;
+//     //    padding-bottom: 60px;
+//     //    padding-left: 5px;
+//     //    font-size: 30px;
+//     //    color:black;
+//     // }
+// }
+
+.formbackground{
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background-image: url('https://images.pexels.com/photos/5863392/pexels-photo-5863392.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background-size: cover;
+    // background-position: right;
+}
+ion-content {
+    
+   
+ 
     .secondcard {
-        top: -10%;
+       align-items: center;
         // margin: 0px;
         display: flex;
         flex-direction: column;
         // margin: 0 !important;
         // height: 100%;
         border-radius: 30px;
+        opacity: 0.8;
+        display: flex; align-items: center; justify-content: center;
     }
-
-    .header{
-        display: flex!important;
-        align-content: center!important;
-        align-items: center!important;
-        width: 100%;
-       padding-top: 60px;
-       padding-bottom: 60px;
-       padding-left: 5px;
-       font-size: 30px;
-       color:black;
-    }
-}
-
-ion-content {
     .error-message{
         color: red;
         font-size: 14px;

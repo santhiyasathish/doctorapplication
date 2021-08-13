@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button routerLink="/doctor/profile"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+
+  <ion-card *ngFor="let x of announcement">
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          <ion-text>{{x.name}}</ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-text>{{x.time}}</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text *ngIf="!x.showMore">
+        {{trimString(x.announcementDetails,50)}}
+      </ion-text>
+      <ion-text class="ion-text-justify" *ngIf="x.showMore">
+        {{x.announcementDetails}}
+      </ion-text>
+      <ion-row>
+        <ion-col class="ion-col">
+          <a (click)="x.showMore = !x.showMore">Show <span [innerHtml]="x.showMore ? 'less' : 'More'"> </span>
+          </a>
+        </ion-col>
+        <ion-col>
+          <ion-button color="success">Accept</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="danger">Reject</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

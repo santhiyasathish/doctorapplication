@@ -9,6 +9,8 @@ import { TopdoctorlistComponent } from './topdoctorlist/topdoctorlist.component'
 import { DoctorprofileviewComponent } from './doctorprofileview/doctorprofileview.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { PatnotificationComponent } from './patnotification/patnotification.component';
+
 
 const routes: Routes = [
   {
@@ -40,8 +42,12 @@ const routes: Routes = [
     component: EditprofileComponent
   },
   {
-    path:'appointment',
+    path:'appointment/:id',
     component: AppointmentComponent
+  },
+  {
+    path: 'patnotification',
+    component: PatnotificationComponent
   }
 ];
 

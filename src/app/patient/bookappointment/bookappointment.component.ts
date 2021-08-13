@@ -5,6 +5,7 @@ import { Platform } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AlertController } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-bookappointment',
@@ -21,13 +22,21 @@ export class BookappointmentComponent implements OnInit {
   isAndroid: boolean = false;
   docId: string;
   docDetail: any = [];
+  available:any=[];
+  durId: string;
+  list: any = [];
+  doc : any = {
+    name : 'Johnny Depp',
+    professional : 'MBBS'
+  }
 
 
   constructor(public platform:Platform, 
     private menu:MenuController,
     private service:PatientserviceService,
     private route: ActivatedRoute,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController, 
+    private datePipe: DatePipe) {
     this.isAndroid = platform.is('android');
    }
 
@@ -36,9 +45,12 @@ export class BookappointmentComponent implements OnInit {
     this.afternoontime=this.service.afternoontime;
     this.eveningtime=this.service.eveningtime;
     this.doclist=this.service.doclist;
+    // this.available=this.service.available;
     this.docId = this.route.snapshot.paramMap.get('id');
-    this.getAppointmentDetail(this.docId);                                                                           
-    
+    this.durId = this.route.snapshot.paramMap.get('id');
+    this.getAppointmentDetail(this.docId);  
+    this.getappointmentAvailability();       
+                                                                    
     this.menu.enable(false);
   }
   slidesOptions={
@@ -58,6 +70,24 @@ export class BookappointmentComponent implements OnInit {
    })
  }
 
+ getappointmentAvailability(){
+   let avalabledata ={
+     dur_id: '1',
+     date: '2021-08-13'
+   }
+   this.service.appointmentAvailability(avalabledata).subscribe(data=>{
+     this.available = JSON.parse(JSON.stringify(data)).data;
+     this.getList('0');
+     console.log(this.available);
+   })
+ }
+
+ getList(i){
+   console.log(i);
+   this.list = this.available[i].list;
+   console.log(this.list);
+ }
+
   getAppointmentDetail(id){
     let passData = {
       doc_id: id
@@ -67,6 +97,8 @@ export class BookappointmentComponent implements OnInit {
       console.log(data);
     })
   }
+
+
   async conform(){
      const alert = await this.alertCtrl.create({  
       
@@ -122,8 +154,19 @@ export class BookappointmentComponent implements OnInit {
     await alert.present();  
     const result = await alert.onDidDismiss();  
     console.log(alert);  
-
-    
   }
+
+  // getAppointment(){
+  //   let myDate = new Date();
+  //   this.datePipe.transform(myDate, 'dd-mm-yyyy');
+  //   let postData = {
+  //     dur_id: '1',
+  //     date: myDate
+  //   };
+  //   console.log(postData);
+  //   this.service.getAppointmentList(postData).subscribe(data=>{
+
+  //   });
+  // }
 
 }
