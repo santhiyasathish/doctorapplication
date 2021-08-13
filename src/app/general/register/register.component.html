@@ -11,13 +11,13 @@
       
         <form  [formGroup]="registerForm" (ngSubmit)="onSubmit()" lines="none" >
           <div>
-            <ion-item lines="none">
+            <ion-item >
               <ion-label position="floating">UserName</ion-label>
               <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"
                 class="form-control"></ion-input>
             </ion-item>
-            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-              <div class="error-message" *ngIf="f.username.errors.required">
+            <div *ngIf="submitted && f.username.errors" class="error-message">
+              <div  *ngIf="f.username.errors.required">
                 <ion-icon name="alert-circle-outline"></ion-icon> UserName is required
               </div>
             </div>
@@ -28,11 +28,11 @@
               <ion-label position="floating">Email</ion-label>
               <ion-input type="email" name="email" placeholder="Enter Email" formControlName="email"></ion-input>
             </ion-item>
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-              <div class="error-message" *ngIf="f.email.errors.required" color="danger">
+            <div *ngIf="submitted && f.email.errors" class="error-message">
+              <div *ngIf="f.email.errors.required" color="danger">
                 <ion-icon name="alert-circle-outline"></ion-icon> Email is required
               </div>
-              <div class="error-message" *ngIf="f.email.errors.email">
+              <div *ngIf="f.email.errors.email">
                 <ion-icon name="alert-circle-outline"></ion-icon> Email is invalid
               </div>
             </div>
@@ -48,14 +48,14 @@
               <ion-icon style="margin-top: 20px" slot="end" [name]="hide ? 'eye' : 'eye-off'" (click)="hide = !hide">
               </ion-icon>
             </ion-item>
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-              <div class="error-message" *ngIf="f.password.errors.required">
+            <div *ngIf="submitted && f.password.errors" class="error-message">
+              <div  *ngIf="f.password.errors.required">
                 <ion-icon name="alert-circle-outline"></ion-icon> Password is required
               </div>
-              <div class="error-message" *ngIf="f.password.errors.minlength">
+              <div  *ngIf="f.password.errors.minlength">
                 <ion-icon name="alert-circle-outline"></ion-icon> Password must be at least 6 characters
               </div>
-              <div class="error-message" *ngIf="f.password.errors.maxlength">
+              <div  *ngIf="f.password.errors.maxlength">
                 <ion-icon name="alert-circle-outline"></ion-icon> Username must not exceed 40 characters
               </div>
             </div>
@@ -69,11 +69,11 @@
               <ion-icon style="margin-top: 20px" slot="end" [name]="hide ? 'eye' : 'eye-off'" (click)="hide = !hide">
               </ion-icon>
             </ion-item>
-            <div *ngIf="submitted && f.cpassword.errors" class="invalid-feedback">
-              <div class="error-message" *ngIf="f.cpassword.errors.required">
+            <div *ngIf="submitted && f.cpassword.errors"  class="error-message">
+              <div *ngIf="f.cpassword.errors.required">
                 <ion-icon name="alert-circle-outline"></ion-icon> Confirm Password is required
               </div>
-              <div class="error-message" *ngIf="f.cpassword.errors.matching">
+              <div  *ngIf="f.cpassword.errors.matching">
                 <ion-icon name="alert-circle-outline"></ion-icon> Confirm Password does not match
               </div>
             </div>
@@ -87,8 +87,8 @@
               <ion-select-option value="patient">patient</ion-select-option>
             </ion-select>
           </ion-item>
-          <div *ngIf="submitted && f.usertype.errors" class="invalid-feedback">
-            <div class="error-message" *ngIf="f.usertype.errors.required">
+          <div *ngIf="submitted && f.usertype.errors"  class="error-message">
+            <div  *ngIf="f.usertype.errors.required">
               <ion-icon name="alert-circle-outline"></ion-icon> Please selct anyone
             </div>
           </div>
@@ -100,8 +100,8 @@
               <ion-select-option value="male">Male</ion-select-option>
             </ion-select>
           </ion-item>
-          <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
-            <div class="error-message" *ngIf="f.gender.errors.required">
+          <div *ngIf="submitted && f.gender.errors"  class="error-message">
+            <div *ngIf="f.gender.errors.required">
               <ion-icon name="alert-circle-outline"></ion-icon> Please selct anyone
             </div>
           </div>
@@ -112,14 +112,14 @@
               formControlName="dob" name="dob">
             </ion-datetime>
           </ion-item>
-          <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
-            <div class="error-message" *ngIf="f.gender.errors.required">
+          <div *ngIf="submitted && f.gender.errors"  class="error-message">
+            <div *ngIf="f.gender.errors.required">
               <ion-icon name="alert-circle-outline"></ion-icon> Please select
             </div>
           </div>
 
           <ion-button type="submit" color="primary" expand="block">Sign Up</ion-button>
-          <p>Already have an account?Login Now</p>
+          <p>Already have an account?<a [routerLink]="['/login']">Login Now</a></p>
         </form>
         
       </ion-card-content>

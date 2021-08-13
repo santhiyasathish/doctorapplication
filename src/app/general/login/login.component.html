@@ -1,7 +1,7 @@
 <ion-content scroll="true">
   <ion-header class="ion-no-border">
     <ion-card class="firstcard" color="tertiary">
-   <ion-card-title class="header"><strong>Login Form</strong></ion-card-title>
+   <ion-card-title class="header">Login Form</ion-card-title>
     </ion-card>
     <ion-card class="secondcard" >
       <ion-card-content>
@@ -10,8 +10,8 @@
             <ion-label position="floating">UserName</ion-label>
             <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"></ion-input>
           </ion-item>
-          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div class="error-message" *ngIf="f.username.errors.required">
+          <div *ngIf="submitted && f.username.errors"class="error-message"  >
+            <div *ngIf="f.username.errors.required">
               <ion-icon name="alert-circle-outline"></ion-icon> UserName is required
             </div>
           </div>
@@ -21,8 +21,8 @@
             <ion-input [type]="hide ? 'password' : 'text'" name = "password "  placeholder="Enter password" formControlName="password"></ion-input>
             <ion-icon style="margin-top: 20px" slot="end" [name]="hide ? 'eye' : 'eye-off'" (click)="hide = !hide"></ion-icon>
           </ion-item>
-          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div class="error-message" *ngIf="f.password.errors.required">
+          <div *ngIf="submitted && f.password.errors" class="error-message" >
+            <div  *ngIf="f.password.errors.required">
               <ion-icon name="alert-circle-outline"></ion-icon> Password is required
             </div>
             <div class="error-message" *ngIf="f.password.errors.minlength">
@@ -36,7 +36,7 @@
           </div>
           <br>
           <ion-button type="submit" color="primary" expand="block">Sign In</ion-button>
-          <p style="font-size: 15px;text-align:center;">Don't have an account?</p>
+          <p style="font-size: 15px;text-align:center;">Don't have an account?<a [routerLink]="['/register']"> Register Now</a></p>
         </form>
       </ion-card-content>
      
