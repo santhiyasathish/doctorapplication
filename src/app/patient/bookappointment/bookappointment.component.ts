@@ -5,6 +5,7 @@ import { Platform } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AlertController } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-bookappointment',
@@ -21,13 +22,18 @@ export class BookappointmentComponent implements OnInit {
   isAndroid: boolean = false;
   docId: string;
   docDetail: any = [];
+  doc : any = {
+    name : 'Johnny Depp',
+    professional : 'MBBS'
+  }
 
 
   constructor(public platform:Platform, 
     private menu:MenuController,
     private service:PatientserviceService,
     private route: ActivatedRoute,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController, 
+    private datePipe: DatePipe) {
     this.isAndroid = platform.is('android');
    }
 
@@ -124,6 +130,19 @@ export class BookappointmentComponent implements OnInit {
     console.log(alert);  
 
     
+  }
+
+  getAppointment(){
+    let myDate = new Date();
+    this.datePipe.transform(myDate, 'dd-mm-yyyy');
+    let postData = {
+      dur_id: '1',
+      date: myDate
+    };
+    console.log(postData);
+    this.service.getAppointmentList(postData).subscribe(data=>{
+
+    });
   }
 
 }

@@ -321,5 +321,9 @@ httpOptions = {
   appointmentDetail(data:any){
     return this.http.post(this.api+'doctorviewappionment', data, this.httpOptions);
   }
+
+  getAppointmentList(data:any){
+    return this.http.post(this.api+'appointmentavailability', data, this.httpOptions);
+  }
   
 }
