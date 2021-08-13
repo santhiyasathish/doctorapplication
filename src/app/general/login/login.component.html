@@ -1,40 +1,105 @@
+<ion-content class="ioncontent">
 
+  <div class="formbackground">
+    <ion-card class="secondcard">
+      <ion-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <ion-item>
+            <ion-label position="floating">UserName</ion-label>
+            <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"></ion-input>
+          </ion-item>
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div class="error-message" *ngIf="f.username.errors.required">
+              <ion-icon name="alert-circle-outline"></ion-icon> UserName is required
+            </div>
+          </div>
+          <ion-item>
+            <ion-label position="floating">
+              <ion-icon name="lock-closed-outline"></ion-icon> Password
+            </ion-label>
 
-
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>
-     Login Form
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-  <div class="login-form">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <ion-item no-lines>
-        <ion-label position="floating">UserName</ion-label>
-        <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"></ion-input>
-      </ion-item>
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div  class="error-message"  *ngIf="f.username.errors.required"> <ion-icon name="alert-circle-outline"></ion-icon> UserName is required</div>
-      </div>
-      <ion-item>
-        <ion-label position="floating">Password</ion-label>
-        <ion-input type="password" name="password" placeholder="Enter password" formControlName="password"></ion-input>
-      </ion-item>
-      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div class="error-message" *ngIf="f.password.errors.required"> <ion-icon name="alert-circle-outline"></ion-icon> Password is required</div>
-        <div  class="error-message"  *ngIf="f.password.errors.minlength"> <ion-icon name="alert-circle-outline"></ion-icon>
-          Password must be at least 6 characters
-        </div>
-        <div   class="error-message" *ngIf="f.password.errors.maxlength"><ion-icon name="alert-circle-outline"></ion-icon>
-          Username must not exceed 40 characters
-        </div>
-      </div>
-      <ion-button type="submit" color="primary" expand="block">Sign In</ion-button>
-    </form>
+            <ion-input [type]="hide ? 'password' : 'text'" name="password " placeholder="Enter password"
+              formControlName="password"></ion-input>
+            <ion-icon style="margin-top: 20px" slot="end" [name]="hide ? 'eye' : 'eye-off'" (click)="hide = !hide">
+            </ion-icon>
+          </ion-item>
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div class="error-message" *ngIf="f.password.errors.required">
+              <ion-icon name="alert-circle-outline"></ion-icon> Password is required
+            </div>
+            <div class="error-message" *ngIf="f.password.errors.minlength">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              Password must be at least 6 characters
+            </div>
+            <div class="error-message" *ngIf="f.password.errors.maxlength">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              Username must not exceed 40 characters
+            </div>
+          </div>
+          <br>
+          <ion-button type="submit" color="primary" expand="block">Sign In</ion-button>
+          <ion-label class="ion-align-center">
+            <p style="font-size: 15px;text-align:center;">Don't have an account? <a style="text-decoration: none;" routerLink="/register">Register</a></p>
+          </ion-label>
+          
+        </form>
+      </ion-card-content>
+    </ion-card>
   </div>
- 
 </ion-content>
 
+
+
+
+
+
+
+<!-- 
+<ion-content scroll="true">
+  <ion-header class="ion-no-border">
+    <ion-card class="firstcard" color="tertiary">
+   <ion-card-title class="header"><strong>Login Form</strong></ion-card-title>
+    </ion-card>
+    <ion-card class="secondcard" >
+      <ion-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <ion-item  >
+            <ion-label position="floating">UserName</ion-label>
+            <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"></ion-input>
+          </ion-item>
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div class="error-message" *ngIf="f.username.errors.required">
+              <ion-icon name="alert-circle-outline"></ion-icon> UserName is required
+            </div>
+          </div>
+          <ion-item>
+            <ion-label position="floating"><ion-icon name="lock-closed-outline"></ion-icon> Password</ion-label>
+            
+            <ion-input [type]="hide ? 'password' : 'text'" name = "password "  placeholder="Enter password" formControlName="password"></ion-input>
+            <ion-icon style="margin-top: 20px" slot="end" [name]="hide ? 'eye' : 'eye-off'" (click)="hide = !hide"></ion-icon>
+          </ion-item>
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div class="error-message" *ngIf="f.password.errors.required">
+              <ion-icon name="alert-circle-outline"></ion-icon> Password is required
+            </div>
+            <div class="error-message" *ngIf="f.password.errors.minlength">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              Password must be at least 6 characters
+            </div>
+            <div class="error-message" *ngIf="f.password.errors.maxlength">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              Username must not exceed 40 characters
+            </div>
+          </div>
+          <br>
+          <ion-button type="submit" color="primary" expand="block">Sign In</ion-button>
+          <p style="font-size: 15px;text-align:center;">Don't have an account?</p>
+        </form>
+      </ion-card-content>
+     
+      
+    </ion-card>
+  </ion-header>
+  
+
+</ion-content> -->
