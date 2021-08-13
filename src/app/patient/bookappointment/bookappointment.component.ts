@@ -21,6 +21,9 @@ export class BookappointmentComponent implements OnInit {
   isAndroid: boolean = false;
   docId: string;
   docDetail: any = [];
+  available:any=[];
+  durId: string;
+  list: any = [];
 
 
   constructor(public platform:Platform, 
@@ -36,9 +39,12 @@ export class BookappointmentComponent implements OnInit {
     this.afternoontime=this.service.afternoontime;
     this.eveningtime=this.service.eveningtime;
     this.doclist=this.service.doclist;
+    // this.available=this.service.available;
     this.docId = this.route.snapshot.paramMap.get('id');
-    this.getAppointmentDetail(this.docId);                                                                           
-    
+    this.durId = this.route.snapshot.paramMap.get('id');
+    this.getAppointmentDetail(this.docId);  
+    this.getappointmentAvailability();       
+                                                                    
     this.menu.enable(false);
   }
   slidesOptions={
@@ -58,6 +64,24 @@ export class BookappointmentComponent implements OnInit {
    })
  }
 
+ getappointmentAvailability(){
+   let avalabledata ={
+     dur_id: '1',
+     date: '2021-08-13'
+   }
+   this.service.appointmentAvailability(avalabledata).subscribe(data=>{
+     this.available = JSON.parse(JSON.stringify(data)).data;
+     this.getList('0');
+     console.log(this.available);
+   })
+ }
+
+ getList(i){
+   console.log(i);
+   this.list = this.available[i].list;
+   console.log(this.list);
+ }
+
   getAppointmentDetail(id){
     let passData = {
       doc_id: id
@@ -67,6 +91,8 @@ export class BookappointmentComponent implements OnInit {
       console.log(data);
     })
   }
+
+
   async conform(){
      const alert = await this.alertCtrl.create({  
       
@@ -122,8 +148,6 @@ export class BookappointmentComponent implements OnInit {
     await alert.present();  
     const result = await alert.onDidDismiss();  
     console.log(alert);  
-
-    
   }
 
 }

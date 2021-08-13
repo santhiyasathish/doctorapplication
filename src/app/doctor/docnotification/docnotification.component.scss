@@ -12,12 +12,18 @@ ion-content {
     ion-card {
         border-radius: 20px;
         ion-card-header {
+            
             ion-row {
                 ion-col {
                     ion-text {
                         font-size: 12px;
                     }
                 }
+            }
+        }
+        ion-card-content{
+            ion-text{
+                    text-align-last: justify;
             }
         }
         .ion-col {

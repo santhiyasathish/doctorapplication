@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ViewappiontmentComponent } from './viewappiontment/viewappiontment.component';
 import { DocnotificationComponent } from './docnotification/docnotification.component';
+import { AppointmentlistComponent } from './appointmentlist/appointmentlist.component';
+
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { DocnotificationComponent } from './docnotification/docnotification.comp
     HomeComponent,
     ProfileComponent,
     ViewappiontmentComponent,
-    DocnotificationComponent
+    DocnotificationComponent,
+    AppointmentlistComponent
   ]
 })
 export class DoctorModule {}

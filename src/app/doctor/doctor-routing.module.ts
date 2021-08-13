@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ViewappiontmentComponent } from './viewappiontment/viewappiontment.component';
 import { DocnotificationComponent } from './docnotification/docnotification.component';
+import { AppointmentlistComponent } from './appointmentlist/appointmentlist.component';
 const routes: Routes = [
   {
     path: '',
@@ -18,8 +19,14 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent
   },
-  {path:'docnotification',
-  component:DocnotificationComponent}
+  {
+    path:'docnotification',
+  component:DocnotificationComponent
+},
+{
+  path:'appointmentlist',
+  component: AppointmentlistComponent
+}
 ];
 
 @NgModule({
