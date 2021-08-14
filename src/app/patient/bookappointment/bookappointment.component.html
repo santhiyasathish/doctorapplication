@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
   <ion-item-group>
     <ion-item>
       <ion-row>
@@ -29,7 +29,7 @@
   <ion-item color="light" class="dateslot">
     <ion-slides [options]="slidesOptions">
       <ion-slide *ngFor="let data of available; let i = index">
-        <ion-card class="ion-activatable ripple-parent"  (click)="getList(i)">
+        <ion-card class="ion-activatable ripple-parent" (click)="getList(i)">
           <ion-ripple-effect></ion-ripple-effect>
           <ion-card-content>
             <ion-row>
@@ -47,7 +47,7 @@
   <ion-item class="ion-text-center">
     <ion-label><strong>Thu, 04 Aug</strong></ion-label>
   </ion-item>
-  <div  *ngFor="let li of list">
+  <div *ngFor="let li of list">
     <ion-item lines="none">
       <ion-col size="1">
         <ion-icon color="medium" name="partly-sunny-outline"></ion-icon>

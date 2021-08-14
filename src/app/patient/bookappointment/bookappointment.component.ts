@@ -5,7 +5,8 @@ import { Platform } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AlertController } from '@ionic/angular';
-import { DatePipe } from '@angular/common';
+import { getLocaleFirstDayOfWeek } from '@angular/common';
+// import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-bookappointment',
@@ -29,6 +30,10 @@ export class BookappointmentComponent implements OnInit {
     name : 'Johnny Depp',
     professional : 'MBBS'
   }
+  sam :any [];
+  samu: any[];
+  sample: any;
+  avlist: any[];
 
 
   constructor(public platform:Platform, 
@@ -36,7 +41,8 @@ export class BookappointmentComponent implements OnInit {
     private service:PatientserviceService,
     private route: ActivatedRoute,
     private alertCtrl: AlertController, 
-    private datePipe: DatePipe) {
+    // private datePipe: DatePipe
+    ) {
     this.isAndroid = platform.is('android');
    }
 
@@ -49,7 +55,8 @@ export class BookappointmentComponent implements OnInit {
     this.docId = this.route.snapshot.paramMap.get('id');
     this.durId = this.route.snapshot.paramMap.get('id');
     this.getAppointmentDetail(this.docId);  
-    this.getappointmentAvailability();       
+    this.getappointmentAvailability();   
+    this.getapplication();    
                                                                     
     this.menu.enable(false);
   }
@@ -78,6 +85,7 @@ export class BookappointmentComponent implements OnInit {
    this.service.appointmentAvailability(avalabledata).subscribe(data=>{
      this.available = JSON.parse(JSON.stringify(data)).data;
      this.getList('0');
+    //  this.getlista('0');
      console.log(this.available);
    })
  }
@@ -85,9 +93,18 @@ export class BookappointmentComponent implements OnInit {
  getList(i){
    console.log(i);
    this.list = this.available[i].list;
+   this.sam = this.available[i].date;
+   this.samu= this.available[i].id;
    console.log(this.list);
+   console.log(this.sam);
+   console.log(this.samu);
  }
-
+//  getlista(a){
+//  console.log(a);
+//    this.avlist = this.list[a].availableList;
+//    console.log(this.avlist);
+//  }
+ 
   getAppointmentDetail(id){
     let passData = {
       doc_id: id
@@ -97,7 +114,20 @@ export class BookappointmentComponent implements OnInit {
       console.log(data);
     })
   }
+  getapplication() {
+    let datas = {
+      dur_Id :'1',
+      date: '2021-08-13' ,
+      id : '1',
+      time: '9:45 AM'
+    }
+    this.service.appointmentAvailability(datas).subscribe(data=>{
+      this.avlist = JSON.parse(JSON.stringify(data));
+      this.getList('0');
+      console.log(this.avlist);
+    })
 
+  }
 
   async conform(){
      const alert = await this.alertCtrl.create({  
@@ -120,7 +150,7 @@ export class BookappointmentComponent implements OnInit {
     inputs: [
       {
         
-        name: 'text',
+        name: 'reson',
         placeholder: 'Reason'
       }
     ],
@@ -134,6 +164,13 @@ export class BookappointmentComponent implements OnInit {
       },
       {
         text: 'Submit',
+        handler: Data => { //takes the data 
+        console.log(Data.reson);
+        console.log(this.sam);
+          
+        }
+        
+       
         // handler: data => {
         //   if (User.isValid(data.username, data.password)) {
         //     // logged in!
