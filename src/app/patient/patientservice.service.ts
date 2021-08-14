@@ -7,127 +7,127 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class PatientserviceService {
   api: string = environment.apiUrl;
-   headers = new HttpHeaders()
-.append('Strict-Transport-Security', 'max-age=63072000; includeSubDomains'); 
+  headers = new HttpHeaders()
+    .append('Strict-Transport-Security', 'max-age=63072000; includeSubDomains');
 
-httpOptions = {
+  httpOptions = {
     headers: new HttpHeaders({
-        "Content-Type": "application/json; charset=utf-8" , 
-        "Access-Control-Allow-Origin": "*", 
-        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token, Accept, Authorization, X-Request-With",
-        "Access-Control-Allow-Credentials" : "true",
-        "Access-Control-Allow-Methods" : "GET, POST, DELETE, PUT, OPTIONS, TRACE, PATCH, CONNECT"  
-       }) 
-};  
+      "Content-Type": "application/json; charset=utf-8",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token, Accept, Authorization, X-Request-With",
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Methods": "GET, POST, DELETE, PUT, OPTIONS, TRACE, PATCH, CONNECT"
+    })
+  };
   morningtime = [
     {
       id: 1,
       slot: '10:30 AM',
-      disable:'true'
+      disable: 'true'
     },
     {
       id: 2,
       slot: '10:45 AM',
-      disable:'false'
+      disable: 'false'
     },
     {
       id: 3,
       slot: '11:00 AM',
-      disable:'false'
+      disable: 'false'
     },
     {
       id: 4,
       slot: '11:15 AM',
-      disable:'false'
+      disable: 'false'
     },
     {
       id: 5,
       slot: '11:30 AM',
-      disable:'false'
+      disable: 'false'
     },
     {
       id: 6,
       slot: '11:45 AM',
-      disable:'true'
+      disable: 'true'
     },
   ];
   afternoontime = [
     {
       id: 1,
       slot: '12:00 PM',
-      disable:'true'
+      disable: 'true'
     },
     {
       id: 2,
       slot: '12:15 PM',
-      disable:'false'
+      disable: 'false'
     },
     {
       id: 3,
       slot: '12:30 PM',
-      disable:'false'
+      disable: 'false'
     },
     {
       id: 4,
       slot: '12:45 PM',
-      disable:'false'
+      disable: 'false'
     },
     {
       id: 5,
       slot: '01:00 PM',
-      disable:'false'
+      disable: 'false'
     },
     {
       id: 6,
       slot: '01:15 PM',
-      disable:'true'
+      disable: 'true'
     },
   ];
   eveningtime = [
     {
       id: 1,
       slot: '05:15 PM',
-      disable:'true'
+      disable: 'true'
     },
     {
       id: 2,
       slot: '05:30 PM',
-      disable:'false'
+      disable: 'false'
     },
     {
       id: 3,
       slot: '05:45 PM',
-      disable:'false'
+      disable: 'false'
     },
     {
       id: 4,
       slot: '06:00 PM',
-      disable:'false'
+      disable: 'false'
     },
     {
       id: 5,
       slot: '06:15 PM',
-      disable:'false'
+      disable: 'false'
     },
     {
       id: 6,
       slot: '06:30 PM',
-      disable:'true'
+      disable: 'true'
     },
     {
-      id:7,
-      slot:'06:45 PM',
-      disable:'false'
+      id: 7,
+      slot: '06:45 PM',
+      disable: 'false'
     },
     {
-      id:8,
-      slot:'07:00 PM',
-      disable:'false'
+      id: 8,
+      slot: '07:00 PM',
+      disable: 'false'
     },
     {
-      id:9,
-      slot:'07:15 PM',
-      disable:'false'
+      id: 9,
+      slot: '07:15 PM',
+      disable: 'false'
     }
   ];
   doclist = [
@@ -237,6 +237,121 @@ httpOptions = {
       satisb: '0.5',
     },
   ];
+  available= [
+    {
+      "date": "2021-08-13",
+      "list": [
+        {
+          "availableList": [
+            {
+              "id": "1",
+              "time": "9:00 AM",
+              "status": "false"
+            },
+            {
+              "id": "2",
+              "time": "9:15 AM",
+              "status": "false"
+            }
+          ],
+          "session": "morning"
+        },
+        {
+          "availableList": [
+            {
+              "id": "3",
+              "time": "9:45 AM",
+              "status": "false"
+            },
+            {
+              "id": "4",
+              "time": "10:00 AM",
+              "status": "false"
+            }
+          ],
+          "session": "evening"
+        }
+      ],
+      "scount": 4,
+      "bookedCount": 0
+    },
+    {
+      "date": "2021-08-14",
+      "list": [
+        {
+          "availableList": [
+            {
+              "id": "1",
+              "time": "9:00 AM",
+              "status": "false"
+            },
+            {
+              "id": "2",
+              "time": "9:15 AM",
+              "status": "false"
+            }
+          ],
+          "session": "morning"
+        },
+        {
+          "availableList": [
+            {
+              "id": "3",
+              "time": "9:45 AM",
+              "status": "false"
+            },
+            {
+              "id": "4",
+              "time": "10:00 AM",
+              "status": "false"
+            }
+          ],
+          "session": "evening"
+        }
+      ],
+      "scount": 4,
+      "bookedCount": 0
+    },
+    {
+      "date": "2021-08-15",
+      "list": [
+        {
+          "availableList": [
+            {
+              "id": "1",
+              "time": "9:00 AM",
+              "status": "false"
+            },
+            {
+              "id": "2",
+              "time": "9:15 AM",
+              "status": "false"
+            }
+          ],
+          "session": "morning"
+        },
+        {
+          "availableList": [
+            {
+              "id": "3",
+              "time": "9:45 AM",
+              "status": "false"
+            },
+            {
+              "id": "4",
+              "time": "10:00 AM",
+              "status": "false"
+            }
+          ],
+          "session": "evening"
+        }
+      ],
+      "scount": 4,
+      "bookedCount": 0
+    }
+  ];
+
+
   slider = [
     {
       id: 1,
@@ -297,33 +412,31 @@ httpOptions = {
       icon: 'https://img.icons8.com/bubbles/50/fa314a/embryo.png',
     },
   ];
-    constructor(private http:HttpClient) {
-     }
-  post (serviceName: string, data:any){
+  constructor(private http: HttpClient) {
+  }
+  post(serviceName: string, data: any) {
 
   }
-  doctorType(){
-    return this.http.get(this.api+'doctortype', this.httpOptions);
+  doctorType() {
+    return this.http.get(this.api + 'doctortype', this.httpOptions);
   }
 
-  topDoctorList(data:any){
-    return this.http.post(this.api+'topDoctorList', data, this.httpOptions);
+  topDoctorList(data: any) {
+    return this.http.post(this.api + 'topDoctorList', data, this.httpOptions);
   }
 
-  viewDoctorProfile(data:any){
-    return this.http.post(this.api+'getdoctorprofile', data, this.httpOptions);
+  viewDoctorProfile(data: any) {
+    return this.http.post(this.api + 'getdoctorprofile', data, this.httpOptions);
   }
 
-  bookAppointment(data:any){
-    return this.http.post(this.api+'bookappointment', data, this.httpOptions);
+  bookAppointment(data: any) {
+    return this.http.post(this.api + 'bookappointment', data, this.httpOptions);
   }
 
-  appointmentDetail(data:any){
-    return this.http.post(this.api+'doctorviewappionment', data, this.httpOptions);
+  appointmentDetail(data: any) {
+    return this.http.post(this.api + 'doctorviewappionment', data, this.httpOptions);
   }
-
-  getAppointmentList(data:any){
-    return this.http.post(this.api+'appointmentavailability', data, this.httpOptions);
+  appointmentAvailability(data: any) {
+    return this.http.post(this.api + 'appointmentavailability', data, this.httpOptions);
   }
-  
 }
