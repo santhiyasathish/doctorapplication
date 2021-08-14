@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { DatePipe } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 import { PatientRoutingModule } from './patient-routing.module';
@@ -33,6 +33,7 @@ import { PatnotificationComponent } from './patnotification/patnotification.comp
     EditprofileComponent,
     AppointmentComponent,
     PatnotificationComponent
-  ]
+  ],
+  providers : [DatePipe]
 })
 export class PatientModule {}
