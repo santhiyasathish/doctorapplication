@@ -6,40 +6,40 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content fullscreen >
 
-  <ion-card *ngFor="let x of announcement">
+  <ion-card *ngFor="let data of approve">
     <ion-card-header>
       <ion-row>
         <ion-col>
-          <ion-text>{{x.name}}</ion-text>
+          <ion-text>{{data.pat_name}}</ion-text>
         </ion-col>
         <ion-col>
           <ion-icon name="calendar-outline"></ion-icon>
-          <ion-text>{{x.time}}</ion-text>
+          <ion-text>{{data.date}}</ion-text>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-label>{{x.desc}}</ion-label>
+        <ion-label></ion-label>
       </ion-row>
     </ion-card-header>
     <ion-card-content>
-      <ion-text *ngIf="!x.showMore">
-        {{trimString(x.announcementDetails,50)}}
+      <ion-text *ngIf="!data.showMore">
+        {{trimString(data.reason,50)}}
       </ion-text>
-      <ion-text class="ion-text-justify" *ngIf="x.showMore">
-        {{x.announcementDetails}}
+      <ion-text class="ion-text-justify" *ngIf="data.showMore">
+        {{data.reason}}
       </ion-text>
       <ion-row>
         <ion-col size="4" class="ion-col">
-          <a (click)="x.showMore = !x.showMore">Show <span [innerHtml]="x.showMore ? 'less' : 'More'"> </span>
+          <a (click)="data.showMore = !data.showMore">Show <span [innerHtml]="data.showMore ? 'less' : 'More'"> </span>
           </a>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label color="{{x.color}}">{{x.status}}</ion-label>
+            <ion-label color="{{data.color}}">{{data.success}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>

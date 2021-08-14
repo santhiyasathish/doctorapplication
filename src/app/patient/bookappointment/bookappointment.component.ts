@@ -5,7 +5,6 @@ import { Platform } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AlertController } from '@ionic/angular';
-import { getLocaleFirstDayOfWeek } from '@angular/common';
 // import { DatePipe } from '@angular/common';
 
 @Component({
