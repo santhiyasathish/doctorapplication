@@ -5,7 +5,7 @@ import { Platform } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AlertController } from '@ionic/angular';
-import { DatePipe } from '@angular/common';
+// import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-bookappointment',
@@ -36,7 +36,7 @@ export class BookappointmentComponent implements OnInit {
     private service:PatientserviceService,
     private route: ActivatedRoute,
     private alertCtrl: AlertController, 
-    private datePipe: DatePipe) {
+   ) {
     this.isAndroid = platform.is('android');
    }
 

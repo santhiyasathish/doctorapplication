@@ -439,4 +439,8 @@ export class PatientserviceService {
   appointmentAvailability(data: any) {
     return this.http.post(this.api + 'appointmentavailability', data, this.httpOptions);
   }
+  approvedlistindoctor(data: any){
+    return this.http.post(this.api + 'approvedlistindoctor',data,this.httpOptions);
+  }
 }
+

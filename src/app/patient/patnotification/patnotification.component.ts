@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { PatientserviceService } from '../patientservice.service'; 
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-patnotification',
   templateUrl: './patnotification.component.html',
   styleUrls: ['./patnotification.component.scss'],
+  providers: [DatePipe],
 })
 export class PatnotificationComponent implements OnInit {
-
+  
+  approve: any=[];
   announcement = [
     {
       id:1,
@@ -30,18 +34,49 @@ export class PatnotificationComponent implements OnInit {
     }
   ];
 
-  constructor() { 
+  myDate = Date();
+
+  constructor(private service:PatientserviceService,private datePipe: DatePipe) { 
+
+   
+
+    
+    console.log('date',this.myDate);
     this.announcement = this.announcement.map(item => ({
       ...item,
       showMore:false,
     }));
   }
 
-  ngOnInit() {}
-  trimString(string, length) {
+  ngOnInit() {
+    this.approvedlistindoctor();
+  }
+    trimString(string, length) {
       return string.length > length ? 
              string.substring(0, length) + '...' :
              string;
+
+             
   }
 
+
+  
+approvedlistindoctor(){
+  this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
+  let approveddoctor = {
+    date: this.myDate,
+  };
+
+  this.service.approvedlistindoctor(approveddoctor).subscribe(data=>{
+    this.approve=JSON.parse(JSON.stringify(data)).message;
+  console.log('approve',this.approve);
+  })
 }
+
+
+}
+
+
+
+
+
