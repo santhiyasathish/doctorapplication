@@ -31,6 +31,10 @@ describe('AppComponent', () => {
     expect(menuItems.length).toEqual(12);
     expect(menuItems[0].textContent).toContain('Inbox');
     expect(menuItems[1].textContent).toContain('Outbox');
+    expect(menuItems[2].textContent).toContain('Outbox');
+    expect(menuItems[3].textContent).toContain('Outbox');
+    expect(menuItems[4].textContent).toContain('Outbox');
+
   }));
 
   it('should have urls', waitForAsync(() => {
@@ -41,6 +45,10 @@ describe('AppComponent', () => {
     expect(menuItems.length).toEqual(12);
     expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/folder/Inbox');
     expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/folder/Outbox');
+    expect(menuItems[2].getAttribute('ng-reflect-router-link')).toEqual('/folder/Outbox');
+    expect(menuItems[3].getAttribute('ng-reflect-router-link')).toEqual('/folder/Outbox');
+    expect(menuItems[4].getAttribute('ng-reflect-router-link')).toEqual('/folder/Outbox');
+
   }));
 
 });

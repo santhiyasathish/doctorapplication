@@ -36,7 +36,11 @@ export class PatnotificationComponent implements OnInit {
   ];
 
   myDate = Date();
-
+  mess: any;
+  messData: any;
+  sample: string;
+  listData: any;
+  avalListData: any;
   constructor(private service:PatientserviceService,private datePipe: DatePipe) { 
 
    
@@ -50,7 +54,8 @@ export class PatnotificationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.approvedlistindoctor();
+    this.userAppointementStatus();
+   
   }
     trimString(string, length) {
       return string.length > length ? 
@@ -62,16 +67,30 @@ export class PatnotificationComponent implements OnInit {
 
 
   
-approvedlistindoctor(){
+  userAppointementStatus(){
   this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
   let approveddoctor = {
-    date: this.myDate,
+    user_id:'39',
+    // date: this.myDate,
   };
 
-  this.service.approvedlistindoctor(approveddoctor).subscribe(data=>{
-    this.approve=JSON.parse(JSON.stringify(data)).message;
-  console.log('approve',this.approve);
+    this.service.userAppointementStatus(approveddoctor).subscribe(data=>{
+      this.approve = JSON.parse(JSON.stringify(data)).message;
+  
+    console.log("sample",this.approve);
+    // this.getList('0'); 
+  console.log('data',data);
   })
+}
+getList(i){
+  this.listData = this.approve[i].list;
+  console.log("datas",this.listData);
+  this.getLists('0');
+
+}
+getLists(a){
+this.avalListData = this.listData[a].availableList;
+console.log("availablelst",this.avalListData);
 }
 
 
