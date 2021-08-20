@@ -448,5 +448,8 @@ export class PatientserviceService {
   patinetprofileedit(data: any){
     return this.http.post(this.api+'patinetprofileedit',data,this.httpOptions);
   }
+  userAppointementStatus(data: any){
+    return this.http.post(this.api + 'userappointementstatus',data,this.httpOptions);
+  }
 }
 
