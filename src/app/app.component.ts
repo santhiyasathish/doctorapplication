@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
 export class AppComponent {
   email : string;
   public appPages = [
-    { title: 'home', url: 'patient/docprofile/4', icon: 'mail' },
-    { title: 'profile', url: 'patient/docprofile/4', icon: 'paper-plane' },
-    { title: 'book appointment', url: 'patient/book', icon: 'paper-plane' },
+    { title: 'home', url: 'patient/docprofile/3', icon: 'mail' },
+    { title: 'profile', url: 'patient/docprofile/3', icon: 'paper-plane' },
+    { title: 'book appointment', url: 'patient/book/3', icon: 'paper-plane' },
+    { title: 'Add Profile', url: 'patient/editprofile', ionc: 'paper-plane'},
     { title: 'Logout', url: '', icon: 'heart' }
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];

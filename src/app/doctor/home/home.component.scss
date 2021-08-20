@@ -1,0 +1,138 @@
+ion-header {
+    ion-toolbar {
+        ion-avatar {
+            width: 50px;
+            height: 30px;
+            margin-right: 10px;
+            ion-icon {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+}
+ion-content {
+    .first-content {
+        height: 140px;
+        background-size: cover;
+        background-position-y: center;
+        // opacity: 0.5;
+        border-radius: 20px;
+        background-color: aliceblue;
+        // background-image: url("https://images.pexels.com/photos/6848000/pexels-photo-6848000.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+        ion-card-content {
+            border-radius: 20px;
+
+            .ion-item-one {
+                border-radius: 20px;
+                --background: none;
+                background-color: #4190fb;
+                color: white;
+                font-weight: 600;
+                opacity: 0.7;
+
+                ion-row {
+                    ion-col {
+                        ion-label {
+                            font-size: smaller;
+                        }
+                    }
+                }
+            }
+            .ion-item-two {
+                --background: none;
+                ion-label {
+                    font-size: smaller;
+                    color: rgb(0, 0, 0);
+                    font-weight: bold;
+                    // text-shadow: 1px 2px #000000;
+                }
+            }
+        }
+    }
+    @media (min-width: 700px) {
+        .app-root {
+            width: 700px;
+            margin: auto;
+            position: relative;
+        }
+    }
+
+    .ion-item-slot {
+        background-size: cover;
+        background-position-y: center;
+        // opacity: 0.5;
+        border-radius: 20px;
+        background-color: aliceblue;
+
+        display: flex;
+        background: none;
+        height: 25%;
+        flex-direction: column;
+
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        box-shadow: none;
+        // padding: 2px 2px 2px 2px;
+        padding: 0px;
+        margin: 0px;
+        ion-card-content {
+            border-radius: 20px;
+            height: 100%;
+            padding: 10px;
+            .sub-row {
+                margin-left: -10px;
+                margin-right: 10px;
+                height: 100%;
+                ion-col {
+                    display: flex;
+                    flex-direction: column;
+                    width: 30%;
+
+                    .sub-card {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 20px;
+                    }
+                }
+            }
+        }
+    }
+    .ion-two-card {
+        height: 130px;
+        background-size: cover;
+        background-position-y: center;
+        // opacity: 0.5;
+        border-radius: 20px;
+        padding-top: -13px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: none;
+        margin: 0px;
+        padding-right: 16px;
+        ion-card-content {
+            height: 100%;
+            ion-row {
+                height: 100%;
+                ion-col {
+                    height: 100%;
+                    ion-card {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 20px;
+                        background-color: rgb(183, 221, 255);
+                        // background-image: url("https://media.istockphoto.com/vectors/abstract-pink-watercolor-textured-background-vector-id863482310?k=6&m=863482310&s=612x612&w=0&h=Awq31a9yDypz7oG6sZ8cydtPBV0S-PHNpT9YnMpdGrA=");
+
+                        ion-label {
+                            color: rgb(0, 0, 0);
+                            font-size: 17px;
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -8,7 +8,7 @@ import { DocnotificationComponent } from './docnotification/docnotification.comp
 import { AppointmentlistComponent } from './appointmentlist/appointmentlist.component';
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent
   },
   {
