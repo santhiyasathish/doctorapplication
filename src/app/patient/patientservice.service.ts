@@ -237,7 +237,7 @@ export class PatientserviceService {
       satisb: '0.5',
     },
   ];
-  available= [
+  available = [
     {
       "date": "2021-08-13",
       "list": [
@@ -439,8 +439,14 @@ export class PatientserviceService {
   appointmentAvailability(data: any) {
     return this.http.post(this.api + 'appointmentavailability', data, this.httpOptions);
   }
-  approvedlistindoctor(data: any){
-    return this.http.post(this.api + 'approvedlistindoctor',data,this.httpOptions);
+  approvedlistindoctor(data: any) {
+    return this.http.post(this.api + 'approvedlistindoctor', data, this.httpOptions);
+  }
+  patientprofile(data: any) {
+    return this.http.post(this.api + 'patientprofile', data, this.httpOptions);
+  }
+  patinetprofileedit(data: any){
+    return this.http.post(this.api+'patinetprofileedit',data,this.httpOptions);
   }
 }
 
