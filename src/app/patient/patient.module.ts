@@ -15,13 +15,18 @@ import { DoctorprofileviewComponent } from './doctorprofileview/doctorprofilevie
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { PatnotificationComponent } from './patnotification/patnotification.component';
+import {  ReactiveFormsModule  } from '@angular/forms';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PatientRoutingModule
+    ReactiveFormsModule,
+    PatientRoutingModule,
+  
   ],
   declarations: [
     BookappointmentComponent,
