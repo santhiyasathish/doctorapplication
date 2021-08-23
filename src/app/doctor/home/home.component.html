@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar color="light">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -32,8 +32,8 @@
         </ion-row>
       </ion-item>
       <ion-item lines="none" class="ion-item-two" *ngFor="let data of dates">
-        <ion-icon  color="primary" name="calendar-outline"></ion-icon>
-        <ion-label >{{data.date}}</ion-label>
+        <ion-icon color="primary" name="calendar-outline"></ion-icon>
+        <ion-label>{{data.date}}</ion-label>
         <ion-label slot="end"> Time: Live Time</ion-label>
       </ion-item>
     </ion-card-content>
@@ -54,7 +54,7 @@
           <ion-label>Satisfaction</ion-label>
           <ion-progress-bar value="0.3"></ion-progress-bar>
         </ion-col>
-      </ion-item > 
+      </ion-item>
       <ion-item lines="none">
         <ion-col>
           <ion-label>Speciality</ion-label>
@@ -115,7 +115,7 @@
     <ion-card-content>
       <ion-item lines="none">
         <ion-label slot="start">Edit profile</ion-label>
-        <ion-button slot="end">
+        <ion-button slot="end" routerLink="/doctor/docprofileupdate/">
           <ion-icon name="pencil-sharp"></ion-icon>Edit
         </ion-button>
       </ion-item>

@@ -1,0 +1,127 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/doctor/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary">Edit Profile</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]>
+  <ion-card class="main-form">
+    <ion-item lines="none" class="sub-form">
+      <form>
+
+        <ion-item lines="none" class="avatar">
+          <ion-avatar>
+            <img
+              src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+          </ion-avatar>
+          <ion-button color="secondary">
+            <ion-icon name="camera-reverse" color="light"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+
+          <ion-input placeholder="FirstName" type="text"></ion-input>
+        </ion-item>
+        <ion-item id="rounded" lines="none">
+          <ion-input placeholder="Last Name" type="text"></ion-input>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <ion-input placeholder=" E-mail"></ion-input>
+          <ion-label style="padding-left: 20px; color: rgb(146, 146, 146);" fixed>@gmail.com</ion-label>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">+91</ion-label>
+          <ion-input type="number" placeholder="Contact"></ion-input>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <ion-datetime placeholder="Date Of Birth"></ion-datetime>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <ion-radio-group value="male">
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-label style="color:rgb(146, 146, 146);">Male</ion-label>
+                  <ion-radio slot="start" color="secondary" value="male"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-label style="color:rgb(146, 146, 146);">Female</ion-label>
+                  <ion-radio slot="start" color="secondary" value="female"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <ion-input placeholder="Institute (Optional)"></ion-input>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <ion-input placeholder="Qualification"></ion-input>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <ion-input placeholder="Description"></ion-input>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <!-- <ion-label>Speciality</ion-label> -->
+          <ion-select placeholder="Speciality" interface="action-sheet">
+            <ion-select-option value="allergist">Allergist</ion-select-option>
+            <ion-select-option value="anesthesiologist">Anesthesiologist</ion-select-option>
+            <ion-select-option value="cardiologist">Cardiologist</ion-select-option>
+            <ion-select-option value="chiropractor">Chiropractor</ion-select-option>
+            <ion-select-option value="dentist">Dentist</ion-select-option>
+            <ion-select-option value="dermatologist">Dermatologist</ion-select-option>
+            <ion-select-option value="fertility">Fertility Specialist</ion-select-option>
+            <ion-select-option value="gynecologist">Gynecologist</ion-select-option>
+            <ion-select-option value="massage">Massage Therapist</ion-select-option>
+            <ion-select-option value="midwife">Midwife</ion-select-option>
+            <ion-select-option value="naturopath">Naturopath</ion-select-option>
+            <ion-select-option value="neurologist">Neurologist</ion-select-option>
+            <ion-select-option value="obstetrician">Obstetrician</ion-select-option>
+            <ion-select-option value="occupational">Occupational Therapist</ion-select-option>
+            <ion-select-option value="oncologist">Oncologist</ion-select-option>
+            <ion-select-option value="ophthalmologist">Ophthalmologist</ion-select-option>
+            <ion-select-option value="pediatrician">Pediatrician</ion-select-option>
+            <ion-select-option value="physical">Physical Therapist</ion-select-option>
+            <ion-select-option value="podiatrist">Podiatrist</ion-select-option>
+            <ion-select-option value="psychiatrist">Psychiatrist</ion-select-option>
+            <ion-select-option value="radiologist">Radiologist</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <ion-input placeholder="Experience" type="number"></ion-input>
+          <ion-label style="color:rgb(146, 146, 146);">Years</ion-label>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <ion-label position="stacked" style="color: rgb(146, 146, 146); padding-bottom: 10px;">Address</ion-label>
+          <ion-input placeholder="Address Line 1" clearInput="true"></ion-input>
+          <ion-input placeholder="Address Line 2" clearInput="true"></ion-input>
+          <ion-input placeholder="City" clearInput="true"></ion-input>
+          <ion-input placeholder="State" clearInput="true"></ion-input>
+          <ion-input placeholder="Zip Code" type="number"></ion-input>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <ion-input type="number" placeholder="Consolidate Fees"></ion-input>
+          <ion-label style="color:rgb(146, 146, 146) ;">Rs.</ion-label>
+
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <ion-input type="number" placeholder="Emergency Contact"></ion-input>
+        </ion-item>
+        <ion-item lines="none" id="rounded">
+          <ion-textarea placeholder="enter your desc..."></ion-textarea>
+
+        </ion-item>
+        <ion-item lines="none" class="updatebtn">
+          <ion-button>
+            <ion-icon name="cloud-upload" style="padding-right: 10px;"></ion-icon>Update
+          </ion-button>
+        </ion-item>
+      </form>
+    </ion-item>
+  </ion-card>
+</ion-content>
