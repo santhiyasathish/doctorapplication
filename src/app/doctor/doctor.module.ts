@@ -11,6 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ViewappiontmentComponent } from './viewappiontment/viewappiontment.component';
 import { DocnotificationComponent } from './docnotification/docnotification.component';
 import { AppointmentlistComponent } from './appointmentlist/appointmentlist.component';
+import { DocprofileupdateComponent } from './docprofileupdate/docprofileupdate.component';
 
 
 
@@ -27,7 +28,9 @@ import { AppointmentlistComponent } from './appointmentlist/appointmentlist.comp
     ProfileComponent,
     ViewappiontmentComponent,
     DocnotificationComponent,
-    AppointmentlistComponent
+    AppointmentlistComponent,
+    DocprofileupdateComponent
+    
   ]
 })
 export class DoctorModule {}

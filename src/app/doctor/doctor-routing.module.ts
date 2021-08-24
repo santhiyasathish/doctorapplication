@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ViewappiontmentComponent } from './viewappiontment/viewappiontment.component';
 import { DocnotificationComponent } from './docnotification/docnotification.component';
 import { AppointmentlistComponent } from './appointmentlist/appointmentlist.component';
+import { DocprofileupdateComponent } from './docprofileupdate/docprofileupdate.component';
 const routes: Routes = [
   {
     path: 'home',
@@ -26,6 +27,9 @@ const routes: Routes = [
 {
   path:'appointmentlist',
   component: AppointmentlistComponent
+},{
+  path:'docprofileupdate',
+  component:DocprofileupdateComponent
 }
 ];
 

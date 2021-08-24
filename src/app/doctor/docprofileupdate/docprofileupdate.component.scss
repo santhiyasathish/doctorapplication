@@ -1,0 +1,85 @@
+ion-header {
+}
+ion-content {
+    .main-form {
+        --background: none;
+        // box-shadow: none;
+        background-color: aliceblue;
+        border-radius: 50px;
+        .sub-form {
+            --background: none;
+            form {
+                width: 100%;
+                text-align: -webkit-center;
+                padding: 0px 10px 0px 10px;
+
+                .avatar {
+                    display: flex;
+                    justify-content: center;
+                    align-content: center;
+                    align-items: center;
+                    width: 50%;
+                    --background: none;
+                    ion-button {
+                        --border-style: solid;
+                        --border-width: 1px;
+                        --border-color: var(--ion-color-light-shape);
+                        --padding-start: 0;
+                        --padding-end: 0;
+                        --padding-top: 0;
+                        --padding-bottom: 0;
+
+                        --border-radius: 50%;
+                        height: 26px;
+                        width: 26px;
+
+                        position: relative;
+                        right: 30px;
+                        bottom: -35px;
+
+                        ion-icon {
+                            width: 14px;
+                            height: 14px;
+                        }
+                    }
+
+                    ion-avatar {
+                        width: 100px;
+                        height: 100px;
+                        position: relative;
+                    }
+                }
+                .updatebtn {
+                    display: flex;
+                    justify-content: center;
+                    align-content: center;
+                    align-items: center;
+                    width: 50%;
+                    --background: none;
+
+                    ion-button {
+                        display: flex;
+                        justify-content: center;
+                        align-content: center;
+                        align-items: center;
+                        width: 100%;
+                        background-color: #7bc1f7;
+                        --background: none;
+                        border-radius: 20px;
+                        --border-radius: 20px;
+                        height: 35px;
+                        font-size: 14px;
+                    }
+                }
+
+                #rounded {
+                    box-shadow: 0px 0px 15px -5px #7bc1f7;
+                    -moz-border-radius: 50px;
+                    -webkit-border-radius: 50px;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}
