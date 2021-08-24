@@ -13,29 +13,92 @@
 <ion-content>
   <ion-card class="first-content">
     <ion-card-content>
-      <ion-item class="ion-item-one">
+      <ion-item lines="none" class="ion-item-one">
+        <ion-item lines="none" class="ion-sub-item">
+          <ion-row class="first-row">
+            <ion-col>
+              <ion-avatar>
+                <img
+                  src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+              </ion-avatar>
+            </ion-col>
+          </ion-row>
+          <ion-row class="second-row">
+            <ion-col>
+              <ion-label>Dr J Priya</ion-label>
+              <ion-label>Sample Data</ion-label>
+              <ion-label>Sub Data</ion-label>
+            </ion-col>
+            <ion-ripple-effect></ion-ripple-effect>
+          </ion-row>
+        </ion-item>
+      </ion-item>
+      <ion-item lines="none" class="contect-info">
         <ion-row>
-          <ion-col>
-            <ion-avatar>
-              <img
-                src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-            </ion-avatar>
+          <ion-col class="col-one">
+            <ion-label>
+              <ion-icon name="call"></ion-icon> +91 8098494194
+            </ion-label>
+            <ion-label>
+              <ion-icon name="mail"></ion-icon> janagan.duskcoder@gmail.com
+            </ion-label>
           </ion-col>
-        </ion-row>
-        <ion-row routerLink="/doctor/profile/" class="ion-activatable ripple-parent">
-          <ion-col>
-            <ion-label>Dr J Priya</ion-label>
-            <ion-label>Sample Data</ion-label>
-            <ion-label>Sub Data</ion-label>
+          <ion-col class="col-two">
+            <ion-label>
+              <ion-icon name="heart-circle"></ion-icon> 24-07-1997
+            </ion-label>
+            <ion-label>
+              <ion-icon name="location"></ion-icon> Pondicherry.
+            </ion-label>
           </ion-col>
-          <ion-ripple-effect></ion-ripple-effect>
         </ion-row>
       </ion-item>
+
       <ion-item lines="none" class="ion-item-two" *ngFor="let data of dates">
         <ion-icon color="primary" name="calendar-outline"></ion-icon>
         <ion-label>{{data.date}}</ion-label>
         <ion-label slot="end"> Time: Live Time</ion-label>
       </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="about">
+    <ion-card-content>
+      <ion-label>About</ion-label>
+      <ion-item class="content" lines="none">
+        <ion-text color="medium">Your health has a big impact on other parts of your life. Your doctor may ask you how your life is
+          going. This isn't
+          being impolite or nosy. Information about what's happening in your life may be useful medically. Let the
+          doctor know
+          about any major changes or stresses in your life, such as a divorce or the death of a loved one.</ion-text>
+      </ion-item>
+      <!-- <ion-item class="field" lines="none">
+        <ion-row>
+          <ion-item lines="none">
+            <ion-col>
+              <ion-label>date of birth : </ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-text>24-07-1997</ion-text>
+            </ion-col>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-col>
+              <ion-label>date of birth : </ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-text>24-07-1997</ion-text>
+            </ion-col>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-col>
+              <ion-label>date of birth : </ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-text>24-07-1997</ion-text>
+            </ion-col>
+          </ion-item>
+        </ion-row>
+      </ion-item> -->
     </ion-card-content>
   </ion-card>
   <ion-card class="progress_card">

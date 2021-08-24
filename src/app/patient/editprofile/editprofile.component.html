@@ -6,56 +6,46 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-card>
-    <form [formGroup]="editForm" (ngSubmit)="onSubmit()" >
-      <ion-item class="txtcolor">
-        <ion-label position="floating">First Name
+<ion-content [fullscreen]>
+  <ion-card class="main-content">
+    <ion-item lines="none" class="sub-main">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <ion-item lines="none" id="rounded">
           <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input type="text" name="firstname" placeholder="Enter FirstName" formControlName="firstname"
-        class="form-control"></ion-input>
-      </ion-item>
-      <div *ngIf="submitted && f.firstname.errors"  class="error-message">
-        <div *ngIf="f.firstname.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> First Name is required
+          <ion-input type="text" name="firstname" placeholder="Enter FirstName" formControlName="firstname"
+            class="form-control"></ion-input>
+        </ion-item>
+        <div *ngIf="submitted && f.firstname.errors" class="error-message">
+          <div *ngIf="f.firstname.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> First Name is required
+          </div>
         </div>
-      </div>
-      <ion-item class="txtcolor">
-        <ion-label position="floating">Last Name
+        <ion-item lines="none" id="rounded">
           <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input type="text" name="lastname" placeholder="Enter FirstName" formControlName="lastname"
-        class="form-control" ></ion-input>
-      </ion-item>
-      <div *ngIf="submitted && f.lastname.errors"  class="error-message">
-        <div *ngIf="f.lastname.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Last Name is required
+          <ion-input type="text" name="lastname" placeholder="Enter FirstName" formControlName="lastname"
+            class="form-control"></ion-input>
+        </ion-item>
+        <div *ngIf="submitted && f.lastname.errors" class="error-message">
+          <div *ngIf="f.lastname.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Last Name is required
+          </div>
         </div>
-      </div>
-      <ion-item class="txtcolor">
-        <ion-label position="floating">Contact Number</ion-label>
-        <ion-input type="Number" name="contact_number" placeholder="Enter Contact" formControlName="contact_number"
-        class="form-control" clearInput></ion-input>
-      </ion-item>
-      <div *ngIf="submitted && f.contact_number.errors"  class="error-message">
-        <div *ngIf="f.contact_number.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Contact Number is required
+        <ion-item lines="none" id="rounded">
+          <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">+91</ion-label>
+          <ion-input type="Number" name="contact_number" placeholder="Enter Contact" formControlName="contact_number"
+            class="form-control"></ion-input>
+        </ion-item>
+        <div *ngIf="submitted && f.contact_number.errors" class="error-message">
+          <div *ngIf="f.contact_number.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Contact Number is required
+          </div>
         </div>
-      </div>
-      <ion-item class="txtcolor">
-        <ion-col>
-          <ion-label>Email id</ion-label>
-        </ion-col>
-        <ion-col>
-          <ion-input type="email"  name="email" placeholder="Enter Email" formControlName="email"
-          class="form-control"clearInput></ion-input>
-        </ion-col>
-        <ion-col>
-          <ion-label>@gmail.com</ion-label>
-        </ion-col>
-      </ion-item>
-      <!-- <div *ngIf="submitted && f.email.errors"  class="error-message">
+        <ion-item lines="none" id="rounded">
+          <ion-input type="email" name="email" placeholder="E-mail" formControlName="email" class="form-control">
+          </ion-input>
+          <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>@gmail.com</ion-label>
+        </ion-item>
+        <!-- <div *ngIf="submitted && f.email.errors"  class="error-message">
         <div   *ngIf="f.email.errors.required" color="danger">
           <ion-icon name="alert-circle-outline"></ion-icon> Email is required
         </div>
@@ -63,128 +53,117 @@
           <ion-icon name="alert-circle-outline"></ion-icon> Email is invalid
         </div>
       </div> -->
-    
-      <ion-item class="txtcolor">
-        <ion-label>Gender</ion-label>
-        <ion-select name="gender" placeholder="Select Gender" formControlName="gender"
-        class="form-control">
-          <ion-select-option value="male">Male</ion-select-option>
-          <ion-select-option value="female">Female</ion-select-option>
-          <ion-select-option value="transgender">Transgender</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <div *ngIf="submitted && f.gender.errors" class="error-message">
-        <div   *ngIf="f.gender.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Gender is required
+        <ion-item lines="none" id="rounded">
+          <ion-radio-group value="male">
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-label style="color:rgb(146, 146, 146);">Male</ion-label>
+                  <ion-radio slot="start" color="secondary" value="male"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-label style="color:rgb(146, 146, 146);">Female</ion-label>
+                  <ion-radio slot="start" color="secondary" value="female"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
+        </ion-item>
+        <div *ngIf="submitted && f.gender.errors" class="error-message">
+          <div *ngIf="f.gender.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Gender is required
+          </div>
         </div>
-      </div>
-      <ion-item class="txtcolor">
-        <ion-label>Date of Birth</ion-label>
-        <ion-datetime value="1990-05-24" placeholder="Select Date" name="dob" formControlName="dob"
-        class="form-control"></ion-datetime>
-      </ion-item>
-      <div *ngIf="submitted && f.dob.errors"  class="error-message">
-        <div   *ngIf="f.dob.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Please select date
+        <ion-item lines="none" id="rounded">
+          <ion-datetime placeholder="Select Date" name="dob" formControlName="dob" class="form-control"></ion-datetime>
+        </ion-item>
+        <div *ngIf="submitted && f.dob.errors" class="error-message">
+          <div *ngIf="f.dob.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Please select date
+          </div>
         </div>
-      </div>
-      <ion-item class="txtcolor">
-        <ion-label>Blood Group</ion-label>
-        <ion-select name="blood_group" placeholder="Select BloodGroup" formControlName="blood_group"
-        class="form-control" >
-          <ion-select-option value="a+">A+</ion-select-option>
-          <ion-select-option value="a-">A-</ion-select-option>
-          <ion-select-option value="b+">B+</ion-select-option>
-          <ion-select-option value="b-">B-</ion-select-option>
-          <ion-select-option value="o+">O+</ion-select-option>
-          <ion-select-option value="o-">O-</ion-select-option>
-          <ion-select-option value="ab+">AB+</ion-select-option>
-          <ion-select-option value="ab-">AB-</ion-select-option>
-        </ion-select>
-       
-      </ion-item>
-      <!-- <div *ngIf="submitted && f.blood_group.errors"  class="error-message">
+        <ion-item lines="none" id="rounded">
+          <ion-select name="blood_group" placeholder="Select BloodGroup" formControlName="blood_group"
+            class="form-control">
+            <ion-select-option value="a+">A+</ion-select-option>
+            <ion-select-option value="a-">A-</ion-select-option>
+            <ion-select-option value="b+">B+</ion-select-option>
+            <ion-select-option value="b-">B-</ion-select-option>
+            <ion-select-option value="o+">O+</ion-select-option>
+            <ion-select-option value="o-">O-</ion-select-option>
+            <ion-select-option value="ab+">AB+</ion-select-option>
+            <ion-select-option value="ab-">AB-</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <!-- <div *ngIf="submitted && f.blood_group.errors"  class="error-message">
         <div   *ngIf="f.blood_group.errors.required">
           <ion-icon name="alert-circle-outline"></ion-icon> Blood Group is required
         </div>
       </div> -->
-      <ion-item class="txtcolor">
-        <ion-label>Marital Status</ion-label>
-        <ion-select name="marital_status" placeholder="Select Marital Status" formControlName="marital_status"
-        class="form-control">
-          <ion-select-option value="single">Single</ion-select-option>
-          <ion-select-option value="married">Married</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <!-- <div *ngIf="submitted && f.marital_status.errors"  class="error-message">
+        <ion-item lines="none" id="rounded">
+          <ion-select name="marital_status" placeholder="Select Marital Status" formControlName="marital_status"
+            class="form-control">
+            <ion-select-option value="single">Single</ion-select-option>
+            <ion-select-option value="married">Married</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <!-- <div *ngIf="submitted && f.marital_status.errors"  class="error-message">
         <div   *ngIf="f.marital_status.errors.required">
           <ion-icon name="alert-circle-outline"></ion-icon> Marital Status is required
         </div>
       </div> -->
-      <ion-item class="txtcolor">
-        <ion-col size="7.5">
-          <ion-label>Height</ion-label>
-        </ion-col>
-        <ion-col size="3">
-          <ion-input type="number" name="height" placeholder="Enter Height" formControlName="height"
-          class="form-control" clearInput></ion-input>
-        </ion-col>
-        <ion-col floating="right">
-          <ion-label>Cm</ion-label>
-        </ion-col>
-      </ion-item>
-      <!-- <div *ngIf="submitted && f.height.errors"  class="error-message">
+        <ion-item lines="none" id="rounded">
+          <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">Weight</ion-label>
+          <ion-input type="number" name="height" formControlName="height" class="form-control" clearInput></ion-input>
+          <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>Cm</ion-label>
+        </ion-item>
+        <!-- <div *ngIf="submitted && f.height.errors"  class="error-message">
         <div   *ngIf="f.height.errors.required">
           <ion-icon name="alert-circle-outline"></ion-icon> Height is required
         </div>
       </div> -->
-      <ion-item class="txtcolor">
-        <ion-col size="7.5">
-          <ion-label>Weight</ion-label>
-        </ion-col>
-        <ion-col size="3">
-          <ion-input type="number"  name="weight" placeholder="Enter Weight" formControlName="weight"
-          class="form-control"clearInput></ion-input>
-        </ion-col>
-        <ion-col>
-          <ion-label>Kg</ion-label>
-        </ion-col>
-      </ion-item>
-      <!-- <div *ngIf="submitted && f.weight.errors"  class="error-message">
+        <ion-item lines="none" id="rounded">
+          <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">Height</ion-label>
+          <ion-input type="number" name="weight" placeholder="Enter Weight" formControlName="weight"
+            class="form-control" clearInput></ion-input>
+          <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>Kg</ion-label>
+        </ion-item>
+        <!-- <div *ngIf="submitted && f.weight.errors"  class="error-message">
         <div   *ngIf="f.weight.errors.required">
           <ion-icon name="alert-circle-outline"></ion-icon> Weight is required
         </div>
       </div> -->
-      <ion-item class="txtcolor">
-        <ion-label position="floating">Emergency Contact</ion-label>
-        <ion-input name="econtact" placeholder="Enter Emergency Contact" formControlName="econtact"
-        class="form-control"></ion-input>
-      </ion-item>
-      <!-- <div *ngIf="submitted && f.econtact.errors"  class="error-message">
+        <ion-item lines="none" id="rounded">
+          <ion-input name="econtact" placeholder="Enter Emergency Contact" formControlName="econtact"
+            class="form-control"></ion-input>
+        </ion-item>
+        <!-- <div *ngIf="submitted && f.econtact.errors"  class="error-message">
         <div   *ngIf="f.econtact.errors.required">
           <ion-icon name="alert-circle-outline"></ion-icon> Emergency Contact is required
         </div>
       </div> -->
-      <ion-item class="txtcolor">
-        <ion-label position="floating" >Location</ion-label>
-        <ion-input name="location" placeholder="Enter Location" formControlName="location"
-        class="form-control"></ion-input>
-      </ion-item>
-      <div *ngIf="submitted && f.location.errors"  class="error-message">
-        <div   *ngIf="f.location.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Location is required
+        <ion-item lines="none" id="rounded">
+          <ion-input name="location" placeholder="Enter Location" formControlName="location" class="form-control">
+          </ion-input>
+        </ion-item>
+        <div *ngIf="submitted && f.location.errors" class="error-message">
+          <div *ngIf="f.location.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Location is required
+          </div>
         </div>
-      </div>
-      <ion-row>
-      <ion-card-content class="button-align">
-        <ion-button type="submit" *ngIf="buttontype == 'add'" (click)="open('add')">Add Profile</ion-button>
-        <!-- <ion-button type="submit">
+        <ion-item lines="none" class="updatebtn">
+          
+            <ion-button type="submit" *ngIf="buttontype == 'add'" (click)="open('add')">Add Profile</ion-button>
+            <!-- <ion-button type="submit">
           <ion-icon name="checkmark-outline"></ion-icon>
           Completed
         </ion-button> -->
-        <ion-button type="submit" *ngIf="buttontype == 'edit'" (click)="open('edit')" >Edit Profile</ion-button>
-      </ion-card-content>
-    </ion-row>
-    </form>
+            <ion-button type="submit" *ngIf="buttontype == 'edit'" (click)="open('edit')">Edit Profile</ion-button>
+          
+        </ion-item>
+      </form>
+    </ion-item>
   </ion-card>
 </ion-content>
