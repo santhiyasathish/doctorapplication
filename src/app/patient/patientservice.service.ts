@@ -442,14 +442,17 @@ export class PatientserviceService {
   approvedlistindoctor(data: any) {
     return this.http.post(this.api + 'approvedlistindoctor', data, this.httpOptions);
   }
+  userAppointementStatus(data: any){
+    return this.http.post(this.api + 'userappointementstatus',data,this.httpOptions);
+  }
   patientprofile(data: any) {
     return this.http.post(this.api + 'patientprofile', data, this.httpOptions);
   }
   patinetprofileedit(data: any){
     return this.http.post(this.api+'patinetprofileedit',data,this.httpOptions);
   }
-  userAppointementStatus(data: any){
-    return this.http.post(this.api + 'userappointementstatus',data,this.httpOptions);
+  getpatientprofile(data: any){
+    return this.http.post(this.api+'getpatientprofile',data,this.httpOptions);
   }
 }
 

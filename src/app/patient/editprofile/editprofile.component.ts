@@ -20,25 +20,56 @@ export class EditprofileComponent implements OnInit {
   detail: any = [];
   sample: string;
   name: string;
+  getprofile: any =[];
+  profileedit: any =[];
+  buttontype='add';
+  
 
   constructor(private formBuilder: FormBuilder, private service: PatientserviceService) { }
   ngOnInit() {
-    
-    this.editForm = this.formBuilder.group({
-      firstname: ['sasmitha', Validators.required],
+    let id = {
+      'user_id': JSON.parse(localStorage.getItem('log')).id
+    };
+    this.service.getpatientprofile(id).subscribe(data=>{
+      this.getprofile =JSON.parse(JSON.stringify(data)).data;
+      if(JSON.parse(JSON.stringify(data)).success == true){
+        this.buttontype = 'edit';
+        console.log(this.getprofile);
+        this.editForm = this.formBuilder.group({
+          firstname: [this.getprofile.name.split(' ')[0], Validators.required],
+          lastname: [this.getprofile.name.split(' ')[1], Validators.required],
+          contact_number: [this.getprofile.contact_number, Validators.required],
+          email: [this.getprofile.email, [Validators.required, Validators.email]],
+          gender: [this.getprofile.gender, Validators.required],
+          dob: [this.getprofile.dob.split('T')[0], Validators.required],
+          blood_group: [this.getprofile.blood_group.toLowerCase(), Validators.required],
+          marital_status: [this.getprofile.marital_status, Validators.required],
+          height: [this.getprofile.height, Validators.required],
+          weight: [this.getprofile.weight, Validators.required],
+          econtact: ['', Validators.required],
+          location: [this.getprofile.location, Validators.required],
+        });
+      }
+      else{
+        this.buttontype = 'add';
+      }
+     });
+     this.editForm = this.formBuilder.group({
+      firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       contact_number: ['', Validators.required],
-      email: ['', [Validators,Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       gender: ['', Validators.required],
       dob: ['', Validators.required],
-      bloodgroup: ['', Validators],
-      mstatus: ['', Validators],
-      height: ['', Validators],
-      weight: ['', Validators],
-      econtact: ['', Validators],
+      blood_group: ['', Validators.required],
+      marital_status: ['', Validators.required],
+      height: ['', Validators.required],
+      weight: ['', Validators.required],
+      econtact: ['', Validators.required],
       location: ['', Validators.required],
 
     })
+    
   }
   get f(): {
      [key: string]: AbstractControl 
@@ -60,22 +91,38 @@ export class EditprofileComponent implements OnInit {
       contact_number: this.editForm.value.contact_number,
       email: this.editForm.value.email,
       gender: this.editForm.value.gender,
-      dob: '2020-12-12',
-      bloodgroup: this.editForm.value.bloodgroup,
-      mstatus: this.editForm.value.mstatus,
+      dob: this.editForm.value.dob.split('T')[0],
+      blood_group: this.editForm.value.blood_group,
+      marital_status: this.editForm.value.marital_status,
       height: this.editForm.value.height,
       weight: this.editForm.value.weight,
       econtact: this.editForm.value.econtact,
       location: this.editForm.value.location,
     }
-    this.service.patientprofile(data).subscribe(data => {
-      this.detail = JSON.parse(JSON.stringify(data));
-      console.log(data);
-    })
-
+    
     if (this.editForm.invalid) {
       return;
     }
 
+    if(this.buttontype == 'add'){
+      
+      this.service.patientprofile(data).subscribe(data => {
+        this.detail = JSON.parse(JSON.stringify(data));
+        console.log(data);
+      });
+
+    }
+    else{
+       this.service.patinetprofileedit(data).subscribe(data=>{
+        this.profileedit = JSON.parse(JSON.stringify(data));
+        console.log( data);
+      })
+     
+    }
   }
+  open(status){
+    
+    this.buttontype = status;
+  }
+
 }

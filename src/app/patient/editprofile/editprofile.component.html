@@ -90,8 +90,8 @@
       </div>
       <ion-item class="txtcolor">
         <ion-label>Blood Group</ion-label>
-        <ion-select name="bloodgroup" placeholder="Select BloodGroup" formControlName="bloodgroup"
-        class="form-control">
+        <ion-select name="blood_group" placeholder="Select BloodGroup" formControlName="blood_group"
+        class="form-control" >
           <ion-select-option value="a+">A+</ion-select-option>
           <ion-select-option value="a-">A-</ion-select-option>
           <ion-select-option value="b+">B+</ion-select-option>
@@ -101,22 +101,23 @@
           <ion-select-option value="ab+">AB+</ion-select-option>
           <ion-select-option value="ab-">AB-</ion-select-option>
         </ion-select>
+       
       </ion-item>
-      <!-- <div *ngIf="submitted && f.bloodgroup.errors"  class="error-message">
-        <div   *ngIf="f.bloodgroup.errors.required">
+      <!-- <div *ngIf="submitted && f.blood_group.errors"  class="error-message">
+        <div   *ngIf="f.blood_group.errors.required">
           <ion-icon name="alert-circle-outline"></ion-icon> Blood Group is required
         </div>
       </div> -->
       <ion-item class="txtcolor">
         <ion-label>Marital Status</ion-label>
-        <ion-select name="mstatus" placeholder="Select Marital Status" formControlName="mstatus"
+        <ion-select name="marital_status" placeholder="Select Marital Status" formControlName="marital_status"
         class="form-control">
           <ion-select-option value="single">Single</ion-select-option>
           <ion-select-option value="married">Married</ion-select-option>
         </ion-select>
       </ion-item>
-      <!-- <div *ngIf="submitted && f.mstatus.errors"  class="error-message">
-        <div   *ngIf="f.mstatus.errors.required">
+      <!-- <div *ngIf="submitted && f.marital_status.errors"  class="error-message">
+        <div   *ngIf="f.marital_status.errors.required">
           <ion-icon name="alert-circle-outline"></ion-icon> Marital Status is required
         </div>
       </div> -->
@@ -174,12 +175,16 @@
           <ion-icon name="alert-circle-outline"></ion-icon> Location is required
         </div>
       </div>
+      <ion-row>
       <ion-card-content class="button-align">
-        <ion-button type="submit">
+        <ion-button type="submit" *ngIf="buttontype == 'add'" (click)="open('add')">Add Profile</ion-button>
+        <!-- <ion-button type="submit">
           <ion-icon name="checkmark-outline"></ion-icon>
           Completed
-        </ion-button>
+        </ion-button> -->
+        <ion-button type="submit" *ngIf="buttontype == 'edit'" (click)="open('edit')" >Edit Profile</ion-button>
       </ion-card-content>
+    </ion-row>
     </form>
   </ion-card>
 </ion-content>
