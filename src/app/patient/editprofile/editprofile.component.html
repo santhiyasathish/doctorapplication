@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar color="light">
     <ion-buttons slot="start">
-      <ion-back-button routerLink="/patient/home"></ion-back-button>
+      <ion-back-button routerLink="/patient/profile"></ion-back-button>
       <ion-title>Profile</ion-title>
     </ion-buttons>
   </ion-toolbar>
@@ -10,6 +10,15 @@
   <ion-card class="main-content">
     <ion-item lines="none" class="sub-main">
       <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <ion-item lines="none" class="avatar">
+          <ion-avatar>
+            <img
+              src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+          </ion-avatar>
+          <ion-button color="secondary">
+            <ion-icon name="camera-reverse" color="light"></ion-icon>
+          </ion-button>
+        </ion-item>
         <ion-item lines="none" id="rounded">
           <ion-text color="danger">*</ion-text>
           <ion-input type="text" name="firstname" placeholder="Enter FirstName" formControlName="firstname"
@@ -41,20 +50,20 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-input type="email" name="email" placeholder="E-mail" formControlName="email" class="form-control">
+          <ion-input type="text" name="email" placeholder="E-mail" formControlName="email" class="form-control">
           </ion-input>
           <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>@gmail.com</ion-label>
         </ion-item>
-        <!-- <div *ngIf="submitted && f.email.errors"  class="error-message">
+        <div *ngIf="submitted && f.email.errors"  class="error-message">
         <div   *ngIf="f.email.errors.required" color="danger">
           <ion-icon name="alert-circle-outline"></ion-icon> Email is required
         </div>
-        <div *ngIf="f.email.errors.email">
-          <ion-icon name="alert-circle-outline"></ion-icon> Email is invalid
+        <div *ngIf="f.email.errors.pattern">
+          <ion-icon name="alert-circle-outline"></ion-icon> Don't type @gmail.com
         </div>
-      </div> -->
+      </div>
         <ion-item lines="none" id="rounded">
-          <ion-radio-group value="male">
+          <ion-radio-group name="gender" formControlName="gender" >
             <ion-row>
               <ion-col>
                 <ion-item lines="none">
@@ -154,14 +163,13 @@
           </div>
         </div>
         <ion-item lines="none" class="updatebtn">
-          
-            <ion-button type="submit" *ngIf="buttontype == 'add'" (click)="open('add')">Add Profile</ion-button>
-            <!-- <ion-button type="submit">
+
+          <ion-button type="submit" *ngIf="buttontype == 'add'" (click)="open('add')"><ion-icon name="person-add"></ion-icon>&nbsp; Add Profile</ion-button>
+          <!-- <ion-button type="submit">
           <ion-icon name="checkmark-outline"></ion-icon>
           Completed
         </ion-button> -->
-            <ion-button type="submit" *ngIf="buttontype == 'edit'" (click)="open('edit')">Edit Profile</ion-button>
-          
+          <ion-button type="submit" *ngIf="buttontype == 'edit'" (click)="open('edit')"><ion-icon name="cloud-upload"></ion-icon> &nbsp; Edit Profile</ion-button>
         </ion-item>
       </form>
     </ion-item>

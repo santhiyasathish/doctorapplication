@@ -1,45 +1,221 @@
-.content{
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
-    overflow: visible;
-    margin: 36px 0 24px;
-    position: relative;
-    padding-top:100px;
-    .img-wrapper{
-        position:absolute;
-        left :50%;
-        top: -30px;
-        transform: translateX(-50%);
-        img{
-            border-radius:50px;
-            width: 80px;
-            height: 80px;
+ion-header {
+}
+ion-content {
+    .main-content {
+        --background: none;
+        // box-shadow: none;
+        border-radius: 20px;
+        .ion-item-one {
+            border-radius: 20px 20px 0px 0px;
+            --background: none;
+            background-color: #4190fb;
+            .ion-sub-item {
+                --background: none;
+                width: 100%;
+                .first-row {
+                    ion-col {
+                        ion-avatar {
+                            width: 100px;
+                            height: 100px;
+                        }
+                    }
+                }
+                .second-row {
+                    width: 100%;
+                    color: white;
+                    font-weight: 600;
+                    ion-col {
+                        ion-label {
+                            font-size: smaller;
+                            ion-button {
+                                --background: none;
+                                --box-shadow: none;
+                                width: 23px;
+
+                                margin: 0 !important;
+                                background-image: url("https://img.icons8.com/emoji/48/000000/glowing-star.png");
+                                background-repeat: no-repeat;
+                                background-position: center;
+                                background-size: 18px 18px;
+                                color: white !important;
+                            }
+                        }
+                    }
+                }
+            }
         }
-        
-        ion-button{
 
-            --border-style:solid;
-            --border-width:1px;
-            --border-color: var(--ion-color-light-shape);
-            --padding-start:0;
-            --padding-end:0;
-            --padding-top:0;
-            --padding-bottom:0;
-            
-            --border-radius: 50%;
-            height: 26px;
-            width: 26px;
+        .sub-header {
+            border-radius: 0px 0px 20px 20px;
+            ion-row {
+                width: 100%;
+                ion-col {
+                    ion-label {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+    .info {
+        --background: none;
+        box-shadow: none;
+        background-color: aliceblue;
+        border-radius: 20px;
+        ion-card-header {
+        }
+        ion-card-content {
+            #rounded {
+                box-shadow: 0px 0px 0px 1px #50a07c;
+                border-radius: 10px;
+                margin-bottom: 10px;
+                --background: none;
+                color: dodgerblue;
+                ion-row {
+                    width: 100%;
+                    .first-col {
+                        ion-label{
+                            padding-top: 10px;
+                        }
+                    }
+                    .second-col {
+                        ion-button {
+                            float: right;
+                            img {
+                                width: 20px;
+                                height: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+            .address-info{
+                --background:none;
+                ion-row{
+                    ion-col{
+                        
+                        ion-label{
+                            color: grey;
+                        }
+                        ion-text{
+                            color: dodgerblue;
+                        }
+                    }
 
-            position:absolute;
-            right: -5px;
-            bottom: -5px;
+                }
+            }
+            .sub-info{
+                --background:none;
+                ion-row{
+                    ion-col{
+                        ion-text{
+                            color: rgb(61, 61, 61);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .review {
+        border-radius: 20px;
+        box-shadow: none;
+        background-color: aliceblue;
+        ion-card-header {
+        }
+        ion-card-content {
+            ion-item {
+                --background: none;
+                ion-col {
+                    text-align: inherit;
+                    padding: 0px 10px 0px 0px;
+                    ion-label {
+                        color: #50a07c;
+                    }
+                    ion-progress-bar {
+                        --background: rgb(0, 0, 0);
+                        --buffer-background: rgb(183 201 224);
+                        --progress-background: rgb(0, 119, 255);
+                        height: 10px;
+                        border-radius: 20px;
+                        opacity: 0.7;
+                    }
+                }
+            }
+        }
+    }
+    .about {
+        background-color: aliceblue;
+        border-radius: 15px;
+        box-shadow: none;
+        ion-card-content {
+            .content {
+                --background: none;
+                ion-text {
+                    font-size: 12px;
+                    text-align: justify;
+                }
+            }
+            .field {
+                background-color: #49a2a5;
+                --background: none;
+                border-radius: 15px;
 
-            ion-icon{
-                width: 14px;
-                height: 14px;
+                ion-row {
+                    // --background: none;
+                    // background-color: #49a2a5;
+                    ion-item {
+                        width: 100%;
+                        color: white;
+                        --background: none;
+                    }
+                }
             }
         }
     }
 }
-.edit-content{
-    border-top: 3px solid rgb(23, 150, 255);
-}
+
+// .content{
+//     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+//     overflow: visible;
+//     margin: 36px 0 24px;
+//     position: relative;
+//     padding-top:100px;
+//     .img-wrapper{
+//         position:absolute;
+//         left :50%;
+//         top: -30px;
+//         transform: translateX(-50%);
+//         img{
+//             border-radius:50px;
+//             width: 80px;
+//             height: 80px;
+//         }
+
+//         ion-button{
+
+//             --border-style:solid;
+//             --border-width:1px;
+//             --border-color: var(--ion-color-light-shape);
+//             --padding-start:0;
+//             --padding-end:0;
+//             --padding-top:0;
+//             --padding-bottom:0;
+
+//             --border-radius: 50%;
+//             height: 26px;
+//             width: 26px;
+
+//             position:absolute;
+//             right: -5px;
+//             bottom: -5px;
+
+//             ion-icon{
+//                 width: 14px;
+//                 height: 14px;
+//             }
+//         }
+//     }
+// }
+// .edit-content{
+//     border-top: 3px solid rgb(23, 150, 255);
+// }

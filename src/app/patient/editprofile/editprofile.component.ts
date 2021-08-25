@@ -58,7 +58,7 @@ export class EditprofileComponent implements OnInit {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       contact_number: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+       email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')]],
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       blood_group: ['', Validators.required],
