@@ -1,13 +1,16 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="light">
-    <ion-buttons slot="start">
+    <ion-buttons class="menu-btn" slot="start">
       <ion-menu-button color="primary"></ion-menu-button>
       <ion-title>Dashboard</ion-title>
+    </ion-buttons>
+    <ion-buttons class="noti-btn" slot="end">
+      <ion-button color="primary"><ion-icon name="notifications-circle"></ion-icon></ion-button>
     </ion-buttons>
     <!-- <ion-img src="https://cdn.pixabay.com/photo/2015/03/26/09/52/chain-link-690503_960_720.jpg"></ion-img> -->
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]>
+<ion-content [fullscreen] *ngFor="let data of editData">
   <ion-card class="main-content">
     <ion-item lines="none" class="ion-item-one">
       <ion-item lines="none" class="ion-sub-item">
@@ -15,15 +18,15 @@
           <ion-col>
             <ion-avatar>
               <img
-                src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                src="{{data.image}}" />
             </ion-avatar>
           </ion-col>
         </ion-row>
         <ion-row class="second-row">
           <ion-col>
-            <ion-label>Dr J Priya</ion-label>
+            <ion-label>{{data.name}}</ion-label>
             <ion-label>Qualification</ion-label>
-            <ion-label>Speciality</ion-label>
+            <ion-label>{{data.professional}}</ion-label>
             <ion-label>Description</ion-label>
             <ion-label>
               <ion-button *ngIf="hideButton" (click)="approve()"></ion-button>
@@ -37,7 +40,7 @@
         </ion-row>
       </ion-item>
     </ion-item>
-    <ion-item class="sub-header" lines="none" color="primary">
+    <ion-item class="sub-header" lines="none">
       <ion-row>
         <ion-col>
           <ion-label>
@@ -49,7 +52,7 @@
         </ion-col>
         <ion-col>
           <ion-label>
-            <ion-icon name="location"></ion-icon> Pondicherry
+            <ion-icon name="location"></ion-icon> {{data.location}}
           </ion-label>
           <ion-label>
             <ion-icon name="call"></ion-icon>Tel: 0413- 7654656
@@ -58,6 +61,14 @@
         </ion-col>
       </ion-row>
     </ion-item>
+  </ion-card>
+  <ion-card class="about">
+    <ion-card-content>
+      <ion-label>About</ion-label>
+      <ion-item class="content" lines="none">
+        <ion-text color="medium">{{data.about}}</ion-text>
+      </ion-item>
+    </ion-card-content>
   </ion-card>
   <ion-card class="info">
     <ion-card-header>
@@ -77,12 +88,35 @@
       <ion-item lines="none" class="sub-info">
         <ion-row>
           <ion-col>
-            <ion-label><ion-icon name="school"></ion-icon>
-            <ion-text>&nbsp;&nbsp;Kmc college.</ion-text></ion-label>
+            <ion-label>
+              <ion-icon name="school"></ion-icon>
+              <ion-text>&nbsp;&nbsp;Kmc college</ion-text>
+            </ion-label>
+            <ion-label>
+              <ion-icon name="business"></ion-icon>
+              <ion-text>&nbsp;&nbsp;1 Year Experience</ion-text>
+            </ion-label>
           </ion-col>
-          
         </ion-row>
-        
+      </ion-item>
+      <ion-item class="booking-form" lines="none">
+        <ion-row>
+          <ion-col class="col-one">
+            <ion-button>
+              <ion-icon name="call"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col class="col-two" >
+            <ion-button>
+              <ion-icon name="mail-unread"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col *ngFor="let data of editData" class="col-three">
+            <ion-button routerLink="/patient/book/{{docId}}">
+              <ion-icon name="calendar"></ion-icon>&nbsp; Appointment
+            </ion-button>
+          </ion-col>
+        </ion-row>
       </ion-item>
       <ion-item class="address-info" lines="none">
         <ion-row>
@@ -103,40 +137,29 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item lines="none">
-        <ion-col>
+        <ion-col class="col-one">
           <ion-label>Service</ion-label>
-          <ion-progress-bar value="0.7"></ion-progress-bar>
+          <ion-progress-bar value="{{data.review}}"></ion-progress-bar>
         </ion-col>
       </ion-item>
       <ion-item lines="none">
         <ion-col>
           <ion-label>Satisfaction</ion-label>
-          <ion-progress-bar value="0.3"></ion-progress-bar>
+          <ion-progress-bar value="{{data.score}}"></ion-progress-bar>
         </ion-col>
       </ion-item>
       <ion-item lines="none">
         <ion-col>
           <ion-label>Speciality</ion-label>
-          <ion-progress-bar value="0.8"></ion-progress-bar>
+          <ion-progress-bar value="{{data.satisfication}}"></ion-progress-bar>
         </ion-col>
       </ion-item>
     </ion-card-content>
   </ion-card>
 
-  <ion-card class="about">
-    <ion-card-content>
-      <ion-label>About</ion-label>
-      <ion-item class="content" lines="none">
-        <ion-text color="medium">Your health has a big impact on other parts of your life. Your doctor may ask you how
-          your life is
-          going. This isn't
-          being impolite or nosy. Information about what's happening in your life may be useful medically. Let the
-          doctor know
-          about any major changes or stresses in your life, such as a divorce or the death of a loved one.</ion-text>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+  
 </ion-content>
+
 
 
 
