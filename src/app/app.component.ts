@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PushNotificationService } from './push-notification.service';
+// import { PushNotificationService } from './push-notification.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -16,11 +16,13 @@ export class AppComponent{
     { title: 'Logout', icon: 'heart' }
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor(private router: Router, private pushNotificationService: PushNotificationService) {
+  constructor(private router: Router,
+    //  private pushNotificationService: PushNotificationService
+     ) {
     if (localStorage.getItem('log') != null) {
     this.email = JSON.parse(localStorage.getItem('log')).email;
     }
-    this.pushNotificationService.register();
+    // this.pushNotificationService.register();
 
   }
 
