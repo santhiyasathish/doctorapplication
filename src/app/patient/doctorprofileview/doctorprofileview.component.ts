@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientserviceService } from '../patientservice.service';
 import { ActivatedRoute } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
+import { MenuController } from '@ionic/angular';
+import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-doctorprofileview',
@@ -18,17 +21,35 @@ export class DoctorprofileviewComponent implements OnInit {
   hideButton3: boolean = true;
   hideButton4: boolean = true;
   
-
   constructor(public service:PatientserviceService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private menu:MenuController,
+    private localNotification:LocalNotifications,
+    private appComponent: AppComponent
     ) { }
 
   ngOnInit() {
+    this.menu.enable(true,'custom');
+    this.appComponent.appPages;
     this.profileId = this.route.snapshot.paramMap.get('id');
     this.docId = this.route.snapshot.paramMap.get('id');
     this.viewDoctorProfile(this.profileId);
     
     
+  }
+  registerNotification(seconds:number){
+    
+    this.localNotification.schedule({
+      title: `my ${seconds} notification`,
+      text:`my detailed description`,
+      trigger: {
+        // at: new Date(new Date().getTime() + ms)
+        
+        in: seconds,
+        unit: ELocalNotificationTriggerUnit.SECOND,
+      },
+
+    });
   }
 
   viewDoctorProfile(val){

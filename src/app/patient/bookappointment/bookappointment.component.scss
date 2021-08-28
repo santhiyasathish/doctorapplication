@@ -8,8 +8,8 @@ ion-content {
     .dateslot {
         margin: 0px -15px 0px -15px;
         ion-slides {
-            --background:none;
-            background-color:#b3cbf6 ;
+            --background: none;
+            background-color: #b3cbf6;
             ion-slide {
                 ion-card {
                     --background: none;
@@ -21,13 +21,20 @@ ion-content {
             }
         }
     }
-    .slot{
+    .slot {
         background-color: aliceblue;
-   
-        .event{
-            --background:none;
+
+        .event {
+            --background: none;
             background-color: aliceblue;
-            
+        }
+    }
+    .date {
+        background-color: #d6ebff;
+        --background: none;
+        color: #4c4c4c;
+        ion-label {
+            text-align-last: center;
         }
     }
 }

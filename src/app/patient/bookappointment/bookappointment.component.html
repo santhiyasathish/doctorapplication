@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="light">
     <ion-buttons>
-      <ion-back-button href="/patient/docprofile:id"></ion-back-button>
+      <ion-back-button routerLink="/patient/docprofile/3/"></ion-back-button>
       <ion-title>Appointment</ion-title>
     </ion-buttons>
   </ion-toolbar>
@@ -44,8 +44,8 @@
     </ion-slides>
   </ion-item>
 
-  <ion-item class="ion-text-center">
-    <ion-label><strong>Thu, 04 Aug</strong></ion-label>
+  <ion-item lines="none" class="date">
+    <ion-label><strong>{{sam}}</strong></ion-label>
   </ion-item>
   
     <div class="slot" *ngFor="let li of list">
