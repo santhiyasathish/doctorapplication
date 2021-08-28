@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 
 // import { DatePipe } from '@angular/common';
 
@@ -45,6 +46,7 @@ export class BookappointmentComponent implements OnInit {
     private service: PatientserviceService,
     private route: ActivatedRoute,
     private alertCtrl: AlertController,
+    private appComponents:AppComponent
     // private datePipe: DatePipe
   ) {
     this.isAndroid = platform.is('android');
@@ -127,6 +129,7 @@ export class BookappointmentComponent implements OnInit {
     }).then(res => {
 
       res.present();
+      this.appComponents.seduleBasic();
       this.router.navigateByUrl('/patient/docprofile/3');
 
     });

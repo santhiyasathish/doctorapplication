@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
 // import { PushNotificationService } from './push-notification.service';
 @Component({
   selector: 'app-root',
@@ -17,8 +19,10 @@ export class AppComponent{
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(private router: Router,
+    private localNotification: LocalNotifications,
     //  private pushNotificationService: PushNotificationService
      ) {
+    this.seduleBasic();
     if (localStorage.getItem('log') != null) {
     this.email = JSON.parse(localStorage.getItem('log')).email;
     }
@@ -33,6 +37,23 @@ export class AppComponent{
       this.router.navigateByUrl('login');
     }
   
+
+  }
+
+  seduleBasic() {
+    this.localNotification.schedule({
+      id: 1,
+      title: 'J janagan',
+      text: 'hai i am jana',
+
+      trigger: {
+        // at: new Date(new Date().getTime() + ms)
+
+        in: 4,
+        unit: ELocalNotificationTriggerUnit.SECOND,
+      },
+      data: 'sample data'
+    });
 
   }
 }
