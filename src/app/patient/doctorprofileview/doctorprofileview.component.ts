@@ -3,7 +3,7 @@ import { PatientserviceService } from '../patientservice.service';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { MenuController } from '@ionic/angular';
-import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
+// import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-doctorprofileview',
@@ -24,7 +24,7 @@ export class DoctorprofileviewComponent implements OnInit {
   constructor(public service:PatientserviceService,
     private route: ActivatedRoute,
     private menu:MenuController,
-    private localNotification:LocalNotifications,
+    // private localNotification:LocalNotifications,
     private appComponent: AppComponent
     ) { }
 
@@ -37,20 +37,20 @@ export class DoctorprofileviewComponent implements OnInit {
     
     
   }
-  registerNotification(seconds:number){
+  // registerNotification(seconds:number){
     
-    this.localNotification.schedule({
-      title: `my ${seconds} notification`,
-      text:`my detailed description`,
-      trigger: {
-        // at: new Date(new Date().getTime() + ms)
+  //   this.localNotification.schedule({
+  //     title: `my ${seconds} notification`,
+  //     text:`my detailed description`,
+  //     trigger: {
+  //       // at: new Date(new Date().getTime() + ms)
         
-        in: seconds,
-        unit: ELocalNotificationTriggerUnit.SECOND,
-      },
+  //       in: seconds,
+  //       unit: ELocalNotificationTriggerUnit.SECOND,
+  //     },
 
-    });
-  }
+  //   });
+  // }
 
   viewDoctorProfile(val){
     let id = {

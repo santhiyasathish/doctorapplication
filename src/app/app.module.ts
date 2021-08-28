@@ -10,7 +10,7 @@ import { GeneralModule } from './general/general.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DatePipe } from '@angular/common';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+// import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +23,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     GeneralModule
   ],
   exports: [GeneralModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, DatePipe,LocalNotifications],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

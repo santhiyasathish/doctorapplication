@@ -16,9 +16,9 @@ export class AppComponent{
     { title: 'Logout', icon: 'heart' }
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor(private router: Router, 
-    // private pushNotificationService: PushNotificationService
-    ) {
+  constructor(private router: Router,
+    //  private pushNotificationService: PushNotificationService
+     ) {
     if (localStorage.getItem('log') != null) {
     this.email = JSON.parse(localStorage.getItem('log')).email;
     }
