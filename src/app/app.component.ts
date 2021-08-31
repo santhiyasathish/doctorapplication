@@ -40,6 +40,7 @@ export class AppComponent{
 
   }
 
+
   seduleBasic() {
     this.localNotification.schedule({
       id: 1,

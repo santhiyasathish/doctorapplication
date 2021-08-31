@@ -34,4 +34,7 @@ export class DoctorserviceService {
   approvedListInDoctor(data: any){
     return this.http.post(this.api +'approvedlistindoctor', data, this.httpOptions);
   }
+  viewDoctorProfile(data: any) {
+    return this.http.post(this.api + 'getdoctorprofile', data, this.httpOptions);
+  }
 }

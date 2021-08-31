@@ -11,6 +11,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DatePipe } from '@angular/common';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Camera } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { Network} from '@ionic-native/network/ngx';
+import { Dialogs} from '@ionic-native/dialogs/ngx';
+
 // import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
@@ -26,7 +31,13 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     GeneralModule
   ],
   exports: [GeneralModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, DatePipe, LocalNotifications],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
+    DatePipe, 
+    LocalNotifications,
+    Camera,
+    File,
+    Network,
+    Dialogs],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

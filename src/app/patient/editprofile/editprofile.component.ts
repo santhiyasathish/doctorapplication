@@ -6,6 +6,9 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { ActionSheetController } from '@ionic/angular';
 
 import { PatientserviceService } from '../patientservice.service';
 @Component({
@@ -20,19 +23,34 @@ export class EditprofileComponent implements OnInit {
   detail: any = [];
   sample: string;
   name: string;
-  getprofile: any =[];
-  profileedit: any =[];
-  buttontype='add';
-  
+  getprofile: any = [];
+  profileedit: any = [];
+  buttontype = 'add';
+  imgURL: any;
 
-  constructor(private formBuilder: FormBuilder, private service: PatientserviceService) { }
+
+  croppedImagepath = "";
+  isLoading = true;
+
+  imagePickerOptions = {
+    maximumImagesCount: 1,
+    quality: 50
+  };
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: PatientserviceService,
+    private camera: Camera,
+    public actionSheetController: ActionSheetController,
+    private file: File) { }
   ngOnInit() {
+
     let id = {
       'user_id': JSON.parse(localStorage.getItem('log')).id
     };
-    this.service.getpatientprofile(id).subscribe(data=>{
-      this.getprofile =JSON.parse(JSON.stringify(data)).data;
-      if(JSON.parse(JSON.stringify(data)).success == true){
+    this.service.getpatientprofile(id).subscribe(data => {
+      this.getprofile = JSON.parse(JSON.stringify(data)).data;
+      if (JSON.parse(JSON.stringify(data)).success == true) {
         this.buttontype = 'edit';
         console.log(this.getprofile);
         this.editForm = this.formBuilder.group({
@@ -50,15 +68,15 @@ export class EditprofileComponent implements OnInit {
           location: [this.getprofile.location, Validators.required],
         });
       }
-      else{
+      else {
         this.buttontype = 'add';
       }
-     });
-     this.editForm = this.formBuilder.group({
+    });
+    this.editForm = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       contact_number: ['', Validators.required],
-       email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')]],
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       blood_group: ['', Validators.required],
@@ -69,13 +87,74 @@ export class EditprofileComponent implements OnInit {
       location: ['', Validators.required],
 
     })
-    
+
   }
   get f(): {
-     [key: string]: AbstractControl 
-    } {
+    [key: string]: AbstractControl
+  } {
     return this.editForm.controls;
   }
+
+  pickImage(sourceType) {
+    this.file.checkDir(this.file.dataDirectory, 'mydir')
+      .then(_ =>
+        console.log('Directory exists'))
+      .catch(err =>
+        console.log('Directory doesn\'t exist'));
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: sourceType,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      this.croppedImagepath = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      // Handle error
+      alert(err);
+    });
+  }
+  async selectImage() {
+    const actionSheet = await this.actionSheetController.create({
+      header: "Select Image source",
+      buttons: [{
+        text: 'Load from Library',
+        handler: () => {
+          this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+        }
+      },
+      {
+        text: 'Use Camera',
+        handler: () => {
+          this.pickImage(this.camera.PictureSourceType.CAMERA);
+        }
+      },
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      }
+      ]
+    });
+    await actionSheet.present();
+  }
+
+  // getCamera(){
+  //   this.camera.getPicture({
+  //     quality:100,
+  //     sourceType: this.camera.PictureSourceType.CAMERA,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE,
+
+  //   }).then((res)=>{
+  //     this.imgURL = 'data:image/jpeg;base64,'+ res;
+
+  //   }).catch(e=>{
+  //     alert(e);
+  //   })
+  // }
 
   onSubmit() {
     let firstname = this.editForm.value.firstname;
@@ -99,30 +178,32 @@ export class EditprofileComponent implements OnInit {
       econtact: this.editForm.value.econtact,
       location: this.editForm.value.location,
     }
-    
+
     if (this.editForm.invalid) {
       return;
     }
 
-    if(this.buttontype == 'add'){
-      
+    if (this.buttontype == 'add') {
+
       this.service.patientprofile(data).subscribe(data => {
         this.detail = JSON.parse(JSON.stringify(data));
         console.log(data);
       });
 
     }
-    else{
-       this.service.patinetprofileedit(data).subscribe(data=>{
+    else {
+      this.service.patinetprofileedit(data).subscribe(data => {
         this.profileedit = JSON.parse(JSON.stringify(data));
-        console.log( data);
+        console.log(data);
       })
-     
+
+
     }
   }
-  open(status){
-    
+  open(status) {
+
     this.buttontype = status;
   }
+
 
 }

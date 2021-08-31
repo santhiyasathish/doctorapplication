@@ -14,9 +14,9 @@
         <ion-item lines="none" class="avatar">
           <ion-avatar>
             <img
-              src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+              src="{{croppedImagepath}}"/>
           </ion-avatar>
-          <ion-button color="secondary">
+          <ion-button (click)="selectImage()" color="secondary">
             <ion-icon name="camera-reverse" color="light"></ion-icon>
           </ion-button>
         </ion-item>

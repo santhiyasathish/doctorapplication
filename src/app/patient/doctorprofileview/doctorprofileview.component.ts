@@ -4,6 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { MenuController, Platform } from '@ionic/angular';
 import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Dialogs } from '@ionic-native/dialogs/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+
 import { DatePipe } from '@angular/common';
 import { State } from 'ionicons/dist/types/stencil-public-runtime';
 // import { Plugins } from '@capacitor/core';
@@ -31,13 +35,18 @@ export class DoctorprofileviewComponent implements OnInit {
   constructor(public service: PatientserviceService,
     private route: ActivatedRoute,
     private menu: MenuController,
+    private network: Network,
     // private localNotification:LocalNotifications,
     private localNotification: LocalNotifications,
-    private plt:Platform,
-    private appComponent: AppComponent
-  ) { 
-    this.plt.ready().then((rdy)=>{
-      
+    private plt: Platform,
+    private appComponent: AppComponent,
+    private dialogs: Dialogs,
+  ) {
+
+
+
+    this.plt.ready().then((rdy) => {
+
     });
   }
 
@@ -49,20 +58,32 @@ export class DoctorprofileviewComponent implements OnInit {
     this.viewDoctorProfile(this.profileId);
 
 
+
+
+  }
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete(() => {
+        this.ngOnInit();
+      });
+    }, 2000);
   }
   seduleBasic() {
     this.localNotification.schedule({
       id: 1,
       title: 'J janagan',
       text: 'hai i am jana',
-      
-      trigger:{
+
+      trigger: {
         // at: new Date(new Date().getTime() + ms)
 
         in: 4,
         unit: ELocalNotificationTriggerUnit.SECOND,
       },
-      data:'sample data'
+      data: 'sample data'
     });
 
   }
