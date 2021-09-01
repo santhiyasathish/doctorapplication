@@ -1,4 +1,17 @@
 ion-header {
+    ion-toolbar {
+        .menu-btn {
+        }
+        .noti-btn {
+            ion-button {
+                width: 60px;
+                ion-icon {
+                    height: 30px;
+                    width: 30px;
+                }
+            }
+        }
+    }
 }
 ion-content {
     .main-content {
@@ -8,7 +21,7 @@ ion-content {
         .ion-item-one {
             border-radius: 20px 20px 0px 0px;
             --background: none;
-            background-color: #4190fb;
+            background-color: #50a07c;
             .ion-sub-item {
                 --background: none;
                 width: 100%;
@@ -47,6 +60,9 @@ ion-content {
 
         .sub-header {
             border-radius: 0px 0px 20px 20px;
+            --background: none;
+            background-color: #50a07c;
+            color: white;
             ion-row {
                 width: 100%;
                 ion-col {
@@ -74,7 +90,7 @@ ion-content {
                 ion-row {
                     width: 100%;
                     .first-col {
-                        ion-label{
+                        ion-label {
                             padding-top: 10px;
                         }
                     }
@@ -89,27 +105,49 @@ ion-content {
                     }
                 }
             }
-            .address-info{
-                --background:none;
-                ion-row{
-                    ion-col{
-                        
-                        ion-label{
+            .address-info {
+                --background: none;
+                ion-row {
+                    ion-col {
+                        ion-label {
                             color: grey;
                         }
-                        ion-text{
+                        ion-text {
                             color: dodgerblue;
                         }
                     }
-
                 }
             }
-            .sub-info{
-                --background:none;
-                ion-row{
-                    ion-col{
-                        ion-text{
+            .sub-info {
+                --background: none;
+                ion-row {
+                    ion-col {
+                        ion-text {
                             color: rgb(61, 61, 61);
+                        }
+                    }
+                }
+            }
+            .booking-form {
+                --background: none;
+                ion-row {
+                    height: 125%;
+                    .col-one {
+                        ion-button {
+                            height: 70%;
+                        }
+                    }
+                    .col-two {
+                        padding-right: 30px;
+                        ion-button {
+                            height: 70%;
+                        }
+                    }
+                    .col-three {
+                        ion-button {
+                            text-transform: none;
+                            // width: 130%;
+                            height: 70%;
                         }
                     }
                 }
@@ -125,6 +163,11 @@ ion-content {
         ion-card-content {
             ion-item {
                 --background: none;
+                .col-one {
+                    ion-label {
+                        padding-bottom: 8px;
+                    }
+                }
                 ion-col {
                     text-align: inherit;
                     padding: 0px 10px 0px 0px;

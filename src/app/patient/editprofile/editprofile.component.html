@@ -1,9 +1,10 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="light">
     <ion-buttons slot="start">
-      <ion-back-button routerLink="/patient/profile"></ion-back-button>
-      <ion-title>Profile</ion-title>
+      <ion-back-button defaultHref="/patient/docprofile/3"></ion-back-button>
+      
     </ion-buttons>
+    <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]>
@@ -13,9 +14,9 @@
         <ion-item lines="none" class="avatar">
           <ion-avatar>
             <img
-              src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+              src="{{croppedImagepath}}"/>
           </ion-avatar>
-          <ion-button color="secondary">
+          <ion-button (click)="selectImage()" color="secondary">
             <ion-icon name="camera-reverse" color="light"></ion-icon>
           </ion-button>
         </ion-item>

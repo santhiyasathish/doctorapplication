@@ -1,6 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientserviceService } from '../patientservice.service';
 import { ActivatedRoute } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
+import { MenuController, Platform } from '@ionic/angular';
+import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Dialogs } from '@ionic-native/dialogs/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+
+import { DatePipe } from '@angular/common';
+import { State } from 'ionicons/dist/types/stencil-public-runtime';
+// import { Plugins } from '@capacitor/core';
+
+
+// const { LocalNotifications } = Plugins;
+// import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-doctorprofileview',
@@ -8,7 +22,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./doctorprofileview.component.scss'],
 })
 export class DoctorprofileviewComponent implements OnInit {
-  editData : any;
+  editData: any;
   profileId: string;
   docId: string;
   message: any;
@@ -17,25 +31,85 @@ export class DoctorprofileviewComponent implements OnInit {
   hideButton2: boolean = true;
   hideButton3: boolean = true;
   hideButton4: boolean = true;
-  
 
-  constructor(public service:PatientserviceService,
-    private route: ActivatedRoute
-    ) { }
+  constructor(public service: PatientserviceService,
+    private route: ActivatedRoute,
+    private menu: MenuController,
+    private network: Network,
+    // private localNotification:LocalNotifications,
+    private localNotification: LocalNotifications,
+    private plt: Platform,
+    private appComponent: AppComponent,
+    private dialogs: Dialogs,
+  ) {
+
+
+
+    this.plt.ready().then((rdy) => {
+
+    });
+  }
 
   ngOnInit() {
+    this.menu.enable(true, 'custom');
+    this.appComponent.appPages;
     this.profileId = this.route.snapshot.paramMap.get('id');
     this.docId = this.route.snapshot.paramMap.get('id');
     this.viewDoctorProfile(this.profileId);
-    
-    
-  }
 
-  viewDoctorProfile(val){
+
+
+
+  }
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete(() => {
+        this.ngOnInit();
+      });
+    }, 2000);
+  }
+  seduleBasic() {
+    this.localNotification.schedule({
+      id: 1,
+      title: 'J janagan',
+      text: 'hai i am jana',
+
+      trigger: {
+        // at: new Date(new Date().getTime() + ms)
+
+        in: 4,
+        unit: ELocalNotificationTriggerUnit.SECOND,
+      },
+      data: 'sample data'
+    });
+
+  }
+  seduleAdvance() {
+
+  }
+  // registerNotification(seconds:number){
+
+  //   this.localNotification.schedule({
+  //     title: `my ${seconds} notification`,
+  //     text:`my detailed description`,
+  //     trigger: {
+  //       // at: new Date(new Date().getTime() + ms)
+
+  //       in: seconds,
+  //       unit: ELocalNotificationTriggerUnit.SECOND,
+  //     },
+
+  //   });
+  // }
+
+  viewDoctorProfile(val) {
     let id = {
       user_id: val
     }
-    this.service.viewDoctorProfile(id).subscribe(data=>{
+    this.service.viewDoctorProfile(id).subscribe(data => {
       this.editData = [JSON.parse(JSON.stringify(data)).data];
     })
   }
@@ -47,7 +121,7 @@ export class DoctorprofileviewComponent implements OnInit {
       this.hideButton2 = true;
       this.hideButton3 = true;
       this.hideButton4 = false;
-      
+
 
     }
     this.message.alert("Congrats! Your account has been approved")
@@ -58,5 +132,5 @@ export class DoctorprofileviewComponent implements OnInit {
     }
     this.message.alert("Sorry your account has not been approved")
   }
- 
+
 }

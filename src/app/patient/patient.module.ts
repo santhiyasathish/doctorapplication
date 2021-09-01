@@ -16,6 +16,8 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { PatnotificationComponent } from './patnotification/patnotification.component';
 import {  ReactiveFormsModule  } from '@angular/forms';
+import { Camera } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 
 
@@ -39,6 +41,6 @@ import {  ReactiveFormsModule  } from '@angular/forms';
     AppointmentComponent,
     PatnotificationComponent
   ],
-  providers : [DatePipe]
+  providers : [DatePipe,Camera,File]
 })
 export class PatientModule {}

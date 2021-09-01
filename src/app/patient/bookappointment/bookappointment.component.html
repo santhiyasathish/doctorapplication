@@ -1,30 +1,30 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar color="light">
     <ion-buttons>
-      <ion-back-button href="/patient/docprofile"></ion-back-button>
+      <ion-back-button routerLink="/patient/docprofile/3/"></ion-back-button>
       <ion-title>Appointment</ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item-group>
+  <!-- <ion-item-group>
     <ion-item>
       <ion-row>
         <ion-avatar>
-          <!-- <img
+           <img
             src="{{doc.doc_image}}"
-          /> -->
+          /> 
         </ion-avatar>
       </ion-row>
       <ion-item lines="none">
         <ion-list>
-          <!-- <ion-label> <h2>{{doc.doc_name}}</h2> </ion-label>
-          <ion-label color="medium"><h6>{{doc.professional}}</h6></ion-label> -->
+           <ion-label> <h2>{{doc.doc_name}}</h2> </ion-label>
+          <ion-label color="medium"><h6>{{doc.professional}}</h6></ion-label>
         </ion-list>
       </ion-item>
     </ion-item>
-  </ion-item-group>
+  </ion-item-group> -->
 
   <ion-item color="light" class="dateslot">
     <ion-slides [options]="slidesOptions">
@@ -35,7 +35,7 @@
             <ion-row>
               <div class="ion-text-justify">
                 <ion-label>{{data.date}}</ion-label>
-                <ion-label color="success">{{data.scount}} slot abailable</ion-label>
+                <ion-label>{{data.scount}} slot abailable</ion-label>
               </div>
             </ion-row>
           </ion-card-content>
@@ -44,29 +44,31 @@
     </ion-slides>
   </ion-item>
 
-  <ion-item class="ion-text-center">
-    <ion-label><strong>Thu, 04 Aug</strong></ion-label>
+  <ion-item lines="none" class="date">
+    <ion-label><strong>{{sam}}</strong></ion-label>
   </ion-item>
-  <div *ngFor="let li of list">
-    <ion-item lines="none">
-      <ion-col size="1">
-        <ion-icon color="medium" name="partly-sunny-outline"></ion-icon>
-      </ion-col>
-      <ion-col size="2.2">
-        <ion-label color="medium">{{li.session}}</ion-label>
-      </ion-col>
-      <ion-col size="2">
-        <!-- <ion-label color="medium">3 slot</ion-label> -->
-      </ion-col>
-    </ion-item>
-    <ion-row>
-      <ion-col *ngFor="let data of li.availableList" size="3">
-        <ion-chip (click)="conform(data.id)" disabled="{{ data.status }}" outline color="success">
-          <ion-label>{{data.time }}</ion-label>
-        </ion-chip>
-      </ion-col>
-    </ion-row>
-  </div>
+  
+    <div class="slot" *ngFor="let li of list">
+      <ion-item class="event" lines="none">
+        <ion-col size="1">
+          <ion-icon color="medium" name="partly-sunny-outline"></ion-icon>
+        </ion-col>
+        <ion-col size="2.2">
+          <ion-label color="medium">{{li.session}}</ion-label>
+        </ion-col>
+        <ion-col size="2">
+          <!-- <ion-label color="medium">3 slot</ion-label> -->
+        </ion-col>
+      </ion-item>
+      <ion-row>
+        <ion-col *ngFor="let data of li.availableList" size="4">
+          <ion-chip (click)="conform(data.id)" disabled="{{ data.status }}" outline color="success">
+            <ion-label>{{data.time }}</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </div>
+  
   <!-- <section>
     <ion-button color="success" expand="block">Book Appointment</ion-button>
   </section> -->

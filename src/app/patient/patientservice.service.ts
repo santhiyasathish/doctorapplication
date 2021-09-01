@@ -6,6 +6,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class PatientserviceService {
+  get(arg0: string, arg1: { timeout: number; }) {
+    throw new Error('Method not implemented.');
+  }
   api: string = environment.apiUrl;
   headers = new HttpHeaders()
     .append('Strict-Transport-Security', 'max-age=63072000; includeSubDomains');
@@ -19,6 +22,7 @@ export class PatientserviceService {
       "Access-Control-Allow-Methods": "GET, POST, DELETE, PUT, OPTIONS, TRACE, PATCH, CONNECT"
     })
   };
+  
   morningtime = [
     {
       id: 1,
@@ -412,11 +416,17 @@ export class PatientserviceService {
       icon: 'https://img.icons8.com/bubbles/50/fa314a/embryo.png',
     },
   ];
+ 
   constructor(private http: HttpClient) {
+
+    
   }
+
   post(serviceName: string, data: any) {
 
   }
+  
+  
   doctorType() {
     return this.http.get(this.api + 'doctortype', this.httpOptions);
   }

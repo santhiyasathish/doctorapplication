@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "302814944019",
+    "project_id": "doctorapp-31599",
+    "storage_bucket": "doctorapp-31599.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:302814944019:android:ce68f3ce65d0e0f9a958e6",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "302814944019-l0fedgi69mnvcst14nb7auf4op148lpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZuyQiLXnKLjXmNE98Xaj-o1UMfuOSq-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "302814944019-l0fedgi69mnvcst14nb7auf4op148lpt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

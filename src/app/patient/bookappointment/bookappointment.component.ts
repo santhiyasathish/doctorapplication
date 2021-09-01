@@ -5,6 +5,9 @@ import { Platform } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
+
 // import { DatePipe } from '@angular/common';
 
 @Component({
@@ -36,11 +39,14 @@ export class BookappointmentComponent implements OnInit {
   avlist: any[];
 
 
-  constructor(public platform: Platform,
+  constructor(
+    private router: Router,
+    public platform: Platform,
     private menu: MenuController,
     private service: PatientserviceService,
     private route: ActivatedRoute,
     private alertCtrl: AlertController,
+    private appComponents:AppComponent
     // private datePipe: DatePipe
   ) {
     this.isAndroid = platform.is('android');
@@ -56,9 +62,7 @@ export class BookappointmentComponent implements OnInit {
     this.durId = this.route.snapshot.paramMap.get('id');
     this.getAppointmentDetail(this.docId);
     this.getappointmentAvailability();
-
     // this.getapplication();    
-
     this.menu.enable(false);
   }
   slidesOptions = {
@@ -121,10 +125,12 @@ export class BookappointmentComponent implements OnInit {
       header: 'Appointment Booking',
       cssClass:'alertHeader',
       message: 'Waiting for your Approval .',
-      buttons: ['OK']
+      buttons: ['OK' ]
     }).then(res => {
 
       res.present();
+      this.appComponents.seduleBasic();
+      this.router.navigateByUrl('/patient/docprofile/3');
 
     });
 

@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
       time:'10:20 AM'
     }
   ];
+  editDatas: any;
+  profileId: any;
  
 
 constructor(private service:DoctorserviceService, public datePipe: DatePipe) {
@@ -24,7 +26,16 @@ constructor(private service:DoctorserviceService, public datePipe: DatePipe) {
   }
   ngOnInit() {
 
+    this.viewDoctorProfile();
   }
  
- 
+  viewDoctorProfile() {
+    let id = {
+      user_id: '3'
+    }
+    this.service.viewDoctorProfile(id).subscribe(data => {
+      this.editDatas = [JSON.parse(JSON.stringify(data)).data];
+      console.log(this.editDatas);
+    })
+  }
 }

@@ -102,7 +102,6 @@ export class RegisterComponent implements OnInit {
 
           {
             text: 'Ok',
-
           }
         ]
       });

@@ -1,7 +1,40 @@
-.dateslot{
-    margin: 0px -15px 0px -15px;
+.alertHeader {
+    --background: none;
+    background: red !important;
 }
-.alertHeader{
-   --background: none;
-   background: red !important;
+ion-header {
+}
+ion-content {
+    .dateslot {
+        margin: 0px -15px 0px -15px;
+        ion-slides {
+            --background: none;
+            background-color: #b3cbf6;
+            ion-slide {
+                ion-card {
+                    --background: none;
+                    background-color: cornflowerblue;
+                    color: white;
+                    border-radius: 15px;
+                    text-align-last: center;
+                }
+            }
+        }
+    }
+    .slot {
+        background-color: aliceblue;
+
+        .event {
+            --background: none;
+            background-color: aliceblue;
+        }
+    }
+    .date {
+        background-color: #d6ebff;
+        --background: none;
+        color: #4c4c4c;
+        ion-label {
+            text-align-last: center;
+        }
+    }
 }

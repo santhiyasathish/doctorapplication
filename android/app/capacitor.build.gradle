@@ -12,10 +12,13 @@ dependencies {
     implementation project(':capacitor-app')
     implementation project(':capacitor-haptics')
     implementation project(':capacitor-keyboard')
+    implementation project(':capacitor-push-notifications')
     implementation project(':capacitor-status-bar')
-
+    implementation "androidx.core:core:1.6.+"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
-
+apply from: "../../node_modules/cordova-plugin-badge/src/android/badge.gradle"
+apply from: "../../node_modules/cordova-plugin-local-notification/src/android/build/localnotification.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()
