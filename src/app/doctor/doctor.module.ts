@@ -12,6 +12,7 @@ import { ViewappiontmentComponent } from './viewappiontment/viewappiontment.comp
 import { DocnotificationComponent } from './docnotification/docnotification.component';
 import { AppointmentlistComponent } from './appointmentlist/appointmentlist.component';
 import { DocprofileupdateComponent } from './docprofileupdate/docprofileupdate.component';
+import {  ReactiveFormsModule  } from '@angular/forms';
 
 
 
@@ -21,7 +22,8 @@ import { DocprofileupdateComponent } from './docprofileupdate/docprofileupdate.c
     CommonModule,
     FormsModule,
     IonicModule,
-    DoctorRoutingModule
+    DoctorRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [
     HomeComponent,
