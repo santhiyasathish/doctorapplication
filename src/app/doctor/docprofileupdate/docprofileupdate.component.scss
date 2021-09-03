@@ -49,6 +49,12 @@ ion-content {
                         position: relative;
                     }
                 }
+                .error-message {
+                    color: red;
+                    font-size: 14px;
+                    margin-left: 10px;
+                    margin-top: 10px;
+                }
                 .updatebtn {
                     display: flex;
                     justify-content: center;

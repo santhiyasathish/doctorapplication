@@ -62,14 +62,14 @@ export class EditprofileComponent implements OnInit {
           firstname: [this.getprofile.name.split(' ')[0], Validators.required],
           lastname: [this.getprofile.name.split(' ')[1], Validators.required],
           contact_number: [this.getprofile.contact_number, Validators.required],
-          email: [this.getprofile.email, [Validators.required, Validators.email]],
+          email: [this.getprofile.email, [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')]],
           gender: [this.getprofile.gender, Validators.required],
           dob: [this.getprofile.dob.split('T')[0], Validators.required],
           blood_group: [this.getprofile.blood_group.toLowerCase(), Validators.required],
           marital_status: [this.getprofile.marital_status, Validators.required],
           height: [this.getprofile.height, Validators.required],
           weight: [this.getprofile.weight, Validators.required],
-          econtact: ['', Validators.required],
+          econtact: [this.getprofile.econtact, Validators.required],
           location: [this.getprofile.location, Validators.required],
         });
       }
@@ -217,6 +217,7 @@ export class EditprofileComponent implements OnInit {
     }
 
     if (this.editForm.invalid) {
+      console.log(this.editForm);
       return;
     }
 

@@ -10,7 +10,7 @@
 <ion-content [fullscreen]>
   <ion-card class="main-form">
     <ion-item lines="none" class="sub-form">
-      <form>
+      <form [formGroup]="doctprofileupdateForm"  (ngSubmit)="onSubmit()">
         <ion-item lines="none" class="avatar">
           <ion-avatar>
             <img
@@ -22,24 +22,52 @@
         </ion-item>
         <ion-item lines="none" id="rounded">
 
-          <ion-input placeholder="FirstName" type="text"></ion-input>
+          <ion-input placeholder="FirstName" type="text" name="firstname" formControlName="firstname"></ion-input>
         </ion-item>
+       <div *ngIf="submitted && f.firstname.errors" class="error-message">
+          <div *ngIf="f.firstname.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> First Name is required
+          </div>
+        </div>
         <ion-item id="rounded" lines="none">
-          <ion-input placeholder="Last Name" type="text"></ion-input>
+          <ion-input placeholder="Last Name" type="text" name="lastname" formControlName="lastname"></ion-input>
         </ion-item>
+        <div *ngIf="submitted && f.lastname.errors" class="error-message">
+          <div *ngIf="f.lastname.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Last Name is required
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
-          <ion-input placeholder=" E-mail"></ion-input>
+          <ion-input type="text" placeholder=" E-mail" name="email" formControlName="email"></ion-input>
           <ion-label style="padding-left: 20px; color: rgb(146, 146, 146);" fixed>@gmail.com</ion-label>
         </ion-item>
+        <div *ngIf="submitted && f.email.errors" class="error-message">
+          <div *ngIf="f.email.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Email is required
+          </div>
+          <div *ngIf="f.email.errors.pattern">
+            <ion-icon name="alert-circle-outline"></ion-icon> Don't type @gmail.com
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">+91</ion-label>
-          <ion-input type="number" placeholder="Contact"></ion-input>
+          <ion-input type="number" placeholder="Contact" name="contact_number" formControlName="contact_number"></ion-input>
         </ion-item>
+        <div *ngIf="submitted && f.contact_number.errors" class="error-message">
+          <div *ngIf="f.contact_number.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Contact Number is required
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
-          <ion-datetime placeholder="Date Of Birth"></ion-datetime>
+          <ion-datetime placeholder="Date Of Birth" name="dob" formControlName="dob"></ion-datetime>
         </ion-item>
+        <div *ngIf="submitted && f.dob.errors" class="error-message">
+          <div *ngIf="f.dob.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Please Select Date
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
-          <ion-radio-group value="male">
+          <ion-radio-group  name="gender" formControlName="gender">
             <ion-row>
               <ion-col>
                 <ion-item lines="none">
@@ -57,18 +85,38 @@
             
           </ion-radio-group>
         </ion-item>
+        <div *ngIf="submitted && f.gender.errors" class="error-message">
+          <div *ngIf="f.gender.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon>Please Select Gender
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
-          <ion-input placeholder="Institute (Optional)"></ion-input>
+          <ion-input placeholder="Institute (Optional)" name="institute" formControlName="institute"></ion-input>
         </ion-item>
+        <div *ngIf="submitted && f.institute.errors" class="error-message">
+          <div *ngIf="f.institute.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon>Institute Name is required
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
-          <ion-input placeholder="Qualification"></ion-input>
+          <ion-input placeholder="Qualification" name="qualification" formControlName="qualification"></ion-input>
         </ion-item>
+        <div *ngIf="submitted && f.qualification.errors" class="error-message">
+          <div *ngIf="f.qualification.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Qualification is required
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
-          <ion-input placeholder="Description"></ion-input>
+          <ion-input placeholder="Description" name="description" formControlName="description"></ion-input>
         </ion-item>
+        <div *ngIf="submitted && f.firstname.errors" class="error-message">
+          <div *ngIf="f.firstname.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Description is required
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
           <!-- <ion-label>Speciality</ion-label> -->
-          <ion-select placeholder="Speciality" interface="action-sheet">
+          <ion-select placeholder="Speciality" name="speciality" formControlName="speciality" interface="action-sheet">
             <ion-select-option value="allergist">Allergist</ion-select-option>
             <ion-select-option value="anesthesiologist">Anesthesiologist</ion-select-option>
             <ion-select-option value="cardiologist">Cardiologist</ion-select-option>
@@ -86,40 +134,104 @@
             <ion-select-option value="oncologist">Oncologist</ion-select-option>
             <ion-select-option value="ophthalmologist">Ophthalmologist</ion-select-option>
             <ion-select-option value="pediatrician">Pediatrician</ion-select-option>
-            <ion-select-option value="physical">Physical Therapist</ion-select-option>
+            <ion-select-option value="skin doctor">Skin Doctor</ion-select-option>
             <ion-select-option value="podiatrist">Podiatrist</ion-select-option>
             <ion-select-option value="psychiatrist">Psychiatrist</ion-select-option>
             <ion-select-option value="radiologist">Radiologist</ion-select-option>
           </ion-select>
         </ion-item>
+        <div *ngIf="submitted && f.speciality.errors" class="error-message">
+          <div *ngIf="f.speciality.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Please Select Speciality
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
-          <ion-input placeholder="Experience" type="number"></ion-input>
+          <ion-input placeholder="Experience" type="text" name="experience" formControlName="experience"></ion-input>
           <ion-label style="color:rgb(146, 146, 146);">Years</ion-label>
         </ion-item>
+        <div *ngIf="submitted && f.experience.errors" class="error-message">
+          <div *ngIf="f.experience.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Experience is required
+          </div>
+        </div>
+       
+         <ion-item lines="none" id="rounded"  formGroupName="address">
+          <ion-label position="stacked" style="color: rgb(146, 146, 146); padding-bottom: 10px;" >Address</ion-label>
+       
+          <ion-input type="text" formControlName="addressl1"  placeholder="Address Line 1" clearInput="true"></ion-input>
+
+          <div *ngIf="submitted && f.addressl1?.errors" class="error-message">
+            <div *ngIf="f.addressl1?.errors.required">
+              <ion-icon name="alert-circle-outline"></ion-icon> Enter your Address Line 1
+            </div>
+          </div>
+
+          <ion-input type="text" formControlName="addressl2"  placeholder="Address Line 2" clearInput="true"></ion-input>
+
+          <div *ngIf="submitted && f.addressl2?.errors" class="error-message">
+            <div *ngIf="f.addressl2?.errors.required">
+              <ion-icon name="alert-circle-outline"></ion-icon> Enter your Address Line 2
+            </div>
+          </div>
+
+          <ion-input type="text"formControlName="city" name="city" placeholder="City" clearInput="true"></ion-input>
+
+          <div *ngIf="submitted && f.city?.errors" class="error-message">
+            <div *ngIf="f.city?.errors.required">
+              <ion-icon name="alert-circle-outline"></ion-icon> Enter your City
+            </div>
+          </div>
+
+          <ion-input type="text" formControlName="state" name="state" placeholder="State" clearInput="true"></ion-input>
+
+          <div *ngIf="submitted && f.state?.errors" class="error-message">
+            <div *ngIf="f .state?.errors.required">
+              <ion-icon name="alert-circle-outline"></ion-icon> Enter your State
+            </div>
+          </div>
+
+          <ion-input type="number" formControlName="zip" name="zip" placeholder="Zip Code" type="number"></ion-input>
+
+          <div *ngIf="submitted && f.zip?.errors" class="error-message">
+            <div *ngIf="f .zip?.errors.required">
+              <ion-icon name="alert-circle-outline"></ion-icon> Enter your Zip Code
+            </div>
+          </div>
+
+        </ion-item>   
+       
         <ion-item lines="none" id="rounded">
-          <ion-label position="stacked" style="color: rgb(146, 146, 146); padding-bottom: 10px;">Address</ion-label>
-          <ion-input placeholder="Address Line 1" clearInput="true"></ion-input>
-          <ion-input placeholder="Address Line 2" clearInput="true"></ion-input>
-          <ion-input placeholder="City" clearInput="true"></ion-input>
-          <ion-input placeholder="State" clearInput="true"></ion-input>
-          <ion-input placeholder="Zip Code" type="number"></ion-input>
-        </ion-item>
-        <ion-item lines="none" id="rounded">
-          <ion-input type="number" placeholder="Consolidate Fees"></ion-input>
+          <ion-input type="number" name="consolidatefees" formControlName="consolidatefees" placeholder="Consolidate Fees"></ion-input>
           <ion-label style="color:rgb(146, 146, 146) ;">Rs.</ion-label>
 
         </ion-item>
+        <div *ngIf="submitted && f.consolidatefees.errors" class="error-message">
+          <div *ngIf="f.consolidatefees?.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon>Consolidate Fees is required
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
-          <ion-input type="number" placeholder="Emergency Contact"></ion-input>
+          <ion-input type="number"  name= "emergency_contact"  formControlName="emergency_contact" placeholder="Emergency Contact"></ion-input>
         </ion-item>
+        <div *ngIf="submitted && f.emergency_contact.errors" class="error-message">
+          <div *ngIf="f.emergency_contact.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Emergency contact is required
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
-          <ion-textarea placeholder="enter your desc..."></ion-textarea>
-
+          <ion-textarea placeholder="About" name="about" formControlName="about"></ion-textarea>
         </ion-item>
+        <div *ngIf="submitted && f.about.errors" class="error-message">
+          <div *ngIf="f.about.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> About is required
+          </div>
+        </div>
         <ion-item lines="none" class="updatebtn">
-          <ion-button>
+          <ion-button type="submit" *ngIf="buttontype == 'add'" (click)="open('add')"><ion-icon name="person-add"></ion-icon>&nbsp; Add Profile</ion-button>
+          <!-- <ion-button type="submit">
             <ion-icon name="cloud-upload" style="padding-right: 10px;"></ion-icon>Update
-          </ion-button>
+          </ion-button> -->
+          <ion-button type="submit" *ngIf="buttontype == 'edit'" (click)="open('edit')"><ion-icon name="cloud-upload"></ion-icon> &nbsp; Edit Profile</ion-button>
         </ion-item>
       </form>
     </ion-item>
