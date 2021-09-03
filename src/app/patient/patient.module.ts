@@ -18,6 +18,8 @@ import { PatnotificationComponent } from './patnotification/patnotification.comp
 import {  ReactiveFormsModule  } from '@angular/forms';
 import { Camera } from '@ionic-native/Camera/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { CallNumber} from '@ionic-native/call-number/ngx';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 
 
@@ -41,6 +43,6 @@ import { File } from '@ionic-native/file/ngx';
     AppointmentComponent,
     PatnotificationComponent
   ],
-  providers : [DatePipe,Camera,File]
+  providers : [DatePipe,Camera,File,CallNumber,EmailComposer]
 })
 export class PatientModule {}

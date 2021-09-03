@@ -22,7 +22,7 @@ export class AppComponent{
     private localNotification: LocalNotifications,
     //  private pushNotificationService: PushNotificationService
      ) {
-    this.seduleBasic();
+ 
     if (localStorage.getItem('log') != null) {
     this.email = JSON.parse(localStorage.getItem('log')).email;
     }
@@ -41,20 +41,5 @@ export class AppComponent{
   }
 
 
-  seduleBasic() {
-    this.localNotification.schedule({
-      id: 1,
-      title: 'J janagan',
-      text: 'hai i am jana',
-
-      trigger: {
-        // at: new Date(new Date().getTime() + ms)
-
-        in: 4,
-        unit: ELocalNotificationTriggerUnit.SECOND,
-      },
-      data: 'sample data'
-    });
-
-  }
+  
 }
