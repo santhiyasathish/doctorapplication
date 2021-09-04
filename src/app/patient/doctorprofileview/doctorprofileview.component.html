@@ -34,11 +34,12 @@
             <ion-label>{{data.professional}}</ion-label>
             <ion-label>Description</ion-label>
             <ion-label>
-              <ion-button *ngIf="hideButton" (click)="approve()"></ion-button>
-              <ion-button *ngIf="hideButton1" (click)="approve()"></ion-button>
-              <ion-button *ngIf="hideButton2" (click)="approve()"></ion-button>
-              <ion-button *ngIf="hideButton3" (click)="approve()"></ion-button>
-              <ion-button *ngIf="hideButton4" (click)="approve()"></ion-button>
+              <ion-icon  [style.color]="'orange'" *ngIf="hideButton" (click)="approve()"name="star" class="style"></ion-icon>
+              <ion-icon [style.color]="'orange'" *ngIf="hideButton1" (click)="approve()" name="star" class="style"></ion-icon>
+              <ion-icon [style.color]="'orange'" *ngIf="hideButton2" (click)="approve()" name="star" class="style"></ion-icon>
+              <ion-icon [style.color]="'orange'" *ngIf="hideButton3" (click)="approve()" name="star" class="style"></ion-icon>
+              <ion-icon [style.color]="'orange'" *ngIf="hideButton4" (click)="approve()" name="star" class="style"></ion-icon>
+             
             </ion-label>
           </ion-col>
           <ion-ripple-effect></ion-ripple-effect>

@@ -31,6 +31,7 @@ export class DoctorprofileviewComponent implements OnInit {
   hideButton2: boolean = true;
   hideButton3: boolean = true;
   hideButton4: boolean = true;
+  // color = "orange";
 
   constructor(public service: PatientserviceService,
     private route: ActivatedRoute,

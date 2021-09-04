@@ -21,6 +21,8 @@ import { File } from '@ionic-native/file/ngx';
 
 
 
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -28,6 +30,8 @@ import { File } from '@ionic-native/file/ngx';
     IonicModule,
     ReactiveFormsModule,
     PatientRoutingModule,
+   
+  
   
   ],
   declarations: [

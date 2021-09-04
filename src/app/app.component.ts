@@ -10,12 +10,22 @@ import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native
 })
 export class AppComponent{
   email : string;
+  userType: string;
   public appPages = [
-    { title: 'home', url: 'patient/docprofile/3', icon: 'mail' },
-    { title: 'profile', url: 'patient/profile', icon: 'paper-plane' },
-    { title: 'book appointment', url: 'patient/book/3', icon: 'paper-plane' },
-    { title: 'Add Profile', url: 'patient/editprofile', ionc: 'paper-plane'},
-    { title: 'Logout', icon: 'heart' }
+    //patient
+    { title: 'Home', url: 'patient/docprofile/3', icon: 'mail', type: 'patient' },
+    { title: 'book appointment', url: 'patient/book/3', icon: 'paper-plane', type: 'patient' },
+    { title: 'Notification', url: 'patient/patnotification', ionc: 'paper-plane', type: 'patient'},
+    { title: 'Profile', url: 'patient/editprofile', icon: 'heart', type: 'patient' },
+    //doctor
+    { title: 'Dashboard', url: 'doctor/home', icon: 'mail', type: 'doctor' },
+    { title: 'Confirmation', url: 'doctor/appointmentlist', ionc: 'paper-plane', type: 'doctor'},
+    { title: 'Notification', url: 'doctor/docnotification', icon: 'paper-plane', type: 'doctor' },
+    { title: 'Profile', url: 'doctor/docprofile', icon: 'paper-plane', type: 'doctor' },
+    //guest
+    // { title: 'Book appointment', url: 'patient/docprofile/3', icon: 'mail', type: 'guest' },
+
+    { title: 'Logout', url: 'patient/docprofile/3', icon: 'mail' },
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(private router: Router,
@@ -25,6 +35,7 @@ export class AppComponent{
     this.seduleBasic();
     if (localStorage.getItem('log') != null) {
     this.email = JSON.parse(localStorage.getItem('log')).email;
+    this.userType =  JSON.parse(localStorage.getItem('log')).user_type;
     }
     // this.pushNotificationService.register();
 
@@ -39,7 +50,10 @@ export class AppComponent{
   
 
   }
-
+  checkType(t): boolean{
+    console.log(this.userType, t);
+      return this.userType == t; 
+  }
 
   seduleBasic() {
     this.localNotification.schedule({

@@ -41,7 +41,7 @@ export class DoctorserviceService {
   doctorprofileedit (data: any){
     return this.http.post(this.api+'doctorprofileedit',data,this.httpOptions);
   }
-  getdoctorprofile (data: any){
+  viewDoctorProfile (data: any){
     return this.http.post(this.api+'getdoctorprofile',data,this.httpOptions);
   }
 }

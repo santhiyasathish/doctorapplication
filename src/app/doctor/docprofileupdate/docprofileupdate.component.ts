@@ -8,6 +8,7 @@ import {
   Validators
 } from '@angular/forms';
 import { DoctorserviceService } from '../doctorservice.service';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-docprofileupdate',
   templateUrl: './docprofileupdate.component.html',
@@ -27,23 +28,18 @@ export class DocprofileupdateComponent implements OnInit {
   contact_number: string;
   location: string;
 
+ 
 
-  constructor(private formBuilder: FormBuilder, private service: DoctorserviceService) { }
+
+  constructor(private formBuilder: FormBuilder, private service: DoctorserviceService,private alertCtrl: AlertController) { }
 
   ngOnInit() {
-
-    // let location;
-    //  location ={
-    //    addressl1 : this.doctprofileupdateForm.value.addressl1 =[],
-    //    addressl2 : this.doctprofileupdateForm.value.addressl2 =[],
-    //    city : this.doctprofileupdateForm.value.city =[],
-    //    state : this.doctprofileupdateForm.value.state =[],
-    //   zip : this.doctprofileupdateForm.value.zip =[],
-    //  };
+    
+    
     let id = {
       'user_id': "10"
     };
-    this.service.getdoctorprofile(id).subscribe(data => {
+    this.service.viewDoctorProfile(id).subscribe(data => {
       this.getprofile = JSON.parse(JSON.stringify(data)).data;
       if (JSON.parse(JSON.stringify(data)).success == true) {
         this.buttontype = 'edit';
@@ -72,11 +68,13 @@ export class DocprofileupdateComponent implements OnInit {
           emergency_contact: [this.getprofile.emergency_contact, Validators.required],
           about: [this.getprofile.about, Validators.required]
         });
+        
       }
       else {
         this.buttontype = 'add';
       }
     });
+   
     this.doctprofileupdateForm = this.formBuilder.group({
 
       firstname: ['', Validators.required],
@@ -91,8 +89,8 @@ export class DocprofileupdateComponent implements OnInit {
       speciality: ['', Validators.required],
       experience: ['', Validators.required],
       address: this.formBuilder.group({
-        addressl1: ['', Validators.required],
-        addressl2: ['', Validators.required],
+        address1: ['', Validators.required],
+        address2: ['', Validators.required],
         city: ['', Validators.required],
         state: ['', Validators.required],
         zip: ['', Validators.required]
@@ -100,7 +98,8 @@ export class DocprofileupdateComponent implements OnInit {
       consolidatefees: ['', Validators.required],
       emergency_contact: ['', Validators.required],
       about: ['', Validators.required]
-    })
+    });
+    
 
   }
   get f(): {
@@ -150,14 +149,22 @@ export class DocprofileupdateComponent implements OnInit {
 
 
     if (this.doctprofileupdateForm.invalid) {
+      this.failedAlert();
       console.log(this.doctprofileupdateForm);
       return;
 
     }
 
     if (this.buttontype == 'add') {
+
       this.service.doctorprofile(data).subscribe(data => {
         this.detail = JSON.parse(JSON.stringify(data));
+       if(this.location == null){
+        this.failedAlert();
+       }
+       else{
+
+       }
         console.log(data);
       });
 
@@ -174,4 +181,16 @@ export class DocprofileupdateComponent implements OnInit {
 
     this.buttontype = status;
   }
+  
+  async failedAlert() {
+    let alert = await this.alertCtrl.create({
+      message:'Address field is required',
+      buttons: [
+        {
+          text: 'ok',
+        }                                                 
+      ]
+    });
+      alert.present();
+    }
 }
