@@ -33,7 +33,7 @@ constructor(private service:DoctorserviceService, public datePipe: DatePipe) {
     let id = {
       user_id: '3'
     }
-    this.service.getdoctorprofile(id).subscribe(data => {
+    this.service.viewDoctorProfile(id).subscribe(data => {
       this.editDatas = [JSON.parse(JSON.stringify(data)).data];
       console.log(this.editDatas);
     })
