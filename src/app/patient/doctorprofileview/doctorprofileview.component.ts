@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { AlertController, MenuController, Platform } from '@ionic/angular';
 import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
-// import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
 import { Network } from '@ionic-native/network/ngx';
 // import { AlertController } from '@ionic/angular';
@@ -64,6 +63,7 @@ export class DoctorprofileviewComponent implements OnInit {
     private route: ActivatedRoute,
     private menu: MenuController,
     private network: Network,
+    private router: Router,
     // private localNotification:LocalNotifications,
     // private localNotification: LocalNotifications,
     private plt: Platform,
@@ -73,7 +73,7 @@ export class DoctorprofileviewComponent implements OnInit {
     public alertController: AlertController,
     private callNumber:CallNumber,
     private emailComposer: EmailComposer,
-    private router:Router
+    // private router:Router
   ) {
     this.subscribe= this. plt.backButton.subscribeWithPriority(666666,()=>{
       if (this.constructor.name =="DoctorprofileviewComponent"){
