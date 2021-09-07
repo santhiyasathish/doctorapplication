@@ -2,24 +2,34 @@ import { Component, OnInit } from '@angular/core';
 import { PatientserviceService } from '../patientservice.service';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+<<<<<<< HEAD
 import { AlertController, MenuController, Platform } from '@ionic/angular';
 import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
+=======
+import { MenuController } from '@ionic/angular';
+import {  Platform } from '@ionic/angular';
+// import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
+>>>>>>> ea23770e6c7ab577c990ed332b43cd401c1b1cce
 import { Dialogs } from '@ionic-native/dialogs/ngx';
 import { Network } from '@ionic-native/network/ngx';
 // import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
+<<<<<<< HEAD
 // import { Events } from '@ionic/angular'
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
+=======
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+>>>>>>> ea23770e6c7ab577c990ed332b43cd401c1b1cce
 
+import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { State } from 'ionicons/dist/types/stencil-public-runtime';
 // import { Plugins } from '@capacitor/core';
-
-
 // const { LocalNotifications } = Plugins;
 // import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
@@ -33,7 +43,16 @@ export class DoctorprofileviewComponent implements OnInit {
   profileId: string;
   docId: string;
   message: any;
+<<<<<<< HEAD
   
+=======
+  hideButton: boolean = true;
+  hideButton1: boolean = true;
+  hideButton2: boolean = true;
+  hideButton3: boolean = true;
+  hideButton4: boolean = true;
+  ionicButton: boolean = false;
+>>>>>>> ea23770e6c7ab577c990ed332b43cd401c1b1cce
   loading: any;
   value: 3000;
   data: any;
@@ -48,6 +67,10 @@ export class DoctorprofileviewComponent implements OnInit {
 
   zip: any;
   subscribe: any;
+  imgurl: any;
+  answer: any = 4;
+  a: any;
+  col: any;
   
 
   constructor(public service: PatientserviceService,
@@ -55,7 +78,7 @@ export class DoctorprofileviewComponent implements OnInit {
     private menu: MenuController,
     private network: Network,
     // private localNotification:LocalNotifications,
-    private localNotification: LocalNotifications,
+    // private localNotification: LocalNotifications,
     private plt: Platform,
     private appComponent: AppComponent,
     public dialogs: Dialogs,
@@ -63,8 +86,12 @@ export class DoctorprofileviewComponent implements OnInit {
     public alertController: AlertController,
     private callNumber:CallNumber,
     private emailComposer: EmailComposer,
+<<<<<<< HEAD
     // private starRating: StarRatingModule,
     // public evens:Events,
+=======
+    private router:Router
+>>>>>>> ea23770e6c7ab577c990ed332b43cd401c1b1cce
   ) {
     this.subscribe= this. plt.backButton.subscribeWithPriority(666666,()=>{
       if (this.constructor.name =="DoctorprofileviewComponent"){
@@ -83,10 +110,23 @@ export class DoctorprofileviewComponent implements OnInit {
     this.plt.ready().then((rdy) => {
 
     });
-  }
 
+    this.menu.enable(true);
+  }
+  onClickone( id: any) {
+    this.answer=id;
+    
+    for(this.a = this.answer; this.a>= 1;this.a--) {
+      
+        
+          console.log("a value",this.a);
+      
+    }
+  }
+ 
+ 
   ngOnInit() {
-    this.menu.enable(true, 'custom');
+    // this.menu.enable(true, 'custom');
     this.appComponent.appPages;
     this.profileId = this.route.snapshot.paramMap.get('id');
     this.docId = this.route.snapshot.paramMap.get('id');
@@ -99,6 +139,7 @@ export class DoctorprofileviewComponent implements OnInit {
 
     });
     this.presentLoading();
+    
   }
   callnumber(){
     this.callNumber.callNumber(this.data, true)
@@ -107,6 +148,10 @@ export class DoctorprofileviewComponent implements OnInit {
     console.log("number",this.data);
   }
 
+  appointment(){
+    this.router.navigateByUrl('/patient/book/3');
+
+  }
   emailcomposer(){
     
     let email = {
@@ -151,11 +196,14 @@ export class DoctorprofileviewComponent implements OnInit {
     await alert.present();
   }
 
+
   async handleButtonClick() {
     await this.loading.dismiss();
+    this.imgurl = "../../../assets/splash_screen.gif";
     const alert = await this.alertController.create({
       header: 'Network error ?',
-      message: 'there is good condiction?',
+      message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">` ,
+   
       cssClass: 'customalert',
 
       buttons: [{
@@ -198,6 +246,7 @@ export class DoctorprofileviewComponent implements OnInit {
     } else {
       await this.loading.present();
       this.viewDoctorProfile('3');
+      this.menu.enable(true);
     }
 
 

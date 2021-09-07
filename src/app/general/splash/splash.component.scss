@@ -1,0 +1,19 @@
+ion-content {
+    --background: none;
+
+   
+    ion-card{
+        box-shadow: none;
+            text-align-last: center;
+        ion-text{
+            text-align-last: center;
+        }
+        
+    }
+}
+ion-footer{
+        text-align-last: center;
+        ion-card{
+            box-shadow: none;
+        }
+}

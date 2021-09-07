@@ -8,7 +8,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { LoadingController } from '@ionic/angular';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { dismiss } from '@ionic/core/dist/types/utils/overlays';
 
@@ -61,6 +61,9 @@ export class BookappointmentComponent implements OnInit {
       unit: ELocalNotificationTriggerUnit;
     }; data: string;
   };
+  bcount: any;
+  scount: any;
+  tscount: number;
 
 
   constructor(
@@ -76,7 +79,7 @@ export class BookappointmentComponent implements OnInit {
     // private datePipe: DatePipe
   ) {
 
-    this.notifyTime = moment(new Date()).format();
+    // this.notifyTime = moment(new Date()).format();
     this.chosenHours = new Date().getHours();
     this.chosenMinutes = new Date().getMinutes();
     this.days = [
@@ -200,9 +203,10 @@ export class BookappointmentComponent implements OnInit {
     // this.available=this.service.available;
     this.docId = this.route.snapshot.paramMap.get('id');
     this.durId = this.route.snapshot.paramMap.get('id');
-    this.getAppointmentDetail(this.docId);
+    
     // this.getappointmentAvailability();
-    // this.getapplication();    
+    // this.getapplication();  
+    this.getAppointmentDetail(this.docId);
     this.presentLoading();
     this.menu.enable(false);
     this.seduleBasic();
@@ -248,19 +252,27 @@ export class BookappointmentComponent implements OnInit {
     }
     this.service.appointmentAvailability(avalabledata).subscribe(async data => {
       this.available = JSON.parse(JSON.stringify(data)).data;
+      
       this.getList('0');
+      console.log("bcount",this.bcount);
       //  this.getlista('0');
-      console.log("availabledata", this.available);
+
       await this.loading.dismiss();
     });
 
   }
 
   getList(i) {
-    console.log(i);
+    console.log("first data",i);
     this.list = this.available[i].list;
     this.sam = this.available[i].date;
+    // this.bcount = this.available[i].bookedCount;
+    // this.scount = this.available[i].scount;
+    // this.tscount = this.scount-this.bcount;
     // this.samu = this.avalabledata.id;
+    console.log("tscount", this.tscount);
+
+    console.log("availabledata", this.available);
     console.log("list", this.list);
     console.log("availabledate", this.sam);
     console.log("availableid", this.samu);
@@ -271,8 +283,11 @@ export class BookappointmentComponent implements OnInit {
     }
     this.service.appointmentDetail(passData).subscribe(data => {
       this.docDetail = JSON.parse(JSON.stringify(data));
-      console.log(data);
+      console.log("details",data);
     })
+  }
+  back(){
+    this.router.navigateByUrl('/login');
   }
   showAlert() {
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
+// import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 // import { PushNotificationService } from './push-notification.service';
 @Component({
@@ -29,7 +29,7 @@ export class AppComponent{
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(private router: Router,
-    private localNotification: LocalNotifications,
+    // private localNotification: LocalNotifications,
     //  private pushNotificationService: PushNotificationService
      ) {
  

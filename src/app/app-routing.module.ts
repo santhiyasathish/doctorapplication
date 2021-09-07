@@ -4,12 +4,14 @@ import { LoginComponent } from './general/login/login.component';
 import { RegisterComponent } from './general/register/register.component';
 import { DoctorprofileviewComponent } from './patient/doctorprofileview/doctorprofileview.component';
 import { EditprofileComponent } from './patient/editprofile/editprofile.component';
+import { GeneralModule } from './general/general.module';
+import { SplashComponent } from './general/splash/splash.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    component: SplashComponent
   },
   {
     path: 'login',
@@ -21,15 +23,19 @@ const routes: Routes = [
   },
   {
     path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
   },
   {
     path: 'patient',
-    loadChildren: () => import('./patient/patient.module').then( m => m.PatientModule)
+    loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)
   },
   {
     path: 'doctor',
-    loadChildren: () => import('./doctor/doctor.module').then( m => m.DoctorModule)
+    loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule)
+  },
+  {
+    path: 'general',
+    loadChildren: () => import('./general/general.module').then(m => m.GeneralModule)
   }
 ];
 
@@ -39,4 +45,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

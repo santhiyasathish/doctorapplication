@@ -28,7 +28,7 @@ import { Dialogs} from '@ionic-native/dialogs/ngx';
     FormsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(), AppRoutingModule, HttpClientModule, 
-    GeneralModule
+    
   ],
   exports: [GeneralModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 

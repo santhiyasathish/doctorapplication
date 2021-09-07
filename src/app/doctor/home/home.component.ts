@@ -26,14 +26,14 @@ constructor(private service:DoctorserviceService, public datePipe: DatePipe) {
   }
   ngOnInit() {
 
-    this.viewDoctorProfile();
+    this.getdoctorprofile();
   }
  
-  viewDoctorProfile() {
+  getdoctorprofile() {
     let id = {
       user_id: '3'
     }
-    this.service.viewDoctorProfile(id).subscribe(data => {
+    this.service.getdoctorprofile(id).subscribe(data => {
       this.editDatas = [JSON.parse(JSON.stringify(data)).data];
       console.log(this.editDatas);
     })

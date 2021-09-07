@@ -62,14 +62,14 @@ export class EditprofileComponent implements OnInit {
           firstname: [this.getprofile.name.split(' ')[0], Validators.required],
           lastname: [this.getprofile.name.split(' ')[1], Validators.required],
           contact_number: [this.getprofile.contact_number, Validators.required],
-          email: [this.getprofile.email, [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')]],
+          email: [this.getprofile.email, [Validators.required, Validators.email]],
           gender: [this.getprofile.gender, Validators.required],
           dob: [this.getprofile.dob.split('T')[0], Validators.required],
           blood_group: [this.getprofile.blood_group.toLowerCase(), Validators.required],
           marital_status: [this.getprofile.marital_status, Validators.required],
           height: [this.getprofile.height, Validators.required],
           weight: [this.getprofile.weight, Validators.required],
-          econtact: [this.getprofile.econtact, Validators.required],
+          econtact: ['', Validators.required],
           location: [this.getprofile.location, Validators.required],
         });
       }
@@ -162,16 +162,11 @@ export class EditprofileComponent implements OnInit {
     //   alert(JSON.stringify(err));
     // })
     Camera.getPhoto({
-      // quality: 100,
+      quality: 100,
     width: 100,
     height:100,
-      preserveAspectRatio: true,
-      correctOrientation: true,
-
     source:CameraSource.Photos,
-      resultType: CameraResultType.Uri,
-
-      
+      resultType: CameraResultType.DataUrl,
     }).then((result)=>{
       this.images = (result.dataUrl);
     },(err)=>{
@@ -217,7 +212,6 @@ export class EditprofileComponent implements OnInit {
     }
 
     if (this.editForm.invalid) {
-      console.log(this.editForm);
       return;
     }
 
