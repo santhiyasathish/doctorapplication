@@ -88,7 +88,15 @@ export class RegisterComponent implements OnInit {
         }
         this.service.login(logdata).subscribe(data1 => {
           localStorage.setItem('log', JSON.stringify(JSON.parse(JSON.stringify(data1)).logData));
-          this.router.navigateByUrl('patient/docprofile/3');
+          if (JSON.parse(localStorage.getItem('log')).usertype == 'doctor') {
+            this.router.navigateByUrl('doctor/docprofileupdate');
+          }
+          else if (JSON.parse(localStorage.getItem('log')).usertype == 'patient') {
+            this.router.navigateByUrl('patient/editprofile');
+          }
+          else {
+            this.router.navigateByUrl('patient/docprofile/3');
+          }
         });
       }
       else {
