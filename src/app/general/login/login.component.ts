@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
     }
 
     let logData = {
-      email : this.loginForm.value.username,
+      mobile : this.loginForm.value.username,
       password : this.loginForm.value.password
     };
     let responseData;

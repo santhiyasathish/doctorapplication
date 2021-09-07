@@ -10,7 +10,7 @@
 <ion-content [fullscreen]>
   <ion-card class="main-form">
     <ion-item lines="none" class="sub-form">
-      <form [formGroup]="doctprofileupdateForm"  (ngSubmit)="onSubmit()">
+      <form [formGroup]="doctprofileupdateForm" (ngSubmit)="onSubmit()">
         <ion-item lines="none" class="avatar">
           <ion-avatar>
             <img
@@ -24,7 +24,7 @@
 
           <ion-input placeholder="FirstName" type="text" name="firstname" formControlName="firstname"></ion-input>
         </ion-item>
-       <div *ngIf="submitted && f.firstname.errors" class="error-message">
+        <div *ngIf="submitted && f.firstname.errors" class="error-message">
           <div *ngIf="f.firstname.errors.required">
             <ion-icon name="alert-circle-outline"></ion-icon> First Name is required
           </div>
@@ -51,7 +51,8 @@
         </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">+91</ion-label>
-          <ion-input type="number" placeholder="Contact" name="contact_number" formControlName="contact_number"></ion-input>
+          <ion-input type="number" placeholder="Contact" name="contact_number" formControlName="contact_number">
+          </ion-input>
         </ion-item>
         <div *ngIf="submitted && f.contact_number.errors" class="error-message">
           <div *ngIf="f.contact_number.errors.required">
@@ -67,7 +68,7 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-radio-group  name="gender" formControlName="gender">
+          <ion-radio-group name="gender" formControlName="gender">
             <ion-row>
               <ion-col>
                 <ion-item lines="none">
@@ -82,7 +83,7 @@
                 </ion-item>
               </ion-col>
             </ion-row>
-            
+
           </ion-radio-group>
         </ion-item>
         <div *ngIf="submitted && f.gender.errors" class="error-message">
@@ -109,8 +110,8 @@
         <ion-item lines="none" id="rounded">
           <ion-input placeholder="Description" name="description" formControlName="description"></ion-input>
         </ion-item>
-        <div *ngIf="submitted && f.firstname.errors" class="error-message">
-          <div *ngIf="f.firstname.errors.required">
+        <div *ngIf="submitted && f.description.errors" class="error-message">
+          <div *ngIf="f.description.errors.required">
             <ion-icon name="alert-circle-outline"></ion-icon> Description is required
           </div>
         </div>
@@ -154,54 +155,59 @@
             <ion-icon name="alert-circle-outline"></ion-icon> Experience is required
           </div>
         </div>
-       
-         <ion-item lines="none" id="rounded"  formGroupName="address">
-          <ion-label position="stacked" style="color: rgb(146, 146, 146); padding-bottom: 10px;" >Address</ion-label>
-       
-          <ion-input type="text" formControlName="addressl1"  placeholder="Address Line 1" clearInput="true"></ion-input>
 
-          <div *ngIf="submitted && f.addressl1?.errors" class="error-message">
-            <div *ngIf="f.addressl1?.errors.required">
+        <ion-item lines="none" id="rounded">
+          <div formGroupName="address">
+            <ion-label position="stacked" style="color: rgb(146, 146, 146); padding-bottom: 10px;">Address</ion-label>
+
+            <ion-input type="text" formControlName="address1" placeholder="Address Line 1" clearInput="true">
+            </ion-input>
+
+            <!-- <div *ngIf="submitted && f.address1?.errors" class="error-message">
+            <div *ngIf="f.address1?.errors.required">
               <ion-icon name="alert-circle-outline"></ion-icon> Enter your Address Line 1
             </div>
-          </div>
+          </div> -->
 
-          <ion-input type="text" formControlName="addressl2"  placeholder="Address Line 2" clearInput="true"></ion-input>
+            <ion-input type="text" formControlName="address2" placeholder="Address Line 2" clearInput="true">
+            </ion-input>
 
-          <div *ngIf="submitted && f.addressl2?.errors" class="error-message">
-            <div *ngIf="f.addressl2?.errors.required">
+            <!-- <div *ngIf="submitted && f.address2?.errors" class="error-message">
+            <div *ngIf="f.address2?.errors.required">
               <ion-icon name="alert-circle-outline"></ion-icon> Enter your Address Line 2
             </div>
-          </div>
+          </div> -->
 
-          <ion-input type="text"formControlName="city" name="city" placeholder="City" clearInput="true"></ion-input>
+            <ion-input type="text" formControlName="city" name="city" placeholder="City" clearInput="true"></ion-input>
 
-          <div *ngIf="submitted && f.city?.errors" class="error-message">
+            <!-- <div *ngIf="submitted && f.city?.errors" class="error -message">
             <div *ngIf="f.city?.errors.required">
               <ion-icon name="alert-circle-outline"></ion-icon> Enter your City
             </div>
-          </div>
+          </div> -->
 
-          <ion-input type="text" formControlName="state" name="state" placeholder="State" clearInput="true"></ion-input>
+            <ion-input type="text" formControlName="state" name="state" placeholder="State" clearInput="true">
+            </ion-input>
 
-          <div *ngIf="submitted && f.state?.errors" class="error-message">
+            <!-- <div *ngIf="submitted && f.state?.errors" class="error-message">
             <div *ngIf="f .state?.errors.required">
               <ion-icon name="alert-circle-outline"></ion-icon> Enter your State
             </div>
+          </div> -->
+
+            <ion-input type="number" formControlName="zip" name="zip" placeholder="Zip Code" type="number"></ion-input>
+
+            <!-- <div *ngIf="submitted && f.zip?.errors" class="error-message">
+              <div *ngIf="f .zip?.errors.required">
+                <ion-icon name="alert-circle-outline"></ion-icon> Enter your Zip Code
+              </div>
+            </div> -->
           </div>
+        </ion-item>
 
-          <ion-input type="number" formControlName="zip" name="zip" placeholder="Zip Code" type="number"></ion-input>
-
-          <div *ngIf="submitted && f.zip?.errors" class="error-message">
-            <div *ngIf="f .zip?.errors.required">
-              <ion-icon name="alert-circle-outline"></ion-icon> Enter your Zip Code
-            </div>
-          </div>
-
-        </ion-item>   
-       
         <ion-item lines="none" id="rounded">
-          <ion-input type="number" name="consolidatefees" formControlName="consolidatefees" placeholder="Consolidate Fees"></ion-input>
+          <ion-input type="number" name="consolidatefees" formControlName="consolidatefees"
+            placeholder="Consolidate Fees"></ion-input>
           <ion-label style="color:rgb(146, 146, 146) ;">Rs.</ion-label>
 
         </ion-item>
@@ -211,7 +217,8 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-input type="number"  name= "emergency_contact"  formControlName="emergency_contact" placeholder="Emergency Contact"></ion-input>
+          <ion-input type="number" name="emergency_contact" formControlName="emergency_contact"
+            placeholder="Emergency Contact"></ion-input>
         </ion-item>
         <div *ngIf="submitted && f.emergency_contact.errors" class="error-message">
           <div *ngIf="f.emergency_contact.errors.required">
@@ -227,11 +234,15 @@
           </div>
         </div>
         <ion-item lines="none" class="updatebtn">
-          <ion-button type="submit" *ngIf="buttontype == 'add'" (click)="open('add')"><ion-icon name="person-add"></ion-icon>&nbsp; Add Profile</ion-button>
+          <ion-button type="submit" *ngIf="buttontype == 'add'" (click)="open('add')">
+            <ion-icon name="person-add"></ion-icon>&nbsp; Add Profile
+          </ion-button>
           <!-- <ion-button type="submit">
             <ion-icon name="cloud-upload" style="padding-right: 10px;"></ion-icon>Update
           </ion-button> -->
-          <ion-button type="submit" *ngIf="buttontype == 'edit'" (click)="open('edit')"><ion-icon name="cloud-upload"></ion-icon> &nbsp; Edit Profile</ion-button>
+          <ion-button type="submit" *ngIf="buttontype == 'edit'" (click)="open('edit')">
+            <ion-icon name="cloud-upload"></ion-icon> &nbsp; Edit Profile
+          </ion-button>
         </ion-item>
       </form>
     </ion-item>

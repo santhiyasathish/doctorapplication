@@ -23,6 +23,9 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 
 
+
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -30,6 +33,8 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
     IonicModule,
     ReactiveFormsModule,
     PatientRoutingModule,
+  
+  
   
   ],
   declarations: [

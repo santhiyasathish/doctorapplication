@@ -33,10 +33,11 @@ export class RegisterComponent implements OnInit {
     }
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
-      email: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])],
+      // email: ['', Validators.compose([
+      //   Validators.required,
+      //   Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      // ])],
+      mobile:['',[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       password: [
         '',
         [
@@ -68,9 +69,10 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     let data;
     data = {
-      email: this.registerForm.value.email,
+      // email: this.registerForm.value.email,
+      mobile: this.registerForm.value.mobile,
       username: this.registerForm.value.username,
-      // usertype: this.registerForm.value.usertype,
+      usertype: this.registerForm.value.usertype,
       password: this.registerForm.value.password,
       gender: this.registerForm.value.gender,
       dob: this.registerForm.value.dob.split('T')[0],
@@ -83,7 +85,7 @@ export class RegisterComponent implements OnInit {
         let logdata;
         alertMsg = response.messages;
         logdata = {
-          email: this.registerForm.value.email,
+          mobile: this.registerForm.value.mobile,
           password: this.registerForm.value.password,
         }
         this.service.login(logdata).subscribe(data1 => {
