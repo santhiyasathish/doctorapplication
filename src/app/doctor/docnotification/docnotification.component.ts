@@ -61,7 +61,6 @@ export class DocnotificationComponent implements OnInit {
       console.log("availabledata", this.message);
     })
   }
-
   approve(id, status){
     let postData={
       id: id,

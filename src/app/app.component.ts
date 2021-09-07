@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
+// import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 // import { PushNotificationService } from './push-notification.service';
 @Component({
@@ -11,15 +11,15 @@ import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native
 export class AppComponent{
   email : string;
   public appPages = [
-    { title: 'home', url: 'patient/docprofile/3', icon: 'mail' },
-    { title: 'profile', url: 'patient/profile', icon: 'paper-plane' },
+    { title: 'home', url: '/patient/docprofile/3', icon: 'mail' },
+    { title: 'profile', url: '/patient/editprofile', icon: 'paper-plane' },
     { title: 'book appointment', url: 'patient/book/3', icon: 'paper-plane' },
-    { title: 'Add Profile', url: 'patient/editprofile', ionc: 'paper-plane'},
+    // { title: 'Add Profile', url: 'patient/editprofile', ionc: 'paper-plane'},
     { title: 'Logout', icon: 'heart' }
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(private router: Router,
-    private localNotification: LocalNotifications,
+    // private localNotification: LocalNotifications,
     //  private pushNotificationService: PushNotificationService
      ) {
  

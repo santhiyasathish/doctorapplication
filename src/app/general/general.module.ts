@@ -4,9 +4,13 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { GeneralRoutingModule } from './general-routing.module';
 import { Router, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { GuestComponent } from './guest/guest.component';
+import { SplashComponent } from './splash/splash.component';
+import { SplitInterpolation } from '@angular/compiler';
 
 @NgModule({
   imports: [
@@ -14,11 +18,16 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    RouterModule
+    RouterModule,
+    GeneralRoutingModule
   ],
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    GuestComponent,
+    SplashComponent
+
+    
   ]
 })
 export class GeneralModule {}

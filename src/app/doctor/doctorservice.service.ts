@@ -27,7 +27,7 @@ export class DoctorserviceService {
   doctorNotification(data:any){
     return this.http.post(this.api +'pendinglist', data, this.httpOptions);
   }
-
+  
   approveApiCall(data: any){
     return this.http.post(this.api + 'acceptappointment', data, this.httpOptions);
   }
