@@ -2,14 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PatientserviceService } from '../patientservice.service';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
-<<<<<<< HEAD
 import { AlertController, MenuController, Platform } from '@ionic/angular';
 import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
-=======
-import { MenuController } from '@ionic/angular';
-import {  Platform } from '@ionic/angular';
-// import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
->>>>>>> ea23770e6c7ab577c990ed332b43cd401c1b1cce
 import { Dialogs } from '@ionic-native/dialogs/ngx';
 import { Network } from '@ionic-native/network/ngx';
 // import { AlertController } from '@ionic/angular';
@@ -18,13 +12,9 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
-<<<<<<< HEAD
 // import { Events } from '@ionic/angular'
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
-=======
-import Swal from 'sweetalert2/dist/sweetalert2.js'
->>>>>>> ea23770e6c7ab577c990ed332b43cd401c1b1cce
 
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -43,16 +33,7 @@ export class DoctorprofileviewComponent implements OnInit {
   profileId: string;
   docId: string;
   message: any;
-<<<<<<< HEAD
   
-=======
-  hideButton: boolean = true;
-  hideButton1: boolean = true;
-  hideButton2: boolean = true;
-  hideButton3: boolean = true;
-  hideButton4: boolean = true;
-  ionicButton: boolean = false;
->>>>>>> ea23770e6c7ab577c990ed332b43cd401c1b1cce
   loading: any;
   value: 3000;
   data: any;
@@ -77,6 +58,7 @@ export class DoctorprofileviewComponent implements OnInit {
     private route: ActivatedRoute,
     private menu: MenuController,
     private network: Network,
+    private router: Router,
     // private localNotification:LocalNotifications,
     // private localNotification: LocalNotifications,
     private plt: Platform,
@@ -86,12 +68,8 @@ export class DoctorprofileviewComponent implements OnInit {
     public alertController: AlertController,
     private callNumber:CallNumber,
     private emailComposer: EmailComposer,
-<<<<<<< HEAD
     // private starRating: StarRatingModule,
     // public evens:Events,
-=======
-    private router:Router
->>>>>>> ea23770e6c7ab577c990ed332b43cd401c1b1cce
   ) {
     this.subscribe= this. plt.backButton.subscribeWithPriority(666666,()=>{
       if (this.constructor.name =="DoctorprofileviewComponent"){
