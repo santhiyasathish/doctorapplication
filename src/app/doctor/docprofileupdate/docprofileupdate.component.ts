@@ -37,7 +37,7 @@ export class DocprofileupdateComponent implements OnInit {
     
     
     let id = {
-      'user_id': "10"
+      'user_id': "3"
     };
     this.service.viewDoctorProfile(id).subscribe(data => {
       this.getprofile = JSON.parse(JSON.stringify(data)).data;
@@ -74,6 +74,7 @@ export class DocprofileupdateComponent implements OnInit {
         this.buttontype = 'add';
       }
     });
+    
    
     this.doctprofileupdateForm = this.formBuilder.group({
 
@@ -144,6 +145,7 @@ export class DocprofileupdateComponent implements OnInit {
       about: this.doctprofileupdateForm.value.about
     }
 
+    
     console.log(this.doctprofileupdateForm.value.email);
     // console.log(data, "data");
 

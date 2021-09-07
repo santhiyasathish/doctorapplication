@@ -6,9 +6,11 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
+// import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
+import { Camera, CameraDirection, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera'
 import { File } from '@ionic-native/file/ngx';
 import { ActionSheetController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 import { PatientserviceService } from '../patientservice.service';
 @Component({
@@ -28,19 +30,22 @@ export class EditprofileComponent implements OnInit {
   buttontype = 'add';
   imgURL: any;
 
+  images="";
 
-  croppedImagepath = "";
-  isLoading = true;
+  // croppedImagepath = "";
+  // isLoading = true;
 
-  imagePickerOptions = {
-    maximumImagesCount: 1,
-    quality: 50
-  };
+  // imagePickerOptions = {
+  //   maximumImagesCount: 1,
+  //   quality: 50
+  // };
 
   constructor(
     private formBuilder: FormBuilder,
     private service: PatientserviceService,
-    private camera: Camera,
+    // public camera:CameraResultType,
+    
+    private router:Router,
     public actionSheetController: ActionSheetController,
     private file: File) { }
   ngOnInit() {
@@ -95,66 +100,98 @@ export class EditprofileComponent implements OnInit {
     return this.editForm.controls;
   }
 
-  pickImage(sourceType) {
-    this.file.checkDir(this.file.dataDirectory, 'mydir')
-      .then(_ =>
-        console.log('Directory exists'))
-      .catch(err =>
-        console.log('Directory doesn\'t exist'));
-    const options: CameraOptions = {
-      quality: 100,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      this.croppedImagepath = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      // Handle error
-      alert(err);
-    });
-  }
-  async selectImage() {
-    const actionSheet = await this.actionSheetController.create({
-      header: "Select Image source",
-      buttons: [{
-        text: 'Load from Library',
-        handler: () => {
-          this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
-        }
-      },
-      {
-        text: 'Use Camera',
-        handler: () => {
-          this.pickImage(this.camera.PictureSourceType.CAMERA);
-        }
-      },
-      {
-        text: 'Cancel',
-        role: 'cancel'
-      }
-      ]
-    });
-    await actionSheet.present();
-  }
 
-  // getCamera(){
-  //   this.camera.getPicture({
-  //     quality:100,
-  //     sourceType: this.camera.PictureSourceType.CAMERA,
+
+  // pickImage(sourceType) {
+  //   this.file.checkDir(this.file.dataDirectory, 'mydir')
+  //     .then(_ =>
+  //       console.log('Directory exists'))
+  //     .catch(err =>
+  //       console.log('Directory doesn\'t exist'));
+  //   const options: CameraOptions = {
+  //     quality: 100,
+  //     sourceType: sourceType,
   //     destinationType: this.camera.DestinationType.DATA_URL,
   //     encodingType: this.camera.EncodingType.JPEG,
-  //     mediaType: this.camera.MediaType.PICTURE,
-
-  //   }).then((res)=>{
-  //     this.imgURL = 'data:image/jpeg;base64,'+ res;
-
-  //   }).catch(e=>{
-  //     alert(e);
-  //   })
+  //     mediaType: this.camera.MediaType.PICTURE
+  //   }
+  //   this.camera.getPicture(options).then((imageData) => {
+  //     // imageData is either a base64 encoded string or a file URI
+  //     this.croppedImagepath = 'data:image/jpeg;base64,' + imageData;
+  //     alert(this.croppedImagepath);
+  //   }, (err) => {
+  //     // Handle error
+  //     alert(err);
+  //   });
   // }
+  // async selectImage() {
+  //   const actionSheet = await this.actionSheetController.create({
+  //     header: "Select Image source",
+  //     buttons: [{
+  //       text: 'Load from Library',
+  //       handler: () => {
+  //         this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+  //       }
+  //     },
+  //     {
+  //       text: 'Use Camera',
+  //       handler: () => {
+  //         this.pickImage(this.camera.PictureSourceType.CAMERA);
+  //       }
+  //     },
+  //     {
+  //       text: 'Cancel',
+  //       role: 'cancel'
+  //     }
+  //     ]
+  //   });
+  //   await actionSheet.present();
+  // }
+
+  getCamera() {
+    // var options: ImageOptions = {
+    //   quality: 100,
+    //   resultType: CameraResultType.DataUrl,
+    //   // saveToGallery:true
+    // }
+    // Camera.getPhoto({options).then((result)=>{
+    //   this.images=(result.dataUrl);
+      
+    // },(err)=>{
+    //   this.router.navigate(['/patient/editprofile']);
+    //   alert(JSON.stringify(err));
+    // })
+    Camera.getPhoto({
+      // quality: 100,
+    width: 100,
+    height:100,
+      preserveAspectRatio: true,
+      correctOrientation: true,
+
+    source:CameraSource.Photos,
+      resultType: CameraResultType.Uri,
+
+      
+    }).then((result)=>{
+      this.images = (result.dataUrl);
+    },(err)=>{
+      
+    })
+    // this.camera.getPicture({
+    //   quality:100,
+    //   sourceType: this.camera.PictureSourceType.CAMERA,
+    //   destinationType: this.camera.DestinationType.DATA_URL,
+    //   encodingType: this.camera.EncodingType.JPEG,
+    //   mediaType: this.camera.MediaType.PICTURE,
+
+    // }).then((res)=>{
+    //   this.imgURL = 'data:image/jpeg;base64,'+ res;
+    //   alert(this.imgURL);
+
+    // }).catch(e=>{
+    //   alert(e);
+    // })
+  }
 
   onSubmit() {
     let firstname = this.editForm.value.firstname;

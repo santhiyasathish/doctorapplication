@@ -10,16 +10,7 @@ import { Dialogs } from '@ionic-native/dialogs/ngx';
 export class PatientComponent implements OnInit {
 
   constructor( private network:Network, private dialogs: Dialogs) {
-    this.network.onDisconnect().subscribe(() => {
-      this.dialogs.alert('network error');
-
-    });
-    this.network.onConnect().subscribe(() => {
-      setTimeout(() => {
-        this.dialogs.alert('we got a' + this.network.type + 'connecting, woohoo!');
-      }, 2000);
-
-    });
+    
    }
 
   ngOnInit() {}
