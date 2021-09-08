@@ -70,7 +70,7 @@ export class PatnotificationComponent implements OnInit {
   userAppointementStatus(){
   this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
   let approveddoctor = {
-    user_id:'39',
+    user_id: JSON.parse(localStorage.getItem('log')).id,
     date: this.myDate,
   };
 
