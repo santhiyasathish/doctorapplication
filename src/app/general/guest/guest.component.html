@@ -1,15 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button id="men" color="primary"></ion-menu-button>
+      <ion-title>Guest User</ion-title>
+    </ion-buttons>
+    <!-- <ion-title>
+      <ion-menu-button id="men" color="primary"></ion-menu-button>
       Guest User
-    </ion-title>
+    </ion-title> -->
   </ion-toolbar>
 
 </ion-header>
 <ion-content [fullscreen]>
   <ion-card class="main-form">
     <ion-item lines="none" class="sub-form">
-      <form>
+      <form [formGroup]="gForm" (ngSubmit)="onGuest()">
         <ion-item lines="none" class="avatar">
           <ion-avatar>
             <img 
@@ -17,14 +22,15 @@
           </ion-avatar>
         </ion-item>
         <ion-item lines="none" id="rounded">
-          <ion-input placeholder="FirstName" type="text" name="firstname"></ion-input>
+          <ion-input placeholder="FirstName" type="text" name="firstname" formControlName="name"></ion-input>
         </ion-item>
         <ion-item lines="none" id="rounded">
-          <ion-input placeholder="Contact Number" type="number" name="contact_number"></ion-input>
+          <ion-input placeholder="Contact Number" type="number" name="contact_number" formControlName="contact_number"></ion-input>
         </ion-item>
         <ion-item lines="none" id="rounded">
-          <ion-input placeholder="Location" type="text" name="location"></ion-input>
+          <ion-input placeholder="Location" type="text" name="location" formControlName="location"></ion-input>
         </ion-item>
+        <ion-button type="submit" color="primary" expand="block">Add Guest</ion-button>
       </form>
     </ion-item>
 

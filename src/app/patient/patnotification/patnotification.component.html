@@ -11,12 +11,12 @@
   <ion-card *ngFor="let data of approve">
     <ion-card-header>
       <ion-row>
-        <ion-col>
+        <!-- <ion-col>
           <ion-text>{{data.pat_name}}</ion-text>
-        </ion-col>
+        </ion-col> -->
         <ion-col>
           <ion-icon name="calendar-outline"></ion-icon>
-          <ion-text>{{data.date}}</ion-text>
+          <ion-text>Date: {{data.date}}</ion-text>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -25,10 +25,10 @@
     </ion-card-header>
     <ion-card-content >
       <ion-text *ngIf="!data.showMore">
-        {{trimString(data.reason,50)}}
+        <b>Reason: </b>{{trimString(data.reason,50)}}
       </ion-text>
       <ion-text class="ion-text-justify" *ngIf="data.showMore">
-        {{data.reason}}
+        <b>Reason: </b>{{data.reason}}
       </ion-text>
       <ion-row >
         <ion-col size="4" class="ion-col">
@@ -40,7 +40,7 @@
         <ion-col>
           <ion-item lines="none">
             <!-- {{(data.approvestatus == 'accept') ? 'success' : 'danger'}} -->
-            <ion-label  [color]="data.approvestatus == 'accept' ? 'success' : 'danger'">
+            <b>Status: </b><ion-label  [color]="data.approvestatus == 'accept' ? 'success' : 'danger'">
               <h2 [innerHtml]="data.approvestatus == 'accept' ? 'Your Appointment Successfully' : 'Your Appointment Rejected'"> </h2></ion-label>
           </ion-item>
         
