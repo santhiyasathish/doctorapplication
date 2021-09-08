@@ -11,7 +11,7 @@ import { Camera, CameraDirection, CameraResultType, CameraSource, ImageOptions }
 import { File } from '@ionic-native/file/ngx';
 import { ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
-
+import { AlertController } from '@ionic/angular';
 import { PatientserviceService } from '../patientservice.service';
 @Component({
   selector: 'app-editprofile',
@@ -43,6 +43,7 @@ export class EditprofileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private service: PatientserviceService,
+    private alertCtrl: AlertController,
     // public camera:CameraResultType,
     
     private router:Router,
@@ -81,7 +82,9 @@ export class EditprofileComponent implements OnInit {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       contact_number: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')]],
+      email: ['', [Validators.required, Validators.email
+        // , Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')
+      ]],
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       blood_group: ['', Validators.required],
@@ -207,10 +210,10 @@ export class EditprofileComponent implements OnInit {
       marital_status: this.editForm.value.marital_status,
       height: this.editForm.value.height,
       weight: this.editForm.value.weight,
-      econtact: this.editForm.value.econtact,
+      emergency_contact: this.editForm.value.econtact,
       location: this.editForm.value.location,
     }
-
+    console.log(this.editForm);
     if (this.editForm.invalid) {
       return;
     }
@@ -219,6 +222,7 @@ export class EditprofileComponent implements OnInit {
 
       this.service.patientprofile(data).subscribe(data => {
         this.detail = JSON.parse(JSON.stringify(data));
+        this.failedAlert(this.detail.messages);
         console.log(data);
       });
 
@@ -226,6 +230,8 @@ export class EditprofileComponent implements OnInit {
     else {
       this.service.patinetprofileedit(data).subscribe(data => {
         this.profileedit = JSON.parse(JSON.stringify(data));
+        this.failedAlert(this.profileedit.messages);
+        this.router.navigateByUrl('patient/docprofile/3');
         console.log(data);
       })
 
@@ -237,5 +243,15 @@ export class EditprofileComponent implements OnInit {
     this.buttontype = status;
   }
 
-
+  async failedAlert(msg) {
+    let alert = await this.alertCtrl.create({
+      message:msg,
+      buttons: [
+        {
+          text: 'ok',
+        }                                                 
+      ]
+    });
+      alert.present();
+    }
 }

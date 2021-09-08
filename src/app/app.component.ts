@@ -25,7 +25,9 @@ export class AppComponent{
     //guest
     // { title: 'Book appointment', url: 'patient/docprofile/3', icon: 'mail', type: 'guest' },
 
-    { title: 'Logout', url: 'patient/docprofile/3', icon: 'mail' },
+    { title: 'Logout', url: 'patient/docprofile/3', icon: 'mail', type: 'doctor' },
+    { title: 'Logout', url: 'patient/docprofile/3', icon: 'mail', type: 'patient' },
+    { title: 'Logout', url: 'patient/docprofile/3', icon: 'mail', type: 'guest' },
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(private router: Router,
