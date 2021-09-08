@@ -464,5 +464,9 @@ export class PatientserviceService {
   getpatientprofile(data: any){
     return this.http.post(this.api+'getpatientprofile',data,this.httpOptions);
   }
+  docId(){
+    return this.http.get(this.api+'doctorid', this.httpOptions);
+  }
+
 }
 

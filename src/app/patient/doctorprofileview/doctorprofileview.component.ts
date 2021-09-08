@@ -33,7 +33,7 @@ export class DoctorprofileviewComponent implements OnInit {
   profileId: string;
   docId: string;
   message: any;
-  
+  id: any;
   loading: any;
   value: 3000;
   data: any;
@@ -52,7 +52,7 @@ export class DoctorprofileviewComponent implements OnInit {
   answer: any = 4;
   a: any;
   col: any;
-  
+  doctor: any;
 
   constructor(public service: PatientserviceService,
     private route: ActivatedRoute,
@@ -92,6 +92,9 @@ export class DoctorprofileviewComponent implements OnInit {
     this.menu.enable(true);
   }
   onClickone( id: any) {
+    this.service.docId().subscribe(data => {
+      this.doctor = JSON.parse(JSON.stringify(data)).doctor;
+    })
     this.answer=id;
     
     for(this.a = this.answer; this.a>= 1;this.a--) {
@@ -108,7 +111,10 @@ export class DoctorprofileviewComponent implements OnInit {
     this.appComponent.appPages;
     this.profileId = this.route.snapshot.paramMap.get('id');
     this.docId = this.route.snapshot.paramMap.get('id');
-    this.viewDoctorProfile(this.profileId);
+    this.service.docId().subscribe(data => {
+      this.id = JSON.parse(JSON.stringify(data)).doctor.user_id;
+      this.viewDoctorProfile(JSON.parse(JSON.stringify(data)).doctor.user_id);
+    });
     this.network.onConnect().subscribe(() => {
 
       this.handleButtonClick();
@@ -127,7 +133,7 @@ export class DoctorprofileviewComponent implements OnInit {
   }
 
   appointment(){
-    this.router.navigateByUrl('/patient/book/3');
+    this.router.navigateByUrl('/patient/book/'+this.id);
 
   }
   emailcomposer(){
@@ -223,7 +229,7 @@ export class DoctorprofileviewComponent implements OnInit {
       // this.networkError();
     } else {
       await this.loading.present();
-      this.viewDoctorProfile('3');
+      this.viewDoctorProfile(this.id);
       this.menu.enable(true);
     }
 
@@ -270,14 +276,15 @@ export class DoctorprofileviewComponent implements OnInit {
 
       this.editData = [JSON.parse(JSON.stringify(data)).data];
       this.data = this.editData[0].contact_number;
-      this.location=this.editData[0].location;
+      this.location=JSON.parse(this.editData[0].location);
+      console.log(this.location);
       // this.state=this.location;
-      this.locat = JSON.parse(this.location);
-      this.state=this.locat.state;
-      this.city = this.locat.city;
-      this.addressl1 = this.locat.addressl1;
-      this.addressl2 = this.locat.addressl2;
-      this.zip = this.locat.zip;
+      // this.locat = JSON.parse(this.location);
+      // this.state=this.locat.state;
+      // this.city = this.locat.city;
+      // this.addressl1 = this.locat.addressl1;
+      // this.addressl2 = this.locat.addressl2;
+      // this.zip = this.locat.zip;
 
       console.log("locat", this.locat);
       console.log("city", this.city); 
