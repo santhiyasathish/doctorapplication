@@ -26,7 +26,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('log') != null) {
-      this.router.navigateByUrl('patient/docprofile/3');
+      if (JSON.parse(localStorage.getItem('log')).user_type == 'doctor') {
+        this.router.navigateByUrl('doctor/docprofileupdate');
+      }
+      else if (JSON.parse(localStorage.getItem('log')).user_type == 'patient') {
+        this.router.navigateByUrl('patient/editprofile');
+      }
+      else {
+        this.router.navigateByUrl('patient/docprofile/3');
+      }
     }
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -64,7 +72,15 @@ export class LoginComponent implements OnInit {
       if(responseData.success == true){
         alertMessage = responseData.messages;
         localStorage.setItem('log', JSON.stringify(responseData.logData));
-        this.router.navigateByUrl('patient/docprofile/3');
+        if (JSON.parse(localStorage.getItem('log')).user_type == 'doctor') {
+          this.router.navigateByUrl('doctor/docprofileupdate');
+        }
+        else if (JSON.parse(localStorage.getItem('log')).user_type == 'patient') {
+          this.router.navigateByUrl('patient/editprofile');
+        }
+        else {
+          this.router.navigateByUrl('patient/docprofile/3');
+        }
       }
       else{
         alertMessage = responseData.error_messages;

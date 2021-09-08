@@ -37,7 +37,7 @@ export class DocprofileupdateComponent implements OnInit {
     
     
     let id = {
-      'user_id': "3"
+      'user_id': JSON.parse(localStorage.getItem('log')).id
     };
     this.service.viewDoctorProfile(id).subscribe(data => {
       this.getprofile = JSON.parse(JSON.stringify(data)).data;
@@ -128,7 +128,7 @@ export class DocprofileupdateComponent implements OnInit {
     this.contact_number =JSON.stringify( this.doctprofileupdateForm.value.contact_number);
     this.location = JSON.stringify(this.doctprofileupdateForm.value.address);
     data = {
-      user_id: "3",
+      user_id: JSON.parse(localStorage.getItem('log')).id,
       name: this.name,
       contact_number:this.contact_number,
       gender: this.doctprofileupdateForm.value.gender,
@@ -151,7 +151,7 @@ export class DocprofileupdateComponent implements OnInit {
 
 
     if (this.doctprofileupdateForm.invalid) {
-      this.failedAlert();
+      this.failedAlert('Address field is required');
       console.log(this.doctprofileupdateForm);
       return;
 
@@ -161,8 +161,9 @@ export class DocprofileupdateComponent implements OnInit {
 
       this.service.doctorprofile(data).subscribe(data => {
         this.detail = JSON.parse(JSON.stringify(data));
+        this.failedAlert(this.detail.messages);
        if(this.location == null){
-        this.failedAlert();
+        this.failedAlert('Address field is required');
        }
        else{
 
@@ -174,8 +175,9 @@ export class DocprofileupdateComponent implements OnInit {
     else {
       this.service.doctorprofileedit(data).subscribe(data => {
         this.profileedit = JSON.parse(JSON.stringify(data));
+        this.failedAlert(this.profileedit.messages);
         console.log(data);
-      })
+      });
 
     }
   }
@@ -184,9 +186,9 @@ export class DocprofileupdateComponent implements OnInit {
     this.buttontype = status;
   }
   
-  async failedAlert() {
+  async failedAlert(msg) {
     let alert = await this.alertCtrl.create({
-      message:'Address field is required',
+      message:msg,
       buttons: [
         {
           text: 'ok',
