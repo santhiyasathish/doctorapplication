@@ -33,12 +33,7 @@ export class DoctorprofileviewComponent implements OnInit {
   profileId: string;
   docId: string;
   message: any;
-  hideButton: boolean = true;
-  hideButton1: boolean = true;
-  hideButton2: boolean = true;
-  hideButton3: boolean = true;
-  hideButton4: boolean = true;
-  ionicButton: boolean = false;
+  id: any;
   loading: any;
   value: 3000;
   data: any;
@@ -57,7 +52,7 @@ export class DoctorprofileviewComponent implements OnInit {
   answer: any = 4;
   a: any;
   col: any;
-  
+  doctor: any;
 
   constructor(public service: PatientserviceService,
     private route: ActivatedRoute,
@@ -71,17 +66,17 @@ export class DoctorprofileviewComponent implements OnInit {
     public dialogs: Dialogs,
     public loadingController: LoadingController,
     public alertController: AlertController,
-    private callNumber:CallNumber,
+    private callNumber: CallNumber,
     private emailComposer: EmailComposer,
     // private router:Router
   ) {
-    this.subscribe= this. plt.backButton.subscribeWithPriority(666666,()=>{
-      if (this.constructor.name =="DoctorprofileviewComponent"){
-        if(window.confirm("Do you want to exit")){
+    this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
+      if (this.constructor.name == "DoctorprofileviewComponent") {
+        if (window.confirm("Do you want to exit")) {
           navigator["app"].exitApp();
         }
       }
-    }) 
+    })
 
     this.network.onDisconnect().subscribe(() => {
       setTimeout(() => {
@@ -96,6 +91,9 @@ export class DoctorprofileviewComponent implements OnInit {
     this.menu.enable(true);
   }
   onClickone( id: any) {
+    this.service.docId().subscribe(data => {
+      this.doctor = JSON.parse(JSON.stringify(data)).doctor;
+    })
     this.answer=id;
     
     for(this.a = this.answer; this.a>= 1;this.a--) {
@@ -105,14 +103,17 @@ export class DoctorprofileviewComponent implements OnInit {
       
     }
   }
- 
- 
+
+
   ngOnInit() {
     // this.menu.enable(true, 'custom');
     this.appComponent.appPages;
     this.profileId = this.route.snapshot.paramMap.get('id');
     this.docId = this.route.snapshot.paramMap.get('id');
-    this.viewDoctorProfile(this.profileId);
+    this.service.docId().subscribe(data => {
+      this.id = JSON.parse(JSON.stringify(data)).doctor.user_id;
+      this.viewDoctorProfile(JSON.parse(JSON.stringify(data)).doctor.user_id);
+    });
     this.network.onConnect().subscribe(() => {
 
       this.handleButtonClick();
@@ -121,21 +122,21 @@ export class DoctorprofileviewComponent implements OnInit {
 
     });
     this.presentLoading();
-    
+
   }
-  callnumber(){
+  callnumber() {
     this.callNumber.callNumber(this.data, true)
       .then(res => console.log('Launched dialer!', res))
       .catch(err => console.log('Error launching dialer', err));
-    console.log("number",this.data);
+    console.log("number", this.data);
   }
 
   appointment(){
-    this.router.navigateByUrl('/patient/book/3');
+    this.router.navigateByUrl('/patient/book/'+this.id);
 
   }
-  emailcomposer(){
-    
+  emailcomposer() {
+
     let email = {
       to: 'janapsp1997@gmail.com',
       cc: 'santhiya.duskcoder@gmail.com',
@@ -184,8 +185,8 @@ export class DoctorprofileviewComponent implements OnInit {
     this.imgurl = "../../../assets/splash_screen.gif";
     const alert = await this.alertController.create({
       header: 'Network error ?',
-      message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">` ,
-   
+      message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
+
       cssClass: 'customalert',
 
       buttons: [{
@@ -215,10 +216,10 @@ export class DoctorprofileviewComponent implements OnInit {
       message: 'Loading...',
       duration: this.value,
       translucent: true,
-      
+
       backdropDismiss: true,
-      cssClass:'loadercustom'
-      
+      cssClass: 'loadercustom'
+
     });
     // Present the loading controller
 
@@ -227,7 +228,7 @@ export class DoctorprofileviewComponent implements OnInit {
       // this.networkError();
     } else {
       await this.loading.present();
-      this.viewDoctorProfile('3');
+      this.viewDoctorProfile(this.id);
       this.menu.enable(true);
     }
 
@@ -242,7 +243,7 @@ export class DoctorprofileviewComponent implements OnInit {
     setTimeout(() => {
       console.log('Async operation has ended');
       event.target.complete(() => {
-        
+
       });
     }, 2000);
   }
@@ -267,27 +268,28 @@ export class DoctorprofileviewComponent implements OnInit {
   async viewDoctorProfile(val) {
 
     let id = {
-      user_id: val
+      user_id: '41'
     }
 
     this.service.viewDoctorProfile(id).subscribe(async data => {
 
       this.editData = [JSON.parse(JSON.stringify(data)).data];
       this.data = this.editData[0].contact_number;
-      this.location=this.editData[0].location;
+      this.location=JSON.parse(this.editData[0].location);
+      console.log(this.location);
       // this.state=this.location;
-      this.locat = JSON.parse(this.location);
-      this.state=this.locat.state;
-      this.city = this.locat.city;
-      this.addressl1 = this.locat.addressl1;
-      this.addressl2 = this.locat.addressl2;
-      this.zip = this.locat.zip;
+      // this.locat = JSON.parse(this.location);
+      // this.state=this.locat.state;
+      // this.city = this.locat.city;
+      // this.addressl1 = this.locat.addressl1;
+      // this.addressl2 = this.locat.addressl2;
+      // this.zip = this.locat.zip;
 
       console.log("locat", this.locat);
-      console.log("city", this.city); 
-      console.log("state",this.state);
-      console.log("location",this.location);
-      console.log("number1",this.data);
+      console.log("city", this.city);
+      console.log("state", this.state);
+      console.log("location", this.location);
+      console.log("number1", this.data);
       await this.loading.dismiss();
     });
 
@@ -296,7 +298,7 @@ export class DoctorprofileviewComponent implements OnInit {
   approve() {
     // if (this.hideButton == true) {
     //   this.hideButton = true;
-    
+
     // }
     // this.message.alert("Congrats! Your account has been approved")
   }

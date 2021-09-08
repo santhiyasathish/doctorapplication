@@ -27,10 +27,10 @@ morningtime:any[];
      }
 
   ngOnInit() {
-    this.morningtime=this.service.morningtime;
-    this.afternoontime=this.service.afternoontime;
-    this.eveningtime=this.service.eveningtime;
-    this.doclist=this.service.doclist;
+    // this.morningtime=this.service.morningtime;
+    // this.afternoontime=this.service.afternoontime;
+    // this.eveningtime=this.service.eveningtime;
+    // this.doclist=this.service.doclist;
     this.docId = this.route.snapshot.paramMap.get('id');
     this.getAppointmentDetail(this.docId);                                                                           
     

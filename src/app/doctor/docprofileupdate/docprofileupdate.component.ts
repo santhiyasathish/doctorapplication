@@ -58,8 +58,8 @@ export class DocprofileupdateComponent implements OnInit {
           speciality: [this.getprofile.professional, Validators.required],
           experience: [this.getprofile.experience, Validators.required],
           address: this.formBuilder.group({
-            addressl1: [this.address.addressl1, Validators.required],
-            addressl2: [this.address.addressl2, Validators.required],
+            address1: [this.address.address1, Validators.required],
+            address2: [this.address.address2, Validators.required],
             city: [this.address.city, Validators.required],
             state: [this.address.state, Validators.required],
             zip: [this.address.zip, Validators.required]

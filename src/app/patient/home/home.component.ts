@@ -33,8 +33,7 @@ export class HomeComponent implements OnInit {
     console.log(this.userName);
    this.selectCatagory('all');
    this.doctorCatList();
-    this.slider=this.service.slider;
-    this.roundList=this.service.roundList;
+   
     
   }
   slidesOptions = {

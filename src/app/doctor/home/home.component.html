@@ -11,6 +11,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen] *ngFor="let data of editDatas">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-card class="first-content">
     <ion-card-content>
       <ion-item lines="none" class="ion-item-one">
@@ -25,10 +30,10 @@
           </ion-row>
           <ion-row class="second-row">
             <ion-col>
-              <ion-label>{{data.name}}</ion-label>
+              <ion-label>Dr. {{data.name}}</ion-label>
               <ion-label>{{data.qualification}}</ion-label>
               <ion-label>{{data.professional}}</ion-label>
-              <ion-label>specility</ion-label>
+              <ion-label>{{data.description}}</ion-label>
             </ion-col>
             <ion-ripple-effect></ion-ripple-effect>
           </ion-row>
@@ -41,15 +46,15 @@
               <ion-icon name="call"></ion-icon> +91 {{data.contact_number}}
             </ion-label>
             <ion-label>
-              <ion-icon name="mail"></ion-icon> janagan.duskcoder@gmail.com
+              <ion-icon name="mail"></ion-icon> {{data.email}}
             </ion-label>
           </ion-col>
           <ion-col class="col-two">
             <ion-label>
-              <ion-icon name="heart-circle"></ion-icon> 24-07-1997
+              <ion-icon name="heart-circle"></ion-icon> {{data.dob}}
             </ion-label>
             <ion-label>
-              <ion-icon name="location"></ion-icon> {{data.location}}.
+              <ion-icon name="location"></ion-icon> {{city}},{{state}}.
             </ion-label>
           </ion-col>
         </ion-row>
@@ -57,8 +62,8 @@
 
       <ion-item lines="none" class="ion-item-two" *ngFor="let data of dates">
         <ion-icon color="primary" name="calendar-outline"></ion-icon>
-        <ion-label>{{data.date}}</ion-label>
-        <ion-label slot="end"> Time: Live Time</ion-label>
+        <ion-label> {{date | date:'dd-MM-yyyy'}}</ion-label>
+        <ion-label slot="end"> Time: {{date | date:'h:mm a'}} </ion-label>
       </ion-item>
     </ion-card-content>
   </ion-card>
@@ -148,7 +153,7 @@
             <ion-card-content>
               <ion-text>Requested Notification</ion-text>
               <ion-text>
-                <h1>1</h1>
+                <h1>{{counts}}</h1>
               </ion-text>
             </ion-card-content>
             <ion-ripple-effect></ion-ripple-effect>
@@ -159,7 +164,7 @@
             <ion-card-content>
               <ion-text>Today Confirmation</ion-text>
               <ion-text>
-                <h1>1</h1>
+                <h1>{{comcount}}</h1>
               </ion-text>
             </ion-card-content>
             <ion-ripple-effect></ion-ripple-effect>
@@ -179,11 +184,11 @@
           <ion-icon name="pencil-sharp"></ion-icon>Edit
         </ion-button>
       </ion-item>
-      <ion-item lines="none">
+      <!-- <ion-item lines="none">
         <ion-label slot="start">Notification</ion-label>
         <ion-toggle slot="end" name="apple" color="secondary" checked></ion-toggle>
 
-      </ion-item>
+      </ion-item> -->
     </ion-card-content>
   </ion-card>
 </ion-content>

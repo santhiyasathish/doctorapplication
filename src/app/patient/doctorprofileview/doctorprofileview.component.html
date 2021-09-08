@@ -33,7 +33,7 @@
             <ion-label>{{data.name}}</ion-label>
             <ion-label>{{data.qualification}}</ion-label>
             <ion-label>{{data.professional}}</ion-label>
-            <ion-label>Description</ion-label>
+            <ion-label>{{data.description}}</ion-label>
             
               <ion-item lines="none">
           
@@ -68,7 +68,7 @@
       <ion-row>
         <ion-col>
           <ion-label>
-            <ion-icon name="mail"></ion-icon> janagan.dudkcoder@gmail.com
+            <ion-icon name="mail"></ion-icon> {{data.email}}
           </ion-label>
           <ion-label>
             <ion-icon name="call"></ion-icon> +91 {{data.contact_number}}
@@ -76,10 +76,10 @@
         </ion-col>
         <ion-col>
           <ion-label>
-            <ion-icon name="location"></ion-icon> {{state}}
+            <ion-icon name="location"></ion-icon> {{location.state}}
           </ion-label>
           <ion-label>
-            <ion-icon name="call"></ion-icon>Tel: 0413- 7654656
+            <ion-icon name="call"></ion-icon>{{data.emergency_contact}}
           </ion-label>
         </ion-col>
       </ion-row>
@@ -149,10 +149,10 @@
             <ion-label>
               <ion-col>
                 <ion-icon name="location"></ion-icon>
-                <ion-text> {{addressl1}},{{addressl2}},</ion-text>
+                <ion-text> {{location.address1}},{{location.address2}},</ion-text>
               </ion-col><br>
               <ion-col>
-                <ion-text>{{city}},{{state}},{{zip}}</ion-text>
+                <ion-text>{{location.city}},{{location.state}},{{location.zip}}</ion-text>
               </ion-col>
             </ion-label>
           </ion-col>

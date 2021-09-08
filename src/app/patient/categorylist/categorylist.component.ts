@@ -12,7 +12,7 @@ export class CategorylistComponent implements OnInit {
   constructor(private service: PatientserviceService) {}
 
   ngOnInit() {
-    this.slider = this.service.slider;
+
     this.doctorCatList();
   }
 
