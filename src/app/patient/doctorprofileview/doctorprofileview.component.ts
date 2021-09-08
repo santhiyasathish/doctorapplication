@@ -159,9 +159,10 @@ export class DoctorprofileviewComponent implements OnInit {
 
   async networkError() {
     await this.loading.dismiss();
+    this.imgurl = "../../../assets/error_network.gif";
     const alert = await this.alertController.create({
       header: 'Network error ?',
-      message: 'your boor net connection?',
+      message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
       cssClass: 'customalert',
 
       buttons: [{
@@ -183,7 +184,7 @@ export class DoctorprofileviewComponent implements OnInit {
 
   async handleButtonClick() {
     await this.loading.dismiss();
-    this.imgurl = "../../../assets/splash_screen.gif";
+    this.imgurl = "../../../assets/good_network.gif";
     const alert = await this.alertController.create({
       header: 'Network error ?',
       message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
