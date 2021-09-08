@@ -15,7 +15,7 @@ export class AppComponent{
     //patient
     { title: 'Home', url: 'patient/docprofile/3', icon: 'mail', type: 'patient' },
     { title: 'book appointment', url: 'patient/book/3', icon: 'paper-plane', type: 'patient' },
-    { title: 'Notification', url: 'patient/patnotification', ionc: 'paper-plane', type: 'patient'},
+    // { title: 'Notification', url: 'patient/patnotification', ionc: 'paper-plane', type: 'patient'},
     { title: 'Profile', url: 'patient/editprofile', icon: 'heart', type: 'patient' },
     //doctor
     { title: 'Dashboard', url: 'doctor/home', icon: 'mail', type: 'doctor' },
@@ -23,7 +23,8 @@ export class AppComponent{
     { title: 'Notification', url: 'doctor/docnotification', icon: 'paper-plane', type: 'doctor' },
     { title: 'Profile', url: 'doctor/docprofile', icon: 'paper-plane', type: 'doctor' },
     //guest
-    // { title: 'Book appointment', url: 'patient/docprofile/3', icon: 'mail', type: 'guest' },
+    
+    { title: 'Book appointment', url: 'patient/docprofile/3', icon: 'mail', type: 'guest' },
 
     { title: 'Logout', url: 'patient/docprofile/3', icon: 'mail', type: 'doctor' },
     { title: 'Logout', url: 'patient/docprofile/3', icon: 'mail', type: 'patient' },

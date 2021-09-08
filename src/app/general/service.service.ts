@@ -37,5 +37,7 @@ export class ServiceService {
   bookAppointment(data: any) {
     return this.http.post(this.api + 'bookappointment', data, this.httpOptions);
   }
-
+  guestUserApi(data: any) {
+    return this.http.post(this.api + 'guestuser', data, this.httpOptions);
+  }
 }
