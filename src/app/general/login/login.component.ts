@@ -73,10 +73,10 @@ export class LoginComponent implements OnInit {
         alertMessage = responseData.messages;
         localStorage.setItem('log', JSON.stringify(responseData.logData));
         if (JSON.parse(localStorage.getItem('log')).user_type == 'doctor') {
-          this.router.navigateByUrl('doctor/docprofileupdate');
+          this.router.navigateByUrl('doctor/home');
         }
         else if (JSON.parse(localStorage.getItem('log')).user_type == 'patient') {
-          this.router.navigateByUrl('patient/editprofile');
+          this.router.navigateByUrl('patient/docprofile/3');
         }
         else {
           this.router.navigateByUrl('patient/docprofile/3');
