@@ -196,10 +196,7 @@ export class BookappointmentComponent implements OnInit {
     // alert.present();
   }
   ngOnInit() {
-    this.morningtime = this.service.morningtime;
-    this.afternoontime = this.service.afternoontime;
-    this.eveningtime = this.service.eveningtime;
-    this.doclist = this.service.doclist;
+    
     // this.available=this.service.available;
     this.docId = this.route.snapshot.paramMap.get('id');
     this.durId = this.route.snapshot.paramMap.get('id');

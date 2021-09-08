@@ -44,8 +44,11 @@ export class DoctorserviceService {
   viewDoctorProfile (data: any){
     return this.http.post(this.api+'getdoctorprofile',data,this.httpOptions);
   }
-  getappointmentcount(){
-      
-      return this.http.get( this.api+'getappointmentcount',this.httpOptions)
-  } 
+  getAppointmentCount() {
+
+    return this.http.get(this.api + 'getappointmentcount', this.httpOptions);
+  }
+  approvedListindoctorcount(data: any) {
+    return this.http.post(this.api + 'approvedListindoctorcount', data, this.httpOptions);
+  }
 }

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorserviceService } from '../doctorservice.service';
+import { LoadingController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { Network } from '@ionic-native/network/ngx';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-docnotification',
@@ -9,38 +13,124 @@ import { DoctorserviceService } from '../doctorservice.service';
 export class DocnotificationComponent implements OnInit {
 
   message: any[];
-  announcement = [
-    {
-      id: 1,
-      name: "janagan J",
-      time: "Dec 15, 2021 11:45 AM",
-      session: "evening",
-      announcementDetails:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, ."
-    },
-    {
-      id: 2,
-      name: "Veera mani kandan",
-      time: "Dec 15, 2021 11:45 AM",
-      session: "morning",
-      announcementDetails:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,."
-    }
-  ];
+  value: 3000;
+  loading: any;
+  imgurl: any;
+  // announcement = [
+  //   {
+  //     id: 1,
+  //     name: "janagan J",
+  //     time: "Dec 15, 2021 11:45 AM",
+  //     session: "evening",
+  //     announcementDetails:
+  //       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, ."
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Veera mani kandan",
+  //     time: "Dec 15, 2021 11:45 AM",
+  //     session: "morning",
+  //     announcementDetails:
+  //       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,."
+  //   }
+  // ];
   // count: any;
   // private tutorialHidden: boolean = true;
-  constructor(public service: DoctorserviceService) {
+  constructor(public service: DoctorserviceService,
+    public loadingController: LoadingController,
+    public alertController: AlertController,
+    private network: Network,
+    private plt: Platform,
+  ) {
 
-    this.announcement = this.announcement.map(item => ({
-      ...item,
-      showMore: false,
-    }));
+    this.network.onDisconnect().subscribe(() => {
+      setTimeout(() => {
+        this.networkError();
+      }, 2000);
+    });
+
+    this.plt.ready().then((rdy) => {
+
+    });
+
+    // this.announcement = this.announcement.map(item => ({
+    //   ...item,
+    //   showMore: false,
+    // }));
   }
 
   ngOnInit() {
+    this.presentLoading();
 
-    this.pendingList();
     // this.appointmentcount();
+  }
+  async handleButtonClick() {
+    await this.loading.dismiss();
+    this.imgurl = "../../../assets/splash_screen.gif";
+    const alert = await this.alertController.create({
+      header: 'Network error ?',
+      message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
+
+      cssClass: 'customalert',
+
+      buttons: [{
+        text: 'ok',
+        role: 'ok',
+        handler: data => {
+          console.log('ok clicked', data);
+          this.presentLoading();
+
+        }
+      }
+      ]
+    },
+    );
+
+    await alert.present();
+  }
+  async networkError() {
+    await this.loading.dismiss();
+    const alert = await this.alertController.create({
+      header: 'Network error ?',
+      message: 'your boor net connection?',
+      cssClass: 'customalert',
+
+      buttons: [{
+        text: 'ok',
+        role: 'ok',
+        handler: data => {
+          console.log('ok clicked', data);
+          this.presentLoading();
+
+        }
+      }
+      ]
+    },
+    );
+
+    await alert.present();
+  }
+  async presentLoading() {
+    // Prepare a loading controller
+    this.loading = await this.loadingController.create({
+      message: 'Loading...',
+      duration: this.value,
+      translucent: true,
+
+      backdropDismiss: true,
+      cssClass: 'loadercustom'
+
+    });
+    // Present the loading controller
+
+    if (this.value == 3000) {
+      await this.loading.present();
+      // this.networkError();
+    } else {
+      await this.loading.present();
+      this.pendingList()
+    }
+    // this.getappointmentAvailability();
   }
 
   trimString(string, length) {
@@ -71,14 +161,15 @@ export class DocnotificationComponent implements OnInit {
   //   })
   // }
 
-  approve(id, status){
-    let postData={
+  approve(id, status) {
+    let postData = {
       id: id,
       approvestatus: status
     }
-    this.service.approveApiCall(postData).subscribe(data =>{
+    this.service.approveApiCall(postData).subscribe(data => {
       console.log(data);
       this.pendingList();
-    })
+      this.presentLoading();
+    });
   }
 }
