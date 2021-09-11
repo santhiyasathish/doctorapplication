@@ -13,6 +13,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-guest',
@@ -32,13 +33,24 @@ export class GuestComponent implements OnInit {
   docId: string;
   gForm: FormGroup;
   guestData: any;
+  subscribe: any;
   constructor(
     private router: Router,
     private service:ServiceService,
     private alertCtrl: AlertController,
     private route: ActivatedRoute,
     private loadingController: LoadingController,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private platform:Platform,) {
+
+    this.subscribe = this.platform.backButton.subscribeWithPriority(666666, () => {
+      if (this.constructor.name == "GuestComponent") {
+        if (window.confirm("Do you want to exit")) {
+          navigator["app"].exitApp();
+        }
+      }
+    });
+     }
 
   ngOnInit() {
     this.docId = this.route.snapshot.paramMap.get('id');

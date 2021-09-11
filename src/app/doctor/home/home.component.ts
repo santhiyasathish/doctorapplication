@@ -18,15 +18,15 @@ import { Platform } from '@ionic/angular';
 })
 export class HomeComponent implements OnInit {
 
-  
-  dates=[
+
+  dates = [
     {
-      date:'20-08-2021',
-      time:'10:20 AM'
+      date: '20-08-2021',
+      time: '10:20 AM'
     }
   ];
   editDatas: any;
-  
+
   counts: any;
   comcount: any;
   location: any;
@@ -40,51 +40,60 @@ export class HomeComponent implements OnInit {
   time: any;
   da: string;
   currDate: any;
-  myDate= Date();
+  myDate = Date();
   value: 3000;
   loading: any;
   imgurl: any;
+  subscribe: any;
 
-constructor(private service:DoctorserviceService, 
-  public datePipe: DatePipe,
-  public loadingController: LoadingController,
-  public alertController: AlertController,
-  private network: Network,
-  private plt: Platform,
-  private menu: MenuController,
-  
-  
+  constructor(private service: DoctorserviceService,
+    public datePipe: DatePipe,
+    public loadingController: LoadingController,
+    public alertController: AlertController,
+    private network: Network,
+    private plt: Platform,
+    private menu: MenuController,
+
+
   ) {
 
-  this.network.onDisconnect().subscribe(() => {
-    setTimeout(() => {
-      this.networkError();
-    }, 2000);
-  });
+    this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
+      if (this.constructor.name == "HomeComponent") {
+        if (window.confirm("Do you want to exit")) {
+          navigator["app"].exitApp();
+        }
+      }
+    });
 
-  this.plt.ready().then((rdy) => {
+    this.network.onDisconnect().subscribe(() => {
+      setTimeout(() => {
+        this.networkError();
+      }, 2000);
+    });
 
-  });
+    this.plt.ready().then((rdy) => {
 
-  this.menu.enable(true);
+    });
 
-
- this.currDate= new Date();
-  this.date=new Date().getTime();
-  console.log("Current Date ", this.currDate);
-  console.log("ccdate",this.myDate);
-  // console.log("Current Date ", datess);
-  // console.log('date', this.myDate);
- 
-
+    this.menu.enable(true);
 
 
-  console.log("dateee", this.da);
+    this.currDate = new Date();
+    this.date = new Date().getTime();
+    console.log("Current Date ", this.currDate);
+    console.log("ccdate", this.myDate);
+    // console.log("Current Date ", datess);
+    // console.log('date', this.myDate);
+
+
+
+
+    console.log("dateee", this.da);
 
   }
   ngOnInit() {
     this.presentLoading();
-    
+
   }
   async handleButtonClick() {
     await this.loading.dismiss();
@@ -158,6 +167,7 @@ constructor(private service:DoctorserviceService,
 
     if (this.value == 3000) {
       await this.loading.present();
+      
       // this.networkError();
     } else {
       await this.loading.present();
@@ -168,15 +178,17 @@ constructor(private service:DoctorserviceService,
     }
 
 
-
+    
+    
+    
     // this.getappointmentAvailability();
   }
- 
+
   getdoctorprofile() {
     let id = {
       user_id: JSON.parse(localStorage.getItem('log')).id
     }
-    this.service.viewDoctorProfile(id).subscribe(data => {
+    this.service.viewDoctorProfile(id).subscribe(async data => {
       this.editDatas = [JSON.parse(JSON.stringify(data)).data];
       this.location = this.editDatas[0].location;
       // this.state=this.location;
@@ -187,22 +199,23 @@ constructor(private service:DoctorserviceService,
       this.addressl2 = this.locat.addressl2;
       this.zip = this.locat.zip;
       console.log(this.editDatas);
-    })
-  }
-  getAppointmentCount(){
-    this.service.getAppointmentCount().subscribe(data => {
-      this.counts= JSON.parse(JSON.stringify(data)).count;
-      console.log("count",this.counts);
+      await this.loading.dismiss();
     });
   }
-  approvedListindoctorcount(){
+  getAppointmentCount() {
+    this.service.getAppointmentCount().subscribe(data => {
+      this.counts = JSON.parse(JSON.stringify(data)).count;
+      console.log("count", this.counts);
+    });
+  }
+  approvedListindoctorcount() {
     this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
-    console.log("dta",this.myDate);
-    let cdata={
+    console.log("dta", this.myDate);
+    let cdata = {
       date: this.myDate
     }
-    this.service.approvedListindoctorcount(cdata).subscribe(data=>{
-      this.comcount= JSON.parse(JSON.stringify(data)).count;
+    this.service.approvedListindoctorcount(cdata).subscribe(data => {
+      this.comcount = JSON.parse(JSON.stringify(data)).count;
     })
   }
 }

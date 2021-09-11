@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientserviceService } from '../patientservice.service'; 
 import { DatePipe } from '@angular/common';
+import { Platform } from '@ionic/angular';
 
 
 @Component({
@@ -41,9 +42,18 @@ export class PatnotificationComponent implements OnInit {
   sample: string;
   listData: any;
   avalListData: any;
-  constructor(private service:PatientserviceService,private datePipe: DatePipe) { 
+  subscribe: any;
+  constructor(private service:PatientserviceService,
+    private datePipe: DatePipe,
+    private platform:Platform,
+    ) { 
 
-   
+    this.subscribe = this.platform.backButton.subscribeWithPriority(666666, () => {
+      if (this.constructor.name == "PatnotificationComponent") {
+        window.location.href = "patient/docprofile/3";
+        // this.back();
+      }
+    });
 
     
     console.log('date',this.myDate);
