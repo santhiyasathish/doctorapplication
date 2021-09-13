@@ -60,6 +60,7 @@ morningtime:any[];
     this.service.appointmentDetail(passData).subscribe(data=>{
       this.docDetail = JSON.parse(JSON.stringify(data)).data;
       console.log(data);
-    })
+      
+    });
   }
 }

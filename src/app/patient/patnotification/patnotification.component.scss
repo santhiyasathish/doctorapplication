@@ -9,9 +9,12 @@
     height: auto;
 }
 ion-content {
+    background: aliceblue;
+    --background:none;
     ion-card {
         border-radius: 20px;
         ion-card-header {
+            text-align: left;
             ion-row {
                 ion-col {
                     ion-text {

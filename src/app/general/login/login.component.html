@@ -5,12 +5,12 @@
       <ion-card-content>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <ion-item>
-            <ion-label position="floating">UserName</ion-label>
+            <ion-label position="floating">Mobile No.</ion-label>
             <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"></ion-input>
           </ion-item>
           <div *ngIf="submitted && f.username.errors" class="error-message">
             <div *ngIf="f.username.errors.required">
-              <ion-icon name="alert-circle-outline"></ion-icon> UserName is required
+              <ion-icon name="alert-circle-outline"></ion-icon> Mobile No. is required
             </div>
           </div>
           <ion-item>

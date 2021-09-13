@@ -6,6 +6,14 @@ import { LoadingController } from '@ionic/angular';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import {
+  AbstractControl,
+  FormControl,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-guest',
@@ -23,20 +31,36 @@ export class GuestComponent implements OnInit {
   samu: any[];
   loading: any;
   docId: string;
-
-
+  gForm: FormGroup;
+  guestData: any;
+  subscribe: any;
   constructor(
     private router: Router,
     private service:ServiceService,
     private alertCtrl: AlertController,
     private route: ActivatedRoute,
-    private loadingController: LoadingController) { }
+    private loadingController: LoadingController,
+    private formBuilder: FormBuilder,
+    private platform:Platform,) {
+
+    this.subscribe = this.platform.backButton.subscribeWithPriority(666666, () => {
+      if (this.constructor.name == "GuestComponent") {
+        if (window.confirm("Do you want to exit")) {
+          navigator["app"].exitApp();
+        }
+      }
+    });
+     }
 
   ngOnInit() {
     this.docId = this.route.snapshot.paramMap.get('id');
     this.getAppointmentDetail(this.docId);
     this.presentLoading();
-
+    this.gForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      contact_number: ['', Validators.required],
+      location: ['', Validators.required]
+    });
   }
   slidesOptions = {
     slidesPerView: 2.5
@@ -94,9 +118,9 @@ export class GuestComponent implements OnInit {
       app_id: id,
       date: this.sam,
       reason: reson,
-      user_id: JSON.parse(localStorage.getItem('log')).id,
+      user_id: this.guestData.data.id,
       status: 'true',
-      approvestatus: 'pending'
+      approvestatus: 'accept'
     };
     console.log(appointment);
     this.service.bookAppointment(appointment).subscribe(data => {
@@ -179,5 +203,14 @@ export class GuestComponent implements OnInit {
     await alert.present();
     const result = await alert.onDidDismiss();
     console.log(alert);
+  }
+
+  onGuest(){
+    console.log(this.gForm.value);
+    this.service.guestUserApi(this.gForm.value).subscribe(data =>{
+      console.log(data);
+      this.guestData = JSON.parse(JSON.stringify(data));
+      alert('Guest Added Successfully');
+    })
   }
 }

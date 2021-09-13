@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PatientserviceService } from '../patientservice.service';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
-import { AlertController, MenuController, Platform } from '@ionic/angular';
+import { AlertController,  Platform } from '@ionic/angular';
 import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
 import { Network } from '@ionic-native/network/ngx';
@@ -11,6 +11,7 @@ import { LoadingController } from '@ionic/angular';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
+
 
 // import { Events } from '@ionic/angular'
 import Swal from 'sweetalert2/dist/sweetalert2.js';
@@ -56,7 +57,7 @@ export class DoctorprofileviewComponent implements OnInit {
 
   constructor(public service: PatientserviceService,
     private route: ActivatedRoute,
-    private menu: MenuController,
+    // private menu: MenuController,
     private network: Network,
     private router: Router,
     // private localNotification:LocalNotifications,
@@ -70,13 +71,14 @@ export class DoctorprofileviewComponent implements OnInit {
     private emailComposer: EmailComposer,
     // private router:Router
   ) {
+    
     this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
       if (this.constructor.name == "DoctorprofileviewComponent") {
         if (window.confirm("Do you want to exit")) {
           navigator["app"].exitApp();
         }
       }
-    })
+    });
 
     this.network.onDisconnect().subscribe(() => {
       setTimeout(() => {
@@ -88,7 +90,7 @@ export class DoctorprofileviewComponent implements OnInit {
 
     });
 
-    this.menu.enable(true);
+    // this.menu.enable(true);
   }
   onClickone( id: any) {
     this.service.docId().subscribe(data => {
@@ -158,9 +160,10 @@ export class DoctorprofileviewComponent implements OnInit {
 
   async networkError() {
     await this.loading.dismiss();
+    this.imgurl = "../../../assets/error_network.gif";
     const alert = await this.alertController.create({
       header: 'Network error ?',
-      message: 'your boor net connection?',
+      message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
       cssClass: 'customalert',
 
       buttons: [{
@@ -182,7 +185,7 @@ export class DoctorprofileviewComponent implements OnInit {
 
   async handleButtonClick() {
     await this.loading.dismiss();
-    this.imgurl = "../../../assets/splash_screen.gif";
+    this.imgurl = "../../../assets/good_network.gif";
     const alert = await this.alertController.create({
       header: 'Network error ?',
       message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
@@ -229,7 +232,7 @@ export class DoctorprofileviewComponent implements OnInit {
     } else {
       await this.loading.present();
       this.viewDoctorProfile(this.id);
-      this.menu.enable(true);
+      // this.menu.enable(true);
     }
 
 
@@ -290,10 +293,15 @@ export class DoctorprofileviewComponent implements OnInit {
       console.log("state", this.state);
       console.log("location", this.location);
       console.log("number1", this.data);
+      
       await this.loading.dismiss();
+      // this.menu.enable(true);
     });
 
   }
+  cancel(){
+   
+   }
 
   approve() {
     // if (this.hideButton == true) {

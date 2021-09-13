@@ -39,6 +39,7 @@ export class AppointmentlistComponent implements OnInit {
   value: 3000;
   loading: any;
   imgurl: any;
+  subscribe: any;
 
 
   constructor(private service: DoctorserviceService,
@@ -49,7 +50,14 @@ export class AppointmentlistComponent implements OnInit {
     private plt: Platform,
   ) {
 
+    
 
+    this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
+      if (this.constructor.name == "AppointmentlistComponent") {
+        window.location.href = "doctor/home";
+        // this.back();
+      }
+    });
     this.network.onDisconnect().subscribe(() => {
       setTimeout(() => {
         this.networkError();
@@ -163,11 +171,12 @@ export class AppointmentlistComponent implements OnInit {
       date: this.myDate,
 
     }
-    this.service.approvedListInDoctor(approvedata).subscribe(data => {
+    this.service.approvedListInDoctor(approvedata).subscribe(async data => {
       console.log("data", data);
       this.message = JSON.parse(JSON.stringify(data)).message;
       console.log("message", this.message);
+      await this.loading.dismiss();
 
-    })
+    });
   }
 }

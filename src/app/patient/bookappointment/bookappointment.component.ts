@@ -2,15 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { PatientserviceService } from '../patientservice.service';
 import { Platform } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, UrlTree } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { LoadingController } from '@ionic/angular';
+
 // import * as moment from 'moment';
 import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { dismiss } from '@ionic/core/dist/types/utils/overlays';
+import { DocprofileupdateComponent } from 'src/app/doctor/docprofileupdate/docprofileupdate.component';
 
 // import { DatePipe } from '@angular/common';
 
@@ -64,6 +66,7 @@ export class BookappointmentComponent implements OnInit {
   bcount: any;
   scount: any;
   tscount: number;
+  subscribe: any;
 
 
   constructor(
@@ -76,9 +79,17 @@ export class BookappointmentComponent implements OnInit {
     private appComponents: AppComponent,
     private loadingController: LoadingController,
     private localNotifications: LocalNotifications,
+
     // private datePipe: DatePipe
   ) {
 
+
+    this.subscribe = this.platform.backButton.subscribeWithPriority(666666, () => {
+      if (this.constructor.name == "BookappointmentComponent") {
+        window.location.href="patient/docprofile/3";
+        // this.back();
+      }
+    });
     // this.notifyTime = moment(new Date()).format();
     this.chosenHours = new Date().getHours();
     this.chosenMinutes = new Date().getMinutes();
@@ -91,9 +102,13 @@ export class BookappointmentComponent implements OnInit {
       { title: 'Saturday', dayCode: 6, checked: false },
       { title: 'Sunday', dayCode: 0, checked: false }
     ];
-    this.isAndroid = platform.is('android');
+    // this.isAndroid = platform.is('android');
   }
   ionViewDidLoad() {
+  }
+  back() {
+      // this.router.navigate('patient/docprofile/3');
+      this.router.navigateByUrl('patient/docprofile/3');
   }
   timeChange(time) {
     this.chosenHours = time.hour.value;
@@ -196,11 +211,11 @@ export class BookappointmentComponent implements OnInit {
     // alert.present();
   }
   ngOnInit() {
-    
+
     // this.available=this.service.available;
     this.docId = this.route.snapshot.paramMap.get('id');
     this.durId = this.route.snapshot.paramMap.get('id');
-    
+
     // this.getappointmentAvailability();
     // this.getapplication();  
     this.getAppointmentDetail(this.docId);
@@ -249,9 +264,9 @@ export class BookappointmentComponent implements OnInit {
     }
     this.service.appointmentAvailability(avalabledata).subscribe(async data => {
       this.available = JSON.parse(JSON.stringify(data)).data;
-      
+
       this.getList('0');
-      console.log("bcount",this.bcount);
+      console.log("bcount", this.bcount);
       //  this.getlista('0');
 
       await this.loading.dismiss();
@@ -260,7 +275,7 @@ export class BookappointmentComponent implements OnInit {
   }
 
   getList(i) {
-    console.log("first data",i);
+    console.log("first data", i);
     this.list = this.available[i].list;
     this.sam = this.available[i].date;
     // this.bcount = this.available[i].bookedCount;
@@ -280,12 +295,12 @@ export class BookappointmentComponent implements OnInit {
     }
     this.service.appointmentDetail(passData).subscribe(data => {
       this.docDetail = JSON.parse(JSON.stringify(data));
-      console.log("details",data);
-    })
+      console.log("details", data);
+    });
   }
-  back(){
-    this.router.navigateByUrl('/login');
-  }
+  // back(){
+  //   this.router.navigateByUrl('/login');
+  // }
   showAlert() {
 
     this.alertCtrl.create({

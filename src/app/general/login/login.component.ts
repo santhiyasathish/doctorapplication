@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('patient/docprofile/3');
         }
         else {
-          this.router.navigateByUrl('patient/docprofile/3');
+          this.router.navigateByUrl('general/guest');
         }
       }
       else{

@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
         ]
       ],
       cpassword: ['', Validators.required],
-      usertype: ['', Validators.required],
+      // usertype: ['', Validators.required],
       gender: ['', Validators.required],
       dob: ['', Validators.required]
 
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
       // email: this.registerForm.value.email,
       mobile: this.registerForm.value.mobile,
       username: this.registerForm.value.username,
-      usertype: this.registerForm.value.usertype,
+      usertype: 'patient',
       password: this.registerForm.value.password,
       gender: this.registerForm.value.gender,
       dob: this.registerForm.value.dob.split('T')[0],

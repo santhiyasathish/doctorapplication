@@ -16,6 +16,7 @@ export class DocnotificationComponent implements OnInit {
   value: 3000;
   loading: any;
   imgurl: any;
+  subscribe: any;
   // announcement = [
   //   {
   //     id: 1,
@@ -42,6 +43,12 @@ export class DocnotificationComponent implements OnInit {
     private network: Network,
     private plt: Platform,
   ) {
+    this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
+      if (this.constructor.name == "DocnotificationComponent") {
+        window.location.href = "doctor/home";
+        // this.back();
+      }
+    });
 
     this.network.onDisconnect().subscribe(() => {
       setTimeout(() => {
@@ -145,13 +152,14 @@ export class DocnotificationComponent implements OnInit {
       approvestatus: "pending",
 
     }
-    this.service.doctorNotification(pending).subscribe(data => {
+    this.service.doctorNotification(pending).subscribe(async data => {
       console.log("data", data);
       this.message = JSON.parse(JSON.stringify(data)).message;
       // this.getList('0');
       //  this.getlista('0');
       console.log("availabledata", this.message);
-    })
+      await this.loading.dismiss();
+    });
   }
 
   // appointmentcount(){

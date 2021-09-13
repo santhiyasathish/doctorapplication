@@ -13,6 +13,11 @@ import { ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { PatientserviceService } from '../patientservice.service';
+import { LoadingController } from '@ionic/angular';
+import { Network } from '@ionic-native/network/ngx';
+import { Platform } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
+
 @Component({
   selector: 'app-editprofile',
   templateUrl: './editprofile.component.html',
@@ -30,7 +35,12 @@ export class EditprofileComponent implements OnInit {
   buttontype = 'add';
   imgURL: any;
 
-  images="";
+  images = "";
+  value: 3000;
+  loading: any;
+  imgurl: any;
+  subscribe: any;
+  // backHidden: boolean=true;
 
   // croppedImagepath = "";
   // isLoading = true;
@@ -45,16 +55,42 @@ export class EditprofileComponent implements OnInit {
     private service: PatientserviceService,
     private alertCtrl: AlertController,
     // public camera:CameraResultType,
-    
-    private router:Router,
+    private router: Router,
     public actionSheetController: ActionSheetController,
-    private file: File) { }
+    private file: File,
+    public loadingController: LoadingController,
+    private network: Network,
+    private plt: Platform,
+    private menu: MenuController,
+  ) {
+    
+    menu.enable(false);
+
+    this.network.onDisconnect().subscribe(() => {
+      setTimeout(() => {
+        this.networkError();
+      }, 2000);
+    });
+
+    this.plt.ready().then((rdy) => {
+
+    });
+
+    this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
+      if (this.constructor.name == "EditprofileComponent") {
+        window.location.href = "patient/docprofile/3";
+        // this.back();
+      }
+    });
+
+  }
   ngOnInit() {
+    this.presentLoading();
 
     let id = {
       'user_id': JSON.parse(localStorage.getItem('log')).id
     };
-    this.service.getpatientprofile(id).subscribe(data => {
+    this.service.getpatientprofile(id).subscribe(async data => {
       this.getprofile = JSON.parse(JSON.stringify(data)).data;
       if (JSON.parse(JSON.stringify(data)).success == true) {
         this.buttontype = 'edit';
@@ -73,6 +109,7 @@ export class EditprofileComponent implements OnInit {
           econtact: ['', Validators.required],
           location: [this.getprofile.location, Validators.required],
         });
+        await this.loading.dismiss();
       }
       else {
         this.buttontype = 'add';
@@ -97,14 +134,84 @@ export class EditprofileComponent implements OnInit {
     })
 
   }
+
+  async handleButtonClick() {
+    await this.loading.dismiss();
+    this.imgurl = "../../../assets/splash_screen.gif";
+    const alert = await this.alertCtrl.create({
+      header: 'Network error ?',
+      message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
+
+      cssClass: 'customalert',
+
+      buttons: [{
+        text: 'ok',
+        role: 'ok',
+        handler: data => {
+          console.log('ok clicked', data);
+          this.presentLoading();
+
+        }
+      }
+      ]
+    },
+    );
+
+    await alert.present();
+  }
+  async networkError() {
+    await this.loading.dismiss();
+    const alert = await this.alertCtrl.create({
+      header: 'Network error ?',
+      message: 'your boor net connection?',
+      cssClass: 'customalert',
+
+      buttons: [{
+        text: 'ok',
+        role: 'ok',
+        handler: data => {
+          console.log('ok clicked', data);
+          this.presentLoading();
+
+        }
+      }
+      ]
+    },
+    );
+
+    await alert.present();
+  }
+  async presentLoading() {
+    // Prepare a loading controller
+    this.loading = await this.loadingController.create({
+      message: 'Loading...',
+      duration: this.value,
+      translucent: true,
+
+      backdropDismiss: true,
+      cssClass: 'loadercustom'
+
+    });
+    // Present the loading controller
+
+    if (this.value == 3000) {
+      await this.loading.present();
+      // this.networkError();
+    } else {
+      await this.loading.present();
+
+
+    }
+
+
+
+    // this.getappointmentAvailability();
+  }
   get f(): {
     [key: string]: AbstractControl
   } {
     return this.editForm.controls;
   }
-
-
-
   // pickImage(sourceType) {
   //   this.file.checkDir(this.file.dataDirectory, 'mydir')
   //     .then(_ =>
@@ -159,36 +266,22 @@ export class EditprofileComponent implements OnInit {
     // }
     // Camera.getPhoto({options).then((result)=>{
     //   this.images=(result.dataUrl);
-      
+
     // },(err)=>{
     //   this.router.navigate(['/patient/editprofile']);
     //   alert(JSON.stringify(err));
     // })
     Camera.getPhoto({
       quality: 100,
-    width: 100,
-    height:100,
-    source:CameraSource.Photos,
+      width: 100,
+      height: 100,
+      source: CameraSource.Photos,
       resultType: CameraResultType.DataUrl,
-    }).then((result)=>{
+    }).then((result) => {
       this.images = (result.dataUrl);
-    },(err)=>{
-      
-    })
-    // this.camera.getPicture({
-    //   quality:100,
-    //   sourceType: this.camera.PictureSourceType.CAMERA,
-    //   destinationType: this.camera.DestinationType.DATA_URL,
-    //   encodingType: this.camera.EncodingType.JPEG,
-    //   mediaType: this.camera.MediaType.PICTURE,
+    }, (err) => {
 
-    // }).then((res)=>{
-    //   this.imgURL = 'data:image/jpeg;base64,'+ res;
-    //   alert(this.imgURL);
-
-    // }).catch(e=>{
-    //   alert(e);
-    // })
+    });
   }
 
   onSubmit() {
@@ -220,19 +313,21 @@ export class EditprofileComponent implements OnInit {
 
     if (this.buttontype == 'add') {
 
-      this.service.patientprofile(data).subscribe(data => {
+      this.service.patientprofile(data).subscribe(async data => {
         this.detail = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.detail.messages);
         console.log(data);
+        await this.loading.dismiss();
       });
 
     }
     else {
-      this.service.patinetprofileedit(data).subscribe(data => {
+      this.service.patinetprofileedit(data).subscribe(async data => {
         this.profileedit = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.profileedit.messages);
         this.router.navigateByUrl('patient/docprofile/3');
         console.log(data);
+        await this.loading.dismiss();
       })
 
 
@@ -245,13 +340,13 @@ export class EditprofileComponent implements OnInit {
 
   async failedAlert(msg) {
     let alert = await this.alertCtrl.create({
-      message:msg,
+      message: msg,
       buttons: [
         {
           text: 'ok',
-        }                                                 
+        }
       ]
     });
-      alert.present();
-    }
+    alert.present();
+  }
 }
