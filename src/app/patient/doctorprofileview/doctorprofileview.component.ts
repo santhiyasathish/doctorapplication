@@ -54,6 +54,9 @@ export class DoctorprofileviewComponent implements OnInit {
   a: any;
   col: any;
   doctor: any;
+  pending: any;
+  myDate = Date();
+  apontid :any;
 
   constructor(public service: PatientserviceService,
     private route: ActivatedRoute,
@@ -69,6 +72,8 @@ export class DoctorprofileviewComponent implements OnInit {
     public alertController: AlertController,
     private callNumber: CallNumber,
     private emailComposer: EmailComposer,
+    private datePipe: DatePipe,
+
     // private starRating: StarRatingModule,
     // public evens:Events,
   ) {
@@ -233,6 +238,8 @@ export class DoctorprofileviewComponent implements OnInit {
     } else {
       await this.loading.present();
       this.viewDoctorProfile(this.id);
+      this.doctorNotification();
+      // this.cancelAppointment();
       // this.menu.enable(true);
     }
 
@@ -300,8 +307,64 @@ export class DoctorprofileviewComponent implements OnInit {
     });
 
   }
+  async conform() {
+    const alert = await this.alertController.create({
+
+      subHeader: 'Booking',
+      message: 'Do you want to booking your Appointment',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'OK',
+          handler: async data => {
+            
+            this.cancelAppointment();
+            
+            
+          }
+        }
+
+      ]
+    });
+    await alert.present();
+  
+    console.log(alert);
+  }
+    cancelAppointment(){
+    // this.presentLoading();
+      let candata={
+        user_id: JSON.parse(localStorage.getItem('log')).id ,
+        appointmentid: this.apontid
+      }
+      console.log("cancel",candata);
+      this.service.cancelAppointment(candata).subscribe( data=>{
+        window.location.href = 'patient/docprofile/3'
+        
+      });
+    }
   cancel(){
-   
+    
+    this.conform();
+   }
+   doctorNotification(){
+     this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
+    console.log("dta", this.myDate);
+     let penData={
+       approvestatus:'pending',
+      //  date:this.myDate
+     }
+     this.service.doctorNotification(penData).subscribe(data=>{
+       this.pending = JSON.parse(JSON.stringify(data)).message;
+       this.apontid = this.pending[0].appointmentid;
+       console.log("appointid",this.apontid);
+       console.log("penlist",this.pending);
+     });
    }
 
   approve() {

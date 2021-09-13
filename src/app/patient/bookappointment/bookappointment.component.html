@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content>
+  <!-- <ion-chip outline-color="success" (click)="truthClick()" [disabled]="disableButton">ssaasdf</ion-chip> -->
   <!-- <ion-item-group>
     <ion-item>
       <ion-row>
@@ -60,7 +61,7 @@
     </ion-item>
     <ion-row>
       <ion-col *ngFor="let data of li.availableList" size="4">
-        <ion-chip (click)="conform(data.id)" disabled="{{ data.status }}" outline color="success">
+        <ion-chip *ngIf="test(data.time)" (click)="conform(data.id)" disabled="{{ data.status }}" outline color="success">
           <ion-label>{{data.time }}</ion-label>
         </ion-chip>
       </ion-col>
