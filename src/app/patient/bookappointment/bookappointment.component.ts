@@ -67,6 +67,13 @@ export class BookappointmentComponent implements OnInit {
   scount: any;
   tscount: number;
   subscribe: any;
+  disableButton: boolean = false;
+  date : Number;
+  datas= Date();
+  sentTempTime: string;
+  sentTime: any;
+  formatTime: any;
+  time: any;
 
 
   constructor(
@@ -82,7 +89,34 @@ export class BookappointmentComponent implements OnInit {
 
     // private datePipe: DatePipe
   ) {
+    
+    // console.log("sample");
+    // if()
+    const datea = new Date('13-09-2021');
+    console.log("dtata", datea);
+    const date = new Date().getTime();
+    const datas = new Date(date * 1000);
+    const hours = datea.getHours();
+    const minutes = datea.getMinutes();
 
+    // const minutesf = minutes[1]; //11
+    // const ampm = hours[1] >= 12 ? 'AM' : 'PM'; //22 >=12 yes == pm
+    // const hoursf = hours[1] >= 12 ? hours[1] - 12 : hours[1]; //22 >= 12 ? 22-12=10 
+    var strTime = hours + ':' + minutes ;
+    const dateObject = new Date();
+    const dateString = dateObject.toLocaleTimeString();
+    const dam = dateString.split(' ');
+    const cont = dateString.split(':');
+    const h= cont[0];
+    const m= cont[1];
+    const ampm=dam[1];
+    this.time= h+":"+m;
+   
+    console.log('formate', strTime);
+    console.log('formatem', dam);
+    console.log('cont', h +":"+ m +":"+ ampm, dateString);
+    // return strTime;
+  
 
     this.subscribe = this.platform.backButton.subscribeWithPriority(666666, () => {
       if (this.constructor.name == "BookappointmentComponent") {
@@ -106,6 +140,11 @@ export class BookappointmentComponent implements OnInit {
   }
   ionViewDidLoad() {
   }
+  
+   
+  // truthClick() { 
+  //   this.disableButton = true; 
+  // }
   back() {
       // this.router.navigate('patient/docprofile/3');
       this.router.navigateByUrl('patient/docprofile/3');
@@ -242,6 +281,7 @@ export class BookappointmentComponent implements OnInit {
       if (this.appoint == true) {
         this.showAlert();
       }
+      
       console.log("appointment", this.appoint);
     })
   }
@@ -312,7 +352,7 @@ export class BookappointmentComponent implements OnInit {
 
       res.present();
       this.seduleBasic();
-      this.router.navigateByUrl('/patient/docprofile/3');
+      window.location.href = "patient/docprofile/3";
 
     });
 
@@ -387,4 +427,18 @@ export class BookappointmentComponent implements OnInit {
     const result = await alert.onDidDismiss();
     console.log(alert);
   }
+
+  test(time){
+    // console.log(time, this.time);
+    let atime = time.split(' ')[0];
+    atime = atime.split(':');
+
+    // console.log(atime);
+    let ctime = this.time.split(':');
+    let ct = ctime[0] * 60 + parseInt(ctime[1]);
+    let at = atime[0] * 60 + parseInt(atime[1]);
+    console.log(at < ct, at > ct, at, ct);
+    return ct>at;
+  }
+
 }

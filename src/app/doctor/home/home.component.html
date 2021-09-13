@@ -63,7 +63,7 @@
       <ion-item lines="none" class="ion-item-two" *ngFor="let data of dates">
         <ion-icon color="primary" name="calendar-outline"></ion-icon>
         <ion-label> {{date | date:'dd-MM-yyyy'}}</ion-label>
-        <ion-label slot="end"> Time: {{date | date:'h:mm a'}} </ion-label>
+        <ion-label slot="end"> Time: {{date | date:'H:MM a'}} </ion-label>
       </ion-item>
     </ion-card-content>
   </ion-card>

@@ -270,12 +270,12 @@
       <ion-button (click)="seduleAdvance()">10 Seconds</ion-button> -->
     </ion-card-content>
   </ion-card>
-  <ion-card class="book">
+  <ion-card *ngFor='let dataa of pending' class="book">
     <ion-card-content>
       <ion-label>Booking</ion-label>
       <ion-item class="content" lines="none">
         <ion-row class="detail_row">
-          <ion-col>
+          <ion-col >
             <ion-label>Dr. {{data.name}}</ion-label>
             <ion-label>{{data.qualification}}</ion-label>
             <ion-label>{{data.professional}}</ion-label>
@@ -283,7 +283,7 @@
         </ion-row>
         <ion-row class="cancel_row">
           <ion-col>
-            <ion-label color="success">10:30 PM</ion-label>
+            <ion-label color="success">{{dataa.time}}</ion-label>
             <ion-chip outline color="danger" (click)="cancel()">Cancel</ion-chip>
 
           </ion-col>

@@ -75,6 +75,12 @@ export class PatientserviceService {
   docId(){
     return this.http.get(this.api+'doctorid', this.httpOptions);
   }
+  cancelAppointment(data : any){
+    return this.http.post(this.api+'cancelappointment',data,this.httpOptions);
+  }
+  doctorNotification(data:any){
+    return this.http.post(this.api +'pendinglist', data, this.httpOptions);
+  }
 
 }
 
