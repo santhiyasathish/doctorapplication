@@ -104,9 +104,10 @@ export class RegisterComponent implements OnInit {
       else {
         alertMsg = response.error_messages;
       }
+      console.log("error_message",response.error_messages);
       let prompt = this.alertCtrl.create({
 
-        message: this.alertmessage,
+        message: alertMsg,
 
         buttons: [
 
