@@ -23,7 +23,7 @@ import { Platform } from '@ionic/angular';
 export class GuestComponent implements OnInit {
   sam: any[];
   appoint: any = [];
-
+ alertmessage: string;
   list: any = [];
  submitted = false;
   docDetail: any = [];
@@ -226,11 +226,37 @@ export class GuestComponent implements OnInit {
         contact_number:this.gForm.value.contact_number,
          location:this.gForm.value.location,
     }
-    console.log(this.gForm.value);
-    this.service.guestUserApi(this.gForm.value).subscribe(data =>{
-      console.log(data);
+    console.log(data);
+     let responseData;
+      let alertMessage;
+    this.service.guestUserApi(data).subscribe( async data =>{
+       let response = JSON.parse(JSON.stringify(data));
+      this.alertmessage = response.messages;
+      if(response.success == true){
+     alertMessage = response.message;
+      }
+      else{
+         alertMessage = response.error_messages;
+      }
+      console.log(response.success);
+
+      console.log("data",data);
       this.guestData = JSON.parse(JSON.stringify(data));
-      alert('Guest Added Successfully');
-    })
+      // alert('Guest Added Successfully');
+       let prompt = this.alertCtrl.create({
+      
+      message: alertMessage,
+     
+      buttons: [
+        
+        {
+          text: 'Ok',
+          
+        }
+      ]
+    });
+    (await prompt).present();
+      
+    });
   }
 }
