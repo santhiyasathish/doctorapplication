@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl : 'http://192.168.0.103/doctorapi/public/api/',
-    //  apiUrl : "https://duskcoder.com/doctor/public/api/",
+  // apiUrl : 'http://192.168.0.103/doctorapi/public/api/',
+     apiUrl : "https://duskcoder.com/doctor/public/api/",
 };
 
 /*
