@@ -18,7 +18,8 @@
             <img
               [src]="images" />
           </ion-avatar>
-          <ion-button (click)="getCamera()" color="secondary">
+          <ion-button (click)="getCamera(); fileInput.click()" color="secondary">
+            <input style="display: none" type="file" (change)="fileChangeEvent($event)" #fileInput>
             <ion-icon name="camera-reverse" color="light"></ion-icon>
           </ion-button>
         </ion-item>

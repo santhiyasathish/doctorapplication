@@ -8,6 +8,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { LoadingController } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
 
 // import * as moment from 'moment';
 import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
@@ -86,23 +87,18 @@ export class BookappointmentComponent implements OnInit {
     private appComponents: AppComponent,
     private loadingController: LoadingController,
     private localNotifications: LocalNotifications,
+    private datepipe: DatePipe
 
     // private datePipe: DatePipe
   ) {
     this.menu.enable(false);
     // console.log("sample");
     // if()
-    const datea = new Date('13-09-2021');
-    console.log("dtata", datea);
-    const date = new Date().getTime();
-    const datas = new Date(date * 1000);
-    const hours = datea.getHours();
-    const minutes = datea.getMinutes();
 
     // const minutesf = minutes[1]; //11
     // const ampm = hours[1] >= 12 ? 'AM' : 'PM'; //22 >=12 yes == pm
     // const hoursf = hours[1] >= 12 ? hours[1] - 12 : hours[1]; //22 >= 12 ? 22-12=10 
-    var strTime = hours + ':' + minutes ;
+    
     const dateObject = new Date();
     const dateString = dateObject.toLocaleTimeString();
     const dam = dateString.split(' ');
@@ -110,12 +106,7 @@ export class BookappointmentComponent implements OnInit {
     const h= cont[0];
     const m= cont[1];
     const ampm=dam[1];
-    this.time= h+":"+m;
-   
-    console.log('formate', strTime);
-    console.log('formatem', dam);
-    console.log('cont', h +":"+ m +":"+ ampm, dateString);
-    // return strTime;
+    this.time= h+":"+m+ " " + ampm;
   
 
     this.subscribe = this.platform.backButton.subscribeWithPriority(666666, () => {
@@ -435,17 +426,20 @@ export class BookappointmentComponent implements OnInit {
     console.log(alert);
   }
 
-  test(time){
-    // console.log(time, this.time);
-    let atime = time.split(' ')[0];
-    atime = atime.split(':');
-
-    // console.log(atime);
+  checkValid(time, date){
+    if( this.datepipe.transform(new Date(), 'yyyy-MM-dd') == date){ 
+      let atime = time.split(' ');
+    let aampm = atime[1] == 'AM'? 0: 12;
+    atime = atime[0].split(':');
     let ctime = this.time.split(':');
-    let ct = ctime[0] * 60 + parseInt(ctime[1]);
-    let at = atime[0] * 60 + parseInt(atime[1]);
-    console.log(at < ct, at > ct, at, ct);
-    return ct>at;
+    let campm = ctime[1].split(' ')[1] == 'AM'? 0: 12;
+    let ct = ctime[0] * 60 + parseInt(ctime[1])+ campm*60;
+    let at = atime[0] * 60 + parseInt(atime[1])+aampm*60;
+    return ct<at;
+    }
+    else{
+      return true;
+    }
   }
 
 }

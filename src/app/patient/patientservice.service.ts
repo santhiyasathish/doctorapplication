@@ -64,10 +64,10 @@ export class PatientserviceService {
     return this.http.post(this.api + 'userappointementstatus',data,this.httpOptions);
   }
   patientprofile(data: any) {
-    return this.http.post(this.api + 'patientprofile', data, this.httpOptions);
+    return this.http.post(this.api + 'patientprofile', data);
   }
   patinetprofileedit(data: any){
-    return this.http.post(this.api+'patinetprofileedit',data,this.httpOptions);
+    return this.http.post(this.api+'patinetprofileedit',data);
   }
   getpatientprofile(data: any){
     return this.http.post(this.api+'getpatientprofile',data,this.httpOptions);
