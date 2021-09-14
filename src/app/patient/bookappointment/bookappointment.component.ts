@@ -91,7 +91,7 @@ export class BookappointmentComponent implements OnInit {
 
     // private datePipe: DatePipe
   ) {
-    
+    this.menu.enable(false);
     // console.log("sample");
     // if()
 
@@ -280,7 +280,14 @@ export class BookappointmentComponent implements OnInit {
 
     // Prepare a loading controller
     this.loading = await this.loadingController.create({
-      message: 'Loading...',
+      spinner: 'dots',
+      // duration: this.value,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: '',
+      backdropDismiss: true,
+      mode: 'ios',
+      keyboardClose: true,
     });
     // Present the loading controller
     await this.loading.present();

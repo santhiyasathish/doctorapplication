@@ -9,6 +9,7 @@ import {
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -21,8 +22,15 @@ export class LoginComponent implements OnInit {
   submitted = false;
   hide = true;
 
-  constructor(private formBuilder: FormBuilder, private service: ServiceService, 
-    private router: Router, public alertCtrl: AlertController) {}
+  constructor(
+    private formBuilder: FormBuilder, 
+    private service: ServiceService, 
+    private router: Router, 
+    public alertCtrl: AlertController,
+    private menu: MenuController
+    ) {
+    this.menu.enable(false);
+    }
 
   ngOnInit() {
     if (localStorage.getItem('log') != null) {

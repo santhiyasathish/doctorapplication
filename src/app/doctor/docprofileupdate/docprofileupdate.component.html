@@ -62,7 +62,7 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-datetime placeholder="Date Of Birth" name="dob" formControlName="dob"></ion-datetime>
+          <ion-datetime displayFormat="DD-MM-YYYY" [(ngModel)]="myDate" placeholder="Date Of Birth" name="dob" formControlName="dob"></ion-datetime>
         </ion-item>
         <div *ngIf="submitted && f.dob.errors" class="error-message">
           <div *ngIf="f.dob.errors.required">
@@ -165,45 +165,24 @@
             <ion-input type="text" formControlName="address1" placeholder="Address Line 1" clearInput="true">
             </ion-input>
 
-            <!-- <div *ngIf="submitted && f.address1?.errors" class="error-message">
-            <div *ngIf="f.address1?.errors.required">
-              <ion-icon name="alert-circle-outline"></ion-icon> Enter your Address Line 1
-            </div>
-          </div> -->
+          
 
             <ion-input type="text" formControlName="address2" placeholder="Address Line 2" clearInput="true">
             </ion-input>
 
-            <!-- <div *ngIf="submitted && f.address2?.errors" class="error-message">
-            <div *ngIf="f.address2?.errors.required">
-              <ion-icon name="alert-circle-outline"></ion-icon> Enter your Address Line 2
-            </div>
-          </div> -->
-
+           
             <ion-input type="text" formControlName="city" name="city" placeholder="City" clearInput="true"></ion-input>
 
-            <!-- <div *ngIf="submitted && f.city?.errors" class="error -message">
-            <div *ngIf="f.city?.errors.required">
-              <ion-icon name="alert-circle-outline"></ion-icon> Enter your City
-            </div>
-          </div> -->
+           
 
             <ion-input type="text" formControlName="state" name="state" placeholder="State" clearInput="true">
             </ion-input>
 
-            <!-- <div *ngIf="submitted && f.state?.errors" class="error-message">
-            <div *ngIf="f .state?.errors.required">
-              <ion-icon name="alert-circle-outline"></ion-icon> Enter your State
-            </div>
-          </div> -->
+           
 
             <ion-input type="number" formControlName="zip" name="zip" placeholder="Zip Code" type="number"></ion-input>
 
-            <!-- <div *ngIf="submitted && f.zip?.errors" class="error-message">
-              <div *ngIf="f .zip?.errors.required">
-                <ion-icon name="alert-circle-outline"></ion-icon> Enter your Zip Code
-              </div>
-            </div> -->
+           
           </div>
         </ion-item>
 

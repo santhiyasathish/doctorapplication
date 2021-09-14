@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PatientserviceService } from '../patientservice.service'; 
 import { DatePipe } from '@angular/common';
 import { Platform } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { Network } from '@ionic-native/network/ngx';
+import { MenuController } from '@ionic/angular';
 
 
 @Component({
@@ -43,10 +47,19 @@ export class PatnotificationComponent implements OnInit {
   listData: any;
   avalListData: any;
   subscribe: any;
+  value: 3000;
+  loading: any;
+  imgurl: any;
   constructor(private service:PatientserviceService,
     private datePipe: DatePipe,
     private platform:Platform,
+    public loadingController: LoadingController,
+    public alertController: AlertController,
+    private network: Network,
+  
+    private menu: MenuController,
     ) { 
+    this.menu.enable(false);
 
     this.subscribe = this.platform.backButton.subscribeWithPriority(666666, () => {
       if (this.constructor.name == "PatnotificationComponent") {
@@ -54,6 +67,18 @@ export class PatnotificationComponent implements OnInit {
         // this.back();
       }
     });
+
+    this.network.onDisconnect().subscribe(() => {
+      setTimeout(() => {
+        this.networkError();
+      }, 2000);
+    });
+
+    this.platform.ready().then((rdy) => {
+
+    });
+
+    this.menu.enable(false);
 
     
     console.log('date',this.myDate);
@@ -64,8 +89,99 @@ export class PatnotificationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userAppointementStatus();
+    this.presentLoading();
    
+  }
+  async handleButtonClick() {
+    await this.loading.dismiss();
+    this.imgurl = "../../../assets/splash_screen.gif";
+    const alert = await this.alertController.create({
+      header: 'Network error ?',
+      message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
+
+      cssClass: 'customalert',
+
+      buttons: [{
+        text: 'ok',
+        role: 'ok',
+        handler: data => {
+          console.log('ok clicked', data);
+          this.presentLoading();
+
+        }
+      }
+      ]
+    },
+    );
+
+    await alert.present();
+  }
+  async networkError() {
+    await this.loading.dismiss();
+    const alert = await this.alertController.create({
+      header: 'Network error ?',
+      message: 'your boor net connection?',
+      cssClass: 'customalert',
+
+      buttons: [{
+        text: 'ok',
+        role: 'ok',
+        handler: data => {
+          console.log('ok clicked', data);
+          this.presentLoading();
+
+        }
+      }
+      ]
+    },
+    );
+
+    await alert.present();
+  }
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.presentLoading();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete(() => {
+
+      });
+    }, 2000);
+  }
+
+  async presentLoading() {
+    // Prepare a loading controller
+    this.loading = await this.loadingController.create({
+      spinner: 'dots',
+      duration: this.value,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: '',
+      backdropDismiss: true,
+      mode: 'ios',
+      keyboardClose: true,
+
+    });
+    // Present the loading controller
+
+    if (this.value == 3000) {
+      await this.loading.present();
+
+      // this.networkError();
+    } else {
+      await this.loading.present();
+      this.userAppointementStatus();
+      // this.getdoctorprofile();
+      // this.getAppointmentCount();
+      // this.approvedListindoctorcount();
+      // this.menu.enable(true);
+    }
+
+
+
+
+
+    // this.getappointmentAvailability();
   }
     trimString(string, length) {
       return string.length > length ? 
@@ -81,11 +197,12 @@ export class PatnotificationComponent implements OnInit {
   this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
   let approveddoctor = {
     user_id: JSON.parse(localStorage.getItem('log')).id,
-    date: this.myDate,
+    // date: this.myDate,
   };
 
-    this.service.userAppointementStatus(approveddoctor).subscribe(data=>{
+    this.service.userAppointementStatus(approveddoctor).subscribe(async data=>{
       this.approve = JSON.parse(JSON.stringify(data)).message;
+      await this.loading.dismiss();
   
     console.log("sample",this.approve);
     // this.getList('0'); 

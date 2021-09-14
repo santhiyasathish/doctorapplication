@@ -6,6 +6,7 @@ import { LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Network } from '@ionic-native/network/ngx';
 import { Platform } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-appointmentlist',
@@ -48,10 +49,11 @@ export class AppointmentlistComponent implements OnInit {
     public alertController: AlertController,
     private network: Network,
     private plt: Platform,
+    private menu: MenuController,
   ) {
 
     
-
+    this.menu.enable(false);
     this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
       if (this.constructor.name == "AppointmentlistComponent") {
         window.location.href = "doctor/home";
@@ -135,12 +137,14 @@ export class AppointmentlistComponent implements OnInit {
   async presentLoading() {
     // Prepare a loading controller
     this.loading = await this.loadingController.create({
-      message: 'Loading...',
+      spinner: 'dots',
       duration: this.value,
+      message: 'Please wait...',
       translucent: true,
-
+      cssClass: '',
       backdropDismiss: true,
-      cssClass: 'loadercustom'
+      mode: 'ios',
+      keyboardClose: true,
 
     });
     // Present the loading controller
