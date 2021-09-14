@@ -10,6 +10,8 @@ import { ServiceService } from '../service.service';
 import { AlertController } from '@ionic/angular';
 import Validation from './validation';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 
 
 @Component({
@@ -24,8 +26,24 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   mydate;
   hide = true;
+  subscribe: any;
 
-  constructor(private formBuilder: FormBuilder, private service: ServiceService, public alertCtrl: AlertController, private router: Router) { }
+  constructor(private formBuilder: FormBuilder,
+    private service: ServiceService,
+    public alertCtrl: AlertController,
+    private router: Router,
+    private menu: MenuController,
+    private platform: Platform
+  ) {
+    this.menu.enable(false);
+
+    this.subscribe = this.platform.backButton.subscribeWithPriority(666666, () => {
+      if (this.constructor.name == "RegisterComponent") {
+        window.location.href = "/login";
+        // this.back();
+      }
+    });
+  }
 
   ngOnInit() {
     if (localStorage.getItem('log') != null) {
@@ -37,7 +55,7 @@ export class RegisterComponent implements OnInit {
       //   Validators.required,
       //   Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       // ])],
-      mobile:['',[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       password: [
         '',
         [
@@ -104,7 +122,7 @@ export class RegisterComponent implements OnInit {
       else {
         alertMsg = response.error_messages;
       }
-      console.log("error_message",response.error_messages);
+      console.log("error_message", response.error_messages);
       let prompt = this.alertCtrl.create({
 
         message: alertMsg,

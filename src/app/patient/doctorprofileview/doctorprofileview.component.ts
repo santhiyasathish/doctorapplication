@@ -223,12 +223,14 @@ export class DoctorprofileviewComponent implements OnInit {
   async presentLoading() {
     // Prepare a loading controller
     this.loading = await this.loadingController.create({
-      message: 'Loading...',
+      spinner: 'dots',
       duration: this.value,
+      message: 'Please wait...',
       translucent: true,
-
+      cssClass: '',
       backdropDismiss: true,
-      cssClass: 'loadercustom'
+      mode: 'ios',
+      keyboardClose: true,
 
     });
     // Present the loading controller

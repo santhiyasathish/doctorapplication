@@ -13,22 +13,22 @@ export class AppComponent{
   userType: string;
   public appPages = [
     //patient
-    { title: 'Home', url: 'patient/docprofile/3', icon: 'mail', type: 'patient' },
-    { title: 'book appointment', url: 'patient/book/3', icon: 'paper-plane', type: 'patient' },
-    // { title: 'Notification', url: 'patient/patnotification', ionc: 'paper-plane', type: 'patient'},
-    { title: 'Profile', url: 'patient/editprofile', icon: 'heart', type: 'patient' },
+    { title: 'Home', url: 'patient/docprofile/3', icon: 'home', type: 'patient' },
+    { title: 'book appointment', url: 'patient/book/3', icon: 'fitness', type: 'patient' },
+    { title: 'Notification', url: 'patient/patnotification', icon: 'notifications-circle', type: 'patient'},
+    { title: 'Profile', url: 'patient/editprofile', icon: 'person-circle', type: 'patient' },
     //doctor
-    { title: 'Dashboard', url: 'doctor/home', icon: 'mail', type: 'doctor' },
-    { title: 'Confirmation', url: 'doctor/appointmentlist', ionc: 'paper-plane', type: 'doctor'},
-    { title: 'Notification', url: 'doctor/docnotification', icon: 'paper-plane', type: 'doctor' },
-    { title: 'Profile', url: 'doctor/docprofile', icon: 'paper-plane', type: 'doctor' },
+    { title: 'Dashboard', url: 'doctor/home', icon: 'home', type: 'doctor' },
+    { title: 'Confirmation', url: 'doctor/appointmentlist', icon: 'calendar', type: 'doctor'},
+    { title: 'Notification', url: 'doctor/docnotification', icon: 'notifications-circle', type: 'doctor' },
+    { title: 'Profile', url: 'doctor/docprofile', icon: 'person-circle', type: 'doctor' },
     //guest
     
-    { title: 'Book appointment', url: 'patient/docprofile/3', icon: 'mail', type: 'guest' },
+    { title: 'Book appointment', url: 'general/guest', icon: 'fitness', type: 'guest' },
 
-    { title: 'Logout', url: 'patient/docprofile/3', icon: 'mail', type: 'doctor' },
-    { title: 'Logout', url: 'patient/docprofile/3', icon: 'mail', type: 'patient' },
-    { title: 'Logout', url: 'patient/docprofile/3', icon: 'mail', type: 'guest' },
+    { title: 'Logout', url: '', icon: 'log-out', type: 'doctor' },
+    { title: 'Logout', url: '', icon: 'log-out', type: 'patient' },
+    { title: 'Logout', url: '', icon: 'log-out', type: 'guest' },
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(private router: Router,

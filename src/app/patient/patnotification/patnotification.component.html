@@ -1,22 +1,61 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons>
-      <ion-back-button routerLink="/patient/docprofile/3/"></ion-back-button>
+      <ion-button href="/patient/docprofile/3">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-title>Notification</ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen >
+<ion-content fullscreen>
 
   <ion-card *ngFor="let data of approve">
-    <ion-card-header>
+
+    <ion-card-content>
+      <ion-item class="head" lines="none">
+        <ion-row>
+          <ion-col class="col-one">
+            <img src="../../../assets/image/caduceus.png" />
+          </ion-col>
+          <ion-col class="col-two">
+            <ion-row>
+              <ion-label>
+                <ion-icon name="calendar-outline"></ion-icon>
+                <ion-text> Date: {{data.date}}</ion-text>
+              </ion-label>
+              <ion-text *ngIf="!data.showMore">
+                <b>Reason: </b>{{trimString(data.reason,50)}}
+              </ion-text>
+              <ion-text class="ion-text-justify" *ngIf="data.showMore">
+                <b>Reason: </b>{{data.reason}}
+              </ion-text>
+              <ion-label>
+                <ion-col>
+                  <a (click)="data.showMore = !data.showMore">Show <span [innerHtml]="data.showMore ? 'less' : 'More'">
+                    </span>
+                  </a>
+                </ion-col>
+              </ion-label>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item class="status" lines='none'>
+        <ion-text>Status: </ion-text>
+        <ion-label [color]="data.approvestatus == 'accept' ? 'success' : 'danger'">
+          <h2 [innerHtml]="data.approvestatus == 'accept' ? ' Your Appointment Successfully' : ' Your Appointment Rejected'">
+          </h2>
+        </ion-label>
+
+      </ion-item>
+    </ion-card-content>
+    <!-- <ion-card-header>
       <ion-row>
-        <!-- <ion-col>
-          <ion-text>{{data.pat_name}}</ion-text>
-        </ion-col> -->
         <ion-col>
           <ion-icon name="calendar-outline"></ion-icon>
-          <ion-text>Date: {{data.date}}</ion-text>
+          <ion-text> Date: {{data.date}}</ion-text>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -39,14 +78,13 @@
       <ion-row>
         <ion-col>
           <ion-item lines="none">
-            <!-- {{(data.approvestatus == 'accept') ? 'success' : 'danger'}} -->
             <b>Status: </b><ion-label  [color]="data.approvestatus == 'accept' ? 'success' : 'danger'">
               <h2 [innerHtml]="data.approvestatus == 'accept' ? 'Your Appointment Successfully' : 'Your Appointment Rejected'"> </h2></ion-label>
           </ion-item>
         
         </ion-col>
       </ion-row>
-    </ion-card-content>
+    </ion-card-content> -->
   </ion-card>
 
 </ion-content>

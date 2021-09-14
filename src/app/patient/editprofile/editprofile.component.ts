@@ -185,12 +185,14 @@ export class EditprofileComponent implements OnInit {
   async presentLoading() {
     // Prepare a loading controller
     this.loading = await this.loadingController.create({
-      message: 'Loading...',
+      spinner: 'dots',
       duration: this.value,
+      message: 'Please wait...',
       translucent: true,
-
+      cssClass: '',
       backdropDismiss: true,
-      cssClass: 'loadercustom'
+      mode: 'ios',
+      keyboardClose: true,
 
     });
     // Present the loading controller
@@ -262,14 +264,15 @@ export class EditprofileComponent implements OnInit {
   getCamera() {
     // var options: ImageOptions = {
     //   quality: 100,
-    //   resultType: CameraResultType.DataUrl,
+    //   resultType: CameraResultType.Base64,
     //   // saveToGallery:true
     // }
-    // Camera.getPhoto({options).then((result)=>{
-    //   this.images=(result.dataUrl);
+    // Camera.getPhoto(options).then((result)=>{
+    //   this.images=(result.path);
+    //   alert('image'+ this.images);
 
     // },(err)=>{
-    //   this.router.navigate(['/patient/editprofile']);
+    //   // this.router.navigate(['/patient/editprofile']);
     //   alert(JSON.stringify(err));
     // })
     Camera.getPhoto({
@@ -279,7 +282,9 @@ export class EditprofileComponent implements OnInit {
       source: CameraSource.Photos,
       resultType: CameraResultType.DataUrl,
     }).then((result) => {
+      
       this.images = (result.dataUrl);
+      console.log('image',this.images);
     }, (err) => {
 
     });

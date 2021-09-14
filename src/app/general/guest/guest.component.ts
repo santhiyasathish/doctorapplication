@@ -34,6 +34,7 @@ export class GuestComponent implements OnInit {
   gForm: FormGroup;
   guestData: any;
   subscribe: any;
+
   constructor(
     private router: Router,
     private service:ServiceService,
@@ -89,7 +90,14 @@ export class GuestComponent implements OnInit {
 
     // Prepare a loading controller
     this.loading = await this.loadingController.create({
-      message: 'Loading...',
+      spinner: 'dots',
+      // duration: this.value,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: '',
+      backdropDismiss: true,
+      mode: 'ios',
+      keyboardClose: true,
     });
     // Present the loading controller
     await this.loading.present();

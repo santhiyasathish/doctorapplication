@@ -11,6 +11,7 @@ import { DoctorserviceService } from '../doctorservice.service';
 import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { Network } from '@ionic-native/network/ngx';
+import { MenuController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-docprofileupdate',
@@ -43,7 +44,9 @@ export class DocprofileupdateComponent implements OnInit {
     public loadingController: LoadingController,
     private network: Network,
     private plt: Platform,
+    private menu: MenuController,
     ) {
+    this.menu.enable(false);
       
     this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
       if (this.constructor.name == "DocprofileupdateComponent") {
@@ -191,12 +194,14 @@ export class DocprofileupdateComponent implements OnInit {
   async presentLoading() {
     // Prepare a loading controller
     this.loading = await this.loadingController.create({
-      message: 'Loading...',
+      spinner: 'dots',
       duration: this.value,
+      message: 'Please wait...',
       translucent: true,
-
+      cssClass: '',
       backdropDismiss: true,
-      cssClass: 'loadercustom'
+      mode: 'ios',
+      keyboardClose: true,
 
     });
     // Present the loading controller
