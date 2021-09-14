@@ -109,13 +109,16 @@ export class RegisterComponent implements OnInit {
         this.service.login(logdata).subscribe(data1 => {
           localStorage.setItem('log', JSON.stringify(JSON.parse(JSON.stringify(data1)).logData));
           if (JSON.parse(localStorage.getItem('log')).user_type == 'doctor') {
-            this.router.navigateByUrl('doctor/docprofileupdate');
+            window.location.href = "doctor/docprofileupdate";
+            // this.router.navigateByUrl('doctor/docprofileupdate');
           }
           else if (JSON.parse(localStorage.getItem('log')).user_type == 'patient') {
-            this.router.navigateByUrl('patient/editprofile');
+            window.location.href = "patient/editprofile";
+            // this.router.navigateByUrl('patient/editprofile');
           }
           else {
-            this.router.navigateByUrl('patient/docprofile/3');
+            window.location.href = "patient/docprofile/3";
+            // this.router.navigateByUrl('patient/docprofile/3');
           }
         });
       }

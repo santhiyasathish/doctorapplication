@@ -81,13 +81,16 @@ export class LoginComponent implements OnInit {
         alertMessage = responseData.messages;
         localStorage.setItem('log', JSON.stringify(responseData.logData));
         if (JSON.parse(localStorage.getItem('log')).user_type == 'doctor') {
-          this.router.navigateByUrl('doctor/home');
+          window.location.href = "doctor/home";
+          // this.router.navigateByUrl('');
         }
         else if (JSON.parse(localStorage.getItem('log')).user_type == 'patient') {
-          this.router.navigateByUrl('patient/docprofile/3');
+          window.location.href = "patient/docprofile/3";
+          // this.router.navigateByUrl('');
         }
         else {
-          this.router.navigateByUrl('general/guest');
+          window.location.href = "general/guest";
+          // this.router.navigateByUrl('');
         }
       }
       else{

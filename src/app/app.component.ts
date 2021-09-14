@@ -21,7 +21,7 @@ export class AppComponent{
     { title: 'Dashboard', url: 'doctor/home', icon: 'home', type: 'doctor' },
     { title: 'Confirmation', url: 'doctor/appointmentlist', icon: 'calendar', type: 'doctor'},
     { title: 'Notification', url: 'doctor/docnotification', icon: 'notifications-circle', type: 'doctor' },
-    { title: 'Profile', url: 'doctor/docprofile', icon: 'person-circle', type: 'doctor' },
+    { title: 'Profile', url: 'doctor/docprofileupdate', icon: 'person-circle', type: 'doctor' },
     //guest
     
     { title: 'Book appointment', url: 'general/guest', icon: 'fitness', type: 'guest' },
