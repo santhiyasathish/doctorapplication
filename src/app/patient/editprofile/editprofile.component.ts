@@ -117,16 +117,15 @@ export class EditprofileComponent implements OnInit {
         this.buttontype = 'add';
       }
     });
-  
     this.editForm = this.formBuilder.group({
-      firstname: [JSON.parse(localStorage.getItem('log')).name.split(' ')[0], Validators.required],
-      lastname: [JSON.parse(localStorage.getItem('log')).name.split(' ')[1], Validators.required],
-      contact_number: [JSON.parse(localStorage.getItem('log')).mobile, Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      contact_number: ['', Validators.required],
       email: ['', [Validators.required, Validators.email
         // , Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')
       ]],
-      gender: [JSON.parse(localStorage.getItem('log')).gender, Validators.required],
-      dob: [JSON.parse(localStorage.getItem('log')).dob, Validators.required],
+      gender: ['', Validators.required],
+      dob: ['', Validators.required],
       blood_group: ['', Validators.required],
       marital_status: ['', Validators.required],
       height: ['', Validators.required],
@@ -135,7 +134,7 @@ export class EditprofileComponent implements OnInit {
       location: ['', Validators.required],
 
     })
-  console.log(JSON.parse(localStorage.getItem('log')).gender);
+
   }
 
   async handleButtonClick() {
@@ -187,14 +186,12 @@ export class EditprofileComponent implements OnInit {
   async presentLoading() {
     // Prepare a loading controller
     this.loading = await this.loadingController.create({
-      spinner: 'dots',
+      message: 'Loading...',
       duration: this.value,
-      message: 'Please wait...',
       translucent: true,
-      cssClass: '',
+
       backdropDismiss: true,
-      mode: 'ios',
-      keyboardClose: true,
+      cssClass: 'loadercustom'
 
     });
     // Present the loading controller
@@ -266,15 +263,14 @@ export class EditprofileComponent implements OnInit {
   getCamera() {
     // var options: ImageOptions = {
     //   quality: 100,
-    //   resultType: CameraResultType.Base64,
+    //   resultType: CameraResultType.DataUrl,
     //   // saveToGallery:true
     // }
-    // Camera.getPhoto(options).then((result)=>{
-    //   this.images=(result.path);
-    //   alert('image'+ this.images);
+    // Camera.getPhoto({options).then((result)=>{
+    //   this.images=(result.dataUrl);
 
     // },(err)=>{
-    //   // this.router.navigate(['/patient/editprofile']);
+    //   this.router.navigate(['/patient/editprofile']);
     //   alert(JSON.stringify(err));
     // })
     Camera.getPhoto({
@@ -284,9 +280,7 @@ export class EditprofileComponent implements OnInit {
       source: CameraSource.Photos,
       resultType: CameraResultType.DataUrl,
     }).then((result) => {
-      
       this.images = (result.dataUrl);
-      console.log('image',this.images);
     }, (err) => {
 
     });

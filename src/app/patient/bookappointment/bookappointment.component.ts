@@ -374,6 +374,10 @@ export class BookappointmentComponent implements OnInit {
 
   }
   async conform(id) {
+    if(localStorage.getItem('log') == null){
+      this.router.navigateByUrl('/login');
+    }
+    else{
     const alert = await this.alertCtrl.create({
 
       subHeader: 'Booking',
@@ -424,6 +428,7 @@ export class BookappointmentComponent implements OnInit {
     await alert.present();
     const result = await alert.onDidDismiss();
     console.log(alert);
+  }
   }
 
   checkValid(time, date){

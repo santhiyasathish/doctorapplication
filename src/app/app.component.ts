@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class AppComponent{
   email : string;
   userType: string;
+  togle: boolean = false;
   public appPages = [
     //patient
     { title: 'Home', url: 'patient/docprofile/3', icon: 'home', type: 'patient' },
@@ -37,6 +38,7 @@ export class AppComponent{
      ) {
  
     if (localStorage.getItem('log') != null) {
+      this.togle = true;
     this.email = JSON.parse(localStorage.getItem('log')).email;
     this.userType =  JSON.parse(localStorage.getItem('log')).user_type;
     }
@@ -48,7 +50,7 @@ export class AppComponent{
     console.log(value);
     if(value == 'Logout'){
       localStorage.clear();
-      this.router.navigateByUrl('login');
+      this.router.navigateByUrl('patient/docprofile/3');
     }
   
 
