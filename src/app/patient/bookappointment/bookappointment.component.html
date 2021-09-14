@@ -60,11 +60,14 @@
       </ion-col>
     </ion-item>
     <ion-row>
-      <ion-col *ngFor="let data of li.availableList" size="4">
-        <ion-chip *ngIf="test(data.time)" (click)="conform(data.id)" disabled="{{ data.status }}" outline color="success">
-          <ion-label>{{data.time }}</ion-label>
-        </ion-chip>
-      </ion-col>
+      <ng-container *ngFor="let data of li.availableList">
+        <ion-col *ngIf="checkValid(data.time, sam)" size="4">
+          <ion-chip (click)="conform(data.id)" disabled="{{ data.status }}" outline color="success">
+            <ion-label>{{data.time }}</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ng-container>
+     
     </ion-row>
   </div>
 
