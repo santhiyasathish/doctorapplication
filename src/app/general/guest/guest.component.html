@@ -22,14 +22,32 @@
           </ion-avatar>
         </ion-item>
         <ion-item lines="none" id="rounded">
-          <ion-input placeholder="FirstName" type="text" name="firstname" formControlName="name"></ion-input>
+          <ion-input placeholder="Enter Name" type="text" name="name" formControlName="name"></ion-input>
         </ion-item>
+        <div *ngIf="submitted && f.name.errors"  class="error-message">
+          <div *ngIf="f.name.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Name is required
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
           <ion-input placeholder="Contact Number" type="number" name="contact_number" formControlName="contact_number"></ion-input>
         </ion-item>
+        <div *ngIf="submitted && f.contact_number.errors"  class="error-message">
+          <div   *ngIf="f.contact_number.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Mobile Number is required
+          </div>
+          <div   *ngIf="f.contact_number.errors.pattern" >
+            <ion-icon name="alert-circle-outline"></ion-icon> Please Enter 10 digit Number
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
           <ion-input placeholder="Location" type="text" name="location" formControlName="location"></ion-input>
         </ion-item>
+        <div *ngIf="submitted && f.location.errors"  class="error-message">
+        <div   *ngIf="f.location.errors.required"  >
+          <ion-icon name="alert-circle-outline"></ion-icon>Location is required
+        </div>
+      </div>
         <ion-button type="submit" color="primary" expand="block">Add Guest</ion-button>
       </form>
     </ion-item>

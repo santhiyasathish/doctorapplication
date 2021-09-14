@@ -34,7 +34,7 @@
         </div>
         <ion-item lines="none" id="rounded">
           <ion-text color="danger">*</ion-text>
-          <ion-input type="text" name="lastname" placeholder="Enter FirstName" formControlName="lastname"
+          <ion-input type="text" name="lastname" placeholder="Enter LastName" formControlName="lastname"
             class="form-control"></ion-input>
         </ion-item>
         <div *ngIf="submitted && f.lastname.errors" class="error-message">
@@ -61,9 +61,6 @@
         <div   *ngIf="f.email.errors.required" color="danger">
           <ion-icon name="alert-circle-outline"></ion-icon> Email is required
         </div>
-        <div *ngIf="f.email.errors.pattern">
-          <ion-icon name="alert-circle-outline"></ion-icon> Don't type @gmail.com
-        </div>
       </div>
         <ion-item lines="none" id="rounded">
           <ion-radio-group name="gender" formControlName="gender" >
@@ -89,7 +86,7 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-datetime placeholder="Select Date" name="dob" formControlName="dob" class="form-control"></ion-datetime>
+          <ion-datetime displayFormat="DD-MM-YYYY"  placeholder="Select Date" name="dob" formControlName="dob" class="form-control"></ion-datetime>
         </ion-item>
         <div *ngIf="submitted && f.dob.errors" class="error-message">
           <div *ngIf="f.dob.errors.required">
@@ -109,11 +106,7 @@
             <ion-select-option value="ab-">AB-</ion-select-option>
           </ion-select>
         </ion-item>
-        <!-- <div *ngIf="submitted && f.blood_group.errors"  class="error-message">
-        <div   *ngIf="f.blood_group.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Blood Group is required
-        </div>
-      </div> -->
+       
         <ion-item lines="none" id="rounded">
           <ion-select name="marital_status" placeholder="Select Marital Status" formControlName="marital_status"
             class="form-control">
@@ -121,41 +114,25 @@
             <ion-select-option value="married">Married</ion-select-option>
           </ion-select>
         </ion-item>
-        <!-- <div *ngIf="submitted && f.marital_status.errors"  class="error-message">
-        <div   *ngIf="f.marital_status.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Marital Status is required
-        </div>
-      </div> -->
+       
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">Weight</ion-label>
           <ion-input type="number" name="height" formControlName="height" class="form-control" clearInput></ion-input>
-          <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>Cm</ion-label>
+          <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>Kg</ion-label>
         </ion-item>
-        <!-- <div *ngIf="submitted && f.height.errors"  class="error-message">
-        <div   *ngIf="f.height.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Height is required
-        </div>
-      </div> -->
+       
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">Height</ion-label>
           <ion-input type="number" name="weight" placeholder="Enter Weight" formControlName="weight"
             class="form-control" clearInput></ion-input>
-          <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>Kg</ion-label>
+          <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>Cm</ion-label>
         </ion-item>
-        <!-- <div *ngIf="submitted && f.weight.errors"  class="error-message">
-        <div   *ngIf="f.weight.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Weight is required
-        </div>
-      </div> -->
+        
         <ion-item lines="none" id="rounded">
           <ion-input name="econtact" placeholder="Enter Emergency Contact" formControlName="econtact"
             class="form-control"></ion-input>
         </ion-item>
-        <!-- <div *ngIf="submitted && f.econtact.errors"  class="error-message">
-        <div   *ngIf="f.econtact.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Emergency Contact is required
-        </div>
-      </div> -->
+        
         <ion-item lines="none" id="rounded">
           <ion-input name="location" placeholder="Enter Location" formControlName="location" class="form-control">
           </ion-input>
@@ -168,10 +145,7 @@
         <ion-item lines="none" class="updatebtn">
 
           <ion-button type="submit" *ngIf="buttontype == 'add'" (click)="open('add')"><ion-icon name="person-add"></ion-icon>&nbsp; Add Profile</ion-button>
-          <!-- <ion-button type="submit">
-          <ion-icon name="checkmark-outline"></ion-icon>
-          Completed
-        </ion-button> -->
+         
           <ion-button type="submit" *ngIf="buttontype == 'edit'" (click)="open('edit')"><ion-icon name="cloud-upload"></ion-icon> &nbsp; Edit Profile</ion-button>
         </ion-item>
       </form>

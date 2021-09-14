@@ -25,7 +25,7 @@ export class GuestComponent implements OnInit {
   appoint: any = [];
 
   list: any = [];
-
+ submitted = false;
   docDetail: any = [];
   available: any = [];
   samu: any[];
@@ -57,10 +57,14 @@ export class GuestComponent implements OnInit {
     this.getAppointmentDetail(this.docId);
     this.presentLoading();
     this.gForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      contact_number: ['', Validators.required],
-      location: ['', Validators.required]
+      name:['', Validators.required],
+      contact_number:['', Validators.required],
+      location:['', Validators.required]
     });
+    
+  }
+   get f(): { [key: string]: AbstractControl } {
+    return this.gForm.controls;
   }
   slidesOptions = {
     slidesPerView: 2.5
@@ -206,6 +210,14 @@ export class GuestComponent implements OnInit {
   }
 
   onGuest(){
+    this.submitted = true;
+     let data;
+    data = {
+        // user_id: JSON.parse(localStorage.getItem('log')).id,
+        name:this.gForm.value.name,
+        contact_number:this.gForm.value.contact_number,
+         location:this.gForm.value.location,
+    }
     console.log(this.gForm.value);
     this.service.guestUserApi(this.gForm.value).subscribe(data =>{
       console.log(data);

@@ -115,15 +115,16 @@ export class EditprofileComponent implements OnInit {
         this.buttontype = 'add';
       }
     });
+  
     this.editForm = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      contact_number: ['', Validators.required],
+      firstname: [JSON.parse(localStorage.getItem('log')).name.split(' ')[0], Validators.required],
+      lastname: [JSON.parse(localStorage.getItem('log')).name.split(' ')[1], Validators.required],
+      contact_number: [JSON.parse(localStorage.getItem('log')).mobile, Validators.required],
       email: ['', [Validators.required, Validators.email
         // , Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')
       ]],
-      gender: ['', Validators.required],
-      dob: ['', Validators.required],
+      gender: [JSON.parse(localStorage.getItem('log')).gender, Validators.required],
+      dob: [JSON.parse(localStorage.getItem('log')).dob, Validators.required],
       blood_group: ['', Validators.required],
       marital_status: ['', Validators.required],
       height: ['', Validators.required],
@@ -132,7 +133,7 @@ export class EditprofileComponent implements OnInit {
       location: ['', Validators.required],
 
     })
-
+  console.log(JSON.parse(localStorage.getItem('log')).gender);
   }
 
   async handleButtonClick() {
