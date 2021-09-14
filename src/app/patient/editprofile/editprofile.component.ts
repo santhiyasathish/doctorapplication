@@ -86,7 +86,7 @@ export class EditprofileComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.presentLoading();
+    // this.presentLoading();
 
     let id = {
       'user_id': JSON.parse(localStorage.getItem('log')).id
@@ -108,7 +108,7 @@ export class EditprofileComponent implements OnInit {
           marital_status: [this.getprofile.marital_status, Validators.required],
           height: [this.getprofile.height, Validators.required],
           weight: [this.getprofile.weight, Validators.required],
-          econtact: ['', Validators.required],
+          econtact: [this.getprofile.emergency_contact, Validators.required],
           location: [this.getprofile.location, Validators.required],
         });
         await this.loading.dismiss();
@@ -184,10 +184,14 @@ export class EditprofileComponent implements OnInit {
     await alert.present();
   }
   async presentLoading() {
+
     // Prepare a loading controller
     this.loading = await this.loadingController.create({
-      message: 'Loading...',
+      // message: 'Loading...',
       duration: this.value,
+      spinner: 'dots',
+      // duration: this.value,
+      message: 'Please wait...',
       translucent: true,
 
       backdropDismiss: true,
@@ -195,18 +199,8 @@ export class EditprofileComponent implements OnInit {
 
     });
     // Present the loading controller
-
-    if (this.value == 3000) {
-      await this.loading.present();
-      // this.networkError();
-    } else {
-      await this.loading.present();
-
-
-    }
-
-
-
+    await this.loading.present();
+    // this.getappointmentAvailability();
     // this.getappointmentAvailability();
   }
   get f(): {
@@ -291,6 +285,7 @@ export class EditprofileComponent implements OnInit {
   }
 
   onSubmit() {
+    // this.presentLoading();
     let firstname = this.editForm.value.firstname;
     let lastname = this.editForm.value.lastname;
     this.name = firstname + " " + (lastname);
