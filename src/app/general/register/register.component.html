@@ -1,25 +1,25 @@
 <ion-content fullscreen>
   <div class="formbackground">
-  <ion-card class="secondcard">
-  
-    <ion-card-content>
-  
-  
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" lines="none">
-        <div>
-          <ion-item >
-            <ion-label position="floating">UserName</ion-label>
-            <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"
-              class="form-control"></ion-input>
-          </ion-item>
-          <div *ngIf="submitted && f.username.errors"  class="error-message">
-            <div *ngIf="f.username.errors.required">
-              <ion-icon name="alert-circle-outline"></ion-icon> UserName is required
+    <ion-card class="secondcard">
+
+      <ion-card-content>
+
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" lines="none">
+          <div>
+            <ion-item>
+              <ion-label position="floating">UserName</ion-label>
+              <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"
+                class="form-control"></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.username.errors" class="error-message">
+              <div *ngIf="f.username.errors.required">
+                <ion-icon name="alert-circle-outline"></ion-icon> UserName is required
+              </div>
             </div>
+
           </div>
-  
-        </div>
-        <!-- <div>
+          <!-- <div>
           <ion-item>
             <ion-label position="floating">Email</ion-label>
             <ion-input type="email" name="email" placeholder="Enter Email" formControlName="email"></ion-input>
@@ -33,65 +33,66 @@
             </div>
           </div>
         </div> -->
-        <div>
-          <ion-item>
-            <ion-label position="floating">Mobile</ion-label>
-            <ion-input type="number" name="mobile" placeholder="Enter Mobile Number" formControlName="mobile"></ion-input>
-          </ion-item>
-          <div *ngIf="submitted && f.mobile.errors"  class="error-message">
-            <div   *ngIf="f.mobile.errors.required" color="danger">
-              <ion-icon name="alert-circle-outline"></ion-icon> Mobile Number is required
-            </div>
-            <div   *ngIf="f.mobile.errors.pattern" color="danger">
-              <ion-icon name="alert-circle-outline"></ion-icon> Please Enter 10 digit Number
-            </div>
-           
-          </div>
-        </div>
-        <div class="form-group">
-          <ion-item>
-            <ion-label position="floating">
-              <ion-icon name="lock-closed-outline"></ion-icon> Password
-            </ion-label>
-  
-            <ion-input [type]="hide ? 'password' : 'text'" name="password " placeholder="Enter password"
-              formControlName="password"></ion-input>
-            <ion-icon style="margin-top: 20px" slot="end" [name]="hide ? 'eye' : 'eye-off'" (click)="hide = !hide">
-            </ion-icon>
-          </ion-item>
-          <div *ngIf="submitted && f.password.errors"  class="error-message">
-            <div  *ngIf="f.password.errors.required">
-              <ion-icon name="alert-circle-outline"></ion-icon> Password is required
-            </div>
-            <div  *ngIf="f.password.errors.minlength">
-              <ion-icon name="alert-circle-outline"></ion-icon> Password must be at least 6 characters
-            </div>
-            <div   *ngIf="f.password.errors.maxlength">
-              <ion-icon name="alert-circle-outline"></ion-icon> Username must not exceed 40 characters
+          <div>
+            <ion-item>
+              <ion-label position="floating">Mobile</ion-label>
+              <ion-input type="number" name="mobile" placeholder="Enter Mobile Number" formControlName="mobile">
+              </ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.mobile.errors" class="error-message">
+              <div *ngIf="f.mobile.errors.required" color="danger">
+                <ion-icon name="alert-circle-outline"></ion-icon> Mobile Number is required
+              </div>
+              <div *ngIf="f.mobile.errors.pattern" color="danger">
+                <ion-icon name="alert-circle-outline"></ion-icon> Please Enter 10 digit Number
+              </div>
+
             </div>
           </div>
-          <ion-item>
-            <ion-label position="floating">
-              <ion-icon name="lock-closed-outline"></ion-icon> ConfirmPassword
-            </ion-label>
-            <ion-input [type]="hide ? 'password' : 'text'" name="cpassword" placeholder="Enter password"
-              formControlName="cpassword">
-            </ion-input>
-            <ion-icon style="margin-top: 20px" slot="end" [name]="hide ? 'eye' : 'eye-off'" (click)="hide = !hide">
-            </ion-icon>
-          </ion-item>
-          <div *ngIf="submitted && f.cpassword.errors"  class="error-message">
-            <div   *ngIf="f.cpassword.errors.required">
-              <ion-icon name="alert-circle-outline"></ion-icon> Confirm Password is required
+          <div class="form-group">
+            <ion-item>
+              <ion-label position="floating">
+                <ion-icon name="lock-closed-outline"></ion-icon> Password
+              </ion-label>
+
+              <ion-input [type]="hide ? 'password' : 'text'" name="password " placeholder="Enter password"
+                formControlName="password"></ion-input>
+              <ion-icon style="margin-top: 20px" slot="end" [name]="hide ? 'eye' : 'eye-off'" (click)="hide = !hide">
+              </ion-icon>
+            </ion-item>
+            <div *ngIf="submitted && f.password.errors" class="error-message">
+              <div *ngIf="f.password.errors.required">
+                <ion-icon name="alert-circle-outline"></ion-icon> Password is required
+              </div>
+              <div *ngIf="f.password.errors.minlength">
+                <ion-icon name="alert-circle-outline"></ion-icon> Password must be at least 6 characters
+              </div>
+              <div *ngIf="f.password.errors.maxlength">
+                <ion-icon name="alert-circle-outline"></ion-icon> Username must not exceed 40 characters
+              </div>
             </div>
-            <div *ngIf="f.cpassword.errors.matching">
-              <ion-icon name="alert-circle-outline"></ion-icon> Confirm Password does not match
+            <ion-item>
+              <ion-label position="floating">
+                <ion-icon name="lock-closed-outline"></ion-icon> ConfirmPassword
+              </ion-label>
+              <ion-input [type]="hide ? 'password' : 'text'" name="cpassword" placeholder="Enter password"
+                formControlName="cpassword">
+              </ion-input>
+              <ion-icon style="margin-top: 20px" slot="end" [name]="hide ? 'eye' : 'eye-off'" (click)="hide = !hide">
+              </ion-icon>
+            </ion-item>
+            <div *ngIf="submitted && f.cpassword.errors" class="error-message">
+              <div *ngIf="f.cpassword.errors.required">
+                <ion-icon name="alert-circle-outline"></ion-icon> Confirm Password is required
+              </div>
+              <div *ngIf="f.cpassword.errors.matching">
+                <ion-icon name="alert-circle-outline"></ion-icon> Confirm Password does not match
+              </div>
             </div>
+
           </div>
-  
-        </div>
-  
-        <!-- <ion-item>
+
+          <!-- <ion-item>
           <ion-label position="floating">User Type</ion-label>
           <ion-select placeholder="Select One" formControlName="usertype" name="usertype">
             <ion-select-option value="doctor">Doctor</ion-select-option>
@@ -103,39 +104,62 @@
             <ion-icon name="alert-circle-outline"></ion-icon> Please selct anyone
           </div>
         </div> -->
-  
-        <ion-item>
-          <ion-label position="floating">Gender</ion-label>
-          <ion-select placeholder="Select One" formControlName="gender" name="gender">
-            <ion-select-option value="female">Female</ion-select-option>
-            <ion-select-option value="male">Male</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <div *ngIf="submitted && f.gender.errors" class="error-message">
-          <div   *ngIf="f.gender.errors.required">
-            <ion-icon name="alert-circle-outline"></ion-icon> Please selct anyone
+
+          <ion-item>
+            <ion-label position="floating">Gender</ion-label>
+            <ion-select placeholder="Select One" formControlName="gender" name="gender">
+              <ion-select-option value="female">Female</ion-select-option>
+              <ion-select-option value="male">Male</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div *ngIf="submitted && f.gender.errors" class="error-message">
+            <div *ngIf="f.gender.errors.required">
+              <ion-icon name="alert-circle-outline"></ion-icon> Please selct anyone
+            </div>
           </div>
-        </div>
-  
-        <ion-item>
-          <ion-label position="floating">DOB</ion-label>
-          <ion-datetime displayFormat="DD-MM-YYYY" [(ngModel)]="mydate" placeholder="Select Date" formControlName="dob"
+
+          <ion-item class="date-item" lines="none">
+            <div>
+            <!-- <ion-datetime displayFormat="DD-MM-YYYY" [(ngModel)]="mydate" placeholder="Select Date" formControlName="dob"
             name="dob">
-          </ion-datetime>
-        </ion-item>
-        <div *ngIf="submitted && f.dob.errors"  class="error-message">
-          <div   *ngIf="f.dob.errors.required">
-            <ion-icon name="alert-circle-outline"></ion-icon> Please select your dob
+          </ion-datetime> -->
+          <ion-row>
+            <ion-col>
+              <ion-label>DOB</ion-label>
+            </ion-col>
+            
+          </ion-row>
+            <ion-row class="date">
+              
+              <ion-col>
+                
+                <ion-input formControlName="dd" placeholder="DD" name="dd"></ion-input>
+              </ion-col>
+              <ion-col>
+              
+                <ion-input formControlName="mm" placeholder="MM" name="mm"></ion-input>
+              </ion-col>
+              <ion-col>
+                
+                <ion-input formControlName="yyyy" placeholder="YYYY" name="yyyy"></ion-input>
+              </ion-col>
+            </ion-row>
           </div>
-        </div>
-  
-        <ion-button type="submit" color="primary" expand="block">Sign Up</ion-button>
-        <ion-label><p>Already have an account? <a style="text-decoration: none;" routerLink="/login">Login Now</a></p></ion-label>
-        
-      </form>
-  
-    </ion-card-content>
-  </ion-card>
+          </ion-item>
+          <div *ngIf="submitted && f.dob.errors" class="error-message">
+            <div *ngIf="f.dob.errors.required">
+              <ion-icon name="alert-circle-outline"></ion-icon> Please select your dob
+            </div>
+          </div>
+
+          <ion-button type="submit" color="primary" expand="block">Sign Up</ion-button>
+          <ion-label>
+            <p>Already have an account? <a style="text-decoration: none;" routerLink="/login">Login Now</a></p>
+          </ion-label>
+
+        </form>
+
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
-

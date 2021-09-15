@@ -35,11 +35,11 @@ export class DoctorserviceService {
     return this.http.post(this.api +'approvedlistindoctor', data, this.httpOptions);
   }
   doctorprofile (data: any){
-    return this.http.post(this.api+'doctorprofile',data,this.httpOptions);
+    return this.http.post(this.api+'doctorprofile',data);
   }
   
   doctorprofileedit (data: any){
-    return this.http.post(this.api+'doctorprofileedit',data,this.httpOptions);
+    return this.http.post(this.api+'doctorprofileedit',data);
   }
   viewDoctorProfile (data: any){
     return this.http.post(this.api+'getdoctorprofile',data,this.httpOptions);

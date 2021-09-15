@@ -24,9 +24,10 @@ export class RegisterComponent implements OnInit {
   alertmessage: string;
   registerForm: FormGroup;
   submitted = false;
-  mydate;
+  // mydate;
   hide = true;
   subscribe: any;
+  dob: string;
 
   constructor(private formBuilder: FormBuilder,
     private service: ServiceService,
@@ -67,8 +68,10 @@ export class RegisterComponent implements OnInit {
       cpassword: ['', Validators.required],
       // usertype: ['', Validators.required],
       gender: ['', Validators.required],
-      dob: ['', Validators.required]
-
+      // dob: ['', Validators.required],
+      dd:['',[Validators.required,  Validators.maxLength(2)]],
+      mm:['',[Validators.required,  Validators.maxLength(2)]],
+      yyyy:['',[Validators.required,  Validators.maxLength(4)]],
     },
       {
         validators: [Validation.match('password', 'cpassword')]
@@ -85,6 +88,14 @@ export class RegisterComponent implements OnInit {
 
   async onSubmit(): Promise<void> {
     this.submitted = true;
+
+    let dd = this.registerForm.value.dd;
+    let mm = this.registerForm.value.mm;
+    let yyyy = this.registerForm.value.yyyy;
+    // this.dob = dd +'-'+mm+'-'+yyyy;
+    this.dob = yyyy + "-" + mm+"-"+dd;
+    console.log(this.dob);
+
     let data;
     data = {
       // email: this.registerForm.value.email,
@@ -93,7 +104,7 @@ export class RegisterComponent implements OnInit {
       usertype: 'patient',
       password: this.registerForm.value.password,
       gender: this.registerForm.value.gender,
-      dob: this.registerForm.value.dob.split('T')[0],
+      dob: this.dob,
     }
     let alertMsg;
     this.service.register(data).subscribe(async data => {

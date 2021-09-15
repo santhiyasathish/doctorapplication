@@ -47,6 +47,23 @@ ion-content {
         margin-left: 10px;
         margin-top: 10px;
     }
+    .date-item{
+        .date{
+            border-color: black;
+            ion-col{
+                ion-input{
+                    
+                    border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+                    height: 30px;
+                    text-align: center;
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+    
 }
 .formbackground {
     // height: 150%;
