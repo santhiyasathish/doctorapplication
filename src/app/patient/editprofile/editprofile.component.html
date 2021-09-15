@@ -59,11 +59,8 @@
           <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>@gmail.com</ion-label>
         </ion-item>
         <div *ngIf="submitted && f.email.errors"  class="error-message">
-        <div   *ngIf="f.email.errors.required" color="danger">
+        <div  *ngIf="f.email.errors.required" color="danger">
           <ion-icon name="alert-circle-outline"></ion-icon> Email is required
-        </div>
-        <div *ngIf="f.email.errors.pattern">
-          <ion-icon name="alert-circle-outline"></ion-icon> Don't type @gmail.com
         </div>
       </div>
         <ion-item lines="none" id="rounded">
@@ -129,22 +126,22 @@
       </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">Weight</ion-label>
-          <ion-input type="number" name="height" formControlName="height" class="form-control" clearInput></ion-input>
+          <ion-input type="number" name="weight" formControlName="weight" class="form-control" clearInput></ion-input>
           <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>Kg</ion-label>
         </ion-item>
-        <div *ngIf="submitted && f.height.errors"  class="error-message">
-        <div   *ngIf="f.height.errors.required">
+        <div *ngIf="submitted && f.weight.errors"  class="error-message">
+        <div   *ngIf="f.weight.errors.required">
           <ion-icon name="alert-circle-outline"></ion-icon> Height is required
         </div>
       </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">Height</ion-label>
-          <ion-input type="number" name="weight" placeholder="Enter Weight" formControlName="weight"
+          <ion-input type="number" name="height" placeholder="Enter Weight" formControlName="height"
             class="form-control" clearInput></ion-input>
           <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>Cm</ion-label>
         </ion-item>
-        <div *ngIf="submitted && f.weight.errors"  class="error-message">
-        <div   *ngIf="f.weight.errors.required">
+        <div *ngIf="submitted && f.height.errors"  class="error-message">
+        <div   *ngIf="f.height.errors.required">
           <ion-icon name="alert-circle-outline"></ion-icon> Weight is required
         </div>
       </div>

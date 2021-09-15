@@ -16,7 +16,7 @@
         <ion-item lines="none" class="avatar">
           <ion-avatar>
             <img
-              src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+            [src]="images" />
           </ion-avatar>
           <ion-button (click)="fileInput.click()" color="secondary">
             <input style="display: none" type="file" (change)="fileChangeEvent($event)" #fileInput>
@@ -48,9 +48,6 @@
           <div *ngIf="f.email.errors.required">
             <ion-icon name="alert-circle-outline"></ion-icon> Email is required
           </div>
-          <div *ngIf="f.email.errors.pattern">
-            <ion-icon name="alert-circle-outline"></ion-icon> Don't type @gmail.com
-          </div>
         </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">+91</ion-label>
@@ -63,7 +60,7 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-datetime displayFormat="DD-MM-YYYY" [(ngModel)]="myDate" placeholder="Date Of Birth" name="dob" formControlName="dob"></ion-datetime>
+          <ion-datetime displayFormat="DD-MM-YYYY"  placeholder="Date Of Birth" name="dob" formControlName="dob"></ion-datetime>
         </ion-item>
         <div *ngIf="submitted && f.dob.errors" class="error-message">
           <div *ngIf="f.dob.errors.required">

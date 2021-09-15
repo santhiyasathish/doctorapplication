@@ -87,7 +87,29 @@ export class EditprofileComponent implements OnInit {
   }
   ngOnInit() {
     // this.presentLoading();
+    this.getDoctorProfile();
+    
+    
+    this.editForm = this.formBuilder.group({
+      firstname: [ JSON.parse(localStorage.getItem('log')).name.split(' ')[0], Validators.required],
+      lastname: [ JSON.parse(localStorage.getItem('log')).name.split(' ')[1], Validators.required],
+      contact_number: [ JSON.parse(localStorage.getItem('log')).mobile, Validators.required],
+      email: ['', [Validators.required, Validators.email
+        // , Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')
+      ]],
+      gender: [JSON.parse(localStorage.getItem('log')).gender, Validators.required],
+      dob: [JSON.parse(localStorage.getItem('log')).dob, Validators.required],
+      blood_group: ['', Validators.required],
+      marital_status: ['', Validators.required],
+      height: ['', Validators.required],
+      weight: ['', Validators.required],
+      econtact: ['', Validators.required],
+      location: ['', Validators.required],
 
+    })
+
+  }
+  getDoctorProfile(){
     let id = {
       'user_id': JSON.parse(localStorage.getItem('log')).id
     };
@@ -95,8 +117,9 @@ export class EditprofileComponent implements OnInit {
       this.getprofile = JSON.parse(JSON.stringify(data)).data;
       if (JSON.parse(JSON.stringify(data)).success == true) {
         this.buttontype = 'edit';
-        console.log(this.getprofile);
+      
         this.images = this.getprofile.image;
+       
         this.editForm = this.formBuilder.group({
           firstname: [this.getprofile.name.split(' ')[0], Validators.required],
           lastname: [this.getprofile.name.split(' ')[1], Validators.required],
@@ -116,25 +139,8 @@ export class EditprofileComponent implements OnInit {
       else {
         this.buttontype = 'add';
       }
+      
     });
-    this.editForm = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      contact_number: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email
-        // , Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')
-      ]],
-      gender: ['', Validators.required],
-      dob: ['', Validators.required],
-      blood_group: ['', Validators.required],
-      marital_status: ['', Validators.required],
-      height: ['', Validators.required],
-      weight: ['', Validators.required],
-      econtact: ['', Validators.required],
-      location: ['', Validators.required],
-
-    })
-
   }
 
   async handleButtonClick() {
@@ -337,7 +343,8 @@ export class EditprofileComponent implements OnInit {
       this.service.patientprofile(formData).subscribe(async data => {
         this.detail = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.detail.messages);
-        console.log(data);
+        this.getDoctorProfile();
+    
         await this.loading.dismiss();
       });
 
@@ -347,7 +354,8 @@ export class EditprofileComponent implements OnInit {
         this.profileedit = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.profileedit.messages);
         this.router.navigateByUrl('patient/docprofile/3');
-        console.log(data);
+        this.getDoctorProfile();
+    
         await this.loading.dismiss();
       })
 

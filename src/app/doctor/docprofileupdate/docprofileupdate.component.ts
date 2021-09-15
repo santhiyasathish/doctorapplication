@@ -30,7 +30,7 @@ export class DocprofileupdateComponent implements OnInit {
   detail: any = [];
   email: string;
   address: any = [];
-  contact_number: string;
+  // contact_number: string;
   location: string;
   value: 3000;
   loading: any;
@@ -71,56 +71,18 @@ export class DocprofileupdateComponent implements OnInit {
   ngOnInit() {
 
     this.presentLoading();
+    this.getDoctorProfile();
     
-    let id = {
-      'user_id': JSON.parse(localStorage.getItem('log')).id
-    };
-    this.service.viewDoctorProfile(id).subscribe(async data => {
-      this.getprofile = JSON.parse(JSON.stringify(data)).data;
-      if (JSON.parse(JSON.stringify(data)).success == true) {
-        this.buttontype = 'edit';
-        this.address = JSON.parse(this.getprofile.location);
-        await this.loading.dismiss();
-
-        this.doctprofileupdateForm = this.formBuilder.group({
-          firstname: [this.getprofile.name.split(' ')[0], Validators.required],
-          lastname: [this.getprofile.name.split(' ')[1], Validators.required],
-          email: [this.getprofile.email, [Validators.required, Validators.email]],
-          contact_number: [this.getprofile.contact_number, Validators.required],
-          gender: [this.getprofile.gender, Validators.required],
-          dob: [this.getprofile.dob ? this.getprofile.dob.split('T')[0] : " ", Validators.required],
-          institute: [this.getprofile.institute, Validators.required],
-          qualification: [this.getprofile.qualification, Validators.required],
-          description: [this.getprofile.description, Validators.required],
-          speciality: [this.getprofile.professional, Validators.required],
-          experience: [this.getprofile.experience, Validators.required],
-          address: this.formBuilder.group({
-            address1: [this.address.address1, Validators.required],
-            address2: [this.address.address2, Validators.required],
-            city: [this.address.city, Validators.required],
-            state: [this.address.state, Validators.required],
-            zip: [this.address.zip, Validators.required]
-          }),
-          consolidatefees: [this.getprofile.consolidatefees, Validators.required],
-          emergency_contact: [this.getprofile.emergency_contact, Validators.required],
-          about: [this.getprofile.about, Validators.required]
-        });
-        
-      }
-      else {
-        this.buttontype = 'add';
-      }
-    });
     
    
     this.doctprofileupdateForm = this.formBuilder.group({
 
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
+      firstname: [ JSON.parse(localStorage.getItem('log')).name.split(' ')[0], Validators.required],
+      lastname: [ JSON.parse(localStorage.getItem('log')).name.split(' ')[1], Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      contact_number: ['', Validators.required],
-      gender: ['', Validators.required],
-      dob: ['', Validators.required],
+      contact_number: [JSON.parse(localStorage.getItem('log')).mobile, Validators.required],
+      gender: [JSON.parse(localStorage.getItem('log')).gender, Validators.required],
+      dob: [JSON.parse(localStorage.getItem('log')).dob, Validators.required],
       institute: ['', Validators.required],
       qualification: ['', Validators.required],
       description: ['', Validators.required],
@@ -140,6 +102,51 @@ export class DocprofileupdateComponent implements OnInit {
     
 
   }
+
+getDoctorProfile(){
+  let id = {
+    'user_id': JSON.parse(localStorage.getItem('log')).id
+  };
+  this.service.viewDoctorProfile(id).subscribe(async data => {
+    this.getprofile = JSON.parse(JSON.stringify(data)).data;
+    if (JSON.parse(JSON.stringify(data)).success == true) {
+      this.buttontype = 'edit';
+      this.address = JSON.parse(this.getprofile.location);
+      // await this.loading.dismiss();
+      
+      this.images = this.getprofile.image;
+      this.doctprofileupdateForm = this.formBuilder.group({
+        firstname: [this.getprofile.name.split(' ')[0], Validators.required],
+        lastname: [this.getprofile.name.split(' ')[1], Validators.required],
+        email: [this.getprofile.email, [Validators.required, Validators.email]],
+        contact_number: [this.getprofile.contact_number, Validators.required],
+        gender: [this.getprofile.gender, Validators.required],
+        dob: [this.getprofile.dob.split('T')[0], Validators.required],
+        institute: [this.getprofile.institute, Validators.required],
+        qualification: [this.getprofile.qualification, Validators.required],
+        description: [this.getprofile.description, Validators.required],
+        speciality: [this.getprofile.professional, Validators.required],
+        experience: [this.getprofile.experience, Validators.required],
+        address: this.formBuilder.group({
+          address1: [this.address.address1, Validators.required],
+          address2: [this.address.address2, Validators.required],
+          city: [this.address.city, Validators.required],
+          state: [this.address.state, Validators.required],
+          zip: [this.address.zip, Validators.required]
+        }),
+        consolidatefees: [this.getprofile.consolidatefees, Validators.required],
+        emergency_contact: [this.getprofile.emergency_contact, Validators.required],
+        about: [this.getprofile.about, Validators.required]
+      });
+      
+    }
+    else {
+      this.buttontype = 'add';
+    }
+   
+  });
+}
+
   get f(): {
     [key: string]: AbstractControl
   } {
@@ -253,7 +260,7 @@ export class DocprofileupdateComponent implements OnInit {
      // let data;
     let formData: FormData = new FormData();
 
-   this.contact_number =JSON.stringify( this.doctprofileupdateForm.value.contact_number);
+  //  this.contact_number =JSON.stringify( this.doctprofileupdateForm.value.contact_number);
     this.location = JSON.stringify(this.doctprofileupdateForm.value.address);
 
     if (this.selectedFile != undefined) {
@@ -262,7 +269,7 @@ export class DocprofileupdateComponent implements OnInit {
     }
  formData.append('user_id', JSON.parse(localStorage.getItem('log')).id);
     formData.append('name', this.name);
-    formData.append('contact_number', this.contact_number,);
+    formData.append('contact_number', this.doctprofileupdateForm.value.contact_number);
     formData.append('email', this.doctprofileupdateForm.value.email);
     formData.append('gender', this.doctprofileupdateForm.value.gender);
     formData.append('dob', this.doctprofileupdateForm.value.dob.split('T')[0]);
@@ -275,32 +282,6 @@ export class DocprofileupdateComponent implements OnInit {
     formData.append('experience', this.doctprofileupdateForm.value.experience);
     formData.append('consolidatefees', this.doctprofileupdateForm.value.consolidatefees);
     formData.append('about', this.doctprofileupdateForm.value.about);
-
-
-    // let data;
-    
-    // data = {
-    //   user_id: JSON.parse(localStorage.getItem('log')).id,
-    //   name: this.name,
-    //   contact_number:this.contact_number,
-    //   gender: this.doctprofileupdateForm.value.gender,
-    //   email: this.doctprofileupdateForm.value.email,
-    //   dob: this.doctprofileupdateForm.value.dob.split('T')[0],
-    //   institute: this.doctprofileupdateForm.value.institute,
-    //   description: this.doctprofileupdateForm.value.description,
-    //   qualification: this.doctprofileupdateForm.value.qualification,
-    //   professional: this.doctprofileupdateForm.value.speciality,
-    //   location:  this.location,
-    //   experience: this.doctprofileupdateForm.value.experience,
-    //   consolidatefees: this.doctprofileupdateForm.value.consolidatefees,
-    //   emergency_contact: this.doctprofileupdateForm.value.emergency_contact,
-    //   about: this.doctprofileupdateForm.value.about
-    // }
-
-    
-    console.log(this.doctprofileupdateForm.value.email);
-    // console.log(data, "data");
-
 
     if (this.doctprofileupdateForm.invalid) {
       this.failedAlert('Address field is required');
@@ -315,12 +296,7 @@ export class DocprofileupdateComponent implements OnInit {
         this.detail = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.detail.messages);
         await this.loading.dismiss();
-       if(this.location == null){
-        this.failedAlert('Address field is required');
-       }
-       else{
-
-       }
+        this.getDoctorProfile();
         console.log(data);
       });
 
@@ -329,7 +305,7 @@ export class DocprofileupdateComponent implements OnInit {
       this.service.doctorprofileedit(formData).subscribe(async data => {
         this.profileedit = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.profileedit.messages);
-        // console.log(data);
+        this.getDoctorProfile();
         await this.loading.dismiss();
       });
 
