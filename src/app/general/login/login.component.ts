@@ -10,6 +10,7 @@ import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -21,31 +22,42 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   hide = true;
+  subscribe: any;
 
   constructor(
     private formBuilder: FormBuilder, 
     private service: ServiceService, 
     private router: Router, 
     public alertCtrl: AlertController,
-    private menu: MenuController
+    private menu: MenuController,
+    private plt :Platform,
     ) {
+      
     this.menu.enable(false);
+    this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
+      if (this.constructor.name == "LoginComponent") {
+        window.location.href ="patient/docprofile/3";
+      }
+    });
     }
 
   ngOnInit() {
     if (localStorage.getItem('log') != null) {
       if (JSON.parse(localStorage.getItem('log')).user_type == 'doctor') {
-        this.router.navigateByUrl('doctor/docprofileupdate');
+        window.location.href ="doctor/docprofileupdate";
+        // this.router.navigateByUrl('');
       }
       else if (JSON.parse(localStorage.getItem('log')).user_type == 'patient') {
-        this.router.navigateByUrl('patient/editprofile');
+        window.location.href = "patient/editprofile";
+        // this.router.navigateByUrl('');
       }
       else {
-        this.router.navigateByUrl('patient/docprofile/3');
+        window.location.href = "patient/docprofile/3";
+        // this.router.navigateByUrl('patient/docprofile/3');
       }
     }
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       password: [
               '',
               [
@@ -70,7 +82,7 @@ export class LoginComponent implements OnInit {
     }
 
     let logData = {
-      mobile : this.loginForm.value.username,
+      mobile : this.loginForm.value.mobile,
       password : this.loginForm.value.password
     };
     let responseData;
@@ -85,7 +97,7 @@ export class LoginComponent implements OnInit {
           // this.router.navigateByUrl('');
         }
         else if (JSON.parse(localStorage.getItem('log')).user_type == 'patient') {
-          window.location.href = "patient/docprofile/3";
+          window.location.href = "patient/book/3";
           // this.router.navigateByUrl('');
         }
         else {

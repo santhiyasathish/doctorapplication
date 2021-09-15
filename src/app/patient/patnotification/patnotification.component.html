@@ -45,8 +45,9 @@
       <ion-item class="status" lines='none'>
         <ion-text>Status: </ion-text>
         <ion-label [color]="data.approvestatus == 'accept' ? 'success' : 'danger'">
-          <h2 [innerHtml]="data.approvestatus == 'accept' ? ' Your Appointment Successfully' : ' Your Appointment Rejected'">
+          <h2 *ngIf="data.approvestatus != 'pending'" [innerHtml]="data.approvestatus == 'accept' ? ' Your Appointment Successfully' : ' Your Appointment Rejected'">
           </h2>
+          <h2 *ngIf="data.approvestatus == 'pending'" [innerHtml]="data.approvestatus == 'pending' ? ' Waiting for your approval ':''"></h2>
         </ion-label>
 
       </ion-item>

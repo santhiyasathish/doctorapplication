@@ -80,7 +80,6 @@ export class DocprofileupdateComponent implements OnInit {
         this.buttontype = 'edit';
         this.address = JSON.parse(this.getprofile.location);
         await this.loading.dismiss();
-
         this.doctprofileupdateForm = this.formBuilder.group({
           firstname: [this.getprofile.name.split(' ')[0], Validators.required],
           lastname: [this.getprofile.name.split(' ')[1], Validators.required],

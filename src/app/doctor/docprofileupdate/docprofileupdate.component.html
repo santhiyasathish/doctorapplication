@@ -62,7 +62,7 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-datetime displayFormat="DD-MM-YYYY" [(ngModel)]="myDate" placeholder="Date Of Birth" name="dob" formControlName="dob"></ion-datetime>
+          <ion-datetime displayFormat="DD-MM-YYYY" placeholder="Date Of Birth" name="dob" formControlName="dob"></ion-datetime>
         </ion-item>
         <div *ngIf="submitted && f.dob.errors" class="error-message">
           <div *ngIf="f.dob.errors.required">

@@ -6,13 +6,21 @@
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <ion-item>
             <ion-label position="floating">Mobile No.</ion-label>
-            <ion-input type="text" name="username" placeholder="Enter Mobile Number" formControlName="username"></ion-input>
+            <ion-input type="text" name="mobile" placeholder="Enter Mobile Number" formControlName="mobile"></ion-input>
           </ion-item>
-          <div *ngIf="submitted && f.username.errors" class="error-message">
-            <div *ngIf="f.username.errors.required">
+          <div *ngIf=" f.mobile.invalid && ( f.mobile.touched || f.mobile.dirty)">
+            <div class="error-message" *ngIf=" f.mobile.errors?.required">*Mobile No. is required</div>
+            <div class="error-message" *ngIf=" f.mobile.errors?.pattern"> Please Enter 10 digit Mobile Number</div>
+          </div>
+
+          <!-- <div *ngIf="submitted &&  f.mobile.invalid " class="error-message">
+            <div *ngIf="f.mobile.errors?.required">
               <ion-icon name="alert-circle-outline"></ion-icon> Mobile No. is required
             </div>
-          </div>
+            <div   *ngIf="f.mobile.errors?.pattern" color="danger">
+              <ion-icon name="alert-circle-outline"></ion-icon> Please Enter 10 digit Number
+            </div>
+          </div> -->
           <ion-item>
             <ion-label position="floating">
               <ion-icon name="lock-closed-outline"></ion-icon> Password
