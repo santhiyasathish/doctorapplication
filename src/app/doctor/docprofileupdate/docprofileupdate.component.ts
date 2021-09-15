@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { Camera, CameraDirection, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera'
 import { DoctorserviceService } from '../doctorservice.service';
 import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
@@ -35,8 +36,8 @@ export class DocprofileupdateComponent implements OnInit {
   loading: any;
   imgurl: any;
   subscribe: any;
- 
-
+  selectedFile;
+ images = "";
 
   constructor(private formBuilder: FormBuilder, 
     private service: DoctorserviceService,
@@ -144,6 +145,24 @@ export class DocprofileupdateComponent implements OnInit {
   } {
     return this.doctprofileupdateForm.controls;
   }
+  getCamera() {
+     Camera.getPhoto({
+      quality: 100,
+      width: 100,
+      height: 100,
+      source: CameraSource.Photos,
+      resultType: CameraResultType.DataUrl,
+    }).then((result) => {
+      
+      this.images = (result.dataUrl);
+      console.log('image',this.images);
+    }, (err) => {
+
+    });
+  }
+  fileChangeEvent(event: any): void {
+      this.selectedFile = event.target.files[0];
+  }
 
   async handleButtonClick() {
     await this.loading.dismiss();
@@ -231,27 +250,52 @@ export class DocprofileupdateComponent implements OnInit {
 
     
     this.submitted = true;
+     // let data;
+    let formData: FormData = new FormData();
 
-    let data;
-    this.contact_number =JSON.stringify( this.doctprofileupdateForm.value.contact_number);
+   this.contact_number =JSON.stringify( this.doctprofileupdateForm.value.contact_number);
     this.location = JSON.stringify(this.doctprofileupdateForm.value.address);
-    data = {
-      user_id: JSON.parse(localStorage.getItem('log')).id,
-      name: this.name,
-      contact_number:this.contact_number,
-      gender: this.doctprofileupdateForm.value.gender,
-      email: this.doctprofileupdateForm.value.email,
-      dob: this.doctprofileupdateForm.value.dob.split('T')[0],
-      institute: this.doctprofileupdateForm.value.institute,
-      description: this.doctprofileupdateForm.value.description,
-      qualification: this.doctprofileupdateForm.value.qualification,
-      professional: this.doctprofileupdateForm.value.speciality,
-      location:  this.location,
-      experience: this.doctprofileupdateForm.value.experience,
-      consolidatefees: this.doctprofileupdateForm.value.consolidatefees,
-      emergency_contact: this.doctprofileupdateForm.value.emergency_contact,
-      about: this.doctprofileupdateForm.value.about
+
+    if (this.selectedFile != undefined) {
+      // console.log(this.selectedFile.name);
+      formData.append('image', this.selectedFile, this.selectedFile.name);
     }
+ formData.append('user_id', JSON.parse(localStorage.getItem('log')).id);
+    formData.append('name', this.name);
+    formData.append('contact_number', this.contact_number,);
+    formData.append('email', this.doctprofileupdateForm.value.email);
+    formData.append('gender', this.doctprofileupdateForm.value.gender);
+    formData.append('dob', this.doctprofileupdateForm.value.dob.split('T')[0]);
+    formData.append('institute', this.doctprofileupdateForm.value.institute);
+    formData.append('description', this.doctprofileupdateForm.value.description);
+    formData.append('qualification', this.doctprofileupdateForm.value.qualification);
+    formData.append('professional', this.doctprofileupdateForm.value.speciality);
+    formData.append('emergency_contact', this.doctprofileupdateForm.value.emergency_contact);
+    formData.append('location',  this.location);
+    formData.append('experience', this.doctprofileupdateForm.value.experience);
+    formData.append('consolidatefees', this.doctprofileupdateForm.value.consolidatefees);
+    formData.append('about', this.doctprofileupdateForm.value.about);
+
+
+    // let data;
+    
+    // data = {
+    //   user_id: JSON.parse(localStorage.getItem('log')).id,
+    //   name: this.name,
+    //   contact_number:this.contact_number,
+    //   gender: this.doctprofileupdateForm.value.gender,
+    //   email: this.doctprofileupdateForm.value.email,
+    //   dob: this.doctprofileupdateForm.value.dob.split('T')[0],
+    //   institute: this.doctprofileupdateForm.value.institute,
+    //   description: this.doctprofileupdateForm.value.description,
+    //   qualification: this.doctprofileupdateForm.value.qualification,
+    //   professional: this.doctprofileupdateForm.value.speciality,
+    //   location:  this.location,
+    //   experience: this.doctprofileupdateForm.value.experience,
+    //   consolidatefees: this.doctprofileupdateForm.value.consolidatefees,
+    //   emergency_contact: this.doctprofileupdateForm.value.emergency_contact,
+    //   about: this.doctprofileupdateForm.value.about
+    // }
 
     
     console.log(this.doctprofileupdateForm.value.email);
@@ -267,7 +311,7 @@ export class DocprofileupdateComponent implements OnInit {
 
     if (this.buttontype == 'add') {
 
-      this.service.doctorprofile(data).subscribe(async data => {
+      this.service.doctorprofile(formData).subscribe(async data => {
         this.detail = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.detail.messages);
         await this.loading.dismiss();
@@ -282,10 +326,10 @@ export class DocprofileupdateComponent implements OnInit {
 
     }
     else {
-      this.service.doctorprofileedit(data).subscribe(async data => {
+      this.service.doctorprofileedit(formData).subscribe(async data => {
         this.profileedit = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.profileedit.messages);
-        console.log(data);
+        // console.log(data);
         await this.loading.dismiss();
       });
 
