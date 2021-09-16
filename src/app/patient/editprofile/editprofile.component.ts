@@ -41,6 +41,7 @@ export class EditprofileComponent implements OnInit {
   imgurl: any;
   subscribe: any;
   selectedFile;
+  dob: string;
   // backHidden: boolean=true;
 
   // croppedImagepath = "";
@@ -98,7 +99,9 @@ export class EditprofileComponent implements OnInit {
         // , Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')
       ]],
       gender: [JSON.parse(localStorage.getItem('log')).gender, Validators.required],
-      dob: [JSON.parse(localStorage.getItem('log')).dob, Validators.required],
+      dd:[JSON.parse(localStorage.getItem('log')).dob.split('-')[2],[Validators.required, Validators.maxLength(2), Validators.pattern("^[0-20]{1,2}?$")]],
+      mm:[JSON.parse(localStorage.getItem('log')).dob.split('-')[1],[Validators.required,  Validators.maxLength(2),Validators.pattern("^[0-1]{1,2}?$")]],
+      yyyy:[JSON.parse(localStorage.getItem('log')).dob.split('-')[0],[Validators.required,  Validators.maxLength(4),Validators.pattern("^[1900-3000]{0,4}?$")]],
       blood_group: ['', Validators.required],
       marital_status: ['', Validators.required],
       height: ['', Validators.required],
@@ -126,7 +129,9 @@ export class EditprofileComponent implements OnInit {
           contact_number: [this.getprofile.contact_number, Validators.required],
           email: [this.getprofile.email, [Validators.required, Validators.email]],
           gender: [this.getprofile.gender, Validators.required],
-          dob: [this.getprofile.dob.split('T')[0], Validators.required],
+          dd: [this.getprofile.dob.split('-')[2], Validators.required],
+        mm: [this.getprofile.dob.split('-')[1], Validators.required],
+        yyyy: [this.getprofile.dob.split('-')[0], Validators.required],
           blood_group: [this.getprofile.blood_group.toLowerCase(), Validators.required],
           marital_status: [this.getprofile.marital_status, Validators.required],
           height: [this.getprofile.height, Validators.required],
@@ -295,7 +300,11 @@ export class EditprofileComponent implements OnInit {
     let firstname = this.editForm.value.firstname;
     let lastname = this.editForm.value.lastname;
     this.name = firstname + " " + (lastname);
-
+    let dd = this.editForm.value.dd;
+    let mm = this.editForm.value.mm;
+    let yyyy = this.editForm.value.yyyy;
+    this.dob = yyyy + "-" + mm+"-"+dd;
+    console.log(this.dob);
     this.submitted = true;
 
     // let data;
@@ -311,7 +320,7 @@ export class EditprofileComponent implements OnInit {
     formData.append('contact_number', this.editForm.value.contact_number);
     formData.append('email', this.editForm.value.email);
     formData.append('gender', this.editForm.value.gender);
-    formData.append('dob', this.editForm.value.dob.split('T')[0]);
+    formData.append('dob', this.dob);
     formData.append('blood_group', this.editForm.value.blood_group);
     formData.append('marital_status', this.editForm.value.marital_status);
     formData.append('height', this.editForm.value.height);
@@ -343,7 +352,7 @@ export class EditprofileComponent implements OnInit {
       this.service.patientprofile(formData).subscribe(async data => {
         this.detail = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.detail.messages);
-        this.getDoctorProfile();
+        
     
         await this.loading.dismiss();
       });
@@ -353,18 +362,42 @@ export class EditprofileComponent implements OnInit {
       this.service.patinetprofileedit(formData).subscribe(async data => {
         this.profileedit = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.profileedit.messages);
-        this.router.navigateByUrl('patient/docprofile/3');
+        // this.router.navigateByUrl('patient/docprofile/3');
+        window.location.href='patient/docprofile/3';
         this.getDoctorProfile();
     
-        await this.loading.dismiss();
+        // await this.loading.dismiss();
       })
 
 
     }
   }
-  open(status) {
+  async open(status) {
+    this.loading = await this.loadingController.create({
+      spinner: 'dots',
+      duration: this.value,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: '',
+      backdropDismiss: true,
+      mode: 'ios',
+      keyboardClose: true,
 
-    this.buttontype = status;
+    });
+    // Present the loading controller
+
+    if (this.value == 3000) {
+      await this.loading.present();
+      // this.networkError();
+    } else {
+      await this.loading.present();
+      // this.cancelAppointment();
+      // this.getDoctorProfile();
+      this.buttontype = status;
+    }
+    await this.loading.dismiss();
+    
+    
   }
 
   async failedAlert(msg) {

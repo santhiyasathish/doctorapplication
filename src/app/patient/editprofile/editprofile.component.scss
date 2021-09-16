@@ -69,7 +69,22 @@ ion-content {
                         }
                     }
                 }
-
+                .date-item{
+                    .date{
+                        border-color: black;
+                        ion-col{
+                            ion-input{
+                                
+                                border: 1px solid #ccc;
+              border-radius: 4px;
+              box-sizing: border-box;
+                                height: 30px;
+                                text-align: center;
+                                border-radius: 4px;
+                            }
+                        }
+                    }
+                }
                 .updatebtn {
                     display: flex;
                     justify-content: center;

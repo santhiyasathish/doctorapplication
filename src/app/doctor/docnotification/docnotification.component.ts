@@ -140,7 +140,8 @@ export class DocnotificationComponent implements OnInit {
       // this.networkError();
     } else {
       await this.loading.present();
-      this.pendingList()
+      this.pendingList();
+      // this.approve('','');
     }
     // this.getappointmentAvailability();
   }
@@ -164,6 +165,8 @@ export class DocnotificationComponent implements OnInit {
       //  this.getlista('0');
       console.log("availabledata", this.message);
       await this.loading.dismiss();
+      // window.location.href="doctor/docnotification/";
+      // await this.loading.dismiss();
     });
   }
 
@@ -179,10 +182,38 @@ export class DocnotificationComponent implements OnInit {
       id: id,
       approvestatus: status
     }
-    this.service.approveApiCall(postData).subscribe(data => {
+    this.service.approveApiCall(postData).subscribe(async data => {
       console.log(data);
-      this.pendingList();
-      this.presentLoading();
+      
+        // Prepare a loading controller
+        this.loading = await this.loadingController.create({
+          spinner: 'dots',
+          duration: this.value,
+          message: 'Please wait...',
+          translucent: true,
+          cssClass: '',
+          backdropDismiss: true,
+          mode: 'ios',
+          keyboardClose: true,
+    
+        });
+        // Present the loading controller
+    
+        if (this.value == 3000) {
+          await this.loading.present();
+          // this.networkError();
+        } else {
+          await this.loading.present();
+          this.pendingList();
+          window.location.href="doctor/docnotification/";
+          // this.approve('','');
+        }
+        // this.getappointmentAvailability();
+      
+      // this.presentLoading();
+      // this.pendingList();
+      
+      
     });
   }
 }
