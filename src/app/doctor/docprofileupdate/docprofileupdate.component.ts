@@ -38,6 +38,7 @@ export class DocprofileupdateComponent implements OnInit {
   subscribe: any;
   selectedFile;
  images = "";
+  dob: string;
 
   constructor(private formBuilder: FormBuilder, 
     private service: DoctorserviceService,
@@ -82,7 +83,9 @@ export class DocprofileupdateComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       contact_number: [JSON.parse(localStorage.getItem('log')).mobile, Validators.required],
       gender: [JSON.parse(localStorage.getItem('log')).gender, Validators.required],
-      dob: [JSON.parse(localStorage.getItem('log')).dob, Validators.required],
+      dd:[JSON.parse(localStorage.getItem('log')).dob.split('-')[2],[Validators.required,Validators.maxLength(2),Validators.pattern("^[0-20]{1,2}?$")]],
+      mm:[JSON.parse(localStorage.getItem('log')).dob.split('-')[1],[Validators.required,Validators.maxLength(2), Validators.pattern("^[0-1]{1,2}?$")]],
+      yyyy:[JSON.parse(localStorage.getItem('log')).dob.split('-')[0],[Validators.required,Validators.maxLength(4),Validators.pattern("^[1900-3000]{0,4}?$")]],
       institute: ['', Validators.required],
       qualification: ['', Validators.required],
       description: ['', Validators.required],
@@ -112,7 +115,7 @@ getDoctorProfile(){
     if (JSON.parse(JSON.stringify(data)).success == true) {
       this.buttontype = 'edit';
       this.address = JSON.parse(this.getprofile.location);
-      // await this.loading.dismiss();
+      await this.loading.dismiss();
       
       this.images = this.getprofile.image;
       this.doctprofileupdateForm = this.formBuilder.group({
@@ -121,7 +124,10 @@ getDoctorProfile(){
         email: [this.getprofile.email, [Validators.required, Validators.email]],
         contact_number: [this.getprofile.contact_number, Validators.required],
         gender: [this.getprofile.gender, Validators.required],
-        dob: [this.getprofile.dob.split('T')[0], Validators.required],
+        // dob: [this.dob, Validators.required],
+        dd: [this.getprofile.dob.split('-')[2], Validators.required],
+        mm: [this.getprofile.dob.split('-')[1], Validators.required],
+        yyyy: [this.getprofile.dob.split('-')[0], Validators.required],
         institute: [this.getprofile.institute, Validators.required],
         qualification: [this.getprofile.qualification, Validators.required],
         description: [this.getprofile.description, Validators.required],
@@ -138,6 +144,7 @@ getDoctorProfile(){
         emergency_contact: [this.getprofile.emergency_contact, Validators.required],
         about: [this.getprofile.about, Validators.required]
       });
+
       
     }
     else {
@@ -247,6 +254,12 @@ getDoctorProfile(){
     let firstname = this.doctprofileupdateForm.value.firstname;
     let lastname = this.doctprofileupdateForm.value.lastname;
     this.name = firstname + " " + (lastname);
+    let dd = this.doctprofileupdateForm.value.dd;
+    let mm = this.doctprofileupdateForm.value.mm;
+    let yyyy = this.doctprofileupdateForm.value.yyyy;
+    this.dob = yyyy + "-" + mm+"-"+dd;
+    console.log(this.dob);
+    
     if (this.doctprofileupdateForm.value.email.split('@').length == 2) {
       this.doctprofileupdateForm.value.email;
 
@@ -272,7 +285,7 @@ getDoctorProfile(){
     formData.append('contact_number', this.doctprofileupdateForm.value.contact_number);
     formData.append('email', this.doctprofileupdateForm.value.email);
     formData.append('gender', this.doctprofileupdateForm.value.gender);
-    formData.append('dob', this.doctprofileupdateForm.value.dob.split('T')[0]);
+    formData.append('dob', this.dob);
     formData.append('institute', this.doctprofileupdateForm.value.institute);
     formData.append('description', this.doctprofileupdateForm.value.description);
     formData.append('qualification', this.doctprofileupdateForm.value.qualification);
@@ -311,9 +324,30 @@ getDoctorProfile(){
 
     }
   }
-  open(status) {
+  async open(status) {
+    this.loading = await this.loadingController.create({
+      spinner: 'dots',
+      duration: this.value,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: '',
+      backdropDismiss: true,
+      mode: 'ios',
+      keyboardClose: true,
 
-    this.buttontype = status;
+    });
+    // Present the loading controller
+
+    if (this.value == 3000) {
+      await this.loading.present();
+      // this.networkError();
+    } else {
+      await this.loading.present();
+      // this.pendingList()
+      this.buttontype = status;
+    }
+
+   
   }
   
   async failedAlert(msg) {

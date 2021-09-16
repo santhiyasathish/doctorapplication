@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
   hide = true;
   subscribe: any;
   dob: string;
+  contact_number: any;
 
   constructor(private formBuilder: FormBuilder,
     private service: ServiceService,
@@ -69,9 +70,9 @@ export class RegisterComponent implements OnInit {
       // usertype: ['', Validators.required],
       gender: ['', Validators.required],
       // dob: ['', Validators.required],
-      dd:['',[Validators.required,  Validators.maxLength(2)]],
-      mm:['',[Validators.required,  Validators.maxLength(2)]],
-      yyyy:['',[Validators.required,  Validators.maxLength(4)]],
+      dd:['',[Validators.required, Validators.pattern("^[0-20]{1,2}?$")]],
+      mm:['',[Validators.required, Validators.pattern("^[0-1]{1,2}?$") ]],
+      yyyy:['',[Validators.required, Validators.pattern("^[1900-3000]{0,4}?$") ]],
     },
       {
         validators: [Validation.match('password', 'cpassword')]
@@ -95,11 +96,12 @@ export class RegisterComponent implements OnInit {
     // this.dob = dd +'-'+mm+'-'+yyyy;
     this.dob = yyyy + "-" + mm+"-"+dd;
     console.log(this.dob);
-
+    this.contact_number = JSON.stringify(this.registerForm.value.mobile);
     let data;
     data = {
+      
       // email: this.registerForm.value.email,
-      mobile: this.registerForm.value.mobile,
+      mobile: this.contact_number,
       username: this.registerForm.value.username,
       usertype: 'patient',
       password: this.registerForm.value.password,
@@ -156,4 +158,8 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+}
+
+function mobile(mobile: any): string {
+  throw new Error('Function not implemented.');
 }

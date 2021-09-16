@@ -326,8 +326,29 @@ export class DoctorprofileviewComponent implements OnInit {
         {
           text: 'OK',
           handler: async data => {
+
+            this.loading = await this.loadingController.create({
+              spinner: 'dots',
+              duration: this.value,
+              message: 'Please wait...',
+              translucent: true,
+              cssClass: '',
+              backdropDismiss: true,
+              mode: 'ios',
+              keyboardClose: true,
+        
+            });
+            // Present the loading controller
+        
+            if (this.value == 3000) {
+              await this.loading.present();
+              // this.networkError();
+            } else {
+              await this.loading.present();
+              this.cancelAppointment();
+            }
             
-            this.cancelAppointment();
+            // this.cancelAppointment();
             
             
           }
@@ -346,7 +367,8 @@ export class DoctorprofileviewComponent implements OnInit {
         appointmentid: this.apontid
       }
       console.log("cancel",candata);
-      this.service.cancelAppointment(candata).subscribe( data=>{
+      this.service.cancelAppointment(candata).subscribe( async data=>{
+        await this.loading.dismiss();
         window.location.href = 'patient/docprofile/3'
         
       });
