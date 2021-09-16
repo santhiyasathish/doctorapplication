@@ -313,8 +313,8 @@ export class DoctorprofileviewComponent implements OnInit {
   async conform() {
     const alert = await this.alertController.create({
 
-      subHeader: 'Booking',
-      message: 'Do you want to booking your Appointment',
+      subHeader: 'Booking Cancel',
+      message: 'Cancel your Appointment ?',
       buttons: [
         {
           text: 'Cancel',

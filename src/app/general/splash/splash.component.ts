@@ -12,7 +12,8 @@ export class SplashComponent implements OnInit {
   {
 
     setTimeout(()=>{
-      this.router.navigateByUrl('/patient/docprofile/3');
+      window.location.href ="/patient/docprofile/3";
+      // this.router.navigateByUrl('');
     },4000);
    }
 

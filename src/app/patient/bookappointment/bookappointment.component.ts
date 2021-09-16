@@ -69,8 +69,8 @@ export class BookappointmentComponent implements OnInit {
   tscount: number;
   subscribe: any;
   disableButton: boolean = false;
-  date : Number;
-  datas= Date();
+  date: Number;
+  datas = Date();
   sentTempTime: string;
   sentTime: any;
   formatTime: any;
@@ -98,20 +98,21 @@ export class BookappointmentComponent implements OnInit {
     // const minutesf = minutes[1]; //11
     // const ampm = hours[1] >= 12 ? 'AM' : 'PM'; //22 >=12 yes == pm
     // const hoursf = hours[1] >= 12 ? hours[1] - 12 : hours[1]; //22 >= 12 ? 22-12=10 
-    
+
     const dateObject = new Date();
     const dateString = dateObject.toLocaleTimeString();
     const dam = dateString.split(' ');
     const cont = dateString.split(':');
-    const h= cont[0];
-    const m= cont[1];
-    const ampm=dam[1];
-    this.time= h+":"+m+ " " + ampm;
-  
+    const h = cont[0];
+    const m = cont[1];
+    const ampm = dam[1];
+    this.time = h + ":" + m + " " + ampm;
+    console.log('time', this.time);
+
 
     this.subscribe = this.platform.backButton.subscribeWithPriority(666666, () => {
       if (this.constructor.name == "BookappointmentComponent") {
-        window.location.href="patient/docprofile/3";
+        window.location.href = "patient/docprofile/3";
         // this.back();
       }
     });
@@ -131,14 +132,14 @@ export class BookappointmentComponent implements OnInit {
   }
   ionViewDidLoad() {
   }
-  
-   
+
+
   // truthClick() { 
   //   this.disableButton = true; 
   // }
   back() {
-      // this.router.navigate('patient/docprofile/3');
-      this.router.navigateByUrl('patient/docprofile/3');
+    // this.router.navigate('patient/docprofile/3');
+    this.router.navigateByUrl('patient/docprofile/3');
   }
   timeChange(time) {
     this.chosenHours = time.hour.value;
@@ -272,7 +273,7 @@ export class BookappointmentComponent implements OnInit {
       if (this.appoint == true) {
         this.showAlert();
       }
-      
+
       console.log("appointment", this.appoint);
     })
   }
@@ -315,7 +316,12 @@ export class BookappointmentComponent implements OnInit {
   getList(i) {
     console.log("first data", i);
     this.list = this.available[i].list;
+    
     this.sam = this.available[i].date;
+    let arrays = this.list['0'].availableList;
+    let array = this.list['1'].availableList;
+    let sams = arrays.length;
+    let sam = array.length;
     // this.bcount = this.available[i].bookedCount;
     // this.scount = this.available[i].scount;
     // this.tscount = this.scount-this.bcount;
@@ -323,7 +329,10 @@ export class BookappointmentComponent implements OnInit {
     console.log("tscount", this.tscount);
 
     console.log("availabledata", this.available);
+    console.log("sam", sams);
+    console.log("sam", sam);
     console.log("list", this.list);
+
     console.log("availabledate", this.sam);
     console.log("availableid", this.samu);
   }
@@ -374,75 +383,103 @@ export class BookappointmentComponent implements OnInit {
 
   }
   async conform(id) {
-    if(localStorage.getItem('log') == null){
+    if (localStorage.getItem('log') == null) {
       this.router.navigateByUrl('/login');
     }
-    else{
-    const alert = await this.alertCtrl.create({
+    else {
+      const alert = await this.alertCtrl.create({
 
-      subHeader: 'Booking',
-      message: 'Do you want to booking your Appointment',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'OK',
-          handler: async data => {
-            let alert = this.alertCtrl.create({
-              message: 'Reason?',
-              inputs: [
-                {
+        subHeader: 'Booking',
+        message: 'Do you want to booking your Appointment',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'OK',
+            handler: async data => {
+              let alert = this.alertCtrl.create({
+                message: 'Reason?',
+                inputs: [
+                  {
 
-                  name: 'reson',
-                  placeholder: 'Reason'
-                }
-              ],
-              buttons: [
-                {
-                  text: 'Cancel',
-                  role: 'cancel',
-                  handler: data => {
-                    console.log('Cancel clicked', data);
+                    name: 'reson',
+                    placeholder: 'Reason'
                   }
-                },
-                {
-                  text: 'Submit',
-                  handler: Data => { //takes the data 
-                    console.log("data reson", Data.reson);
-                    this.getbookAppointment(Data.reson, id);
+                ],
+                buttons: [
+                  {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: data => {
+                      console.log('Cancel clicked', data);
+                    }
+                  },
+                  {
+                    text: 'Submit',
+                    handler: Data => { //takes the data 
+                      console.log("data reson", Data.reson);
+                      this.getbookAppointment(Data.reson, id);
+                    }
                   }
-                }
-              ]
-            });
-            (await alert).present();
+                ]
+              });
+              (await alert).present();
+            }
           }
+
+        ]
+      });
+      await alert.present();
+      const result = await alert.onDidDismiss();
+      console.log(alert);
+    }
+  }
+
+  checkValid(time, date) {
+    if (this.datepipe.transform(new Date(), 'yyyy-MM-dd') == date) {
+      let atime = time.split(' ');
+      let aampm = atime[1] == 'AM' ? 0 : 12;
+      atime = atime[0].split(':');
+      
+      // let atime = time.split(':');
+      // let aampm = atime[1].split(' ')[1] == 'AM' ? 0 : 12;
+
+      let ctime = this.time.split(':');
+      let campm = ctime[1].split(' ')[1] == 'AM' ? 0 : 12;
+
+
+      if(ctime[0]==12){
+        // console.log('text', ctime[0]);
+        campm = 0;
+        if(atime[0]==atime[0]){
+          let atime = time.split(' ');
+          let aampms = atime[1] == 'AM' ? 0 : 12;
+          // let ctime = this.time.split(':');
+          // let campms = ctime[1].split(' ')[1] == 'AM' ? 0 : 12;
+          aampm = aampms;
+          // campm = campms;
         }
 
-      ]
-    });
-    await alert.present();
-    const result = await alert.onDidDismiss();
-    console.log(alert);
-  }
-  }
+      }
 
-  checkValid(time, date){
-    if( this.datepipe.transform(new Date(), 'yyyy-MM-dd') == date){ 
-      let atime = time.split(' ');
-    let aampm = atime[1] == 'AM'? 0: 12;
-    atime = atime[0].split(':');
-    let ctime = this.time.split(':');
-    let campm = ctime[1].split(' ')[1] == 'AM'? 0: 12;
-    let ct = ctime[0] * 60 + parseInt(ctime[1])+ campm*60;
-    let at = atime[0] * 60 + parseInt(atime[1])+aampm*60;
-    return ct<at;
+
+      // console.log('aampm', aampm);
+      // console.log('sam', ctime[0]);
+      let ct = ctime[0] * 60 + parseInt(ctime[1]) + campm * 60;
+      let at = atime[0] * 60 + parseInt(atime[1]) + aampm * 60;
+      // console.log('atime', at);
+      // console.log('ctime', ct);
+      // console.log('error true',);
+      
+      return ct < at;
     }
-    else{
+    
+    else {
       return true;
     }
   }

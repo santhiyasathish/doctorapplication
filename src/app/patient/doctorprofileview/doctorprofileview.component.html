@@ -161,6 +161,39 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
+  <ion-card *ngFor='let dataa of pending' class="book">
+    <ion-card-content>
+      <ion-label>Booking</ion-label>
+      <ion-item class="content" lines="none">
+        <ion-row class="detail_row">
+          <ion-col>
+            <ion-label>Dr. {{data.name}}</ion-label>
+            <ion-label>{{data.qualification}}</ion-label>
+            <ion-label>{{data.professional}}</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row class="cancel_row">
+          <ion-col>
+            <ion-label color="success">{{dataa.time}}</ion-label>
+            <ion-chip outline color="danger" (click)="cancel()">Cancel</ion-chip>
+  
+          </ion-col>
+        </ion-row>
+  
+        <!-- <ion-col>
+                <ion-label>Dr.janagan</ion-label>
+                <ion-label>MBMS Skin Specialist</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-chip outline color="success">10:30 PM</ion-chip>
+              </ion-col>
+              <ion-col>
+                <ion-icon color="danger"name="close-circle-outline">
+                </ion-icon>
+              </ion-col> -->
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
   <ion-card class="review">
     <ion-card-header>
       <ion-label>Review</ion-label>
@@ -270,39 +303,7 @@
       <ion-button (click)="seduleAdvance()">10 Seconds</ion-button> -->
     </ion-card-content>
   </ion-card>
-  <ion-card *ngFor='let dataa of pending' class="book">
-    <ion-card-content>
-      <ion-label>Booking</ion-label>
-      <ion-item class="content" lines="none">
-        <ion-row class="detail_row">
-          <ion-col >
-            <ion-label>Dr. {{data.name}}</ion-label>
-            <ion-label>{{data.qualification}}</ion-label>
-            <ion-label>{{data.professional}}</ion-label>
-          </ion-col>
-        </ion-row>
-        <ion-row class="cancel_row">
-          <ion-col>
-            <ion-label color="success">{{dataa.time}}</ion-label>
-            <ion-chip outline color="danger" (click)="cancel()">Cancel</ion-chip>
-
-          </ion-col>
-        </ion-row>
-
-        <!-- <ion-col>
-              <ion-label>Dr.janagan</ion-label>
-              <ion-label>MBMS Skin Specialist</ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-chip outline color="success">10:30 PM</ion-chip>
-            </ion-col>
-            <ion-col>
-              <ion-icon color="danger"name="close-circle-outline">
-              </ion-icon>
-            </ion-col> -->
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+  
 </ion-content>
 
 
