@@ -9,6 +9,7 @@ import {
 // import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { Camera, CameraDirection, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera'
 import { File } from '@ionic-native/file/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -61,8 +62,8 @@ export class EditprofileComponent implements OnInit {
     public actionSheetController: ActionSheetController,
     private file: File,
     public loadingController: LoadingController,
-    private network: Network,
     private plt: Platform,
+    private network: Network,
     private menu: MenuController,
   ) {
     
@@ -286,6 +287,7 @@ export class EditprofileComponent implements OnInit {
       resultType: CameraResultType.DataUrl,
     }).then((result) => {
       this.images = (result.dataUrl);
+      alert(this.images);
     }, (err) => {
 
     });
@@ -293,6 +295,8 @@ export class EditprofileComponent implements OnInit {
 
     fileChangeEvent(event: any): void {
       this.selectedFile = event.target.files[0];
+      console.log('image',this.selectedFile);
+      // this.images =this.selectedFile;
   }
 
   onSubmit() {
@@ -313,6 +317,7 @@ export class EditprofileComponent implements OnInit {
     if (this.selectedFile != undefined) {
       // console.log(this.selectedFile.name);
       formData.append('image', this.selectedFile, this.selectedFile.name);
+      
     }
 
     formData.append('user_id', JSON.parse(localStorage.getItem('log')).id);

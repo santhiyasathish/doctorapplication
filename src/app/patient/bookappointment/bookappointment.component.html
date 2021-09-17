@@ -1,7 +1,9 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="light">
     <ion-buttons>
-      <ion-button routerLink="/patient/docprofile/3"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+      <ion-button href="/patient/docprofile/3">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
       <ion-title>Appointment</ion-title>
     </ion-buttons>
   </ion-toolbar>
@@ -73,10 +75,10 @@
       <ion-label color="medium">{{sece}}</ion-label>
 
     </ion-item>
-    <ion-item *ngIf="hides" class="event" lines='none'>
+    <!-- <ion-item *ngIf="hides" class="event" lines='none'>
       <ion-label style="font-size: 20px;font-family: emoji; color: cadetblue;text-align: center;">
         Data Not Found</ion-label>
-    </ion-item>
+    </ion-item> -->
     <div>
       <ng-container *ngFor="let data of arraye">
         <ion-col *ngIf="checkValid(data.time, sam)" size="4">
