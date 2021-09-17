@@ -70,9 +70,9 @@ export class RegisterComponent implements OnInit {
       // usertype: ['', Validators.required],
       gender: ['', Validators.required],
       // dob: ['', Validators.required],
-      dd:['',[Validators.required, Validators.pattern("^[0-20]{1,2}?$")]],
-      mm:['',[Validators.required, Validators.pattern("^[0-1]{1,2}?$") ]],
-      yyyy:['',[Validators.required, Validators.pattern("^[1900-3000]{0,4}?$") ]],
+      dd:['',[Validators.required, Validators.pattern("^[1-9]$|^[1-2][0-9]$|^3[0-1]$")]],
+      mm:['',[Validators.required, Validators.pattern("^([1-9]$|1[0-2])$") ]],
+      yyyy:['',[Validators.required, Validators.pattern("^[1900-3000]{0,4}?$")]],
     },
       {
         validators: [Validation.match('password', 'cpassword')]
