@@ -65,7 +65,7 @@ export class EditprofileComponent implements OnInit {
     private plt: Platform,
     private menu: MenuController,
   ) {
-    
+
     menu.enable(false);
 
     this.network.onDisconnect().subscribe(() => {
@@ -89,19 +89,19 @@ export class EditprofileComponent implements OnInit {
   ngOnInit() {
     // this.presentLoading();
     this.getDoctorProfile();
-    
-    
+
+
     this.editForm = this.formBuilder.group({
-      firstname: [ JSON.parse(localStorage.getItem('log')).name.split(' ')[0], Validators.required],
-      lastname: [ JSON.parse(localStorage.getItem('log')).name.split(' ')[1], Validators.required],
-      contact_number: [ JSON.parse(localStorage.getItem('log')).mobile, Validators.required],
+      firstname: [JSON.parse(localStorage.getItem('log')).name.split(' ')[0], Validators.required],
+      lastname: [JSON.parse(localStorage.getItem('log')).name.split(' ')[1], Validators.required],
+      contact_number: [JSON.parse(localStorage.getItem('log')).mobile, Validators.required],
       email: ['', [Validators.required, Validators.email
         // , Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')
       ]],
       gender: [JSON.parse(localStorage.getItem('log')).gender, Validators.required],
-      dd:[JSON.parse(localStorage.getItem('log')).dob.split('-')[2],[Validators.required, Validators.maxLength(2), Validators.pattern("^[0-20]{1,2}?$")]],
-      mm:[JSON.parse(localStorage.getItem('log')).dob.split('-')[1],[Validators.required,  Validators.maxLength(2),Validators.pattern("^[0-1]{1,2}?$")]],
-      yyyy:[JSON.parse(localStorage.getItem('log')).dob.split('-')[0],[Validators.required,  Validators.maxLength(4),Validators.pattern("^[1900-3000]{0,4}?$")]],
+      dd: [JSON.parse(localStorage.getItem('log')).dob.split('-')[2], [Validators.required, Validators.pattern("^[1-9]$|^[1-2][0-9]$|^3[0-1]$")]],
+      mm: [JSON.parse(localStorage.getItem('log')).dob.split('-')[1], [Validators.required, Validators.pattern("^([1-9]$|1[0-2])$")]],
+      yyyy: [JSON.parse(localStorage.getItem('log')).dob.split('-')[0], [Validators.required, Validators.pattern("^[1900-3000]{0,4}?$")]],
       blood_group: ['', Validators.required],
       marital_status: ['', Validators.required],
       height: ['', Validators.required],
@@ -112,7 +112,7 @@ export class EditprofileComponent implements OnInit {
     })
 
   }
-  getDoctorProfile(){
+  getDoctorProfile() {
     let id = {
       'user_id': JSON.parse(localStorage.getItem('log')).id
     };
@@ -120,18 +120,18 @@ export class EditprofileComponent implements OnInit {
       this.getprofile = JSON.parse(JSON.stringify(data)).data;
       if (JSON.parse(JSON.stringify(data)).success == true) {
         this.buttontype = 'edit';
-      
+
         this.images = this.getprofile.image;
-       
+
         this.editForm = this.formBuilder.group({
           firstname: [this.getprofile.name.split(' ')[0], Validators.required],
           lastname: [this.getprofile.name.split(' ')[1], Validators.required],
           contact_number: [this.getprofile.contact_number, Validators.required],
           email: [this.getprofile.email, [Validators.required, Validators.email]],
           gender: [this.getprofile.gender, Validators.required],
-          dd: [this.getprofile.dob.split('-')[2], Validators.required],
-        mm: [this.getprofile.dob.split('-')[1], Validators.required],
-        yyyy: [this.getprofile.dob.split('-')[0], Validators.required],
+          dd: [this.getprofile.dob.split('-')[2], Validators.required, Validators.pattern("^[1-9]$|^[1-2][0-9]$|^3[0-1]$")],
+          mm: [this.getprofile.dob.split('-')[1], Validators.required, ("^([1-9]$|1[0-2])$")],
+          yyyy: [this.getprofile.dob.split('-')[0], Validators.required, ("^[1900-3000]{0,4}?$")],
           blood_group: [this.getprofile.blood_group.toLowerCase(), Validators.required],
           marital_status: [this.getprofile.marital_status, Validators.required],
           height: [this.getprofile.height, Validators.required],
@@ -144,7 +144,7 @@ export class EditprofileComponent implements OnInit {
       else {
         this.buttontype = 'add';
       }
-      
+
     });
   }
 
@@ -291,8 +291,8 @@ export class EditprofileComponent implements OnInit {
     });
   }
 
-    fileChangeEvent(event: any): void {
-      this.selectedFile = event.target.files[0];
+  fileChangeEvent(event: any): void {
+    this.selectedFile = event.target.files[0];
   }
 
   onSubmit() {
@@ -303,7 +303,7 @@ export class EditprofileComponent implements OnInit {
     let dd = this.editForm.value.dd;
     let mm = this.editForm.value.mm;
     let yyyy = this.editForm.value.yyyy;
-    this.dob = yyyy + "-" + mm+"-"+dd;
+    this.dob = yyyy + "-" + mm + "-" + dd;
     console.log(this.dob);
     this.submitted = true;
 
@@ -352,8 +352,8 @@ export class EditprofileComponent implements OnInit {
       this.service.patientprofile(formData).subscribe(async data => {
         this.detail = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.detail.messages);
-        
-    
+
+
         await this.loading.dismiss();
       });
 
@@ -363,9 +363,9 @@ export class EditprofileComponent implements OnInit {
         this.profileedit = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.profileedit.messages);
         // this.router.navigateByUrl('patient/docprofile/3');
-        window.location.href='patient/docprofile/3';
+        window.location.href = 'patient/docprofile/3';
         this.getDoctorProfile();
-    
+
         // await this.loading.dismiss();
       })
 
@@ -396,8 +396,8 @@ export class EditprofileComponent implements OnInit {
       this.buttontype = status;
     }
     await this.loading.dismiss();
-    
-    
+
+
   }
 
   async failedAlert(msg) {

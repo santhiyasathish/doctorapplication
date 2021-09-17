@@ -112,15 +112,12 @@
           </ion-item>
           <div *ngIf="submitted && f.gender.errors" class="error-message">
             <div *ngIf="f.gender.errors.required">
-              <ion-icon name="alert-circle-outline"></ion-icon> Please selct anyone
+              <ion-icon name="alert-circle-outline"></ion-icon> Please select anyone
             </div>
           </div>
 
           <ion-item class="date-item" lines="none">
             <div>
-            <!-- <ion-datetime displayFormat="DD-MM-YYYY" [(ngModel)]="mydate" placeholder="Select Date" formControlName="dob"
-            name="dob">
-          </ion-datetime> -->
           <ion-row>
             <ion-col>
               <ion-label>DOB</ion-label>
@@ -133,12 +130,7 @@
                 <ion-input type="text"  maxLength='2' name="dd"  placeholder="DD" formControlName="dd"></ion-input>
                
               </ion-col>
-              <!-- <div *ngIf=" f.dd.invalid && ( f.dd.touched || f.dd.dirty)">
-                <div class="error-message" *ngIf=" f.dd.errors?.required" >*Date is required</div> 
-                <div class="error-message"  ngIf=" f.dd.errors?.maxLength"> Please Enter 2 digit abova  Date </div>
-              </div> -->
-    
-
+   
               <ion-col>
                 <ion-input type="text"   maxLength="2"formControlName="mm" placeholder="MM" name="mm"></ion-input>
                 
@@ -152,16 +144,16 @@
             </ion-row>
             <div *ngIf=" f.dd.invalid && ( f.dd.touched || f.dd.dirty)">
               <div class="error-message" *ngIf=" f.dd.errors?.required" >*Date is required</div> 
-              <div class="error-message"  *ngIf=" f.dd.errors?.pattern"> *Please Enter 2 digit below  Date </div>
+              <div class="error-message" *ngIf=" f.dd.errors?.pattern"> *Please Enter 2 digit below  Date </div>
             </div>
             <div *ngIf=" f.mm.invalid && ( f.mm.touched || f.mm.dirty)">
               <div class="error-message" *ngIf=" f.mm.errors?.required" >*Month is required</div> 
-              <div class="error-message"  *ngIf=" f.mm.errors?.pattern"> *Please Enter 2 digit below  Month </div>
+              <div class="error-message" *ngIf=" f.mm.errors?.pattern"> *Please Enter 2 digit below  Month </div>
             </div>
           
             <div *ngIf=" f.yyyy.invalid && ( f.yyyy.touched || f.yyyy.dirty)">
               <div class="error-message" *ngIf=" f.yyyy.errors?.required" >*Year is required</div> 
-              <div class="error-message"  *ngIf=" f.yyyy.errors?.pattern"> *Please Enter 4 digit below  Year </div>
+              <div class="error-message" *ngIf=" f.yyyy.errors?.pattern"> *Please Enter 4 digit below  Year </div>
             </div>
           </div>
           </ion-item> 
