@@ -75,6 +75,16 @@ export class BookappointmentComponent implements OnInit {
   sentTime: any;
   formatTime: any;
   time: any;
+  lo: boolean =true;
+  secm: any[];
+  sece: any;
+  arraym: any;
+  secmor: any;
+  secmsa: any;
+  arraye: any;
+  hide: boolean = false;
+  hides: boolean =false;
+  
 
 
   constructor(
@@ -316,12 +326,16 @@ export class BookappointmentComponent implements OnInit {
   getList(i) {
     console.log("first data", i);
     this.list = this.available[i].list;
+    this.secmsa = this.list['0'];
+    this.secm = this.list['0'].session;
+    // this.secmor= this.secm
+    this.sece = this.list['1'].session;
     
     this.sam = this.available[i].date;
-    let arrays = this.list['0'].availableList;
-    let array = this.list['1'].availableList;
-    let sams = arrays.length;
-    let sam = array.length;
+    this. arraym = this.list['0'].availableList;
+    this. arraye = this.list['1'].availableList;
+    // let sams = arrays.length;
+    // let sam = array.length;
     // this.bcount = this.available[i].bookedCount;
     // this.scount = this.available[i].scount;
     // this.tscount = this.scount-this.bcount;
@@ -329,8 +343,8 @@ export class BookappointmentComponent implements OnInit {
     console.log("tscount", this.tscount);
 
     console.log("availabledata", this.available);
-    console.log("sam", sams);
-    console.log("sam", sam);
+    // console.log("sam", sams);
+    console.log("sam", this.secm);
     console.log("list", this.list);
 
     console.log("availabledate", this.sam);
@@ -445,20 +459,29 @@ export class BookappointmentComponent implements OnInit {
       let atime = time.split(' ');
       let aampm = atime[1] == 'AM' ? 0 : 12;
       atime = atime[0].split(':');
-      
       // let atime = time.split(':');
       // let aampm = atime[1].split(' ')[1] == 'AM' ? 0 : 12;
-
       let ctime = this.time.split(':');
       let campm = ctime[1].split(' ')[1] == 'AM' ? 0 : 12;
 
-
+      if (campm>aampm){
+        this.hide = true;
+        // this.hides= true;
+      }
+      if (campm < aampm) {
+        // this.hide = true;
+        this.hides= true;
+      }
       if(ctime[0]==12){
+        
         // console.log('text', ctime[0]);
         campm = 0;
         if(atime[0]==atime[0]){
           let atime = time.split(' ');
           let aampms = atime[1] == 'AM' ? 0 : 12;
+          this.lo = false;
+          console.log("no data");
+          // this.hide = true;
           // let ctime = this.time.split(':');
           // let campms = ctime[1].split(' ')[1] == 'AM' ? 0 : 12;
           aampm = aampms;
@@ -466,16 +489,21 @@ export class BookappointmentComponent implements OnInit {
         }
 
       }
-
-
       // console.log('aampm', aampm);
       // console.log('sam', ctime[0]);
       let ct = ctime[0] * 60 + parseInt(ctime[1]) + campm * 60;
       let at = atime[0] * 60 + parseInt(atime[1]) + aampm * 60;
-      // console.log('atime', at);
-      // console.log('ctime', ct);
-      // console.log('error true',);
+      console.log('atime', at);
+      console.log('ctime', ct);
       
+      //   if (at >=779) {
+      //     console.log("no data");
+      //     this.hide = true;
+      //   }
+      // else{
+      //   console.log("error data");
+      // }
+      // console.log('error true',);
       return ct < at;
     }
     

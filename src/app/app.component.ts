@@ -50,6 +50,7 @@ export class AppComponent {
 
   async logout(value) {
     // console.log(value);
+    if (value == 'Logout') {
     const alert = await this.alertCtrl.create({
 
       subHeader: 'LogOut',
@@ -65,11 +66,10 @@ export class AppComponent {
         {
           text: 'OK',
           handler: async data => {
-            if (value == 'Logout') {
+            
               localStorage.clear();
               // alert("Logout Successfully");
               window.location.href='patient/docprofile/3';
-            }
             (await alert).present();
           }
         }
@@ -79,7 +79,7 @@ export class AppComponent {
     await alert.present();
     const result = await alert.onDidDismiss();
     console.log(alert);
-    
+  }
   }
   
   // async conform() {

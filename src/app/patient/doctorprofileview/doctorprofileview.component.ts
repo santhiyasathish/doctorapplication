@@ -57,6 +57,9 @@ export class DoctorprofileviewComponent implements OnInit {
   pending: any;
   myDate = Date();
   apontid :any;
+  togle: boolean = false;
+  userType: any;
+  log: boolean = true;
 
   constructor(public service: PatientserviceService,
     private route: ActivatedRoute,
@@ -78,6 +81,13 @@ export class DoctorprofileviewComponent implements OnInit {
     // private starRating: StarRatingModule,
     // public evens:Events,
   ) {
+
+    if (localStorage.getItem('log') != null) {
+      this.togle = true;
+      this.log= false;
+      this.email = JSON.parse(localStorage.getItem('log')).email;
+      this.userType = JSON.parse(localStorage.getItem('log')).user_type;
+    }
     
     this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
       if (this.constructor.name == "DoctorprofileviewComponent") {
