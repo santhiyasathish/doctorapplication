@@ -67,7 +67,7 @@ export class EditprofileComponent implements OnInit {
     private menu: MenuController,
   ) {
 
-    menu.enable(false);
+    this.menu.enable(false);
 
     this.network.onDisconnect().subscribe(() => {
       setTimeout(() => {

@@ -96,12 +96,12 @@ export class RegisterComponent implements OnInit {
     // this.dob = dd +'-'+mm+'-'+yyyy;
     this.dob = yyyy + "-" + mm+"-"+dd;
     console.log(this.dob);
-    this.contact_number = JSON.stringify(this.registerForm.value.mobile);
+    // this.contact_number = JSON.stringify(this.registerForm.value.mobile);
     let data;
     data = {
       
       // email: this.registerForm.value.email,
-      mobile: this.contact_number,
+      mobile: this.registerForm.value.mobile,
       username: this.registerForm.value.username,
       usertype: 'patient',
       password: this.registerForm.value.password,
@@ -122,16 +122,16 @@ export class RegisterComponent implements OnInit {
         this.service.login(logdata).subscribe(data1 => {
           localStorage.setItem('log', JSON.stringify(JSON.parse(JSON.stringify(data1)).logData));
           if (JSON.parse(localStorage.getItem('log')).user_type == 'doctor') {
-            window.location.href = "doctor/docprofileupdate";
-            // this.router.navigateByUrl('doctor/docprofileupdate');
+            // window.location.href = "/doctor/docprofileupdate";
+            this.router.navigateByUrl('doctor/docprofileupdate');
           }
           else if (JSON.parse(localStorage.getItem('log')).user_type == 'patient') {
-            window.location.href = "patient/editprofile";
-            // this.router.navigateByUrl('patient/editprofile');
+            // window.location.href = "/patient/editprofile";
+            this.router.navigateByUrl('patient/editprofile');
           }
           else {
-            window.location.href = "patient/docprofile/3";
-            // this.router.navigateByUrl('patient/docprofile/3');
+            // window.location.href = "/patient/docprofile/3";
+            this.router.navigateByUrl('patient/docprofile/3');
           }
         });
       }

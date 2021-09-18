@@ -84,8 +84,8 @@ export class BookappointmentComponent implements OnInit {
   secmor: any;
   secmsa: any;
   arraye: any;
-  hide: boolean = false;
-  hides: boolean = false;
+  // hide: boolean = false;
+  // hides: boolean = false;
   sams: any;
   dates: any;
   aampm: number;
@@ -107,18 +107,18 @@ export class BookappointmentComponent implements OnInit {
 
     // private datePipe: DatePipe
   ) {
-    this.platform.ready().then(() => {
-      this.localNotifications.on('click').subscribe(res => {
-        let msg = res.data ? res.data.mydata : '';
-        // this.showAlert(res.title, res.text, msg);
-      });
-      this.localNotifications.on('trigger').subscribe(res => {
-        let msg = res.data ? res.data.mydata : '';
-        // this.showAlert(res.title, res.text, msg);
+    // this.platform.ready().then(() => {
+    //   this.localNotifications.on('click').subscribe(res => {
+    //     let msg = res.data ? res.data.mydata : '';
+    //     // this.showAlert(res.title, res.text, msg);
+    //   });
+    //   this.localNotifications.on('trigger').subscribe(res => {
+    //     let msg = res.data ? res.data.mydata : '';
+    //     // this.showAlert(res.title, res.text, msg);
 
-      });
+    //   });
 
-    });
+    // });
 
 
     this.schedule();
@@ -180,102 +180,102 @@ export class BookappointmentComponent implements OnInit {
     this.chosenHours = time.hour.value;
     this.chosenMinutes = time.minute.value;
   }
-  async addNotifications() {
-    let currentDate = new Date();
-    let currentDay = currentDate.getDay(); // Sunday = 0, Monday = 1, etc.
-    for (let day of this.days) {
-      if (day.checked) {
-        let firstNotificationTime = new Date();
-        let dayDifference = day.dayCode - currentDay;
-        if (dayDifference < 0) {
-          dayDifference = dayDifference + 7; // for cases where the day is in the following week
-        }
-        firstNotificationTime.setHours(firstNotificationTime.getHours() + (24 * (dayDifference)));
-        firstNotificationTime.setHours(this.chosenHours);
-        firstNotificationTime.setMinutes(this.chosenMinutes);
+  // async addNotifications() {
+  //   let currentDate = new Date();
+  //   let currentDay = currentDate.getDay(); // Sunday = 0, Monday = 1, etc.
+  //   for (let day of this.days) {
+  //     if (day.checked) {
+  //       let firstNotificationTime = new Date();
+  //       let dayDifference = day.dayCode - currentDay;
+  //       if (dayDifference < 0) {
+  //         dayDifference = dayDifference + 7; // for cases where the day is in the following week
+  //       }
+  //       firstNotificationTime.setHours(firstNotificationTime.getHours() + (24 * (dayDifference)));
+  //       firstNotificationTime.setHours(this.chosenHours);
+  //       firstNotificationTime.setMinutes(this.chosenMinutes);
 
-        let notification =
-        {
-          id: 1,
-          title: 'Attention',
-          text: 'Simons Notification',
-          data: { mydata: 'My hidden message this is' },
-          at: new Date(new Date().getTime() + 5 * 1000)
-        };
-        // {
-        //   id: day.dayCode,
-        //   title: 'J janagan',
-        //   text: 'hai i am jana',
+  //       let notification =
+  //       {
+  //         id: 1,
+  //         title: 'Attention',
+  //         text: 'Simons Notification',
+  //         data: { mydata: 'My hidden message this is' },
+  //         at: new Date(new Date().getTime() + 5 * 1000)
+  //       };
+  //       // {
+  //       //   id: day.dayCode,
+  //       //   title: 'J janagan',
+  //       //   text: 'hai i am jana',
 
-        //   trigger: {
-        //     // at: new Date(new Date().getTime() + ms)
-        //     // at: new Date(new Date().getTime() + 5000),
-        //     // in: 4,
-        //     // at: firstNotificationTime,
-        //     in: firstNotificationTime,
-        //     // every: 'week',
-        //     unit: ELocalNotificationTriggerUnit.SECOND,
-        //   },
-        //   data: 'sample data'
-        // };
-        // alert(notification);
-        // {
+  //       //   trigger: {
+  //       //     // at: new Date(new Date().getTime() + ms)
+  //       //     // at: new Date(new Date().getTime() + 5000),
+  //       //     // in: 4,
+  //       //     // at: firstNotificationTime,
+  //       //     in: firstNotificationTime,
+  //       //     // every: 'week',
+  //       //     unit: ELocalNotificationTriggerUnit.SECOND,
+  //       //   },
+  //       //   data: 'sample data'
+  //       // };
+  //       // alert(notification);
+  //       // {
 
-        //   id: day.dayCode,
-        //   title: 'Hey!',
-        //   text: 'You just got notified :)',
+  //       //   id: day.dayCode,
+  //       //   title: 'Hey!',
+  //       //   text: 'You just got notified :)',
 
-        //   at: firstNotificationTime,
-        //   // every: 'week'
-        // };
-        this.notifications.push(notification);
-      }
-    }
-    console.log("Notifications to be scheduled: ", this.notifications);
-    if (this.platform.is('cordova')) {
-      // Cancel any existing notifications
-      this.localNotifications.cancelAll().then(async () => {
-        // Schedule the new notifications
-        this.localNotifications.schedule(this.notifications);
-        this.notifications = [];
-        const alert = await this.alertCtrl.create({
-          header: 'Notification ?',
-          message: 'notification Set',
-          cssClass: 'customalert',
-          buttons: ['ok']
-        },
-        );
+  //       //   at: firstNotificationTime,
+  //       //   // every: 'week'
+  //       // };
+  //       this.notifications.push(notification);
+  //     }
+  //   }
+  //   console.log("Notifications to be scheduled: ", this.notifications);
+  //   if (this.platform.is('cordova')) {
+  //     // Cancel any existing notifications
+  //     this.localNotifications.cancelAll().then(async () => {
+  //       // Schedule the new notifications
+  //       this.localNotifications.schedule(this.notifications);
+  //       this.notifications = [];
+  //       const alert = await this.alertCtrl.create({
+  //         header: 'Notification ?',
+  //         message: 'notification Set',
+  //         cssClass: 'customalert',
+  //         buttons: ['ok']
+  //       },
+  //       );
 
-        await alert.present();
-        // let alert = this.alertCtrl.create({
-
-
-        //   buttons: ['Ok']
-        // });
-        // await alert.present();
-      });
-    }
-  }
-  async cancelAll() {
-    this.localNotifications.cancelAll();
-    const alert = await this.alertCtrl.create({
-      header: 'Notification ?',
-      message: 'Notifications cancelled',
-      cssClass: 'customalert',
-
-      buttons: ['ok']
-    },
-    );
-
-    await alert.present();
+  //       await alert.present();
+  //       // let alert = this.alertCtrl.create({
 
 
-    // let alert = this.alertCtrl.create({
-    //   title: 'Notifications cancelled',
-    //   buttons: ['Ok']
-    // });
-    // alert.present();
-  }
+  //       //   buttons: ['Ok']
+  //       // });
+  //       // await alert.present();
+  //     });
+  //   }
+  // }
+  // async cancelAll() {
+  //   // this.localNotifications.cancelAll();
+  //   const alert = await this.alertCtrl.create({
+  //     header: 'Notification ?',
+  //     message: 'Notifications cancelled',
+  //     cssClass: 'customalert',
+
+  //     buttons: ['ok']
+  //   },
+  //   );
+
+  //   await alert.present();
+
+
+  //   // let alert = this.alertCtrl.create({
+  //   //   title: 'Notifications cancelled',
+  //   //   buttons: ['Ok']
+  //   // });
+  //   // alert.present();
+  // }
   ngOnInit() {
     // this.seduleBasic();
 
@@ -343,7 +343,7 @@ export class BookappointmentComponent implements OnInit {
     }
     this.service.appointmentAvailability(avalabledata).subscribe(async data => {
       this.available = JSON.parse(JSON.stringify(data)).data;
-
+      this.schedule();
       this.getList('0');
       console.log("bcount", this.bcount);
       //  this.getlista('0');
@@ -355,8 +355,8 @@ export class BookappointmentComponent implements OnInit {
 
   checkValid(time, date) {
 
-    this.sams = this.available['0'].date;
-    console.log("rgfff", this.sams);
+    // this.sams = this.available['0'].date;
+    // console.log("rgfff", this.sams);
     if (this.datepipe.transform(new Date(), 'yyyy-MM-dd') == date) {
       let atime = time.split(' ');
       this.aampm = atime[1] == 'AM' ? 0 : 12;
@@ -364,26 +364,26 @@ export class BookappointmentComponent implements OnInit {
       let ctime = this.time.split(':');
       this.campm = ctime[1].split(' ')[1] == 'AM' ? 0 : 12;
 
-      if (this.campm > this.aampm) {
-        this.hide = true;
-        console.log("ddddds");
-      }
+      // if (this.campm > this.aampm) {
+      //   this.hide = true;
+      //   console.log("ddddds");
+      // }
 
-      if (ctime[0] == 12) {
-        this.campm = 0;
-        if (atime[0] == atime[0]) {
-          let atime = time.split(' ');
-          let aampms = atime[1] == 'AM' ? 0 : 12;
-          this.lo = false;
-          console.log("no data");
-          this.aampm = aampms;
-        }
+      // if (ctime[0] == 12) {
+      //   this.campm = 0;
+      //   if (atime[0] == atime[0]) {
+      //     let atime = time.split(' ');
+      //     let aampms = atime[1] == 'AM' ? 0 : 12;
+      //     this.lo = false;
+      //     console.log("no data");
+      //     this.aampm = aampms;
+      //   }
 
-      }
+      // }
       let ct = ctime[0] * 60 + parseInt(ctime[1]) + this.campm * 60;
       let at = atime[0] * 60 + parseInt(atime[1]) + this.aampm * 60;
-      console.log('atime', at);
-      console.log('ctime', ct);
+      // console.log('atime', at);
+      // console.log('ctime', ct);
       return ct < at;
     }
 
@@ -392,6 +392,7 @@ export class BookappointmentComponent implements OnInit {
     }
   }
   async getList(i) {
+    this.schedule();
     // this.presentLoading();
     console.log("first data", i);
     this.list = this.available[i].list;
@@ -402,30 +403,23 @@ export class BookappointmentComponent implements OnInit {
     this.arraym = this.list['0'].availableList;
     this.arraye = this.list['1'].availableList;
     this.dates = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
-    if (this.dates !== this.sam) {
-      console.log("jana", this.dates);
-      this.hide = false;
+    // if (this.dates !== this.sam) {
+    //   console.log("jana", this.dates);
+    //   this.hide = false;
 
-    }
-    else {
-      if (this.dates == this.sam) {
-        if (this.campm > this.aampm) {
-          this.hide = true;
-          console.log("ddddd");
-        }
-      }
+    // }
+    // else {
+    //   if (this.dates == this.sam) {
+    //     if (this.campm > this.aampm) {
+    //       this.hide = true;
+    //       console.log("ddddd");
+    //     }
+    //   }
 
-    }
+    // }
     await this.loading.dismiss();
-    console.log("tscount", this.tscount);
 
-    console.log("availabledata", this.available);
-    // console.log("sam", sams);
-    console.log("sam", this.secm);
-    console.log("list", this.list);
 
-    console.log("availabledate", this.sam);
-    console.log("availableid", this.samu);
   }
   getAppointmentDetail(id) {
     let passData = {
@@ -434,6 +428,17 @@ export class BookappointmentComponent implements OnInit {
     this.service.appointmentDetail(passData).subscribe(data => {
       this.docDetail = JSON.parse(JSON.stringify(data));
       console.log("details", data);
+
+      let a = 30;
+      let b = 20;
+      console.log("first value a", a);
+      console.log("first value b", b);
+      let c = a;
+      let d = b;
+      console.log("second value a", d);
+      console.log("second value b",c);
+
+
     });
   }
   // back(){
@@ -461,13 +466,16 @@ export class BookappointmentComponent implements OnInit {
       id: 1,
       title: 'Attention',
       text: 'simons notification',
-      data: { mydata: 'myhidden' },
-      trigger: { in: 5, unit: ELocalNotificationTriggerUnit.SECOND },
+      data: 'myhidden',
+      lockscreen: true,
+      trigger: {
+        in: 5,
+        unit: ELocalNotificationTriggerUnit.SECOND,
+      },
     });
   }
 
   // seduleBasic() {
-
   //   this.localNotifications.schedule(
   //     {
   //       id: 1,
@@ -493,6 +501,7 @@ export class BookappointmentComponent implements OnInit {
     }
   }
   async conform(id) {
+
     if (localStorage.getItem('log') == null) {
       this.router.navigateByUrl('/login');
     }
