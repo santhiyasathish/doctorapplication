@@ -47,7 +47,7 @@ export class BookappointmentComponent implements OnInit {
   sample: any;
   avlist: any[];
   loading: any;
-
+  hide: boolean = false;
 
 
   notifyTime: any;
@@ -290,6 +290,17 @@ export class BookappointmentComponent implements OnInit {
     this.menu.enable(false);
     // this.seduleBasic();
   }
+
+nodataFound(i, date){
+//  setTimeout(function(){
+   if (this.datepipe.transform(new Date(), 'yyyy-MM-dd') == date) {
+     return document.getElementById(i).childElementCount == 0;
+   }
+   else {
+     return false;
+   }
+}
+
   slidesOptions = {
     slidesPerView: 2.5
   }
@@ -362,24 +373,23 @@ export class BookappointmentComponent implements OnInit {
       this.aampm = atime[1] == 'AM' ? 0 : 12;
       atime = atime[0].split(':');
       let ctime = this.time.split(':');
-      this.campm = ctime[1].split(' ')[1] == 'AM' ? 0 : 12;
+      this.campm = ctime[1].split(' ')[1].toUpperCase() == 'AM' ? 0 : 12;
 
-      // if (this.campm > this.aampm) {
-      //   this.hide = true;
-      //   console.log("ddddds");
-      // }
+      if (this.campm > this.aampm) {
+        this.hide = true;
+        console.log("ddddds");
+      }
 
-      // if (ctime[0] == 12) {
-      //   this.campm = 0;
-      //   if (atime[0] == atime[0]) {
-      //     let atime = time.split(' ');
-      //     let aampms = atime[1] == 'AM' ? 0 : 12;
-      //     this.lo = false;
-      //     console.log("no data");
-      //     this.aampm = aampms;
-      //   }
-
-      // }
+      if (ctime[0] == 12) {
+        this.campm = 0;
+        if (atime[0] == atime[0]) {
+          let atime = time.split(' ');
+          let aampms = atime[1] == 'AM' ? 0 : 12;
+          this.lo = false;
+          console.log("no data");
+          this.aampm = aampms;
+        }
+      }
       let ct = ctime[0] * 60 + parseInt(ctime[1]) + this.campm * 60;
       let at = atime[0] * 60 + parseInt(atime[1]) + this.aampm * 60;
       // console.log('atime', at);
@@ -452,9 +462,7 @@ export class BookappointmentComponent implements OnInit {
       message: 'Waiting for your Approval .',
       buttons: ['OK']
     }).then(res => {
-
       res.present();
-
       window.location.href = "patient/docprofile/3";
 
     });
@@ -525,10 +533,9 @@ export class BookappointmentComponent implements OnInit {
                 message: 'Reason?',
                 inputs: [
                   {
-
                     name: 'reson',
-                    placeholder: 'What reson'
-                  }
+                    placeholder:'reason'
+                  },
                 ],
                 buttons: [
                   {

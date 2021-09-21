@@ -127,17 +127,17 @@
             <ion-row class="date">
               
               <ion-col>
-                <ion-input type="text"  maxLength='2' name="dd"  placeholder="DD" formControlName="dd"></ion-input>
+                <ion-input #Field1 (keyup)="gotoNextField(Field2)"  type="tel" minlength="2" maxLength='2' name="dd"  placeholder="DD" formControlName="dd"></ion-input>
                
               </ion-col>
    
               <ion-col>
-                <ion-input type="text"   maxLength="2"formControlName="mm" placeholder="MM" name="mm"></ion-input>
+                <ion-input  #Field2 (keyup)="gotoNextFields(Field3)" type="tel"  maxLength="2" formControlName="mm" placeholder="MM" name="mm"></ion-input>
                 
               </ion-col>
 
               <ion-col>
-                <ion-input type="text"  maxLength="4" formControlName="yyyy" placeholder="YYYY" name="yyyy"></ion-input>
+                <ion-input  #Field3 (keyup)="gotoNextFields(Field3)" maxLength="4" type="tel"  formControlName="yyyy" placeholder="YYYY" name="yyyy"></ion-input>
                 
               </ion-col>
               

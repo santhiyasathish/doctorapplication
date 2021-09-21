@@ -70,9 +70,9 @@ export class RegisterComponent implements OnInit {
       // usertype: ['', Validators.required],
       gender: ['', Validators.required],
       // dob: ['', Validators.required],
-      dd:['',[Validators.required, Validators.pattern("^0[1-9]$|[1-9]$|^[1-2][0-9]$|^3[0-1]$")]],
-      mm:['',[Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|1[0-2])$") ]],
-      yyyy:['',[Validators.required, Validators.pattern("^[1900-3000]{0,4}?$")]],
+      dd: ['', [Validators.required, Validators.pattern("^0[1-9]$|[1-9]$|^[1-2][0-9]$|^3[0-1]$")]],
+      mm: ['', [Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|1[0-2])$")]],
+      yyyy: ['', [Validators.required, Validators.pattern("^[1900-3000]{0,4}?$")]],
     },
       {
         validators: [Validation.match('password', 'cpassword')]
@@ -87,6 +87,29 @@ export class RegisterComponent implements OnInit {
 
 
 
+  gotoNextField(nextElement) {
+    var nextinput = this.registerForm.value.dd;
+    // var nextinputtwo = this.registerForm.value.mm;
+    if (nextinput.length === 2) {
+      nextElement.setFocus();
+    }else if(nextElement.length==0){
+      
+    }
+
+    // nextElement.setFocus();
+  }
+  gotoNextFields(nextElements) {
+    // var nextinput = this.registerForm.value.dd;
+    var nextinputtwo = this.registerForm.value.mm;
+
+    if (nextinputtwo.length === 2) {
+      nextElements.setFocus();
+    } else if (nextinputtwo.length === 0) {
+      nextElements.setFocus();
+    }
+
+  }
+
   async onSubmit(): Promise<void> {
     this.submitted = true;
 
@@ -94,12 +117,12 @@ export class RegisterComponent implements OnInit {
     let mm = this.registerForm.value.mm;
     let yyyy = this.registerForm.value.yyyy;
     // this.dob = dd +'-'+mm+'-'+yyyy;
-    this.dob = yyyy + "-" + mm+"-"+dd;
+    this.dob = yyyy + "-" + mm + "-" + dd;
     console.log(this.dob);
     // this.contact_number = JSON.stringify(this.registerForm.value.mobile);
     let data;
     data = {
-      
+
       // email: this.registerForm.value.email,
       mobile: this.registerForm.value.mobile,
       username: this.registerForm.value.username,
@@ -159,6 +182,7 @@ export class RegisterComponent implements OnInit {
   }
 
 }
+
 
 function mobile(mobile: any): string {
   throw new Error('Function not implemented.');

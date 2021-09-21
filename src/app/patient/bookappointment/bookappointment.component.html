@@ -38,7 +38,7 @@
             <ion-row>
               <div class="ion-text-justify">
                 <ion-label>{{data.date}}</ion-label>
-                <ion-label>{{data.scount-data.bookedCount}} slot abailable</ion-label>
+                <ion-label>{{data.scount-data.bookedCount}} slot available</ion-label>
               </div>
             </ion-row>
           </ion-card-content>
@@ -69,29 +69,35 @@
       </ng-container>
     </div>
   </div> -->
-<div class="slot" *ngFor="let li of list">
-  <ion-item class="event" lines="none">
-    <ion-col size="1">
-      <ion-icon color="medium" name="partly-sunny-outline"></ion-icon>
-    </ion-col>
-    <ion-col size="2.2">
-      <ion-label color="medium">{{li.session}}</ion-label>
-    </ion-col>
-    <ion-col size="2">
-
-    </ion-col>
-  </ion-item>
-  <ion-row>
-    <ng-container *ngFor="let data of li.availableList">
-      <ion-col *ngIf="checkValid(data.time, sam)" size="4">
-        <ion-chip (click)="conform(data.id)" disabled="{{ data.status }}" outline color="success">
-          <ion-label>{{data.time }}</ion-label>
-        </ion-chip>
+  <div class="slot" *ngFor="let li of list; let i = index" class="event" lines="none">
+    <!-- <ion-item class="event" lines="none"> -->
+    <ion-row>
+      <ion-col size="1">
+        <ion-icon color="medium" name="partly-sunny-outline"></ion-icon>
       </ion-col>
-    </ng-container>
+      <ion-col size="11">
+        <ion-label color="medium">{{li.session}}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row id="{{i}}" class="time" >
+      <ng-container class="txt"  *ngIf="nodataFound(i, sam)"> 
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;
+     
+        DATA NOT FOUND </ng-container>
+      <ng-container *ngFor="let data of li.availableList">
+        <ion-col  *ngIf="checkValid(data.time, sam)" size="4">
+          <ion-chip class="timeslo" (click)="conform(data.id)" disabled="{{ data.status }}" outline color="success">
+            <ion-label >{{data.time }}</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+    <!-- </ion-item> -->
 
-  </ion-row>
-</div>
+  </div>
 
 
   <!-- <div class="slot">
@@ -114,7 +120,7 @@
 
 
 
-<!-- <ion-item *ngIf="hides" class="event" lines='none'>
+  <!-- <ion-item *ngIf="hides" class="event" lines='none'>
       <ion-label style="font-size: 20px;font-family: emoji; color: cadetblue;text-align: center;">
         Data Not Found</ion-label>
     </ion-item> -->

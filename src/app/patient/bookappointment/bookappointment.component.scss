@@ -2,8 +2,8 @@
     --background: none;
     background: red !important;
 }
-ion-header {
-}
+// ion-header {
+// }
 ion-content {
     .dateslot {
         margin: 0px -15px 0px -15px;
@@ -27,6 +27,17 @@ ion-content {
         .event {
             --background: none;
             background-color: aliceblue;
+        }
+    }
+    .time {
+        color: #ababab;
+
+        font-weight: 800;
+        // place-content: center;
+       
+
+        .timeslo {
+            font-weight: 200 !important;
         }
     }
     .date {
