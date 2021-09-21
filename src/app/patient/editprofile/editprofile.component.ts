@@ -86,6 +86,24 @@ export class EditprofileComponent implements OnInit {
     });
 
   }
+  gotoNextField(nextElement) {
+    var nextinput = this.editForm.value.dd;
+    // var nextinputtwo = this.registerForm.value.mm;
+    if (nextinput.length === 2) {
+      nextElement.setFocus();
+    }
+  
+    // nextElement.setFocus();
+  }
+  gotoNextFields(nextElement) {
+    var nextinput = this.editForm.value.mm;
+    // var nextinputtwo = this.registerForm.value.mm;
+    if (nextinput.length === 2) {
+      nextElement.setFocus();
+    }
+  
+    // nextElement.setFocus();
+  }
   ngOnInit() {
     // this.presentLoading();
     this.getDoctorProfile();
@@ -95,13 +113,13 @@ export class EditprofileComponent implements OnInit {
       firstname: [JSON.parse(localStorage.getItem('log')).name.split(' ')[0], Validators.required],
       lastname: [JSON.parse(localStorage.getItem('log')).name.split(' ')[1], Validators.required],
       contact_number: [JSON.parse(localStorage.getItem('log')).mobile, Validators.required],
-      email: ['', [Validators.required, Validators.email
-        // , Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+$')
+      email: ['', [Validators.required,
+        , Validators.pattern(/^(\d{10}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/)
       ]],
       gender: [JSON.parse(localStorage.getItem('log')).gender, Validators.required],
-      dd: [JSON.parse(localStorage.getItem('log')).dob.split('-')[2], [Validators.required, Validators.pattern("^[1-9]$|^[1-2][0-9]$|^3[0-1]$")]],
-      mm: [JSON.parse(localStorage.getItem('log')).dob.split('-')[1], [Validators.required, Validators.pattern("^([1-9]$|1[0-2])$")]],
-      yyyy: [JSON.parse(localStorage.getItem('log')).dob.split('-')[0], [Validators.required, Validators.pattern("^[1900-3000]{0,4}?$")]],
+      dd: [JSON.parse(localStorage.getItem('log')).dob.split('-')[2], [Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|^[1-2][0-9]$|^3[0-1])$")]],
+      mm: [JSON.parse(localStorage.getItem('log')).dob.split('-')[1], [Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|1[0-2])$")]],
+      yyyy: [JSON.parse(localStorage.getItem('log')).dob.split('-')[0], [Validators.required, Validators.pattern("^19(0[0-9]|[1-9][0-9])$|20(0[0-9]|[1-9][0-9])$")]],
       blood_group: ['', Validators.required],
       marital_status: ['', Validators.required],
       height: ['', Validators.required],
@@ -127,11 +145,11 @@ export class EditprofileComponent implements OnInit {
           firstname: [this.getprofile.name.split(' ')[0], Validators.required],
           lastname: [this.getprofile.name.split(' ')[1], Validators.required],
           contact_number: [this.getprofile.contact_number, Validators.required],
-          email: [this.getprofile.email, [Validators.required, Validators.email]],
+          email: [this.getprofile.email, [Validators.required,Validators.pattern(/^(\d{10}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/)]],
           gender: [this.getprofile.gender, Validators.required],
-          dd: [this.getprofile.dob.split('-')[2],[Validators.required, Validators.pattern("^0[1-9]$|[1-9]$|^[1-2][0-9]$|^3[0-1]$")]],
+          dd: [this.getprofile.dob.split('-')[2],[Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|^[1-2][0-9]$|^3[0-1])$")]],
           mm: [this.getprofile.dob.split('-')[1],[Validators.required,Validators.pattern("^(0[1-9]$|[1-9]$|1[0-2])$")]],
-          yyyy: [this.getprofile.dob.split('-')[0],[ Validators.required, Validators.pattern("^[1900-3000]{0,4}?$")]],
+          yyyy: [this.getprofile.dob.split('-')[0],[ Validators.required, Validators.pattern("^19(0[0-9]|[1-9][0-9])$|20(0[0-9]|[1-9][0-9])$")]],
           blood_group: [this.getprofile.blood_group.toLowerCase(), Validators.required],
           marital_status: [this.getprofile.marital_status, Validators.required],
           height: [this.getprofile.height, Validators.required],

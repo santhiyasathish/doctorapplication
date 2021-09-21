@@ -8,13 +8,13 @@
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" lines="none">
           <div>
             <ion-item>
-              <ion-label position="floating">UserName</ion-label>
-              <ion-input type="text" name="username" placeholder="Enter username" formControlName="username"
+              <ion-label position="floating">Name</ion-label>
+              <ion-input type="text" name="username" placeholder="Enter Name" formControlName="username"
                 class="form-control"></ion-input>
             </ion-item>
             <div *ngIf="submitted && f.username.errors" class="error-message">
               <div *ngIf="f.username.errors.required">
-                <ion-icon name="alert-circle-outline"></ion-icon> UserName is required
+                <ion-icon name="alert-circle-outline"></ion-icon> Name is required
               </div>
             </div>
 
@@ -36,7 +36,9 @@
           <div>
             <ion-item>
               <ion-label position="floating">Mobile</ion-label>
-              <ion-input type="text"maxLength="10" name="mobile" placeholder="Enter Mobile Number" formControlName="mobile"></ion-input>            </ion-item>
+              <ion-input type="text" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                name="mobile" placeholder="Enter Mobile Number" formControlName="mobile"></ion-input>
+            </ion-item>
             <div *ngIf="submitted && f.mobile.errors" class="error-message">
               <div *ngIf="f.mobile.errors.required" color="danger">
                 <ion-icon name="alert-circle-outline"></ion-icon> Mobile Number is required
@@ -118,45 +120,51 @@
 
           <ion-item class="date-item" lines="none">
             <div>
-          <ion-row>
-            <ion-col>
-              <ion-label>DOB</ion-label>
-            </ion-col>
-            
-          </ion-row>
-            <ion-row class="date">
-              
-              <ion-col>
-                <ion-input type="text"  maxLength='2' name="dd"  placeholder="DD" formControlName="dd"></ion-input>
-               
-              </ion-col>
-   
-              <ion-col>
-                <ion-input type="text"   maxLength="2"formControlName="mm" placeholder="MM" name="mm"></ion-input>
-                
-              </ion-col>
+              <ion-row>
+                <ion-col>
+                  <ion-label>DOB</ion-label>
+                </ion-col>
+              </ion-row>
+              <ion-row class="date">
 
-              <ion-col>
-                <ion-input type="text"  maxLength="4" formControlName="yyyy" placeholder="YYYY" name="yyyy"></ion-input>
-                
-              </ion-col>
-              
-            </ion-row>
-            <div *ngIf=" f.dd.invalid && ( f.dd.touched || f.dd.dirty)">
-              <div class="error-message" *ngIf=" f.dd.errors?.required" >*Date is required</div> 
-              <div class="error-message" *ngIf=" f.dd.errors?.pattern"> *Please Enter 2 digit below  Date </div>
+                <ion-col>
+                  <ion-input type="text" #dd maxLength="2"
+                    onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="dd" placeholder="DD"
+                    formControlName="dd"   (keyup)="gotoNextField(mm)" clearInput="true"></ion-input>
+
+                </ion-col>
+
+                <ion-col>
+                  <ion-input type="text" #mm maxLength="2"
+                    onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="mm"
+                    placeholder="MM" name="mm" (keyup)="gotoNextFields(yyyy)" clearInput="true"></ion-input>
+
+                </ion-col>
+
+                <ion-col>
+                  <ion-input type="text" #yyyy maxLength="4"
+                    onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="yyyy"
+                    placeholder="YYYY" name="yyyy"(keyup)="gotoNextFields(yyyy)"clearInput="true"></ion-input>
+
+                </ion-col>
+
+              </ion-row>
+              <div *ngIf=" f.dd.invalid && ( f.dd.touched || f.dd.dirty)">
+                <div class="error-message" *ngIf=" f.dd.errors?.required">*Date is required</div>
+                <div class="error-message" *ngIf=" f.dd.errors?.pattern"> *Please Enter 2 digit below Date </div>
+              </div>
+              <div *ngIf=" f.mm.invalid && ( f.mm.touched || f.mm.dirty)">
+                <div class="error-message" *ngIf=" f.mm.errors?.required">*Month is required</div>
+                <div class="error-message" *ngIf=" f.mm.errors?.pattern"> *Please Enter 2 digit below Month </div>
+              </div>
+
+              <div *ngIf=" f.yyyy.invalid && ( f.yyyy.touched || f.yyyy.dirty)">
+                <div class="error-message" *ngIf=" f.yyyy.errors?.required">*Year is required</div>
+                <div class="error-message" *ngIf=" f.yyyy.errors?.pattern"> *Please Enter 4 digit below Year </div>
+              </div>
             </div>
-            <div *ngIf=" f.mm.invalid && ( f.mm.touched || f.mm.dirty)">
-              <div class="error-message" *ngIf=" f.mm.errors?.required" >*Month is required</div> 
-              <div class="error-message" *ngIf=" f.mm.errors?.pattern"> *Please Enter 2 digit below  Month </div>
-            </div>
-          
-            <div *ngIf=" f.yyyy.invalid && ( f.yyyy.touched || f.yyyy.dirty)">
-              <div class="error-message" *ngIf=" f.yyyy.errors?.required" >*Year is required</div> 
-              <div class="error-message" *ngIf=" f.yyyy.errors?.pattern"> *Please Enter 4 digit below  Year </div>
-            </div>
-          </div>
-          </ion-item> 
+
+          </ion-item>
           <!-- <div *ngIf="submitted && f.dob.errors" class="error-message">
             <div *ngIf="f.dob.errors.required">
               <ion-icon name="alert-circle-outline"></ion-icon> Please select your dob
