@@ -3,7 +3,7 @@ import { PatientserviceService } from '../patientservice.service';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { AlertController,  Platform } from '@ionic/angular';
-import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
+// import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
 import { Network } from '@ionic-native/network/ngx';
 // import { AlertController } from '@ionic/angular';
@@ -20,6 +20,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { State } from 'ionicons/dist/types/stencil-public-runtime';
+import { MenuController } from '@ionic/angular';
 // import { Plugins } from '@capacitor/core';
 // const { LocalNotifications } = Plugins;
 // import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
@@ -63,7 +64,7 @@ export class DoctorprofileviewComponent implements OnInit {
 
   constructor(public service: PatientserviceService,
     private route: ActivatedRoute,
-    // private menu: MenuController,
+    private menu: MenuController,
     private network: Network,
     private router: Router,
     // private localNotification:LocalNotifications,
@@ -107,7 +108,7 @@ export class DoctorprofileviewComponent implements OnInit {
 
     });
 
-    // this.menu.enable(true);
+    this.menu.enable(true);
   }
   onClickone( id: any) {
     this.service.docId().subscribe(data => {

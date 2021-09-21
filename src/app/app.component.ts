@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 // import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Platform } from '@ionic/angular';
 
 // import { PushNotificationService } from './push-notification.service';
 @Component({
@@ -34,11 +35,13 @@ export class AppComponent {
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(private router: Router,
-    // private localNotification: LocalNotifications,
+    // private localNotifications: LocalNotifications,
     //  private pushNotificationService: PushNotificationService
     private alertCtrl: AlertController,
+    private platform: Platform,
   ) {
 
+    // this.seduleBasic();
     if (localStorage.getItem('log') != null) {
       this.togle = true;
       this.email = JSON.parse(localStorage.getItem('log')).email;
@@ -114,6 +117,34 @@ export class AppComponent {
     console.log(this.userType, t);
     return this.userType == t;
   }
+  // seduleBasic() {
+  //   this.localNotifications.schedule(
+  //     {
+  //       id: 1,
+  //       title: 'Your Booking',
+  //       text: 'Waiting for your Booking Confirmation',
+  //       // sound: 'file://assets/sounds/bell.mp3',
 
+  //       trigger: {
+  //         // at: new Date(new Date().getTime() + ms)
+  //         // at: new Date(new Date().getTime() + 5000),
+
+  //         in: 1,
+  //         unit: ELocalNotificationTriggerUnit.SECOND,
+  //       },
+  //       // data: 'sample data',
+  //     }
+
+  //   );
+   
+
+  // }
+  setSound() {
+    if (this.platform.is('android')) {
+      return 'file://assets/sounds/bell.mp3'
+    } else {
+      return 'file://assets/sounds/bell.mp3'
+    }
+  }
 
 }
