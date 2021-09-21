@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   hide = true;
   subscribe: any;
   dob: string;
-  contact_number: any;
+  // contact_number: any;
 
   constructor(private formBuilder: FormBuilder,
     private service: ServiceService,
@@ -46,6 +46,40 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
+//  move(e:any,p:any,c:any,n:any){
+//    console.log(e);
+//      var length = c.value.length;
+//      var maxLength = c.getAttribute("maxLength");
+//      console.log(maxLength);
+//      if(length == maxLength){
+//        if(n!= " "){
+//         n.focus();
+//        }
+//      }
+//      if(e.key === "Backspace"){
+//        if(p! = " "){
+//         p.focus();
+//        }
+//      }
+//  }
+gotoNextField(nextElement) {
+  var nextinput = this.registerForm.value.dd;
+  // var nextinputtwo = this.registerForm.value.mm;
+  if (nextinput.length === 2) {
+    nextElement.setFocus();
+  }
+
+  // nextElement.setFocus();
+}
+gotoNextFields(nextElement) {
+  var nextinput = this.registerForm.value.mm;
+  // var nextinputtwo = this.registerForm.value.mm;
+  if (nextinput.length === 2) {
+    nextElement.setFocus();
+  }
+
+  // nextElement.setFocus();
+}
 
   ngOnInit() {
     if (localStorage.getItem('log') != null) {
@@ -70,9 +104,9 @@ export class RegisterComponent implements OnInit {
       // usertype: ['', Validators.required],
       gender: ['', Validators.required],
       // dob: ['', Validators.required],
-      dd: ['', [Validators.required, Validators.pattern("^0[1-9]$|[1-9]$|^[1-2][0-9]$|^3[0-1]$")]],
-      mm: ['', [Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|1[0-2])$")]],
-      yyyy: ['', [Validators.required, Validators.pattern("^[1900-3000]{0,4}?$")]],
+      dd:['',[Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|^[1-2][0-9]$|^3[0-1])$")]],
+      mm:['',[Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|1[0-2])$") ]],
+      yyyy:['',[Validators.required, Validators.pattern("^19(0[0-9]|[1-9][0-9])$|20(0[0-9]|[1-9][0-9])$")]],
     },
       {
         validators: [Validation.match('password', 'cpassword')]
@@ -87,28 +121,6 @@ export class RegisterComponent implements OnInit {
 
 
 
-  gotoNextField(nextElement) {
-    var nextinput = this.registerForm.value.dd;
-    // var nextinputtwo = this.registerForm.value.mm;
-    if (nextinput.length === 2) {
-      nextElement.setFocus();
-    }else if(nextElement.length==0){
-      
-    }
-
-    // nextElement.setFocus();
-  }
-  gotoNextFields(nextElements) {
-    // var nextinput = this.registerForm.value.dd;
-    var nextinputtwo = this.registerForm.value.mm;
-
-    if (nextinputtwo.length === 2) {
-      nextElements.setFocus();
-    } else if (nextinputtwo.length === 0) {
-      nextElements.setFocus();
-    }
-
-  }
 
   async onSubmit(): Promise<void> {
     this.submitted = true;
@@ -145,16 +157,16 @@ export class RegisterComponent implements OnInit {
         this.service.login(logdata).subscribe(data1 => {
           localStorage.setItem('log', JSON.stringify(JSON.parse(JSON.stringify(data1)).logData));
           if (JSON.parse(localStorage.getItem('log')).user_type == 'doctor') {
-            // window.location.href = "/doctor/docprofileupdate";
-            this.router.navigateByUrl('doctor/docprofileupdate');
+            window.location.href = "/doctor/docprofileupdate";
+            // this.router.navigateByUrl('doctor/docprofileupdate');
           }
           else if (JSON.parse(localStorage.getItem('log')).user_type == 'patient') {
-            // window.location.href = "/patient/editprofile";
-            this.router.navigateByUrl('patient/editprofile');
+            window.location.href = "/patient/editprofile";
+            // this.router.navigateByUrl('patient/editprofile');
           }
           else {
-            // window.location.href = "/patient/docprofile/3";
-            this.router.navigateByUrl('patient/docprofile/3');
+            window.location.href = "/patient/docprofile/3";
+            // this.router.navigateByUrl('patient/docprofile/3');
           }
         });
       }

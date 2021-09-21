@@ -15,8 +15,7 @@
       <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
         <ion-item lines="none" class="avatar">
           <ion-avatar>
-            <img
-              [src]="images" />
+            <img [src]="images" />
           </ion-avatar>
           <ion-button (click)="fileInput.click()" color="secondary">
             <input style="display: none" type="file" (change)="fileChangeEvent($event)" #fileInput>
@@ -45,8 +44,9 @@
         </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">+91</ion-label>
-          <ion-input type="Number" name="contact_number" placeholder="Enter Contact" formControlName="contact_number"
-            class="form-control"></ion-input>
+          <ion-input type="Number" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+            name="contact_number" placeholder="Enter Contact" formControlName="contact_number" class="form-control">
+          </ion-input>
         </ion-item>
         <div *ngIf="submitted && f.contact_number.errors" class="error-message">
           <div *ngIf="f.contact_number.errors.required">
@@ -58,13 +58,18 @@
           </ion-input>
           <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>@gmail.com</ion-label>
         </ion-item>
-        <div *ngIf="submitted && f.email.errors"  class="error-message">
-        <div  *ngIf="f.email.errors.required" color="danger">
-          <ion-icon name="alert-circle-outline"></ion-icon> Email is required
+        <div *ngIf="submitted && f.email.errors" class="error-message">
+          <div *ngIf="f.email.errors.required" color="danger">
+            <ion-icon name="alert-circle-outline"></ion-icon> Email is required
+          </div>
         </div>
-      </div>
+        <div *ngIf="submitted && f.email.errors" class="error-message">
+          <div *ngIf="f.email.errors.pattern" color="danger">
+            <ion-icon name="alert-circle-outline"></ion-icon> Please Enter valid mail Address
+          </div>
+        </div>
         <ion-item lines="none" id="rounded">
-          <ion-radio-group name="gender" formControlName="gender" >
+          <ion-radio-group name="gender" formControlName="gender">
             <ion-row>
               <ion-col>
                 <ion-item lines="none">
@@ -97,31 +102,39 @@
             <ion-row class="date">
 
               <ion-col>
+                <ion-input type="text" #dd maxLength="2"
+                  onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="dd" placeholder="DD"
+                  formControlName="dd" (keyup)="gotoNextField(mm)" clearInput="true"></ion-input>
 
-                <ion-input type="text"  maxLength='2' name="dd"  placeholder="DD" formControlName="dd"></ion-input>
               </ion-col>
-              <ion-col>
 
-                <ion-input type="text"  maxLength='2'formControlName="mm" placeholder="MM" name="mm"></ion-input>
+              <ion-col>
+                <ion-input type="text" #mm maxLength="2"
+                  onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="mm" placeholder="MM"
+                  name="mm" (keyup)="gotoNextFields(yyyy)" clearInput="true"></ion-input>
+
               </ion-col>
-              <ion-col>
 
-                <ion-input type="text"  maxLength='4'formControlName="yyyy" placeholder="YYYY" name="yyyy"></ion-input>
+              <ion-col>
+                <ion-input type="text" #yyyy maxLength="4"
+                  onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="yyyy"
+                  placeholder="YYYY" name="yyyy" (keyup)="gotoNextFields(yyyy)" clearInput="true"></ion-input>
+
               </ion-col>
             </ion-row>
             <div *ngIf=" f.dd.invalid && ( f.dd.touched || f.dd.dirty)">
-              <div class="error-message"  *ngIf=" f.dd.errors?.pattern"> *Please Enter 2 digit below  Date </div>
-              <div class="error-message" *ngIf=" f.dd.errors?.required" >*Date is required</div> 
-              
+              <div class="error-message" *ngIf=" f.dd.errors?.pattern"> *Please Enter 2 digit below Date </div>
+              <div class="error-message" *ngIf=" f.dd.errors?.required">*Date is required</div>
+
             </div>
             <div *ngIf=" f.mm.invalid && ( f.mm.touched || f.mm.dirty)">
-              <div class="error-message" *ngIf=" f.mm.errors?.required" >*Month is required</div> 
-              <div class="error-message"  *ngIf=" f.mm.errors?.pattern"> *Please Enter 2 digit below  Month </div>
+              <div class="error-message" *ngIf=" f.mm.errors?.required">*Month is required</div>
+              <div class="error-message" *ngIf=" f.mm.errors?.pattern"> *Please Enter 2 digit below Month </div>
             </div>
-          
+
             <div *ngIf=" f.yyyy.invalid && ( f.yyyy.touched || f.yyyy.dirty)">
-              <div class="error-message" *ngIf=" f.yyyy.errors?.required" >*Year is required</div> 
-              <div class="error-message"  *ngIf=" f.yyyy.errors?.pattern"> *Please Enter 4 digit below  Year </div>
+              <div class="error-message" *ngIf=" f.yyyy.errors?.required">*Year is required</div>
+              <div class="error-message" *ngIf=" f.yyyy.errors?.pattern"> *Please Enter 4 digit below Year </div>
             </div>
           </div>
         </ion-item>
@@ -143,11 +156,11 @@
             <ion-select-option value="ab-">AB-</ion-select-option>
           </ion-select>
         </ion-item>
-        <div *ngIf="submitted && f.blood_group.errors"  class="error-message">
-        <div   *ngIf="f.blood_group.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Blood Group is required
+        <div *ngIf="submitted && f.blood_group.errors" class="error-message">
+          <div *ngIf="f.blood_group.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Blood Group is required
+          </div>
         </div>
-      </div>
         <ion-item lines="none" id="rounded">
           <ion-select name="marital_status" placeholder="Select Marital Status" formControlName="marital_status"
             class="form-control">
@@ -155,41 +168,40 @@
             <ion-select-option value="married">Married</ion-select-option>
           </ion-select>
         </ion-item>
-        <div *ngIf="submitted && f.marital_status.errors"  class="error-message">
-        <div   *ngIf="f.marital_status.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Marital Status is required
+        <div *ngIf="submitted && f.marital_status.errors" class="error-message">
+          <div *ngIf="f.marital_status.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Marital Status is required
+          </div>
         </div>
-      </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">Weight</ion-label>
           <ion-input type="number" name="weight" formControlName="weight" class="form-control" clearInput></ion-input>
           <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>Kg</ion-label>
         </ion-item>
-        <div *ngIf="submitted && f.weight.errors"  class="error-message">
-        <div   *ngIf="f.weight.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Height is required
+        <div *ngIf="submitted && f.weight.errors" class="error-message">
+          <div *ngIf="f.weight.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Height is required
+          </div>
         </div>
-      </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">Height</ion-label>
-          <ion-input type="number" name="height"  formControlName="height"
-            class="form-control" clearInput></ion-input>
+          <ion-input type="number" name="height" formControlName="height" class="form-control" clearInput></ion-input>
           <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>Cm</ion-label>
         </ion-item>
-        <div *ngIf="submitted && f.height.errors"  class="error-message">
-        <div   *ngIf="f.height.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Weight is required
+        <div *ngIf="submitted && f.height.errors" class="error-message">
+          <div *ngIf="f.height.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Weight is required
+          </div>
         </div>
-      </div>
         <ion-item lines="none" id="rounded">
-          <ion-input name="econtact" placeholder="Enter Emergency Contact" formControlName="econtact"
-            class="form-control"></ion-input>
+          <ion-input name="econtact" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+            placeholder="Enter Emergency Contact" formControlName="econtact" class="form-control"></ion-input>
         </ion-item>
-        <div *ngIf="submitted && f.econtact.errors"  class="error-message">
-        <div   *ngIf="f.econtact.errors.required">
-          <ion-icon name="alert-circle-outline"></ion-icon> Emergency Contact is required
+        <div *ngIf="submitted && f.econtact.errors" class="error-message">
+          <div *ngIf="f.econtact.errors.required">
+            <ion-icon name="alert-circle-outline"></ion-icon> Emergency Contact is required
+          </div>
         </div>
-      </div>
         <ion-item lines="none" id="rounded">
           <ion-input name="location" placeholder="Enter Location" formControlName="location" class="form-control">
           </ion-input>
@@ -201,12 +213,16 @@
         </div>
         <ion-item lines="none" class="updatebtn">
 
-          <ion-button type="submit" *ngIf="buttontype == 'add'" (click)="open('add')"><ion-icon name="person-add"></ion-icon>&nbsp; Add Profile</ion-button>
+          <ion-button type="submit" *ngIf="buttontype == 'add'" (click)="open('add')">
+            <ion-icon name="person-add"></ion-icon>&nbsp; Add Profile
+          </ion-button>
           <!-- <ion-button type="submit">
           <ion-icon name="checkmark-outline"></ion-icon>
           Completed
         </ion-button> -->
-          <ion-button type="submit" *ngIf="buttontype == 'edit'" (click)="open('edit')"><ion-icon name="cloud-upload"></ion-icon> &nbsp; Edit Profile</ion-button>
+          <ion-button type="submit" *ngIf="buttontype == 'edit'" (click)="open('edit')">
+            <ion-icon name="cloud-upload"></ion-icon> &nbsp; Edit Profile
+          </ion-button>
         </ion-item>
       </form>
     </ion-item>
