@@ -121,6 +121,7 @@ gotoNextFields(nextElement) {
 
 
 
+
   async onSubmit(): Promise<void> {
     this.submitted = true;
 
@@ -128,12 +129,12 @@ gotoNextFields(nextElement) {
     let mm = this.registerForm.value.mm;
     let yyyy = this.registerForm.value.yyyy;
     // this.dob = dd +'-'+mm+'-'+yyyy;
-    this.dob = yyyy + "-" + mm+"-"+dd;
+    this.dob = yyyy + "-" + mm + "-" + dd;
     console.log(this.dob);
     // this.contact_number = JSON.stringify(this.registerForm.value.mobile);
     let data;
     data = {
-      
+
       // email: this.registerForm.value.email,
       mobile: this.registerForm.value.mobile,
       username: this.registerForm.value.username,
@@ -193,6 +194,7 @@ gotoNextFields(nextElement) {
   }
 
 }
+
 
 function mobile(mobile: any): string {
   throw new Error('Function not implemented.');
