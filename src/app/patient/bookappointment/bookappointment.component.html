@@ -37,8 +37,8 @@
           <ion-card-content>
             <ion-row>
               <div class="ion-text-justify">
-                <ion-label>{{data.date}}</ion-label>
-                <ion-label>{{data.scount-data.bookedCount}} slot abailable</ion-label>
+                <ion-label>{{data.date | date:'dd-MM-yyyy'}}</ion-label>
+                <ion-label>{{data.scount-data.bookedCount}} slot available</ion-label>
               </div>
             </ion-row>
           </ion-card-content>
@@ -47,7 +47,7 @@
     </ion-slides>
   </ion-item>
   <ion-item lines="none" class="date">
-    <ion-label><strong>{{sam}}</strong></ion-label>
+    <ion-label><strong>{{sam | date:'dd-MM-yyyy'}}</strong></ion-label>
   </ion-item>
   <!-- <div class="slot">
     <ion-item class="event" lines="none">

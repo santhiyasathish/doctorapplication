@@ -51,7 +51,7 @@
           </ion-col>
           <ion-col class="col-two">
             <ion-label>
-              <ion-icon name="gift"></ion-icon> {{data.dob}}
+              <ion-icon name="gift"></ion-icon> {{data.dob | date:"dd-MM-yyyy"}}
             </ion-label>
             <ion-label>
               <ion-icon name="location"></ion-icon> {{city}},{{state}}.
