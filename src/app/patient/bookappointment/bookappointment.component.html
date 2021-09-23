@@ -38,7 +38,9 @@
             <ion-row>
               <div class="ion-text-justify">
                 <ion-label>{{data.date}}</ion-label>
-                <ion-label>{{data.scount-data.bookedCount}} slot available</ion-label>
+                <ion-label><ng-container *ngIf="i == 0"> {{count}} </ng-container>
+                  <ng-container *ngIf="i != 0"> {{data.scount-data.bookedCount}} </ng-container>
+                 slot available</ion-label>
               </div>
             </ion-row>
           </ion-card-content>

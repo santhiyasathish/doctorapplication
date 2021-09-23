@@ -1,9 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="light">
-    
       <ion-menu-button slot="start" color="primary"></ion-menu-button>
       <ion-title>Dashboard</ion-title>
-    
     <ion-buttons *ngIf='togle' routerLink="/patient/patnotification/" class="noti-btn" slot="end">
       <ion-button color="primary">
         <ion-icon name="notifications-circle"></ion-icon>
@@ -64,7 +62,6 @@
                 <ion-icon name=star></ion-icon>
               </button>
             </ion-item>
-
           </ion-col>
           <ion-ripple-effect></ion-ripple-effect>
         </ion-row>
@@ -180,11 +177,9 @@
         <ion-row class="cancel_row">
           <ion-col>
             <ion-label color="success">{{dataa.time}}</ion-label>
-            <ion-chip outline color="danger" (click)="cancel()">Cancel</ion-chip>
-  
+            <ion-chip outline color="danger" (click)="cancel()">Cancel</ion-chip> 
           </ion-col>
-        </ion-row>
-  
+        </ion-row> 
         <!-- <ion-col>
                 <ion-label>Dr.janagan</ion-label>
                 <ion-label>MBMS Skin Specialist</ion-label>
@@ -207,8 +202,7 @@
       <ion-item lines="none">
         <!-- <ion-col  class="col-one">
           <ion-label>Service</ion-label>
-          <ion-progress-bar value="{{data.review}}"></ion-progress-bar>
-          
+          <ion-progress-bar value="{{data.review}}"></ion-progress-bar>          
         </ion-col> -->
         <ion-col class="col-two">
           <ion-item lines="none">
@@ -234,14 +228,12 @@
               <ion-icon name=star></ion-icon>
             </button>
           </ion-item>
-
         </ion-col>
       </ion-item>
       <ion-item lines="none">
         <ion-col class="col-one">
           <ion-label>Satisfaction</ion-label>
           <ion-progress-bar value="{{data.score}}"></ion-progress-bar>
-
         </ion-col>
         <!-- <ion-col class="col-two">
           <ion-item lines="none">
@@ -271,7 +263,6 @@
       </ion-item>
       <!-- <ion-item class="star" lines="none">
         <ion-col class="col-two">
-         
           <ion-item lines="none">
             <ion-label>Speciality</ion-label>
             <ion-item>
@@ -299,16 +290,13 @@
           </ion-item>
           <ion-progress-bar value="{{data.satisfication}}"></ion-progress-bar>
         </ion-col>
-        <ion-col class="col-two">
-          
+        <ion-col class="col-two">        
         </ion-col>
-
       </ion-item> -->
       <!-- <ion-button (click)="seduleBasic()">3 Seconds</ion-button>
       <ion-button (click)="seduleAdvance()">10 Seconds</ion-button> -->
     </ion-card-content>
   </ion-card>
-  
 </ion-content>
 
 

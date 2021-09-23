@@ -249,7 +249,7 @@ getDoctorProfile(){
       message: 'Please wait...',
       translucent: true,
       cssClass: '',
-      backdropDismiss: true,
+      backdropDismiss: false,
       mode: 'ios',
       keyboardClose: true,
 
@@ -352,7 +352,7 @@ getDoctorProfile(){
       message: 'Please wait...',
       translucent: true,
       cssClass: '',
-      backdropDismiss: true,
+      backdropDismiss: false,
       mode: 'ios',
       keyboardClose: true,
 

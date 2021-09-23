@@ -224,7 +224,7 @@ export class EditprofileComponent implements OnInit {
       message: 'Please wait...',
       translucent: true,
 
-      backdropDismiss: true,
+      backdropDismiss: false,
       cssClass: 'loadercustom'
 
     });
@@ -400,7 +400,7 @@ export class EditprofileComponent implements OnInit {
       message: 'Please wait...',
       translucent: true,
       cssClass: '',
-      backdropDismiss: true,
+      backdropDismiss: false,
       mode: 'ios',
       keyboardClose: true,
 

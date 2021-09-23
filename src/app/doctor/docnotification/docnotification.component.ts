@@ -128,7 +128,7 @@ export class DocnotificationComponent implements OnInit {
       message: 'Please wait...',
       translucent: true,
       cssClass: '',
-      backdropDismiss: true,
+      backdropDismiss: false,
       mode: 'ios',
       keyboardClose: true,
 
@@ -192,7 +192,7 @@ export class DocnotificationComponent implements OnInit {
           message: 'Please wait...',
           translucent: true,
           cssClass: '',
-          backdropDismiss: true,
+          backdropDismiss: false,
           mode: 'ios',
           keyboardClose: true,
     

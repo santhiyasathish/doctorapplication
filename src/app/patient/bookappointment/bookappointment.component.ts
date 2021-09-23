@@ -90,6 +90,10 @@ export class BookappointmentComponent implements OnInit {
   dates: any;
   aampm: number;
   campm: number;
+  listdata: string ="";
+  getcone: number;
+  count=0;
+  lidata: any;
 
 
 
@@ -123,7 +127,7 @@ export class BookappointmentComponent implements OnInit {
 
     this.schedule();
     this.menu.enable(false);
-    // console.log("sample");
+    // // console.log("sample");
     // if()
 
     // const minutesf = minutes[1]; //11
@@ -142,7 +146,7 @@ export class BookappointmentComponent implements OnInit {
     const m = cont[1];
     const ampm = dam[1];
     this.time = h + ":" + m + " " + ampm;
-    console.log('time', this.time);
+    // console.log('time', this.time);
 
 
     this.subscribe = this.platform.backButton.subscribeWithPriority(666666, () => {
@@ -231,7 +235,7 @@ export class BookappointmentComponent implements OnInit {
   //       this.notifications.push(notification);
   //     }
   //   }
-  //   console.log("Notifications to be scheduled: ", this.notifications);
+  //   // console.log("Notifications to be scheduled: ", this.notifications);
   //   if (this.platform.is('cordova')) {
   //     // Cancel any existing notifications
   //     this.localNotifications.cancelAll().then(async () => {
@@ -278,7 +282,7 @@ export class BookappointmentComponent implements OnInit {
   // }
   ngOnInit() {
     // this.seduleBasic();
-
+   
     // this.available=this.service.available;
     this.docId = this.route.snapshot.paramMap.get('id');
     this.durId = this.route.snapshot.paramMap.get('id');
@@ -294,6 +298,9 @@ export class BookappointmentComponent implements OnInit {
 nodataFound(i, date){
 //  setTimeout(function(){
    if (this.datepipe.transform(new Date(), 'yyyy-MM-dd') == date) {
+    this.getcone= document.getElementById(i).childElementCount;
+    //  let codes = document.getElementById('1').childElementCount;
+    //  // console.log("getelement2", codes);
      return document.getElementById(i).childElementCount == 0;
    }
    else {
@@ -314,7 +321,7 @@ nodataFound(i, date){
       status: 'true',
       approvestatus: 'pending'
     };
-    console.log(appointment);
+    // console.log(appointment);
     this.service.bookAppointment(appointment).subscribe(data => {
       this.appoint = JSON.parse(JSON.stringify(data)).success;
       // this.seduleBasic();
@@ -324,7 +331,7 @@ nodataFound(i, date){
 
       }
 
-      console.log("appointment", this.appoint);
+      // console.log("appointment", this.appoint);
     })
   }
   async presentLoading() {
@@ -336,7 +343,7 @@ nodataFound(i, date){
       message: 'Please wait...',
       translucent: true,
       cssClass: '',
-      backdropDismiss: true,
+      backdropDismiss: false,
       mode: 'ios',
       keyboardClose: true,
     });
@@ -356,7 +363,8 @@ nodataFound(i, date){
       this.available = JSON.parse(JSON.stringify(data)).data;
       this.schedule();
       this.getList('0');
-      console.log("bcount", this.bcount);
+      
+      // console.log("bcount", this.available);
       //  this.getlista('0');
 
       await this.loading.dismiss();
@@ -367,7 +375,7 @@ nodataFound(i, date){
   checkValid(time, date) {
 
     // this.sams = this.available['0'].date;
-    // console.log("rgfff", this.sams);
+    // // console.log("rgfff", this.sams);
     if (this.datepipe.transform(new Date(), 'yyyy-MM-dd') == date) {
       let atime = time.split(' ');
       this.aampm = atime[1] == 'AM' ? 0 : 12;
@@ -375,9 +383,11 @@ nodataFound(i, date){
       let ctime = this.time.split(':');
       this.campm = ctime[1].split(' ')[1].toUpperCase() == 'AM' ? 0 : 12;
 
-      if (this.campm > this.aampm) {
+      if (this.campm < this.aampm) {
         this.hide = true;
-        console.log("ddddds");
+      //   this.count = this.count + 1;
+      //  // console.log("count",this.count);
+      //   // // console.log("ddddds");
       }
 
       if (ctime[0] == 12) {
@@ -386,14 +396,16 @@ nodataFound(i, date){
           let atime = time.split(' ');
           let aampms = atime[1] == 'AM' ? 0 : 12;
           this.lo = false;
-          console.log("no data");
+          // // console.log("no data");
           this.aampm = aampms;
         }
       }
       let ct = ctime[0] * 60 + parseInt(ctime[1]) + this.campm * 60;
       let at = atime[0] * 60 + parseInt(atime[1]) + this.aampm * 60;
-      // console.log('atime', at);
-      // console.log('ctime', ct);
+      //  if(ct < at){
+      //   this.count= this.count+1;
+      //  }
+      //  // console.log("check count",this.count);
       return ct < at;
     }
 
@@ -401,10 +413,40 @@ nodataFound(i, date){
       return true;
     }
   }
+  slotcount(time){
+    
+    console.log(this.dates);
+    if (this.sam == this.dates){
+      this.count = 0;
+      console.log(this.sam, "santhiya");
+      let ctime = time.split(':');
+      let campm = ctime[1].split(' ')[1].toUpperCase() == 'AM' ? 0 : 12;
+      let ct = ctime[0] * 60 + parseInt(ctime[1]) + campm * 60;
+
+      let list = this.available['0'].list;
+      list.forEach(listdata => {
+        this.lidata = listdata.availableList;
+
+        this.lidata.forEach(slot => {
+
+          let atime = slot.time;
+          let atimes = atime.split(':');
+          let aampm = atimes[1].split(' ')[1].toUpperCase() == 'AM' ? 0 : 12;
+          let at = atimes[0] * 60 + parseInt(atimes[1]) + aampm * 60;
+
+          if (slot.status == 'false') {
+            if (ct < at) {
+              this.count = this.count + 1;
+            }
+          }
+        });
+      });
+    }
+  }
   async getList(i) {
     this.schedule();
     // this.presentLoading();
-    console.log("first data", i);
+    // console.log("first data", i);
     this.list = this.available[i].list;
     this.secmsa = this.list['0'];
     this.secm = this.list['0'].session;
@@ -413,16 +455,18 @@ nodataFound(i, date){
     this.arraym = this.list['0'].availableList;
     this.arraye = this.list['1'].availableList;
     this.dates = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
+    console.log(this.time, "dmwekofdfjdfl");
+    this.slotcount(this.time);
+    // console.log('avail', this.list);
     // if (this.dates !== this.sam) {
-    //   console.log("jana", this.dates);
+    //   // console.log("jana", this.dates);
     //   this.hide = false;
-
     // }
     // else {
     //   if (this.dates == this.sam) {
     //     if (this.campm > this.aampm) {
     //       this.hide = true;
-    //       console.log("ddddd");
+    //       // console.log("ddddd");
     //     }
     //   }
 
@@ -437,18 +481,7 @@ nodataFound(i, date){
     }
     this.service.appointmentDetail(passData).subscribe(data => {
       this.docDetail = JSON.parse(JSON.stringify(data));
-      console.log("details", data);
-
-      let a = 30;
-      let b = 20;
-      console.log("first value a", a);
-      console.log("first value b", b);
-      let c = a;
-      let d = b;
-      console.log("second value a", d);
-      console.log("second value b",c);
-
-
+      // console.log("details", data);
     });
   }
   // back(){
@@ -460,10 +493,11 @@ nodataFound(i, date){
       header: 'Appointment Booking',
       cssClass: 'alertHeader',
       message: 'Waiting for your Approval .',
+      mode:'ios',
       buttons: ['OK']
     }).then(res => {
       res.present();
-      window.location.href = "patient/docprofile/3";
+      // window.location.href = "patient/docprofile/3";
 
     });
 
@@ -518,12 +552,13 @@ nodataFound(i, date){
 
         subHeader: 'Booking',
         message: 'Do you want to booking your Appointment',
+        mode:'ios',
         buttons: [
           {
             text: 'Cancel',
             role: 'cancel',
             handler: data => {
-              console.log('Cancel clicked');
+              // console.log('Cancel clicked');
             }
           },
           {
@@ -531,26 +566,92 @@ nodataFound(i, date){
             handler: async data => {
               let alert = this.alertCtrl.create({
                 message: 'Reason?',
+                mode:'ios',
+
                 inputs: [
                   {
                     name: 'reson',
-                    placeholder:'reason'
+                    type: 'checkbox',
+                    value: 'Other',
+                    label: 'Other',
+                    checked: true
+
+                  },
+                  {
+                    name: 'reson',
+                    type: 'checkbox',
+                    value: 'Cough',
+                    label: 'Cough',
+                   
+                  },
+                  {
+                    name: 'reson',
+                    type: 'checkbox',
+                    value: 'Fever',
+                    label: 'Fever',
+
+                  },
+                  {
+                    name: 'reson',
+                    type: 'checkbox',
+                    value: 'Stomach Pain',
+                    label: 'Stomach Pain',
+
+                  },
+                  {
+                    name: 'reson',
+                    type: 'checkbox',
+                    value: 'Headache',
+                    label: 'Headache',
+
+                  },
+                  {
+                    name: 'reson',
+                    type: 'checkbox',
+                    value: 'Cough',
+                    label: 'Cough',
+                   
+                  },
+                  {
+                    name: 'reson',
+                    type: 'checkbox',
+                    value: 'Fever',
+                    label: 'Fever',
+
+                  },
+                  {
+                    name: 'reson',
+                    type: 'checkbox',
+                    value: 'Stomach Pain',
+                    label: 'Stomach Pain',
+
+                  },
+                  {
+                    name: 'reson',
+                    type: 'checkbox',
+                    value: 'Headache',
+                    label: 'Headache',
+
                   },
                 ],
+          
                 buttons: [
                   {
                     text: 'Cancel',
                     role: 'cancel',
                     handler: data => {
-                      console.log('Cancel clicked', data);
+                      // console.log('Cancel clicked', data);
                     }
                   },
                   {
                     text: 'Submit',
                     handler: Data => { //takes the data 
-                      console.log("data reson", Data.reson);
-                      this.getbookAppointment(Data.reson, id);
-
+                      // console.log("data reson", Data);
+                      Data.forEach(d1 =>{
+                        this.listdata= this.listdata +d1+', ';
+                      });
+                      // console.log('check',this.listdata);
+                      this.getbookAppointment(this.listdata, id);
                     }
                   }
                 ]
@@ -563,7 +664,7 @@ nodataFound(i, date){
       });
       await alert.present();
       const result = await alert.onDidDismiss();
-      console.log(alert);
+      // console.log(alert);
     }
   }
 

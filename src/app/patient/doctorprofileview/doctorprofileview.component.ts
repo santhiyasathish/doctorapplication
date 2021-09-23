@@ -183,6 +183,7 @@ export class DoctorprofileviewComponent implements OnInit {
       header: 'Network error ?',
       message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
       cssClass: 'customalert',
+      mode:'ios',
 
       buttons: [{
         text: 'ok',
@@ -207,6 +208,7 @@ export class DoctorprofileviewComponent implements OnInit {
     const alert = await this.alertController.create({
       header: 'Network error ?',
       message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
+      mode:'ios',
 
       cssClass: 'customalert',
 
@@ -239,7 +241,7 @@ export class DoctorprofileviewComponent implements OnInit {
       message: 'Please wait...',
       translucent: true,
       cssClass: '',
-      backdropDismiss: true,
+      backdropDismiss: false,
       mode: 'ios',
       keyboardClose: true,
 
@@ -289,7 +291,6 @@ export class DoctorprofileviewComponent implements OnInit {
 
   //   });
   // }
-
   async viewDoctorProfile(val) {
 
     let id = {
@@ -297,7 +298,6 @@ export class DoctorprofileviewComponent implements OnInit {
     }
 
     this.service.viewDoctorProfile(id).subscribe(async data => {
-
       this.editData = [JSON.parse(JSON.stringify(data)).data];
       this.data = this.editData[0].contact_number;
       this.location=JSON.parse(this.editData[0].location);
@@ -309,13 +309,11 @@ export class DoctorprofileviewComponent implements OnInit {
       // this.addressl1 = this.locat.addressl1;
       // this.addressl2 = this.locat.addressl2;
       // this.zip = this.locat.zip;
-
       console.log("locat", this.locat);
       console.log("city", this.city);
       console.log("state", this.state);
       console.log("location", this.location);
       console.log("number1", this.data);
-      
       await this.loading.dismiss();
       // this.menu.enable(true);
     });
@@ -326,6 +324,7 @@ export class DoctorprofileviewComponent implements OnInit {
 
       subHeader: 'Booking Cancel',
       message: 'Cancel your Appointment ?',
+      mode:'ios',
       buttons: [
         {
           text: 'Cancel',
@@ -344,7 +343,7 @@ export class DoctorprofileviewComponent implements OnInit {
               message: 'Please wait...',
               translucent: true,
               cssClass: '',
-              backdropDismiss: true,
+              backdropDismiss: false,
               mode: 'ios',
               keyboardClose: true,
         
@@ -358,13 +357,9 @@ export class DoctorprofileviewComponent implements OnInit {
               await this.loading.present();
               this.cancelAppointment();
             }
-            
             // this.cancelAppointment();
-            
-            
           }
         }
-
       ]
     });
     await alert.present();
