@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { LoadingController } from '@ionic/angular';
 import { ServiceService } from '../service.service';
 import { AlertController } from '@ionic/angular';
 import Validation from './validation';
@@ -28,11 +29,14 @@ export class RegisterComponent implements OnInit {
   hide = true;
   subscribe: any;
   dob: string;
+  value: 3000;
+  loading: any;
   // contact_number: any;
 
   constructor(private formBuilder: FormBuilder,
     private service: ServiceService,
     public alertCtrl: AlertController,
+    public loadingController: LoadingController,
     private router: Router,
     private menu: MenuController,
     private platform: Platform
@@ -46,42 +50,44 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
-//  move(e:any,p:any,c:any,n:any){
-//    console.log(e);
-//      var length = c.value.length;
-//      var maxLength = c.getAttribute("maxLength");
-//      console.log(maxLength);
-//      if(length == maxLength){
-//        if(n!= " "){
-//         n.focus();
-//        }
-//      }
-//      if(e.key === "Backspace"){
-//        if(p! = " "){
-//         p.focus();
-//        }
-//      }
-//  }
-gotoNextField(nextElement) {
-  var nextinput = this.registerForm.value.dd;
-  // var nextinputtwo = this.registerForm.value.mm;
-  if (nextinput.length === 2) {
-    nextElement.setFocus();
-  }
+  //  move(e:any,p:any,c:any,n:any){
+  //    console.log(e);
+  //      var length = c.value.length;
+  //      var maxLength = c.getAttribute("maxLength");
+  //      console.log(maxLength);
+  //      if(length == maxLength){
+  //        if(n!= " "){
+  //         n.focus();
+  //        }
+  //      }
+  //      if(e.key === "Backspace"){
+  //        if(p! = " "){
+  //         p.focus();
+  //        }
+  //      }
+  //  }
+  gotoNextField(nextElement) {
+    var nextinput = this.registerForm.value.dd;
+    // var nextinputtwo = this.registerForm.value.mm;
+    if (nextinput.length === 2) {
+      nextElement.setFocus();
+    }
 
-  // nextElement.setFocus();
-}
-gotoNextFields(nextElement) {
-  var nextinput = this.registerForm.value.mm;
-  // var nextinputtwo = this.registerForm.value.mm;
-  if (nextinput.length === 2) {
-    nextElement.setFocus();
+    // nextElement.setFocus();
   }
+  gotoNextFields(nextElement) {
+    var nextinput = this.registerForm.value.mm;
+    // var nextinputtwo = this.registerForm.value.mm;
+    if (nextinput.length === 2) {
+      nextElement.setFocus();
+    }
 
-  // nextElement.setFocus();
-}
+    // nextElement.setFocus();
+  }
 
   ngOnInit() {
+
+
     if (localStorage.getItem('log') != null) {
       this.router.navigateByUrl('patient/docprofile/3');
     }
@@ -104,9 +110,9 @@ gotoNextFields(nextElement) {
       // usertype: ['', Validators.required],
       gender: ['', Validators.required],
       // dob: ['', Validators.required],
-      dd:['',[Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|^[1-2][0-9]$|^3[0-1])$")]],
-      mm:['',[Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|1[0-2])$") ]],
-      yyyy:['',[Validators.required, Validators.pattern("^19(0[0-9]|[1-9][0-9])$|20(0[0-9]|[1-9][0-9])$")]],
+      dd: ['', [Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|^[1-2][0-9]$|^3[0-1])$")]],
+      mm: ['', [Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|1[0-2])$")]],
+      yyyy: ['', [Validators.required, Validators.pattern("^19(0[0-9]|[1-9][0-9])$|20(0[0-9]|[1-9][0-9])$")]],
     },
       {
         validators: [Validation.match('password', 'cpassword')]
@@ -121,9 +127,32 @@ gotoNextFields(nextElement) {
 
 
 
-
   async onSubmit(): Promise<void> {
-    this.submitted = true;
+    this.loading = await this.loadingController.create({
+      spinner: 'dots',
+      duration: this.value,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: '',
+      backdropDismiss: true,
+      mode: 'ios',
+      keyboardClose: true,
+
+    });
+    // Present the loading controller
+
+    if (this.value == 3000) {
+      await this.loading.present();
+      // this.networkError();
+    } else {
+      await this.loading.present();
+      // this.pendingList()
+      this.submitted = true;
+    }
+
+
+    // this.presentLoading();
+
 
     let dd = this.registerForm.value.dd;
     let mm = this.registerForm.value.mm;
@@ -144,8 +173,10 @@ gotoNextFields(nextElement) {
       dob: this.dob,
     }
     let alertMsg;
+
     this.service.register(data).subscribe(async data => {
       let response = JSON.parse(JSON.stringify(data));
+      await this.loading.dismiss();
       this.alertmessage = response.messages;
       if (response.success == true) {
         let logdata;
@@ -154,26 +185,36 @@ gotoNextFields(nextElement) {
           mobile: this.registerForm.value.mobile,
           password: this.registerForm.value.password,
         }
-        this.service.login(logdata).subscribe(data1 => {
+
+        this.service.login(logdata).subscribe(async data1 => {
           localStorage.setItem('log', JSON.stringify(JSON.parse(JSON.stringify(data1)).logData));
           if (JSON.parse(localStorage.getItem('log')).user_type == 'doctor') {
+            // await this.loading.dismiss();
             window.location.href = "/doctor/docprofileupdate";
             // this.router.navigateByUrl('doctor/docprofileupdate');
           }
           else if (JSON.parse(localStorage.getItem('log')).user_type == 'patient') {
+            // await this.loading.dismiss();
             window.location.href = "/patient/editprofile";
             // this.router.navigateByUrl('patient/editprofile');
           }
           else {
             window.location.href = "/patient/docprofile/3";
+            // await this.loading.dismiss();
             // this.router.navigateByUrl('patient/docprofile/3');
           }
+
+
         });
+        // await this.loading.dismiss();
       }
+
       else {
         alertMsg = response.error_messages;
       }
       console.log("error_message", response.error_messages);
+
+
       let prompt = this.alertCtrl.create({
 
         message: alertMsg,
@@ -188,12 +229,15 @@ gotoNextFields(nextElement) {
       (await prompt).present();
 
     });
+
     if (this.registerForm.invalid) {
       return;
     }
   }
 
+
 }
+
 
 
 function mobile(mobile: any): string {

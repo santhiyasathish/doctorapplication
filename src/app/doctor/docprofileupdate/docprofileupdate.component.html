@@ -23,7 +23,7 @@
           </ion-button>
         </ion-item>
         <ion-item lines="none" id="rounded">
-
+          <ion-text color="danger">*</ion-text>
           <ion-input placeholder="FirstName" type="text" name="firstname" formControlName="firstname"></ion-input>
         </ion-item>
         <div *ngIf="submitted && f.firstname.errors" class="error-message">
@@ -32,6 +32,7 @@
           </div>
         </div>
         <ion-item id="rounded" lines="none">
+          <ion-text color="danger">*</ion-text>
           <ion-input placeholder="Last Name" type="text" name="lastname" formControlName="lastname"></ion-input>
         </ion-item>
         <div *ngIf="submitted && f.lastname.errors" class="error-message">
@@ -55,7 +56,7 @@
         </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">+91</ion-label>
-          <ion-input type="number" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Contact" name="contact_number" formControlName="contact_number">
+          <ion-input readonly type="text" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Contact" name="contact_number" formControlName="contact_number">
           </ion-input>
         </ion-item>
         <div *ngIf="submitted && f.contact_number.errors" class="error-message">
@@ -243,7 +244,7 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-input type="number" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="emergency_contact" formControlName="emergency_contact"
+          <ion-input type="text" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="emergency_contact" formControlName="emergency_contact"
             placeholder="Emergency Contact"></ion-input>
         </ion-item>
         <div *ngIf="submitted && f.emergency_contact.errors" class="error-message">

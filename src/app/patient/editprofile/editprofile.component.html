@@ -44,7 +44,7 @@
         </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">+91</ion-label>
-          <ion-input type="Number" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+          <ion-input  readonly type="text" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
             name="contact_number" placeholder="Enter Contact" formControlName="contact_number" class="form-control">
           </ion-input>
         </ion-item>
@@ -194,7 +194,7 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-input name="econtact" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+          <ion-input type="text" name="econtact" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
             placeholder="Enter Emergency Contact" formControlName="econtact" class="form-control"></ion-input>
         </ion-item>
         <div *ngIf="submitted && f.econtact.errors" class="error-message">
