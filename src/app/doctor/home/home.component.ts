@@ -45,6 +45,10 @@ export class HomeComponent implements OnInit {
   loading: any;
   imgurl: any;
   subscribe: any;
+  rattingpoint: any = "";
+  rattingVal: any;
+  rattingsplits: any;
+  rattingsplit: any;
 
   constructor(private service: DoctorserviceService,
     public datePipe: DatePipe,
@@ -92,6 +96,7 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.viewRatting();
     this.presentLoading();
 
   }
@@ -150,6 +155,18 @@ export class HomeComponent implements OnInit {
 
       });
     }, 2000);
+  }
+  viewRatting() {
+
+    this.service.viewRatting().subscribe(data => {
+      this.rattingVal = JSON.parse(JSON.stringify(data)).data;
+      this.rattingsplits = this.rattingVal.split('.');
+      this.rattingsplit = this.rattingsplits[0];
+      this.rattingpoint = this.rattingsplit;
+      console.log('rat', this.rattingsplit);
+    });
+
+
   }
 
   async presentLoading() {

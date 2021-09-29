@@ -109,21 +109,29 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item lines="none">
-        <ion-col>
+        <!-- <ion-col  class="col-one">
+                <ion-label>Service</ion-label>
+                <ion-progress-bar value="{{data.review}}"></ion-progress-bar>          
+              </ion-col> -->
+        <ion-col class="col-two">
+          <ion-item lines="none">
           <ion-label>Service</ion-label>
-          <ion-progress-bar value="0.2"></ion-progress-bar>
-        </ion-col>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-col>
-          <ion-label>Satisfaction</ion-label>
-          <ion-progress-bar value="{{data.score}}"></ion-progress-bar>
-        </ion-col>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-col>
-          <ion-label>Speciality</ion-label>
-          <ion-progress-bar value="{{data.satisfication}}"></ion-progress-bar>
+            <button [ngStyle]="this.rattingpoint >= '1' ? {color:'orange'} : {color:'gray'}" id="1">
+              <ion-icon name=star></ion-icon>
+            </button>
+            <button [ngStyle]="this.rattingpoint >= '2' ? {color:'orange'} : {color:'gray'}" id="2">
+              <ion-icon name=star></ion-icon>
+            </button>
+            <button [ngStyle]="this.rattingpoint >= '3' ? {color:'orange'} : {color:'gray'}" id="3">
+              <ion-icon name=star></ion-icon>
+            </button>
+            <button [ngStyle]="this.rattingpoint >= '4' ? {color:'orange'} : {color:'gray'}" id="4">
+              <ion-icon name=star></ion-icon>
+            </button>
+            <button [ngStyle]="this.rattingpoint >= '5' ? {color:'orange'} : {color:'gray'}" id="5">
+              <ion-icon name=star></ion-icon>
+            </button>
+          </ion-item>
         </ion-col>
       </ion-item>
 

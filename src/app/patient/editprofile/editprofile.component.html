@@ -44,7 +44,7 @@
         </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">+91</ion-label>
-          <ion-input  readonly type="text" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+          <ion-input  readonly inputmode="numeric" [required]="true" appInputInteger type="text" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
             name="contact_number" placeholder="Enter Contact" formControlName="contact_number" class="form-control">
           </ion-input>
         </ion-item>
@@ -54,9 +54,9 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-input type="text" name="email" placeholder="E-mail" formControlName="email" class="form-control">
+          <ion-input type="text" name="email" placeholder="name@Example.com" formControlName="email" class="form-control">
           </ion-input>
-          <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>@gmail.com</ion-label>
+          <!-- <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>@gmail.com</ion-label> -->
         </ion-item>
         <div *ngIf="submitted && f.email.errors" class="error-message">
           <div *ngIf="f.email.errors.required" color="danger">
@@ -194,7 +194,7 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-input type="text" name="econtact" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+          <ion-input inputmode="numeric" [required]="true" appInputInteger type="text" name="econtact" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
             placeholder="Enter Emergency Contact" formControlName="econtact" class="form-control"></ion-input>
         </ion-item>
         <div *ngIf="submitted && f.econtact.errors" class="error-message">
@@ -203,8 +203,14 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-input name="location" placeholder="Enter Location" formControlName="location" class="form-control">
-          </ion-input>
+          <ion-label class="location-css" >Location</ion-label>
+          <ion-select  interface="popover" name="location" formControlName="location" class="form-control">
+            <ion-select-option  value="pondicherry">Pondicherry</ion-select-option>
+            <ion-select-option value="villianur">Villianur</ion-select-option>
+            
+          </ion-select>
+          <!-- <ion-input  placeholder="Enter Location" >
+          </ion-input> -->
         </ion-item>
         <div *ngIf="submitted && f.location.errors" class="error-message">
           <div *ngIf="f.location.errors.required">

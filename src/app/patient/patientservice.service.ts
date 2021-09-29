@@ -81,6 +81,18 @@ export class PatientserviceService {
   doctorNotification(data:any){
     return this.http.post(this.api +'pendinglist', data, this.httpOptions);
   }
+  patientHistory(data:any){
+    return this.http.post(this.api +'patienthistory',data,this.httpOptions);
+  }
+  viewRatting(){
+    return this.http.get(this.api + 'viewrating',this.httpOptions);
+  }
+  setRatting(data:any){
+    return this.http.post(this.api +'rating',data, this.httpOptions);
+  }
+  fixRatting(data:any){
+    return this.http.post(this.api +'getrating',data, this.httpOptions);
+  }
 
 }
 

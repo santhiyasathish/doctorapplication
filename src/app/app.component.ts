@@ -15,20 +15,22 @@ export class AppComponent {
   userType: string;
   togle: boolean = false;
   public appPages = [
+    
     //patient
     { title: 'Home', url: 'patient/docprofile/3', icon: 'home', type: 'patient' },
     { title: 'book appointment', url: 'patient/book/3', icon: 'fitness', type: 'patient' },
     { title: 'Notification', url: 'patient/patnotification', icon: 'notifications-circle', type: 'patient' },
     { title: 'Profile', url: 'patient/editprofile', icon: 'person-circle', type: 'patient' },
+    { title: 'Histroy', url: 'patient/patienthistory', icon: 'sync-circle', type:'patient'},
     //doctor
     { title: 'Dashboard', url: 'doctor/home', icon: 'home', type: 'doctor' },
     { title: 'Confirmation', url: 'doctor/appointmentlist', icon: 'calendar', type: 'doctor' },
     { title: 'Notification', url: 'doctor/docnotification', icon: 'notifications-circle', type: 'doctor' },
     { title: 'Profile', url: 'doctor/docprofileupdate', icon: 'person-circle', type: 'doctor' },
+    { title: 'Histroy', url: 'doctor/doctorhistory', icon: 'sync-circle', type: 'doctor' },
     //guest
 
     { title: 'Book appointment', url: 'general/guest', icon: 'fitness', type: 'guest' },
-
     { title: 'Logout', url: 'doctor/home', icon: 'log-out', type: 'doctor' },
     { title: 'Logout', url: 'patient/docprofile/3', icon: 'log-out', type: 'patient' },
     { title: 'Logout', url: 'general/guest', icon: 'log-out', type: 'guest' },
@@ -58,6 +60,7 @@ export class AppComponent {
 
       subHeader: 'LogOut',
       message: 'Do you want to LogOut your Account?',
+      mode:'ios',
       buttons: [
         {
           text: 'Cancel',

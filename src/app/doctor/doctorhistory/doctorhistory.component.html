@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons>
+      <ion-button href="/doctor/home">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-title>Appointment History</ion-title>
+    </ion-buttons>
+
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <ion-row *ngFor='let data of dataList' class="table">
+    <ion-col class="date">
+      {{data.date | date:'dd-MM-YYYY' }}
+    </ion-col>
+    <ion-col class="reason">
+      {{data.reason}}
+    </ion-col>
+    <ion-col class="status">
+      <ion-label [color]="data.approvestatus == 'accept' ? 'success' : 'danger'" *ngIf="data.approvestatus!=='pending'"
+        [innerHtml]="data.approvestatus=='accept'? 'Accept':'Cancel' ">
+      </ion-label>
+      <ion-label [color]="data.approvestatus == 'pending' ? 'warning' : 'danger'" *ngIf="data.approvestatus=='pending'"
+        [innerHtml]="data.approvestatus=='pending'? 'Waiting':'' "></ion-label>
+      <!-- {{data.status}} -->
+    </ion-col>
+  </ion-row>
+</ion-content>

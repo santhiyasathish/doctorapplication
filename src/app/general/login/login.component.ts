@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-login',
@@ -37,6 +39,8 @@ export class LoginComponent implements OnInit {
     public alertCtrl: AlertController,
     private menu: MenuController,
     private plt: Platform,
+    private location: Location,
+
   ) {
 
     this.menu.enable(false);
@@ -54,6 +58,7 @@ export class LoginComponent implements OnInit {
         // this.router.navigateByUrl('');
       }
       else if (JSON.parse(localStorage.getItem('log')).user_type == 'patient') {
+        
         window.location.href = "patient/editprofile";
         // this.router.navigateByUrl('');
       }
@@ -123,20 +128,20 @@ export class LoginComponent implements OnInit {
       if (responseData.success == true) {
         await this.loading.dismiss();
         alertMessage = responseData.messages;
-        let prompt = this.alertCtrl.create({
+        // let prompt = this.alertCtrl.create({
 
-          message: alertMessage,
-          mode:'ios',
+        //   message: alertMessage,
+        //   mode:'ios',
   
-          buttons: [
+        //   buttons: [
   
-            {
-              text: 'Ok',
+        //     {
+        //       text: 'Ok',
   
-            }
-          ]
-        });
-        (await prompt).present();
+        //     }
+        //   ]
+        // });
+        // (await prompt).present();
         
         console.log('log', alertMessage);
         localStorage.setItem('log', JSON.stringify(responseData.logData));
@@ -146,9 +151,20 @@ export class LoginComponent implements OnInit {
           // this.router.navigateByUrl('');
         }
         else if (JSON.parse(localStorage.getItem('log')).user_type == 'patient') {
-          
-         
-          window.location.href = "patient/book/3";
+          if (window.history.state.navigationId > 1) {
+            console.log("len", window.history.state.navigationId);
+            window.location.href = "patient/book/3";
+           
+          }else{
+            window.location.href = "patient/docprofile/3";
+          }
+          // if (window.history.length > 1) {
+          //   this.location.back();
+          //   // this.doctorprofile.presentLoading();
+          // } else {
+
+          // }
+          // window.location.href = "patient/book/3";
           // this.router.navigateByUrl('');
         }
         else {

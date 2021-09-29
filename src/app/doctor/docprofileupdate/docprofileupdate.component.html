@@ -41,8 +41,8 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-input type="text" placeholder=" E-mail" name="email" formControlName="email"></ion-input>
-          <ion-label style="padding-left: 20px; color: rgb(146, 146, 146);" fixed>@gmail.com</ion-label>
+          <ion-input type="text" placeholder="name@Example.com" name="email" formControlName="email"></ion-input>
+          <!-- <ion-label style="padding-left: 20px; color: rgb(146, 146, 146);" fixed>@gmail.com</ion-label> -->
         </ion-item>
         <div *ngIf="submitted && f.email.errors" class="error-message">
           <div *ngIf="f.email.errors.required">
@@ -56,7 +56,7 @@
         </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">+91</ion-label>
-          <ion-input readonly type="text" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Contact" name="contact_number" formControlName="contact_number">
+          <ion-input readonly inputmode="numeric" [required]="true" appInputInteger type="text" maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Contact" name="contact_number" formControlName="contact_number">
           </ion-input>
         </ion-item>
         <div *ngIf="submitted && f.contact_number.errors" class="error-message">
@@ -244,7 +244,7 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-input type="text" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="emergency_contact" formControlName="emergency_contact"
+          <ion-input inputmode="numeric" [required]="true" appInputInteger type="text" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="emergency_contact" formControlName="emergency_contact"
             placeholder="Emergency Contact"></ion-input>
         </ion-item>
         <div *ngIf="submitted && f.emergency_contact.errors" class="error-message">

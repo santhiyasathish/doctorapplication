@@ -42,7 +42,7 @@ export class BookappointmentComponent implements OnInit {
     name: 'Johnny Depp',
     professional: 'MBBS'
   }
-  sam: any[];
+  sam;
   samu: any[];
   sample: any;
   avlist: any[];
@@ -497,7 +497,7 @@ nodataFound(i, date){
       buttons: ['OK']
     }).then(res => {
       res.present();
-      // window.location.href = "patient/docprofile/3";
+      window.location.href = "patient/docprofile/3";
 
     });
 

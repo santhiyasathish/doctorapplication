@@ -6,7 +6,7 @@
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <ion-item>
             <ion-label position="floating">Mobile No.</ion-label>
-            <ion-input type="text"maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="mobile" placeholder="Enter Mobile Number" formControlName="mobile"></ion-input>
+            <ion-input inputmode="numeric" [required]="true" appInputInteger type="text"maxLength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="mobile" placeholder="Enter Mobile Number" formControlName="mobile"></ion-input>
             <!-- <ion-input type="text" name="mobile" placeholder="Enter Mobile Number" formControlName="mobile"></ion-input> -->
           </ion-item>
           <div *ngIf=" f.mobile.invalid && ( f.mobile.touched || f.mobile.dirty)">

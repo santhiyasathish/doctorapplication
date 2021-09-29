@@ -1,0 +1,31 @@
+ion-header {
+}
+ion-content {
+    .table {
+        padding-top: 30px;
+                border-bottom: 1px solid #b9b9b9;
+               
+        .date {
+            text-align-last: center;
+            font-size: smaller;
+            color: grey;
+             border-right: 1px solid #b9b9b9;
+        }
+        .reason {
+            text-align-last: center;
+            font-size: smaller;
+            color: grey;
+            border-right: 1px solid #b9b9b9;
+        }
+        .status {
+            text-align-last: center;
+            font-size: smaller;
+            ion-label {
+                border-radius: 25px;
+                border: 1px solid #b9b9b9;
+                padding: 2px 7px 2px 7px;
+                font-weight: bold;
+            }
+        }
+    }
+}

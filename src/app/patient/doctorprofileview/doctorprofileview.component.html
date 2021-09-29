@@ -1,17 +1,18 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="light">
-      <ion-menu-button slot="start" color="primary"></ion-menu-button>
-      <ion-title>Dashboard</ion-title>
+    <ion-menu-button slot="start" color="primary"></ion-menu-button>
+    <ion-title>Dashboard</ion-title>
     <ion-buttons *ngIf='togle' routerLink="/patient/patnotification/" class="noti-btn" slot="end">
       <ion-button color="primary">
         <ion-icon name="notifications-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-buttons *ngIf='log' routerLink="/login" class="log-btn"  slot="end">
+    <ion-buttons *ngIf='log' (click)="login()" class="log-btn" slot="end">
       <ion-button color="primary">
         Login
       </ion-button>
     </ion-buttons>
+    
     <!-- <ion-img src="https://cdn.pixabay.com/photo/2015/03/26/09/52/chain-link-690503_960_720.jpg"></ion-img> -->
   </ion-toolbar>
 </ion-header>
@@ -27,8 +28,7 @@
         <ion-row class="first-row">
           <ion-col>
             <ion-avatar>
-              <img
-                src="{{data.image}}" />
+              <img src="{{data.image}}" />
             </ion-avatar>
           </ion-col>
         </ion-row>
@@ -41,24 +41,24 @@
 
             <ion-item lines="none">
 
-              <button [ngStyle]="this.answer >= '1' ? {color:'orange'} : {color:'gray'}" [hidden]="false" id="1"
-                expand="block" (click)="onClickone('1') ">
+              <button  [ngStyle]="this.rattingpoint >= '1' ? {color:'orange'} : {color:'gray'}" id="1"
+                >
                 <ion-icon name=star></ion-icon>
               </button>
-              <button [ngStyle]="this.answer >= '2' ? {color:'orange'} : {color:'gray'}" [hidden]="false" id="2"
-                expand="block" (click)="onClickone('2')">
+              <button  [ngStyle]="this.rattingpoint >= '2' ? {color:'orange'} : {color:'gray'}"  id="2"
+               >
                 <ion-icon name=star></ion-icon>
               </button>
-              <button [ngStyle]="this.answer >= '3' ? {color:'orange'} : {color:'gray'}" [hidden]="false" id="3"
-                expand="block" (click)="onClickone('3')">
+              <button  [ngStyle]="this.rattingpoint >= '3' ? {color:'orange'} : {color:'gray'}"  id="3"
+               >
                 <ion-icon name=star></ion-icon>
               </button>
-              <button [ngStyle]="this.answer >= '4' ? {color:'orange'} : {color:'gray'}" [hidden]="false" id="4"
-                expand="block" (click)="onClickone('4')">
+              <button   [ngStyle]="this.rattingpoint >= '4' ? {color:'orange'} : {color:'gray'}" id="4"
+                >
                 <ion-icon name=star></ion-icon>
               </button>
-              <button [ngStyle]="this.answer >= '5' ? {color:'orange'} : {color:'gray'}" [hidden]="false" id="5"
-                expand="block" (click)="onClickone('5')">
+              <button   [ngStyle]="this.rattingpoint >= '5' ? {color:'orange'} : {color:'gray'}"  id="5"
+               >
                 <ion-icon name=star></ion-icon>
               </button>
             </ion-item>
@@ -176,10 +176,11 @@
         </ion-row>
         <ion-row class="cancel_row">
           <ion-col>
+            <ion-label color="medium">{{dataa.date| date:'dd-MM-yyyy'}}</ion-label>
             <ion-label color="success">{{dataa.time}}</ion-label>
-            <ion-chip outline color="danger" (click)="cancel()">Cancel</ion-chip> 
+            <ion-chip outline color="danger" (click)="cancel()">Cancel</ion-chip>
           </ion-col>
-        </ion-row> 
+        </ion-row>
         <!-- <ion-col>
                 <ion-label>Dr.janagan</ion-label>
                 <ion-label>MBMS Skin Specialist</ion-label>
@@ -194,8 +195,8 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
-  <ion-card class="review">
-    <ion-card-header>
+  <ion-card *ngIf='hiderat' class="review" >
+    <ion-card-header >
       <ion-label>Review</ion-label>
     </ion-card-header>
     <ion-card-content>
@@ -207,35 +208,40 @@
         <ion-col class="col-two">
           <ion-item lines="none">
             <ion-label>Service</ion-label>
-            <button [ngStyle]="this.answer >= '1' ? {color:'orange'} : {color:'gray'}" [hidden]="false" id="1"
-              expand="block" (click)="onClickone('1') ">
+            <button [disabled]="this.rat" [ngStyle]="this.answer >= '1' ? {color:'orange'} : {color:'gray'}" id="1"
+              expand="block" (click)="onClickone('1') " >
+              <ion-icon  name=star></ion-icon>
+            </button>
+            <button [disabled]="this.rat" [ngStyle]="this.answer >= '2' ? {color:'orange'} : {color:'gray'}"  id="2"
+              expand="block" (click)="onClickone('2')" >
               <ion-icon name=star></ion-icon>
             </button>
-            <button [ngStyle]="this.answer >= '2' ? {color:'orange'} : {color:'gray'}" [hidden]="false" id="2"
-              expand="block" (click)="onClickone('2')">
+            <button [disabled]="this.rat" [ngStyle]="this.answer >= '3' ? {color:'orange'} : {color:'gray'}"  id="3"
+              expand="block" (click)="onClickone('3')" >
               <ion-icon name=star></ion-icon>
             </button>
-            <button [ngStyle]="this.answer >= '3' ? {color:'orange'} : {color:'gray'}" [hidden]="false" id="3"
-              expand="block" (click)="onClickone('3')">
-              <ion-icon name=star></ion-icon>
-            </button>
-            <button [ngStyle]="this.answer >= '4' ? {color:'orange'} : {color:'gray'}" [hidden]="false" id="4"
+            <button [disabled]="this.rat" [ngStyle]="this.answer >= '4' ? {color:'orange'} : {color:'gray'}"  id="4"
               expand="block" (click)="onClickone('4')">
               <ion-icon name=star></ion-icon>
             </button>
-            <button [ngStyle]="this.answer >= '5' ? {color:'orange'} : {color:'gray'}" [hidden]="false" id="5"
-              expand="block" (click)="onClickone('5')">
+            <button [disabled]="this.rat" [ngStyle]="this.answer >= '5' ? {color:'orange'} : {color:'gray'}"  id="5"
+              expand="block" (click)="onClickone('5')" >
               <ion-icon name=star></ion-icon>
             </button>
           </ion-item>
         </ion-col>
       </ion-item>
-      <ion-item lines="none">
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<!-- <ion-item lines="none">
         <ion-col class="col-one">
           <ion-label>Satisfaction</ion-label>
           <ion-progress-bar value="{{data.score}}"></ion-progress-bar>
         </ion-col>
-        <!-- <ion-col class="col-two">
+      </ion-item> -->
+<!-- <ion-col class="col-two">
           <ion-item lines="none">
             <ion-label>Satisfaction</ion-label>
             <button [ngStyle]="this.answer >= '1' ? {color:'orange'} : {color:'gray'}" [hidden]="false" id="1" expand="block"
@@ -260,8 +266,8 @@
             </button>
           </ion-item>
         </ion-col> -->
-      </ion-item>
-      <!-- <ion-item class="star" lines="none">
+
+<!-- <ion-item class="star" lines="none">
         <ion-col class="col-two">
           <ion-item lines="none">
             <ion-label>Speciality</ion-label>
@@ -293,11 +299,8 @@
         <ion-col class="col-two">        
         </ion-col>
       </ion-item> -->
-      <!-- <ion-button (click)="seduleBasic()">3 Seconds</ion-button>
+<!-- <ion-button (click)="seduleBasic()">3 Seconds</ion-button>
       <ion-button (click)="seduleAdvance()">10 Seconds</ion-button> -->
-    </ion-card-content>
-  </ion-card>
-</ion-content>
 
 
 <!-- <ion-content *ngFor="let data of editData">
