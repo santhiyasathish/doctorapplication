@@ -43,6 +43,11 @@ export class EditprofileComponent implements OnInit {
   subscribe: any;
   selectedFile;
   dob: string;
+  errory: boolean = false;
+  errord: boolean = false;
+  type: number;
+  leap: boolean;
+  height: any = [];
   // backHidden: boolean=true;
 
   // croppedImagepath = "";
@@ -93,7 +98,7 @@ export class EditprofileComponent implements OnInit {
     if (nextinput.length === 2) {
       nextElement.setFocus();
     }
-  
+
     // nextElement.setFocus();
   }
   gotoNextFields(nextElement) {
@@ -102,7 +107,7 @@ export class EditprofileComponent implements OnInit {
     if (nextinput.length === 2) {
       nextElement.setFocus();
     }
-  
+
     // nextElement.setFocus();
   }
   ngOnInit() {
@@ -123,7 +128,9 @@ export class EditprofileComponent implements OnInit {
       yyyy: [JSON.parse(localStorage.getItem('log')).dob.split('-')[0], [Validators.required, Validators.pattern("^19(0[0-9]|[1-9][0-9])$|20(0[0-9]|[1-9][0-9])$")]],
       blood_group: ['', Validators.required],
       marital_status: ['', Validators.required],
-      height: ['', Validators.required],
+      // height: ['', Validators.required]
+      feet: ['', Validators.required],
+      inches: ['', Validators.required],
       weight: ['', Validators.required],
       econtact: ['', Validators.required],
       location: ['', Validators.required],
@@ -139,25 +146,28 @@ export class EditprofileComponent implements OnInit {
       this.getprofile = JSON.parse(JSON.stringify(data)).data;
       if (JSON.parse(JSON.stringify(data)).success == true) {
         this.buttontype = 'edit';
-
         this.images = this.getprofile.image;
+
 
         this.editForm = this.formBuilder.group({
           firstname: [this.getprofile.name.split(' ')[0], Validators.required],
           lastname: [this.getprofile.name.split(' ')[1], Validators.required],
           contact_number: [this.getprofile.contact_number, Validators.required],
-          email: [this.getprofile.email, [Validators.required,Validators.pattern(/^(\d{10}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/)]],
+          email: [this.getprofile.email, [Validators.required, Validators.pattern(/^(\d{10}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/)]],
           gender: [this.getprofile.gender, Validators.required],
-          dd: [this.getprofile.dob.split('-')[2],[Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|^[1-2][0-9]$|^3[0-1])$")]],
-          mm: [this.getprofile.dob.split('-')[1],[Validators.required,Validators.pattern("^(0[1-9]$|[1-9]$|1[0-2])$")]],
-          yyyy: [this.getprofile.dob.split('-')[0],[ Validators.required, Validators.pattern("^19(0[0-9]|[1-9][0-9])$|20(0[0-9]|[1-9][0-9])$")]],
+          dd: [this.getprofile.dob.split('-')[2], [Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|^[1-2][0-9]$|^3[0-1])$")]],
+          mm: [this.getprofile.dob.split('-')[1], [Validators.required, Validators.pattern("^(0[1-9]$|[1-9]$|1[0-2])$")]],
+          yyyy: [this.getprofile.dob.split('-')[0], [Validators.required, Validators.pattern("^19(0[0-9]|[1-9][0-9])$|20(0[0-9]|[1-9][0-9])$")]],
           blood_group: [this.getprofile.blood_group.toLowerCase(), Validators.required],
           marital_status: [this.getprofile.marital_status, Validators.required],
-          height: [this.getprofile.height, Validators.required],
+          // height: [this.getprofile.height, Validators.required],
+          feet: [this.getprofile.height.split('.')[0], Validators.required],
+          inches: [this.getprofile.height.split('.')[1], Validators.required],
           weight: [this.getprofile.weight, Validators.required],
           econtact: [this.getprofile.emergency_contact, Validators.required],
           location: [this.getprofile.location, Validators.required],
         });
+
         await this.loading.dismiss();
       }
       else {
@@ -324,16 +334,26 @@ export class EditprofileComponent implements OnInit {
     let mm = this.editForm.value.mm;
     let yyyy = this.editForm.value.yyyy;
     this.dob = yyyy + "-" + mm + "-" + dd;
-    console.log(this.dob);
+
+
     this.submitted = true;
+    let feet = this.editForm.value.feet;
+    let inches = this.editForm.value.inches;
+    this.height = feet + "." + inches;
 
     // let data;
     let formData: FormData = new FormData();
 
+    if(this.errory || this.errord){
+      return;
+    }
+
+  
+
     if (this.selectedFile != undefined) {
       // console.log(this.selectedFile.name);
       formData.append('image', this.selectedFile, this.selectedFile.name);
-      
+
     }
 
     formData.append('user_id', JSON.parse(localStorage.getItem('log')).id);
@@ -344,7 +364,9 @@ export class EditprofileComponent implements OnInit {
     formData.append('dob', this.dob);
     formData.append('blood_group', this.editForm.value.blood_group);
     formData.append('marital_status', this.editForm.value.marital_status);
-    formData.append('height', this.editForm.value.height);
+    formData.append('height', this.height);
+    // formData.append('feet',this.editForm.value.feet);
+    // formData.append('inches',this.editForm.value.inches);
     formData.append('weight', this.editForm.value.weight);
     formData.append('emergency_contact', this.editForm.value.econtact);
     formData.append('location', this.editForm.value.location);
@@ -363,13 +385,14 @@ export class EditprofileComponent implements OnInit {
     //   emergency_contact: this.editForm.value.econtact,
     //   location: this.editForm.value.location,
     // }
-    console.log(this.editForm);
+
+    // console.log(this.editForm);
     if (this.editForm.invalid) {
       return;
     }
 
-    if (this.buttontype == 'add') {
 
+    if (this.buttontype == 'add') {
       this.service.patientprofile(formData).subscribe(async data => {
         this.detail = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.detail.messages);
@@ -384,7 +407,7 @@ export class EditprofileComponent implements OnInit {
         this.profileedit = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.profileedit.messages);
         // this.router.navigateByUrl('patient/docprofile/3');
-        window.location.href = 'patient/docprofile/3';
+        // window.location.href = 'patient/docprofile/3';
         this.getDoctorProfile();
 
         // await this.loading.dismiss();
@@ -431,5 +454,106 @@ export class EditprofileComponent implements OnInit {
       ]
     });
     alert.present();
+  }
+
+
+  checkyear(formvalue) {
+   
+    let y, m, d;;
+    //  m, d;
+    y = parseInt(formvalue.yyyy);
+    m = parseInt(formvalue.mm);
+    d = parseInt(formvalue.dd);
+
+    // m, d
+    if (y <= 2021) {
+      if (y % 4 == 0) {
+        this.leap = true;
+        console.log(this.leap);
+      }
+      else {
+        this.leap = false;
+
+      }
+
+      this.errory = false;
+
+    }
+    else {
+      this.errory = true;
+
+    }
+
+    this.chackmonth(m, d);
+  }
+
+  chackmonth(m, d) {
+    if ((m == 1) || (m == 3) || (m == 5) || (m == 7) || (m == 8) || (m == 10) || (m == 12)) {
+      this.type = 1
+    }
+
+    else if (m == 2) {
+      this.type = 2
+    }
+
+    else {
+      this.type = 3
+    }
+
+    this.chackdate(d);
+  }
+
+
+
+
+  chackdate(d) {
+    console.log(this.type, this.errord);
+    switch (this.type) {
+      case 1:
+        if (d <= 31) {
+          this.errord = false;
+        }
+        else {
+          this.errord = true;
+        }
+        break;
+
+      case 2:
+        if (this.leap == true) {
+          if (d <= 29) {
+            this.errord = false;
+          }
+          else {
+            this.errord = true;
+          }
+        }
+        else {
+          if (d <= 28) {
+            this.errord = false;
+          }
+          else {
+            this.errord = true;
+          }
+        }
+        break;
+      case 3:
+        if (d <= 30) {
+          this.errord = false;
+        }
+        else {
+          this.errord = true;
+        }
+        break;
+    }
+
+
+  }
+
+  submit(dob: { value: { yyyy: any; mm: any; dd: any; }; }) {
+    let y = dob.value.yyyy
+    let m = dob.value.mm
+    let d = dob.value.dd
+
+    console.log('stest', y, m, d);
   }
 }
