@@ -75,21 +75,21 @@
             <ion-row class="date">
 
               <ion-col>
-                <ion-input type="text" #dd maxLength="2"
+                <ion-input type="text" #dd maxLength="2" (focusout)='checkyear(doctprofileupdateForm.value)'
                   onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="dd" placeholder="DD"
                   formControlName="dd"   (keyup)="gotoNextField(mm)" clearInput="true"></ion-input>
 
               </ion-col>
 
               <ion-col>
-                <ion-input type="text" #mm maxLength="2"
+                <ion-input type="text" #mm maxLength="2" (focusout)='checkyear(doctprofileupdateForm.value)'
                   onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="mm"
                   placeholder="MM" name="mm" (keyup)="gotoNextFields(yyyy)" clearInput="true"></ion-input>
 
               </ion-col>
 
               <ion-col>
-                <ion-input type="text" #yyyy maxLength="4"
+                <ion-input type="text" #yyyy maxLength="4" (focusout)='checkyear(doctprofileupdateForm.value)'
                   onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="yyyy"
                   placeholder="YYYY" name="yyyy"(keyup)="gotoNextFields(yyyy)"clearInput="true"></ion-input>
 
@@ -110,6 +110,7 @@
             </div>
           </div>
         </ion-item>
+        <div *ngIf="errory || errord" class="error-message">*Please check your dob </div>
         <!-- <div *ngIf="submitted && f.dob.errors" class="error-message">
           <div *ngIf="f.dob.errors.required">
             <ion-icon name="alert-circle-outline"></ion-icon> Please Select Date
