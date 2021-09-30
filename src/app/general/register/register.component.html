@@ -165,11 +165,8 @@
             </div>
 
           </ion-item>
-          <!-- <div *ngIf="submitted && f.dob.errors" class="error-message">
-            <div *ngIf="f.dob.errors.required">
-              <ion-icon name="alert-circle-outline"></ion-icon> Please select your dob
-            </div>
-          </div> -->
+          <div *ngIf="errory || errord" class="error-message">*Please check your dob </div>
+         
 
           <ion-button type="submit" color="primary" expand="block">Sign Up</ion-button>
           <ion-label>

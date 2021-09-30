@@ -125,23 +125,24 @@ export class LoginComponent implements OnInit {
     this.service.login(logData).subscribe(async data => {
       let responseData = JSON.parse(JSON.stringify(data));
       this.alertmessages = responseData.messages;
+      console.log( this.alertmessages);
       if (responseData.success == true) {
         await this.loading.dismiss();
         alertMessage = responseData.messages;
-        // let prompt = this.alertCtrl.create({
+        let prompt = this.alertCtrl.create({
 
-        //   message: alertMessage,
-        //   mode:'ios',
+          message: alertMessage,
+          mode:'ios',
   
-        //   buttons: [
+          buttons: [
   
-        //     {
-        //       text: 'Ok',
+            {
+              text: 'Ok',
   
-        //     }
-        //   ]
-        // });
-        // (await prompt).present();
+            }
+          ]
+        });
+        (await prompt).present();
         
         console.log('log', alertMessage);
         localStorage.setItem('log', JSON.stringify(responseData.logData));

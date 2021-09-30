@@ -31,6 +31,10 @@ export class RegisterComponent implements OnInit {
   dob: string;
   value: 3000;
   loading: any;
+  errory: boolean = false;
+  errord: boolean = false;
+  type: number;
+  leap: boolean;
   // contact_number: any;
 
   constructor(private formBuilder: FormBuilder,
@@ -160,6 +164,11 @@ export class RegisterComponent implements OnInit {
     // this.dob = dd +'-'+mm+'-'+yyyy;
     this.dob = yyyy + "-" + mm + "-" + dd;
     console.log(this.dob);
+    
+    if(this.errory || this.errord){
+      return;
+    }
+
     // this.contact_number = JSON.stringify(this.registerForm.value.mobile);
     let data;
     data = {
@@ -235,11 +244,111 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  checkyear(formvalue) {
+   
+    let y, m, d;;
+    //  m, d;
+    y = parseInt(formvalue.yyyy);
+    m = parseInt(formvalue.mm);
+    d = parseInt(formvalue.dd);
+
+    // m, d
+    if (y <= 2021) {
+      if (y % 4 == 0) {
+        this.leap = true;
+        console.log(this.leap);
+      }
+      else {
+        this.leap = false;
+
+      }
+
+      this.errory = false;
+
+    }
+    else {
+      this.errory = true;
+
+    }
+
+    this.chackmonth(m, d);
+  }
+ 
+
+  chackmonth(m, d) {
+    if ((m == 1) || (m == 3) || (m == 5) || (m == 7) || (m == 8) || (m == 10) || (m == 12)) {
+      this.type = 1
+    }
+
+    else if (m == 2) {
+      this.type = 2
+    }
+
+    else {
+      this.type = 3
+    }
+
+    this.chackdate(d);
+  }
+
+
+
+
+  chackdate(d) {
+    console.log(this.type, this.errord);
+    switch (this.type) {
+      case 1:
+        if (d <= 31) {
+          this.errord = false;
+        }
+        else {
+          this.errord = true;
+        }
+        break;
+
+      case 2:
+        if (this.leap == true) {
+          if (d <= 29) {
+            this.errord = false;
+          }
+          else {
+            this.errord = true;
+          }
+        }
+        else {
+          if (d <= 28) {
+            this.errord = false;
+          }
+          else {
+            this.errord = true;
+          }
+        }
+        break;
+      case 3:
+        if (d <= 30) {
+          this.errord = false;
+        }
+        else {
+          this.errord = true;
+        }
+        break;
+    }
+
+
+  }
+ 
+
+  submit(dob: { value: { yyyy: any; mm: any; dd: any; }; }) {
+    let y = dob.value.yyyy
+    let m = dob.value.mm
+    let d = dob.value.dd
+
+    console.log('stest', y, m, d);
+  }
 
 }
 
-
-
 function mobile(mobile: any): string {
   throw new Error('Function not implemented.');
+  
 }
