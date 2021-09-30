@@ -20,7 +20,7 @@ export class AppComponent {
     { title: 'Home', url: 'patient/docprofile/3', icon: 'home', type: 'patient' },
     { title: 'book appointment', url: 'patient/book/3', icon: 'fitness', type: 'patient' },
     { title: 'Notification', url: 'patient/patnotification', icon: 'notifications-circle', type: 'patient' },
-    { title: 'Profile', url: 'patient/editprofile', icon: 'person-circle', type: 'patient' },
+    { title: 'Profile', url: 'patient/profile', icon: 'person-circle', type: 'patient' },
     { title: 'Histroy', url: 'patient/patienthistory', icon: 'sync-circle', type:'patient'},
     //doctor
     { title: 'Dashboard', url: 'doctor/home', icon: 'home', type: 'doctor' },

@@ -160,7 +160,7 @@ export class EditprofileComponent implements OnInit {
           yyyy: [this.getprofile.dob.split('-')[0], [Validators.required, Validators.pattern("^19(0[0-9]|[1-9][0-9])$|20(0[0-9]|[1-9][0-9])$")]],
           blood_group: [this.getprofile.blood_group.toLowerCase(), Validators.required],
           marital_status: [this.getprofile.marital_status, Validators.required],
-          // height: [this.getprofile.height, Validators.required],
+         
           feet: [this.getprofile.height.split('.')[0], Validators.required],
           inches: [this.getprofile.height.split('.')[1], Validators.required],
           weight: [this.getprofile.weight, Validators.required],
@@ -406,7 +406,7 @@ export class EditprofileComponent implements OnInit {
       this.service.patinetprofileedit(formData).subscribe(async data => {
         this.profileedit = JSON.parse(JSON.stringify(data));
         this.failedAlert(this.profileedit.messages);
-        // this.router.navigateByUrl('patient/docprofile/3');
+        this.router.navigateByUrl('patient/docprofile/3');
         // window.location.href = 'patient/docprofile/3';
         this.getDoctorProfile();
 
@@ -443,20 +443,6 @@ export class EditprofileComponent implements OnInit {
 
 
   }
-
-  async failedAlert(msg) {
-    let alert = await this.alertCtrl.create({
-      message: msg,
-      buttons: [
-        {
-          text: 'ok',
-        }
-      ]
-    });
-    alert.present();
-  }
-
-
   checkyear(formvalue) {
    
     let y, m, d;;
@@ -556,4 +542,17 @@ export class EditprofileComponent implements OnInit {
 
     console.log('stest', y, m, d);
   }
+
+  async failedAlert(msg) {
+    let alert = await this.alertCtrl.create({
+      message: msg,
+      buttons: [
+        {
+          text: 'ok',
+        }
+      ]
+    });
+    alert.present();
+  }
+ 
 }
