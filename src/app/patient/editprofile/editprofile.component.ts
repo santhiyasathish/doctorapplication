@@ -460,12 +460,12 @@ export class EditprofileComponent implements OnInit {
   checkyear(formvalue) {
    
     let y, m, d;;
-    //  m, d;
+   
     y = parseInt(formvalue.yyyy);
     m = parseInt(formvalue.mm);
     d = parseInt(formvalue.dd);
 
-    // m, d
+   
     if (y <= 2021) {
       if (y % 4 == 0) {
         this.leap = true;
