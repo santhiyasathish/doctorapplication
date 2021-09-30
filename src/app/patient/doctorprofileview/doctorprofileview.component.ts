@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PatientserviceService } from '../patientservice.service';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
-import { AlertController,  Platform } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 // import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
 import { Network } from '@ionic-native/network/ngx';
@@ -21,6 +21,7 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { State } from 'ionicons/dist/types/stencil-public-runtime';
 import { MenuController } from '@ionic/angular';
+import { ThrowStmt } from '@angular/compiler';
 // import { Plugins } from '@capacitor/core';
 // const { LocalNotifications } = Plugins;
 // import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
@@ -36,6 +37,7 @@ export class DoctorprofileviewComponent implements OnInit {
   docId: string;
   message: any;
   id: any;
+  ids: any;
   loading: any;
   value: 3000;
   data: any;
@@ -51,16 +53,24 @@ export class DoctorprofileviewComponent implements OnInit {
   zip: any;
   subscribe: any;
   imgurl: any;
-  answer: any = 4;
+  answer: any = "";
+  rattingpoint: any = "";
   a: any;
   col: any;
   doctor: any;
   pending: any;
   myDate = Date();
-  apontid :any;
+  apontid: any;
   togle: boolean = false;
   userType: any;
   log: boolean = true;
+  hiderat: boolean = false;
+  rattingVal: any;
+  rattingsplit: any;
+  rattingsplits: any;
+  rat: boolean = false;
+  alertmessage: any;
+  fixData: any;
 
   constructor(public service: PatientserviceService,
     private route: ActivatedRoute,
@@ -85,11 +95,14 @@ export class DoctorprofileviewComponent implements OnInit {
 
     if (localStorage.getItem('log') != null) {
       this.togle = true;
-      this.log= false;
+      this.log = false;
+      this.hiderat = true;
+      this.fixRatting();
+      
       this.email = JSON.parse(localStorage.getItem('log')).email;
       this.userType = JSON.parse(localStorage.getItem('log')).user_type;
     }
-    
+
     this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
       if (this.constructor.name == "DoctorprofileviewComponent") {
         if (window.confirm("Do you want to exit")) {
@@ -110,23 +123,38 @@ export class DoctorprofileviewComponent implements OnInit {
 
     this.menu.enable(true);
   }
-  onClickone( id: any) {
-    this.service.docId().subscribe(data => {
-      this.doctor = JSON.parse(JSON.stringify(data)).doctor;
-    })
-    this.answer=id;
-    
-    for(this.a = this.answer; this.a>= 1;this.a--) {
-      
-        
-          console.log("a value",this.a);
-      
+  onClickone(id: any) {
+    this.answer = id;
+    if (this.answer >= 0) {
+      this.rat = true;
     }
+    let data={
+      user_id:JSON.parse(localStorage.getItem('log')).id,
+      rating: this.answer,
+    }
+    this.service.setRatting(data).subscribe(data =>{
+      let response = JSON.parse(JSON.stringify(data));
+      this.alertmessage = response.messasge;
+      console.log('msg', this.alertmessage);
+
+    });
+    // this.service.docId().subscribe(data => {
+    //   this.doctor = JSON.parse(JSON.stringify(data));
+    // })
+   
+    console.log('rat', this.answer);
+    // for (this.a = this.answer; this.a >= 1; this.a--) {
+
+
+    //   console.log("a value", this.a);
+
+    // }
   }
 
 
   ngOnInit() {
     // this.menu.enable(true, 'custom');
+    this.viewRatting();
     this.appComponent.appPages;
     this.profileId = this.route.snapshot.paramMap.get('id');
     this.docId = this.route.snapshot.paramMap.get('id');
@@ -144,6 +172,32 @@ export class DoctorprofileviewComponent implements OnInit {
     this.presentLoading();
 
   }
+  fixRatting(){
+    let data = {
+      user_id: JSON.parse(localStorage.getItem('log')).id
+    }
+    this.service.fixRatting(data).subscribe(data => {
+      this.fixData = JSON.parse(JSON.stringify(data)).data;
+      this.answer = this.fixData.rating;
+      console.log('data1', this.answer);
+      if (this.answer >= 0) {
+        this.rat = true;
+      }
+    });
+  }
+
+  viewRatting() {
+    
+    this.service.viewRatting().subscribe(data => {
+      this.rattingVal = JSON.parse(JSON.stringify(data)).data;
+      this.rattingsplits = this.rattingVal.split('.');
+      this.rattingsplit = this.rattingsplits[0];
+      this.rattingpoint = this.rattingsplit;
+      console.log('rat', this.rattingsplit);
+    });
+
+    
+  }
   callnumber() {
     this.callNumber.callNumber(this.data, true)
       .then(res => console.log('Launched dialer!', res))
@@ -151,23 +205,23 @@ export class DoctorprofileviewComponent implements OnInit {
     console.log("number", this.data);
   }
 
-  appointment(){
-    this.router.navigateByUrl('/patient/book/'+this.id);
+  appointment() {
+    this.router.navigateByUrl('/patient/book/' + this.id);
 
   }
   emailcomposer() {
 
     let email = {
-      to: 'janapsp1997@gmail.com',
+      to: 'janagan.duskcoder@gmail.com',
       cc: 'santhiya.duskcoder@gmail.com',
-      bcc: ['john@doe.com', 'jane@doe.com'],
+      // bcc: ['john@doe.com', 'jane@doe.com'],
       attachments: [
-        'file://img/logo.png',
-        'res://icon.png',
-        'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
-        'file://README.pdf'
+        // 'file://img/logo.png',
+        // 'res://icon.png',
+        // 'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
+        // 'file://README.pdf'
       ],
-      subject: 'Cordova Icons',
+      subject: 'Appointment Report',
       body: 'How are you? Nice greetings from Leipzig',
       isHtml: true
     }
@@ -180,13 +234,13 @@ export class DoctorprofileviewComponent implements OnInit {
     await this.loading.dismiss();
     this.imgurl = "../../../assets/error_network.gif";
     const alert = await this.alertController.create({
-      header: 'Network error ?',
+      header: 'Network error, Please Try Again ?',
       message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
       cssClass: 'customalert',
-      mode:'ios',
+      mode: 'ios',
 
       buttons: [{
-        text: 'ok',
+        text: 'Retry',
         role: 'ok',
         handler: data => {
           console.log('ok clicked', data);
@@ -206,9 +260,9 @@ export class DoctorprofileviewComponent implements OnInit {
     await this.loading.dismiss();
     this.imgurl = "../../../assets/good_network.gif";
     const alert = await this.alertController.create({
-      header: 'Network error ?',
+      header: 'Network Status, Oky ?',
       message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
-      mode:'ios',
+      mode: 'ios',
 
       cssClass: 'customalert',
 
@@ -250,6 +304,7 @@ export class DoctorprofileviewComponent implements OnInit {
 
     if (this.value == 3000) {
       await this.loading.present();
+      console.log("time out");
       // this.networkError();
     } else {
       await this.loading.present();
@@ -300,7 +355,7 @@ export class DoctorprofileviewComponent implements OnInit {
     this.service.viewDoctorProfile(id).subscribe(async data => {
       this.editData = [JSON.parse(JSON.stringify(data)).data];
       this.data = this.editData[0].contact_number;
-      this.location=JSON.parse(this.editData[0].location);
+      this.location = JSON.parse(this.editData[0].location);
       console.log(this.location);
       // this.state=this.location;
       // this.locat = JSON.parse(this.location);
@@ -324,7 +379,7 @@ export class DoctorprofileviewComponent implements OnInit {
 
       subHeader: 'Booking Cancel',
       message: 'Cancel your Appointment ?',
-      mode:'ios',
+      mode: 'ios',
       buttons: [
         {
           text: 'Cancel',
@@ -346,10 +401,10 @@ export class DoctorprofileviewComponent implements OnInit {
               backdropDismiss: false,
               mode: 'ios',
               keyboardClose: true,
-        
+
             });
             // Present the loading controller
-        
+
             if (this.value == 3000) {
               await this.loading.present();
               // this.networkError();
@@ -363,40 +418,48 @@ export class DoctorprofileviewComponent implements OnInit {
       ]
     });
     await alert.present();
-  
+
     console.log(alert);
   }
-    cancelAppointment(){
+  cancelAppointment() {
     // this.presentLoading();
-      let candata={
-        user_id: JSON.parse(localStorage.getItem('log')).id ,
-        appointmentid: this.apontid
-      }
-      console.log("cancel",candata);
-      this.service.cancelAppointment(candata).subscribe( async data=>{
-        await this.loading.dismiss();
-        window.location.href = 'patient/docprofile/3'
-        
-      });
+    let candata = {
+      user_id: JSON.parse(localStorage.getItem('log')).id,
+      appointmentid: this.apontid
     }
-  cancel(){
-    
+    console.log("cancel", candata);
+    this.service.cancelAppointment(candata).subscribe(async data => {
+      await this.loading.dismiss();
+      window.location.href = 'patient/docprofile/3'
+
+    });
+  }
+
+  cancel() {
+
     this.conform();
-   }
-   doctorNotification(){
-     this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
+  }
+  doctorNotification() {
+    this.myDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
     console.log("dta", this.myDate);
-     let penData={
-       approvestatus:'pending',
+    let penData = {
+      user_id: JSON.parse(localStorage.getItem('log')).id,
+      approvestatus: 'pending',
       //  date:this.myDate
-     }
-     this.service.doctorNotification(penData).subscribe(data=>{
-       this.pending = JSON.parse(JSON.stringify(data)).message;
-       this.apontid = this.pending[0].appointmentid;
-       console.log("appointid",this.apontid);
-       console.log("penlist",this.pending);
-     });
-   }
+    }
+    this.service.doctorNotification(penData).subscribe(data => {
+      this.pending = JSON.parse(JSON.stringify(data)).message;
+      this.apontid = this.pending[0].appointmentid;
+
+
+      console.log("appointid", this.apontid);
+      console.log("penlist", this.pending);
+    });
+  }
+  login() {
+    window.location.href = '/login';
+
+  }
 
   approve() {
     // if (this.hideButton == true) {

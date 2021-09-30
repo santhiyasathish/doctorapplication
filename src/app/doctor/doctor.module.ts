@@ -13,6 +13,7 @@ import { DocnotificationComponent } from './docnotification/docnotification.comp
 import { AppointmentlistComponent } from './appointmentlist/appointmentlist.component';
 import { DocprofileupdateComponent } from './docprofileupdate/docprofileupdate.component';
 import {  ReactiveFormsModule  } from '@angular/forms';
+import { DoctorhistoryComponent } from './doctorhistory/doctorhistory.component';
 
 
 
@@ -31,7 +32,8 @@ import {  ReactiveFormsModule  } from '@angular/forms';
     ViewappiontmentComponent,
     DocnotificationComponent,
     AppointmentlistComponent,
-    DocprofileupdateComponent
+    DocprofileupdateComponent,
+    DoctorhistoryComponent,
     
   ]
 })

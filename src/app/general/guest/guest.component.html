@@ -30,7 +30,7 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-input placeholder="Contact Number" type="number" name="contact_number" formControlName="contact_number"></ion-input>
+          <ion-input placeholder="Contact Number" inputmode="numeric" [required]="true" appInputInteger type="text" name="contact_number" formControlName="contact_number"></ion-input>
         </ion-item>
         <div *ngIf="submitted && f.contact_number.errors"  class="error-message">
           <div   *ngIf="f.contact_number.errors.required">

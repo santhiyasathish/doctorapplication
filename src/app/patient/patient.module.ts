@@ -20,6 +20,7 @@ import { Camera } from '@ionic-native/Camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { CallNumber} from '@ionic-native/call-number/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { PatienthistoryComponent } from './patienthistory/patienthistory.component';
 
 
 
@@ -46,7 +47,8 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
     DoctorprofileviewComponent,
     EditprofileComponent,
     AppointmentComponent,
-    PatnotificationComponent
+    PatnotificationComponent,
+    PatienthistoryComponent
   ],
   providers : [DatePipe,Camera,File,CallNumber,EmailComposer]
 })

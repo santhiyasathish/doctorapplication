@@ -10,6 +10,7 @@ import { DoctorprofileviewComponent } from './doctorprofileview/doctorprofilevie
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { PatnotificationComponent } from './patnotification/patnotification.component';
+import { PatienthistoryComponent } from './patienthistory/patienthistory.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: 'patnotification',
     component: PatnotificationComponent
+  },
+  {
+    path: 'patienthistory',
+    component: PatienthistoryComponent
   }
 ];
 

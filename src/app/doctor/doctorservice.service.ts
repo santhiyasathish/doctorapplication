@@ -51,4 +51,10 @@ export class DoctorserviceService {
   approvedListindoctorcount(data: any) {
     return this.http.post(this.api + 'approvedListindoctorcount', data, this.httpOptions);
   }
+  doctorHistory(){
+    return this.http.get(this.api + 'doctorhistory',this.httpOptions);
+  }
+  viewRatting(){
+    return this.http.get(this.api +'viewrating',this.httpOptions);
+  }
 }
