@@ -128,21 +128,21 @@
               <ion-row class="date">
 
                 <ion-col>
-                  <ion-input type="text" #dd maxLength="2"
+                  <ion-input inputmode="numeric" [required]="true" appInputInteger type="text" #dd maxLength="2"
                     onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="dd" placeholder="DD"
                     formControlName="dd"   (keyup)="gotoNextField(mm)" clearInput="true"></ion-input>
 
                 </ion-col>
 
                 <ion-col>
-                  <ion-input type="text" #mm maxLength="2"
+                  <ion-input inputmode="numeric" [required]="true" appInputInteger type="text" #mm maxLength="2"
                     onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="mm"
                     placeholder="MM" name="mm" (keyup)="gotoNextFields(yyyy)" clearInput="true"></ion-input>
 
                 </ion-col>
 
                 <ion-col>
-                  <ion-input type="text" #yyyy maxLength="4"
+                  <ion-input inputmode="numeric" [required]="true" appInputInteger type="text" #yyyy maxLength="4"
                     onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="yyyy"
                     placeholder="YYYY" name="yyyy"(keyup)="gotoNextFields(yyyy)"clearInput="true"></ion-input>
 

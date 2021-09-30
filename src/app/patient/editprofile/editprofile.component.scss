@@ -69,15 +69,14 @@ ion-content {
                         }
                     }
                 }
-                .date-item{
-                    .date{
+                .date-item {
+                    .date {
                         border-color: black;
-                        ion-col{
-                            ion-input{
-                                
+                        ion-col {
+                            ion-input {
                                 border: 1px solid #ccc;
-              border-radius: 4px;
-              box-sizing: border-box;
+                                border-radius: 4px;
+                                box-sizing: border-box;
                                 height: 30px;
                                 text-align: center;
                                 border-radius: 4px;
@@ -114,7 +113,7 @@ ion-content {
                 -webkit-border-radius: 50px;
                 border-radius: 10px;
                 margin-bottom: 10px;
-                .location-css{
+                .location-css {
                     color: rgb(146, 146, 146);
                 }
             }

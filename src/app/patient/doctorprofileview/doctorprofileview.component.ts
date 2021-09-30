@@ -65,12 +65,15 @@ export class DoctorprofileviewComponent implements OnInit {
   userType: any;
   log: boolean = true;
   hiderat: boolean = false;
+  bookbtn: boolean =false;
   rattingVal: any;
   rattingsplit: any;
   rattingsplits: any;
   rat: boolean = false;
   alertmessage: any;
   fixData: any;
+  bookStatus: any;
+  bookstatus: any;
 
   constructor(public service: PatientserviceService,
     private route: ActivatedRoute,
@@ -97,11 +100,16 @@ export class DoctorprofileviewComponent implements OnInit {
       this.togle = true;
       this.log = false;
       this.hiderat = true;
-      this.fixRatting();
+      // this.bookbtn = false;
       
+      this.fixRatting();
+      // this.appointmentStatus();
       this.email = JSON.parse(localStorage.getItem('log')).email;
       this.userType = JSON.parse(localStorage.getItem('log')).user_type;
     }
+    
+
+   
 
     this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
       if (this.constructor.name == "DoctorprofileviewComponent") {
@@ -128,11 +136,11 @@ export class DoctorprofileviewComponent implements OnInit {
     if (this.answer >= 0) {
       this.rat = true;
     }
-    let data={
-      user_id:JSON.parse(localStorage.getItem('log')).id,
+    let data = {
+      user_id: JSON.parse(localStorage.getItem('log')).id,
       rating: this.answer,
     }
-    this.service.setRatting(data).subscribe(data =>{
+    this.service.setRatting(data).subscribe(data => {
       let response = JSON.parse(JSON.stringify(data));
       this.alertmessage = response.messasge;
       console.log('msg', this.alertmessage);
@@ -141,7 +149,7 @@ export class DoctorprofileviewComponent implements OnInit {
     // this.service.docId().subscribe(data => {
     //   this.doctor = JSON.parse(JSON.stringify(data));
     // })
-   
+
     console.log('rat', this.answer);
     // for (this.a = this.answer; this.a >= 1; this.a--) {
 
@@ -154,6 +162,7 @@ export class DoctorprofileviewComponent implements OnInit {
 
   ngOnInit() {
     // this.menu.enable(true, 'custom');
+ 
     this.viewRatting();
     this.appComponent.appPages;
     this.profileId = this.route.snapshot.paramMap.get('id');
@@ -172,7 +181,22 @@ export class DoctorprofileviewComponent implements OnInit {
     this.presentLoading();
 
   }
-  fixRatting(){
+  appointmentStatus(){
+    let data={
+      user_id:JSON.parse(localStorage.getItem('log')).id,
+    }
+    this.service.appointmentStatus(data).subscribe(data=>{
+      console.log('data2',data);
+      this.bookstatus= JSON.parse(JSON.stringify(data)).data;
+      this.bookStatus = this.bookstatus;
+      console.log('status', this.bookStatus);
+      if(this.bookStatus!=null){
+        this.bookbtn= true;
+      }
+     
+    });
+  }
+  fixRatting() {
     let data = {
       user_id: JSON.parse(localStorage.getItem('log')).id
     }
@@ -187,7 +211,7 @@ export class DoctorprofileviewComponent implements OnInit {
   }
 
   viewRatting() {
-    
+
     this.service.viewRatting().subscribe(data => {
       this.rattingVal = JSON.parse(JSON.stringify(data)).data;
       this.rattingsplits = this.rattingVal.split('.');
@@ -196,7 +220,7 @@ export class DoctorprofileviewComponent implements OnInit {
       console.log('rat', this.rattingsplit);
     });
 
-    
+
   }
   callnumber() {
     this.callNumber.callNumber(this.data, true)
@@ -255,12 +279,11 @@ export class DoctorprofileviewComponent implements OnInit {
     await alert.present();
   }
 
-
   async handleButtonClick() {
     await this.loading.dismiss();
     this.imgurl = "../../../assets/good_network.gif";
     const alert = await this.alertController.create({
-      header: 'Network Status, Oky ?',
+      header: 'Network Status, Okay ?',
       message: `<img src="${this.imgurl}" alt="g-maps" style="border-radius: 2px">`,
       mode: 'ios',
 
@@ -281,11 +304,6 @@ export class DoctorprofileviewComponent implements OnInit {
 
     await alert.present();
   }
-
-
-
-
-
 
   async presentLoading() {
     // Prepare a loading controller

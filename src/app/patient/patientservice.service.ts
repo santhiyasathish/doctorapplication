@@ -93,6 +93,9 @@ export class PatientserviceService {
   fixRatting(data:any){
     return this.http.post(this.api +'getrating',data, this.httpOptions);
   }
+  appointmentStatus(data:any){
+    return this.http.post(this.api +'userappointmentstatus',data,this.httpOptions);
+  }
 
 }
 

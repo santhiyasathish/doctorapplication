@@ -90,10 +90,14 @@ export class BookappointmentComponent implements OnInit {
   dates: any;
   aampm: number;
   campm: number;
-  listdata: string ="";
+  listdata: string = "";
   getcone: number;
-  count=0;
+  count = 0;
   lidata: any;
+  bookstatus: any;
+  bookStatus: any;
+  bookbtn: boolean = false;
+  bookstatuss: any;
 
 
 
@@ -111,6 +115,7 @@ export class BookappointmentComponent implements OnInit {
 
     // private datePipe: DatePipe
   ) {
+
     // this.platform.ready().then(() => {
     //   this.localNotifications.on('click').subscribe(res => {
     //     let msg = res.data ? res.data.mydata : '';
@@ -179,6 +184,27 @@ export class BookappointmentComponent implements OnInit {
   back() {
     // this.router.navigate('patient/docprofile/3');
     this.router.navigateByUrl('patient/docprofile/3');
+  }
+  appointmentStatus() {
+    let data = {
+      user_id: JSON.parse(localStorage.getItem('log')).id,
+      date: this.sam,
+    }
+    this.service.appointmentStatus(data).subscribe(async data => {
+      console.log('data2', data);
+      this.bookstatuss = JSON.parse(JSON.stringify(data)).data;
+      // this.bookStatus = this.bookstatuss;
+      console.log('status', this.bookstatuss);
+     
+      if (this.bookstatuss != null) {
+          this.bookbtn = true;
+          console.log('sam', this.sam, this.dates);
+      } else{
+          this.bookbtn = false;
+          console.log('status2',this.bookStatus);
+        }
+      await this.loading.dismiss();
+    });
   }
   timeChange(time) {
     this.chosenHours = time.hour.value;
@@ -282,7 +308,7 @@ export class BookappointmentComponent implements OnInit {
   // }
   ngOnInit() {
     // this.seduleBasic();
-   
+
     // this.available=this.service.available;
     this.docId = this.route.snapshot.paramMap.get('id');
     this.durId = this.route.snapshot.paramMap.get('id');
@@ -292,21 +318,22 @@ export class BookappointmentComponent implements OnInit {
     this.getAppointmentDetail(this.docId);
     this.presentLoading();
     this.menu.enable(false);
+
     // this.seduleBasic();
   }
 
-nodataFound(i, date){
-//  setTimeout(function(){
-   if (this.datepipe.transform(new Date(), 'yyyy-MM-dd') == date) {
-    this.getcone= document.getElementById(i).childElementCount;
-    //  let codes = document.getElementById('1').childElementCount;
-    //  // console.log("getelement2", codes);
-     return document.getElementById(i).childElementCount == 0;
-   }
-   else {
-     return false;
-   }
-}
+  nodataFound(i, date) {
+    //  setTimeout(function(){
+    if (this.datepipe.transform(new Date(), 'yyyy-MM-dd') == date) {
+      this.getcone = document.getElementById(i).childElementCount;
+      //  let codes = document.getElementById('1').childElementCount;
+      //  // console.log("getelement2", codes);
+      return document.getElementById(i).childElementCount == 0;
+    }
+    else {
+      return false;
+    }
+  }
 
   slidesOptions = {
     slidesPerView: 2.5
@@ -363,13 +390,12 @@ nodataFound(i, date){
       this.available = JSON.parse(JSON.stringify(data)).data;
       this.schedule();
       this.getList('0');
-      
+
       // console.log("bcount", this.available);
       //  this.getlista('0');
 
       await this.loading.dismiss();
     });
-
   }
 
   checkValid(time, date) {
@@ -385,9 +411,9 @@ nodataFound(i, date){
 
       if (this.campm < this.aampm) {
         this.hide = true;
-      //   this.count = this.count + 1;
-      //  // console.log("count",this.count);
-      //   // // console.log("ddddds");
+        //   this.count = this.count + 1;
+        //  // console.log("count",this.count);
+        //   // // console.log("ddddds");
       }
 
       if (ctime[0] == 12) {
@@ -413,37 +439,55 @@ nodataFound(i, date){
       return true;
     }
   }
-  slotcount(time){
-    
+  async slotcount(time) {
+
     console.log(this.dates);
-    if (this.sam == this.dates){
+    if (this.sam == this.dates) {
       this.count = 0;
-      console.log(this.sam, "santhiya");
+      console.log(this.sam, this.dates, "santhiya");
       let ctime = time.split(':');
-      let campm = ctime[1].split(' ')[1].toUpperCase() == 'AM' ? 0 : 12;
-      let ct = ctime[0] * 60 + parseInt(ctime[1]) + campm * 60;
+      this.campm = ctime[1].split(' ')[1].toUpperCase() == 'AM' ? 0 : 12;
+      console.log('ctime', ctime[0])
+      if (ctime[0] == '12') {
+        // this.campm = 0;
+        let ctimes = time.split(' ');
+        let aampms = ctimes[1] = 0;
+        console.log("no data", aampms);
+        this.campm = aampms;
+      }
+      console.log('campm', this.campm);
+      let ct = ctime[0] * 60 + parseInt(ctime[1]) + this.campm * 60;
+
+
+      console.log("ct", ct);
 
       let list = this.available['0'].list;
       list.forEach(listdata => {
         this.lidata = listdata.availableList;
-
         this.lidata.forEach(slot => {
-
           let atime = slot.time;
           let atimes = atime.split(':');
           let aampm = atimes[1].split(' ')[1].toUpperCase() == 'AM' ? 0 : 12;
           let at = atimes[0] * 60 + parseInt(atimes[1]) + aampm * 60;
+          console.log('list', at);
 
           if (slot.status == 'false') {
             if (ct < at) {
               this.count = this.count + 1;
+              console.log('count', this.count);
             }
           }
+
         });
       });
+      await this.loading.dismiss();
+
     }
   }
   async getList(i) {
+
+
+
     this.schedule();
     // this.presentLoading();
     // console.log("first data", i);
@@ -455,8 +499,10 @@ nodataFound(i, date){
     this.arraym = this.list['0'].availableList;
     this.arraye = this.list['1'].availableList;
     this.dates = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
-    console.log(this.time, "dmwekofdfjdfl");
+    console.log(this.sam, "dmwekofdfjdfl");
+    this.appointmentStatus();
     this.slotcount(this.time);
+
     // console.log('avail', this.list);
     // if (this.dates !== this.sam) {
     //   // console.log("jana", this.dates);
@@ -471,7 +517,7 @@ nodataFound(i, date){
     //   }
 
     // }
-    await this.loading.dismiss();
+
 
 
   }
@@ -493,7 +539,7 @@ nodataFound(i, date){
       header: 'Appointment Booking',
       cssClass: 'alertHeader',
       message: 'Waiting for your Approval .',
-      mode:'ios',
+      mode: 'ios',
       buttons: ['OK']
     }).then(res => {
       res.present();
@@ -552,7 +598,7 @@ nodataFound(i, date){
 
         subHeader: 'Booking',
         message: 'Do you want to booking your Appointment',
-        mode:'ios',
+        mode: 'ios',
         buttons: [
           {
             text: 'Cancel',
@@ -566,7 +612,7 @@ nodataFound(i, date){
             handler: async data => {
               let alert = this.alertCtrl.create({
                 message: 'Reason?',
-                mode:'ios',
+                mode: 'ios',
 
                 inputs: [
                   {
@@ -582,7 +628,7 @@ nodataFound(i, date){
                     type: 'checkbox',
                     value: 'Cough',
                     label: 'Cough',
-                   
+
                   },
                   {
                     name: 'reson',
@@ -610,7 +656,7 @@ nodataFound(i, date){
                     type: 'checkbox',
                     value: 'Cough',
                     label: 'Cough',
-                   
+
                   },
                   {
                     name: 'reson',
@@ -634,7 +680,7 @@ nodataFound(i, date){
 
                   },
                 ],
-          
+
                 buttons: [
                   {
                     text: 'Cancel',
@@ -647,8 +693,8 @@ nodataFound(i, date){
                     text: 'Submit',
                     handler: Data => { //takes the data 
                       // console.log("data reson", Data);
-                      Data.forEach(d1 =>{
-                        this.listdata= this.listdata +d1+', ';
+                      Data.forEach(d1 => {
+                        this.listdata = this.listdata + d1 + ', ';
                       });
                       // console.log('check',this.listdata);
                       this.getbookAppointment(this.listdata, id);

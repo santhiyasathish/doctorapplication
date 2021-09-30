@@ -75,21 +75,21 @@
             <ion-row class="date">
 
               <ion-col>
-                <ion-input type="text" #dd maxLength="2" (focusout)='checkyear(doctprofileupdateForm.value)'
+                <ion-input inputmode="numeric" [required]="true" appInputInteger type="text" #dd maxLength="2" (focusout)='checkyear(doctprofileupdateForm.value)'
                   onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="dd" placeholder="DD"
                   formControlName="dd"   (keyup)="gotoNextField(mm)" clearInput="true"></ion-input>
 
               </ion-col>
 
               <ion-col>
-                <ion-input type="text" #mm maxLength="2" (focusout)='checkyear(doctprofileupdateForm.value)'
+                <ion-input inputmode="numeric" [required]="true" appInputInteger type="text" #mm maxLength="2" (focusout)='checkyear(doctprofileupdateForm.value)'
                   onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="mm"
                   placeholder="MM" name="mm" (keyup)="gotoNextFields(yyyy)" clearInput="true"></ion-input>
 
               </ion-col>
 
               <ion-col>
-                <ion-input type="text" #yyyy maxLength="4" (focusout)='checkyear(doctprofileupdateForm.value)'
+                <ion-input inputmode="numeric" [required]="true" appInputInteger type="text" #yyyy maxLength="4" (focusout)='checkyear(doctprofileupdateForm.value)'
                   onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="yyyy"
                   placeholder="YYYY" name="yyyy"(keyup)="gotoNextFields(yyyy)"clearInput="true"></ion-input>
 
@@ -196,7 +196,7 @@
           </div>
         </div>
         <ion-item lines="none" id="rounded">
-          <ion-input placeholder="Experience" type="text" name="experience" formControlName="experience"></ion-input>
+          <ion-input placeholder="Experience" inputmode="numeric" [required]="true" appInputInteger type="text" name="experience" formControlName="experience"></ion-input>
           <ion-label style="color:rgb(146, 146, 146);">Years</ion-label>
         </ion-item>
         <div *ngIf="submitted && f.experience.errors" class="error-message">

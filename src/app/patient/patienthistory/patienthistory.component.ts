@@ -42,7 +42,7 @@ export class PatienthistoryComponent implements OnInit {
   patientHistory() {
 
     let id = {
-      user_id: '51',
+      user_id: JSON.parse(localStorage.getItem('log')).id,
     }
 
     this.service.patientHistory(id).subscribe(async data => {
