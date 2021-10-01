@@ -91,11 +91,14 @@
      
         DATA NOT FOUND </ng-container>
       <ng-container *ngFor="let data of li.availableList">
-        <ion-col  *ngIf="checkValid(data.time, sam)" size="4">
-          <ion-chip class="timeslo" (click)="conform(data.id)" disabled="{{ data.status }}" outline color="success">
-            <ion-label >{{data.time }}</ion-label>
-          </ion-chip>
-        </ion-col>
+        <ng-container *ngIf="checkValid(data.time, sam)">
+          <ion-col [hidden]="bookbtn" size="4">
+            <ion-chip class="timeslo" (click)="conform(data.id)" disabled="{{data.status}}" outline color="success">
+              <ion-label>{{data.time }}</ion-label>
+            </ion-chip>
+          </ion-col>
+        </ng-container>
+        
       </ng-container>
     </ion-row>
     <!-- </ion-item> -->

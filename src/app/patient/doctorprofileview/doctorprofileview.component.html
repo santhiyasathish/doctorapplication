@@ -139,7 +139,7 @@
             </ion-button>
           </ion-col>
           <ion-col *ngFor="let data of editData" class="col-three">
-            <ion-button (click)="appointment()">
+            <ion-button [disabled]="this.bookbtn" (click)="appointment()">
               <ion-icon name="calendar"></ion-icon>&nbsp; Appointment
             </ion-button>
           </ion-col>
@@ -176,8 +176,8 @@
         </ion-row>
         <ion-row class="cancel_row">
           <ion-col>
-            <ion-label color="medium">{{dataa.date| date:'dd-MM-yyyy'}}</ion-label>
-            <ion-label color="success">{{dataa.time}}</ion-label>
+            <ion-label color="medium"><ion-icon name="calendar"></ion-icon>{{dataa.date| date:'dd-MM-yyyy'}}</ion-label>
+            <ion-label style="text-align: center;" color="success">{{dataa.time}}</ion-label>
             <ion-chip outline color="danger" (click)="cancel()">Cancel</ion-chip>
           </ion-col>
         </ion-row>
