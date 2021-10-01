@@ -14,7 +14,7 @@
     <ion-item lines="none" class="sub-main">
       <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
         <ion-item lines="none" class="avatar">
-          <ion-avatar>
+          <ion-avatar (click)="fileInput.click()">
             <img [src]="images" />
           </ion-avatar>
           <ion-button (click)="fileInput.click()" color="secondary">
