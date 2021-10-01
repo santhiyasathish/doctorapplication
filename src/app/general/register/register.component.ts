@@ -227,6 +227,7 @@ export class RegisterComponent implements OnInit {
       let prompt = this.alertCtrl.create({
 
         message: alertMsg,
+        mode:'ios',
 
         buttons: [
 

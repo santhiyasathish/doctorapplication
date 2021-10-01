@@ -34,12 +34,12 @@
 <ion-content *ngFor="let data of getprofile">
   <ion-card style="margin-top: 70%">
     <ion-card-content>
-      <ion-row>
+      <ion-row >
         <ion-col>
           <ion-label>Patient Name </ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{data.name}}</ion-label>
+          <ion-label class="profile">{{data.name}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -47,7 +47,7 @@
           <ion-label>Contact Number </ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{data.contact_number}}</ion-label>
+          <ion-label class="profile">+91 {{data.contact_number}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -55,7 +55,7 @@
           <ion-label>Email id </ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{data.email}}</ion-label>
+          <ion-label >{{data.email}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -63,7 +63,7 @@
           <ion-label>Gender </ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{data.gender}}</ion-label>
+          <ion-label class="profile">{{data.gender}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -71,7 +71,7 @@
           <ion-label>Date of Birth </ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{data.dob}}</ion-label>
+          <ion-label >{{data.dob |date:'dd-MM-YYYY'}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -79,7 +79,7 @@
           <ion-label>Blood Group </ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{data.blood_group}}</ion-label>
+          <ion-label class="profile">{{data.blood_group}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -87,7 +87,7 @@
           <ion-label>Marital Status </ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{data.marital_status}}</ion-label>
+          <ion-label class="profile">{{data.marital_status}}</ion-label>
 
         </ion-col>
       </ion-row>
@@ -96,7 +96,7 @@
           <ion-label>Height </ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{data.height}}</ion-label>
+          <ion-label class="profile">{{data.height}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -104,7 +104,7 @@
           <ion-label>Weight </ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{data.weight}}</ion-label>
+          <ion-label class="profile">{{data.weight}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -112,7 +112,7 @@
           <ion-label>Emergency Contact </ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{data.emergency_contact}}</ion-label>
+          <ion-label class="profile">{{data.emergency_contact}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -120,7 +120,7 @@
           <ion-label>Location </ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>{{data.location}}</ion-label>
+          <ion-label class="profile">{{data.location}}</ion-label>
         </ion-col>
       </ion-row>
     </ion-card-content>

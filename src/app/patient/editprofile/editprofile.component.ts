@@ -86,7 +86,10 @@ export class EditprofileComponent implements OnInit {
 
     this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
       if (this.constructor.name == "EditprofileComponent") {
-        window.location.href = "patient/docprofile/3";
+        if (window.confirm("Do you want to Discard ?")) {
+          window.location.href = "patient/docprofile/3";
+        }
+        
         // this.back();
       }
     });

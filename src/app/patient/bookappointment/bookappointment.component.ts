@@ -98,6 +98,9 @@ export class BookappointmentComponent implements OnInit {
   bookStatus: any;
   bookbtn: boolean = false;
   bookstatuss: any;
+  alert: any;
+  alerts: Promise<HTMLIonAlertElement>;
+  samalert: Promise<void>;
 
 
 
@@ -195,14 +198,32 @@ export class BookappointmentComponent implements OnInit {
       this.bookstatuss = JSON.parse(JSON.stringify(data)).data;
       // this.bookStatus = this.bookstatuss;
       console.log('status', this.bookstatuss);
-     
+      await this.loading.dismiss();
+
+
       if (this.bookstatuss != null) {
-          this.bookbtn = true;
-          console.log('sam', this.sam, this.dates);
-      } else{
-          this.bookbtn = false;
-          console.log('status2',this.bookStatus);
-        }
+        // this.bookbtn = true;
+
+        this.samalert = this.alertCtrl.create({
+          header: 'Appointment Booking',
+          cssClass: 'alertHeader',
+          message: 'Already Booking .',
+          mode: 'ios',
+          buttons: ['OK']
+        }).then(async res => {
+          (await this.alert).dismiss();
+          (await this.alerts).dismiss();
+          res.present();
+          // window.location.href = "patient/docprofile/3";
+
+        });
+
+
+        console.log('sam', this.sam, this.dates);
+      } else {
+        // this.bookbtn = false;
+        console.log('status2', this.bookStatus);
+      }
       await this.loading.dismiss();
     });
   }
@@ -486,7 +507,19 @@ export class BookappointmentComponent implements OnInit {
   }
   async getList(i) {
 
-
+    this.loading = await this.loadingController.create({
+      spinner: 'dots',
+      // duration: this.value,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: '',
+      backdropDismiss: false,
+      mode: 'ios',
+      keyboardClose: true,
+    });
+    // Present the loading controller
+    // this.seduleBasic();
+    await this.loading.present();
 
     this.schedule();
     // this.presentLoading();
@@ -517,9 +550,6 @@ export class BookappointmentComponent implements OnInit {
     //   }
 
     // }
-
-
-
   }
   getAppointmentDetail(id) {
     let passData = {
@@ -594,122 +624,137 @@ export class BookappointmentComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }
     else {
-      const alert = await this.alertCtrl.create({
+      // this.appointmentStatus();
+      if (this.bookstatuss != null) {
+        // this.bookbtn = true;
 
-        subHeader: 'Booking',
-        message: 'Do you want to booking your Appointment',
-        mode: 'ios',
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: data => {
-              // console.log('Cancel clicked');
-            }
-          },
-          {
-            text: 'OK',
-            handler: async data => {
-              let alert = this.alertCtrl.create({
-                message: 'Reason?',
-                mode: 'ios',
+        let samalert = this.alertCtrl.create({
+          header: 'Appointment Booking',
+          cssClass: 'alertHeader',
+          message: 'Already Booking .',
+          mode: 'ios',
+          buttons: ['OK']
+        });
+        await (await samalert).present();
 
-                inputs: [
-                  {
-                    name: 'reson',
-                    type: 'checkbox',
-                    value: 'Other',
-                    label: 'Other',
-                    checked: true
 
-                  },
-                  {
-                    name: 'reson',
-                    type: 'checkbox',
-                    value: 'Cough',
-                    label: 'Cough',
+        console.log('sam', this.sam, this.dates);
+      }else{
+        this.alert = await this.alertCtrl.create({
+          subHeader: 'Booking',
+          message: 'Do you want to booking your Appointment',
+          mode: 'ios',
+          buttons: [
+            {
+              text: 'Cancel',
+              role: 'cancel',
+              handler: data => {
+                // console.log('Cancel clicked');
+              }
+            },
+            {
+              text: 'OK',
+              handler: async data => {
+                this.alerts = this.alertCtrl.create({
+                  message: 'Reason?',
+                  mode: 'ios',
+                  inputs: [
+                    {
+                      name: 'reson',
+                      type: 'checkbox',
+                      value: 'Other',
+                      label: 'Other',
+                      checked: true
 
-                  },
-                  {
-                    name: 'reson',
-                    type: 'checkbox',
-                    value: 'Fever',
-                    label: 'Fever',
+                    },
+                    {
+                      name: 'reson',
+                      type: 'checkbox',
+                      value: 'Cough',
+                      label: 'Cough',
 
-                  },
-                  {
-                    name: 'reson',
-                    type: 'checkbox',
-                    value: 'Stomach Pain',
-                    label: 'Stomach Pain',
+                    },
+                    {
+                      name: 'reson',
+                      type: 'checkbox',
+                      value: 'Fever',
+                      label: 'Fever',
 
-                  },
-                  {
-                    name: 'reson',
-                    type: 'checkbox',
-                    value: 'Headache',
-                    label: 'Headache',
+                    },
+                    {
+                      name: 'reson',
+                      type: 'checkbox',
+                      value: 'Stomach Pain',
+                      label: 'Stomach Pain',
 
-                  },
-                  {
-                    name: 'reson',
-                    type: 'checkbox',
-                    value: 'Cough',
-                    label: 'Cough',
+                    },
+                    {
+                      name: 'reson',
+                      type: 'checkbox',
+                      value: 'Headache',
+                      label: 'Headache',
 
-                  },
-                  {
-                    name: 'reson',
-                    type: 'checkbox',
-                    value: 'Fever',
-                    label: 'Fever',
+                    },
+                    {
+                      name: 'reson',
+                      type: 'checkbox',
+                      value: 'Cough',
+                      label: 'Cough',
 
-                  },
-                  {
-                    name: 'reson',
-                    type: 'checkbox',
-                    value: 'Stomach Pain',
-                    label: 'Stomach Pain',
+                    },
+                    {
+                      name: 'reson',
+                      type: 'checkbox',
+                      value: 'Fever',
+                      label: 'Fever',
 
-                  },
-                  {
-                    name: 'reson',
-                    type: 'checkbox',
-                    value: 'Headache',
-                    label: 'Headache',
+                    },
+                    {
+                      name: 'reson',
+                      type: 'checkbox',
+                      value: 'Stomach Pain',
+                      label: 'Stomach Pain',
 
-                  },
-                ],
+                    },
+                    {
+                      name: 'reson',
+                      type: 'checkbox',
+                      value: 'Headache',
+                      label: 'Headache',
 
-                buttons: [
-                  {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: data => {
-                      // console.log('Cancel clicked', data);
+                    },
+                  ],
+
+                  buttons: [
+                    {
+                      text: 'Cancel',
+                      role: 'cancel',
+                      handler: data => {
+                        // console.log('Cancel clicked', data);
+                      }
+                    },
+                    {
+                      text: 'Submit',
+                      handler: Data => { //takes the data 
+                        // console.log("data reson", Data);
+                        Data.forEach(d1 => {
+                          this.listdata = this.listdata + d1 + ', ';
+                        });
+                        // console.log('check',this.listdata);
+                        this.getbookAppointment(this.listdata, id);
+                      }
                     }
-                  },
-                  {
-                    text: 'Submit',
-                    handler: Data => { //takes the data 
-                      // console.log("data reson", Data);
-                      Data.forEach(d1 => {
-                        this.listdata = this.listdata + d1 + ', ';
-                      });
-                      // console.log('check',this.listdata);
-                      this.getbookAppointment(this.listdata, id);
-                    }
-                  }
-                ]
-              });
-              (await alert).present();
+                  ]
+                });
+                (await this.alerts).present();
+              }
             }
-          }
 
-        ]
-      });
-      await alert.present();
-      const result = await alert.onDidDismiss();
+          ]
+        });
+        await this.alert.present();
+      }
+      const result = await this.alert.onDidDismiss();
       // console.log(alert);
     }
   }

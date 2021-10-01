@@ -24,7 +24,7 @@
         </ion-item>
         <ion-item lines="none" id="rounded">
           <ion-text color="danger">*</ion-text>
-          <ion-input type="text" name="firstname" placeholder="Enter FirstName" formControlName="firstname"
+          <ion-input type="text" name="firstname" placeholder="First Name" formControlName="firstname"
             class="form-control"></ion-input>
         </ion-item>
         <div *ngIf="submitted && f.firstname.errors" class="error-message">
@@ -34,7 +34,7 @@
         </div>
         <ion-item lines="none" id="rounded">
           <ion-text color="danger">*</ion-text>
-          <ion-input type="text" name="lastname" placeholder="Enter LastName" formControlName="lastname"
+          <ion-input type="text" name="lastname" placeholder="Last Name" formControlName="lastname"
             class="form-control"></ion-input>
         </ion-item>
         <div *ngIf="submitted && f.lastname.errors" class="error-message">
@@ -97,7 +97,7 @@
           <div>
             <ion-row>
               <ion-col>
-                <ion-label>DOB</ion-label>
+                <ion-label style="color: rgb(146, 146, 146); ">Date Of Birth</ion-label>
               </ion-col>
 
             </ion-row>
@@ -179,10 +179,10 @@
         </div>
         <ion-item lines="none" id="rounded">
           <ion-label style="padding-right: 20px; color: rgb(146, 146, 146);">Weight</ion-label>
-          <ion-input type="text" maxLength="3" name="weight"
+          <ion-input inputmode="numeric" [required]="true" appInputInteger type="text" maxLength="3" name="weight"
             onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="weight"
             class="form-control" clearInput></ion-input>
-          <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>Kg</ion-label>
+          <ion-label style="padding-left: 5px; color: rgb(146, 146, 146);" fixed>Pounds</ion-label>
         </ion-item>
         <div *ngIf="submitted && f.weight.errors" class="error-message">
           <div *ngIf="f.weight.errors.required">
@@ -196,53 +196,52 @@
         </ion-item> -->
         <ion-item class="date-item" lines="none" id="rounded">
           <div>
-              <ion-row class="date">
-              
-                <ion-label style="padding-top: 10px;color: rgb(146, 146, 146)">Height</ion-label>
-              
-              
-              
-                <ion-select name="feet" placeholder="Feet"  formControlName="feet" class="form-control">
-                  <ion-select-option value="1">1</ion-select-option>
-                  <ion-select-option value="2">2</ion-select-option>
-                  <ion-select-option value="3">3</ion-select-option>
-                  <ion-select-option value="4">4</ion-select-option>
-                  <ion-select-option value="5">5</ion-select-option>
-                  <ion-select-option value="6">6</ion-select-option>
-                  <ion-select-option value="7">7</ion-select-option>
-                  <ion-select-option value="8">8</ion-select-option>
+            <ion-row class="date">
+              <ion-col>
+              <ion-label style="padding-top: 10px;color: rgb(146, 146, 146)">Height</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none">
+                <ion-select style="padding-right: 10px;" name="feet" placeholder="Feet" formControlName="feet"
+                  class="form-control">
+                  <ion-select-option value="1">1 Feet</ion-select-option>
+                  <ion-select-option value="2">2 Feet</ion-select-option>
+                  <ion-select-option value="3">3 Feet</ion-select-option>
+                  <ion-select-option value="4">4 Feet</ion-select-option>
+                  <ion-select-option value="5">5 Feet</ion-select-option>
+                  <ion-select-option value="6">6 Feet</ion-select-option>
+                  <ion-select-option value="7">7 Feet</ion-select-option>
+                  <ion-select-option value="8">8 Feet</ion-select-option>
                 </ion-select>
-                <ion-label style="padding-top: 10px;padding-right:10px ;">Feet</ion-label>
-            
-              
-                <ion-select name="inches" placeholder="Inches"  formControlName="inches" class="form-control">
-                  <ion-select-option value="1">1</ion-select-option>
-                  <ion-select-option value="2">2</ion-select-option>
-                  <ion-select-option value="3">3</ion-select-option>
-                  <ion-select-option value="4">4</ion-select-option>
-                  <ion-select-option value="5">5</ion-select-option>
-                  <ion-select-option value="6">6</ion-select-option>
-                  <ion-select-option value="7">7</ion-select-option>
-                  <ion-select-option value="8">8</ion-select-option>
-                  <ion-select-option value="9">9</ion-select-option>
-                  <ion-select-option value="10">10</ion-select-option>
-                  <ion-select-option value="11">11</ion-select-option>
-                  <ion-select-option value="12">12</ion-select-option>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none">
+                <ion-select style="padding-right: 10px;" name="inches" placeholder="Inches" formControlName="inches"
+                  class="form-control">
+                  <ion-select-option value="1">1 Inches</ion-select-option>
+                  <ion-select-option value="2">2 Inches</ion-select-option>
+                  <ion-select-option value="3">3 Inches</ion-select-option>
+                  <ion-select-option value="4">4 Inches</ion-select-option>
+                  <ion-select-option value="5">5 Inches</ion-select-option>
+                  <ion-select-option value="6">6 Inches</ion-select-option>
+                  <ion-select-option value="7">7 Inches</ion-select-option>
+                  <ion-select-option value="8">8 Inches</ion-select-option>
+                  <ion-select-option value="9">9 Inches</ion-select-option>
+                  <ion-select-option value="10">10 Inches</ion-select-option>
+                  <ion-select-option value="11">11 Inches</ion-select-option>
+                  <ion-select-option value="12">12 Inches</ion-select-option>
                 </ion-select>
-                <ion-label style="padding-top: 10px;">Inches</ion-label>
-
+                </ion-item>
+              </ion-col>
             </ion-row>
             <div *ngIf=" f.feet.invalid && ( f.feet.touched || f.feet.dirty)">
-
               <div class="error-message" *ngIf=" f.feet.errors?.required">Feet is required</div>
-
             </div>
             <div *ngIf=" f.inches.invalid && ( f.inches.touched || f.inches.dirty)">
               <div class="error-message" *ngIf=" f.inches.errors?.required">Inches is required</div>
-
             </div>
           </div>
-
         </ion-item>
         <ion-item lines="none" id="rounded">
           <ion-input inputmode="numeric" [required]="true" appInputInteger type="text" name="econtact" maxLength="10"

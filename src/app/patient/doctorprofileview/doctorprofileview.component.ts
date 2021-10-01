@@ -65,7 +65,7 @@ export class DoctorprofileviewComponent implements OnInit {
   userType: any;
   log: boolean = true;
   hiderat: boolean = false;
-  bookbtn: boolean =false;
+  bookbtn: boolean = false;
   rattingVal: any;
   rattingsplit: any;
   rattingsplits: any;
@@ -101,15 +101,15 @@ export class DoctorprofileviewComponent implements OnInit {
       this.log = false;
       this.hiderat = true;
       // this.bookbtn = false;
-      
+
       this.fixRatting();
       // this.appointmentStatus();
       this.email = JSON.parse(localStorage.getItem('log')).email;
       this.userType = JSON.parse(localStorage.getItem('log')).user_type;
     }
-    
 
-   
+
+
 
     this.subscribe = this.plt.backButton.subscribeWithPriority(666666, () => {
       if (this.constructor.name == "DoctorprofileviewComponent") {
@@ -131,21 +131,50 @@ export class DoctorprofileviewComponent implements OnInit {
 
     this.menu.enable(true);
   }
-  onClickone(id: any) {
-    this.answer = id;
-    if (this.answer >= 0) {
-      this.rat = true;
-    }
-    let data = {
-      user_id: JSON.parse(localStorage.getItem('log')).id,
-      rating: this.answer,
-    }
-    this.service.setRatting(data).subscribe(data => {
-      let response = JSON.parse(JSON.stringify(data));
-      this.alertmessage = response.messasge;
-      console.log('msg', this.alertmessage);
+  async onClickone(id: any) {
+    const alert = await this.alertController.create({
+      header: 'Rating ',
+      message: `Confirm Your Valuable Rating ? `,
+      mode: 'ios',
 
-    });
+      cssClass: 'customalert',
+
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: data => {
+          // console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'ok',
+        role: 'ok',
+        handler: data => {
+          console.log('ok clicked', data);
+
+          this.answer = id;
+          if (this.answer >= 0) {
+            this.rat = true;
+          }
+          let datas = {
+            user_id: JSON.parse(localStorage.getItem('log')).id,
+            rating: this.answer,
+          }
+          this.service.setRatting(datas).subscribe(data => {
+            let response = JSON.parse(JSON.stringify(data));
+            this.alertmessage = response.messasge;
+            console.log('msg', this.alertmessage);
+
+          });
+        }
+      }
+      ]
+    },
+    );
+
+    await alert.present();
+
+
     // this.service.docId().subscribe(data => {
     //   this.doctor = JSON.parse(JSON.stringify(data));
     // })
@@ -162,7 +191,7 @@ export class DoctorprofileviewComponent implements OnInit {
 
   ngOnInit() {
     // this.menu.enable(true, 'custom');
- 
+
     this.viewRatting();
     this.appComponent.appPages;
     this.profileId = this.route.snapshot.paramMap.get('id');
@@ -181,19 +210,19 @@ export class DoctorprofileviewComponent implements OnInit {
     this.presentLoading();
 
   }
-  appointmentStatus(){
-    let data={
-      user_id:JSON.parse(localStorage.getItem('log')).id,
+  appointmentStatus() {
+    let data = {
+      user_id: JSON.parse(localStorage.getItem('log')).id,
     }
-    this.service.appointmentStatus(data).subscribe(data=>{
-      console.log('data2',data);
-      this.bookstatus= JSON.parse(JSON.stringify(data)).data;
+    this.service.appointmentStatus(data).subscribe(data => {
+      console.log('data2', data);
+      this.bookstatus = JSON.parse(JSON.stringify(data)).data;
       this.bookStatus = this.bookstatus;
       console.log('status', this.bookStatus);
-      if(this.bookStatus!=null){
-        this.bookbtn= true;
+      if (this.bookStatus != null) {
+        this.bookbtn = true;
       }
-     
+
     });
   }
   fixRatting() {
